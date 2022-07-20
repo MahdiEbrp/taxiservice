@@ -1,0 +1,46 @@
+{
+    "extends": "next/core-web-vitals",
+    "rules": {
+        "no-console": "warn",
+        "no-unused-vars": "warn",
+        "no-undef": "warn",
+        "no-unused-expressions": "warn",
+        "no-unused-labels": "warn",
+        "semi": "error",
+        "no-trailing-spaces": "error",
+        "no-duplicate-case": "error",
+        "no-extra-semi": "error",
+        "no-extra-parens": "error",
+        "no-extra-boolean-cast": "error",
+        "no-debugger": "error",
+        "no-empty": "error",
+        "no-duplicate-imports": "error",
+        "max-lines": [
+            "error", {
+                "max": 200,
+                "skipBlankLines": true,
+                "skipComments": true
+            }
+        ],
+        "eqeqeq": [
+            "error", "allow-null"
+        ],
+        "quotes": [
+            "error", "single", "avoid-escape"
+        ]
+
+
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true,
+        "jest": true
+    }
+
+
+}
