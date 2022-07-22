@@ -1,6 +1,8 @@
 import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
 import { isCaptchaValid } from '../../../lib/Validator';
+import prismaClient from '../../../lib/PrismaClient';
+import { Sh256Encrypt } from '../../../lib/Encryption';
 
 export const options = {
     providers: [
@@ -15,23 +17,37 @@ export const options = {
             async authorize(credentials) {
                 const email = credentials?.email;
                 const password = credentials?.password;
+                if (!email || !password)
+                    return null;
+
                 const requestId = credentials?.requestId;
                 if (email && password && requestId) {
 
-                    const isValid = await isCaptchaValid(credentials?.requestId as string);
+                    const isValid = await isCaptchaValid(credentials?.requestId);
+                    const encryptedPassword = Sh256Encrypt(password, process.env.ENCRYPTION_PASSWORD_SALT as string);
+
                     if (isValid !== 200)
-                        throw new Error(`Captcha Error ${isValid}`);
+                        throw new Error('ERR_INVALID_CAPTCHA');
                     else {
-                        const user = { id: 1, email: 'test@test.com', password: 'test123', requestId: 'ok' };
-                        if (user.email === email && user.password === password)
+                        try {
+                            const prisma = prismaClient;
+                            const user = await prisma.user.findFirst({
+                                where: {
+                                    email: email,
+                                    password: encryptedPassword,
+                                    verified:true
+                                }
+                            });
                             return user;
-                        else
-                            return null;
+                        }
+                        catch(e) {
+                            throw new Error('ERR_UNKNOWN_AUTHORIZING_USER');
+                        }
                     }
 
                 }
                 else
-                    return null;
+                    throw new Error('ERR_INVALID_FORMAT');
             }
         }),
 
