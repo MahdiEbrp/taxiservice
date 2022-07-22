@@ -60,7 +60,8 @@ const English = {
             serverError:'Contact the system administrator if none of the methods work.',
         },
         resend: 'Resend',
-        cancel: 'Cancel',
+        return: 'Return',
+        operationSuccess: 'The account verification process has been completed successfully.',
         redirectingToHomePage: 'Redirecting to home page...',
     },
     loginDialog: {

@@ -59,7 +59,8 @@ const Persian = {
             serverError: 'اگر هیچ یک از روش ها کار نکرد، با مدیر سیستم تماس بگیرید.',
         },
         resend: 'ارسال مجدد',
-        cancel: 'لغو',
+        return: 'بازگشت',
+        operationSuccess:'تأیید حساب با موفقیت انجام شد.',
         redirectingToHomePage: 'در حال تغییر مسیر به صفحه اصلی...',
     },
     loginDialog: {

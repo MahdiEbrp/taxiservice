@@ -8,7 +8,7 @@ import { GetData } from '../lib/FetchData';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { getResponseError } from '../lib/Language';
 import { BiMessageSquareError } from 'react-icons/bi';
-
+import { FiUserCheck } from 'react-icons/fi';
 const Verify: NextPage = () => {
     const router = useRouter();
     const code = router.query['code'] as string || '';
@@ -63,8 +63,6 @@ const Verify: NextPage = () => {
         await router.push('/');
     };
 
-    if (isVerified)
-        redirect();
     const VerificationError = () => {
         return (
             <>
@@ -85,9 +83,29 @@ const Verify: NextPage = () => {
                 </ol>
                 <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Button onClick={() => resend()}>{emailVerificationPage.resend}</Button>
-                    <Button onClick={() => redirect()} autoFocus>{emailVerificationPage.cancel}</Button>
+                    <Button onClick={() => redirect()}>{emailVerificationPage.return}</Button>
                 </CardActions>
             </>
+        );
+
+    };
+    const VerificationSuccess = () => {
+        return (
+            <>
+                <Typography variant="h5" sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                    <FiUserCheck />
+                    {emailVerificationPage.operationSuccess}
+                </Typography>
+                <Divider variant="middle" />
+                <Typography>
+                    {emailVerificationPage.reason}
+                </Typography>
+                <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button onClick={() => redirect()}>{emailVerificationPage.return}</Button>
+                </CardActions>
+
+            </>
+
         );
 
     };
@@ -99,7 +117,7 @@ const Verify: NextPage = () => {
             </Head>
             <Card dir={settings.rightToLeft ? 'rtl' : 'ltr'} sx={{ display: 'flex', flex: '1', justifyContent: 'center', alignItems: 'center' }}>
                 <Paper elevation={3} sx={{ margin: '5px' }}>
-                    <CardContent sx={{ color: isLoading ? '' : 'error.main', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <CardContent sx={{ color: !isLoading && !isVerified ? 'error.main' : '', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {isLoading ?
                             <>
                                 <CircularLoading />
@@ -109,7 +127,8 @@ const Verify: NextPage = () => {
                             </>
                             :
                             <>
-                                <VerificationError />
+                                {/* {isVerified ? <VerificationSuccess /> : <VerificationError />} */}
+                                <VerificationSuccess />
                             </>
                         }
                     </CardContent>
