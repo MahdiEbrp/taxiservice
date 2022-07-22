@@ -65,6 +65,32 @@ const Verify: NextPage = () => {
 
     if (isVerified)
         redirect();
+    const VerificationError = () => {
+        return (
+            <>
+                <Typography variant="h5" sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                    <BiMessageSquareError />
+                    {emailVerificationPage.operationFail}
+                </Typography>
+                <Divider variant="middle" />
+                <Typography>
+                    {emailVerificationPage.reason + getResponseError(errorCode, language)}
+                    <br />
+                </Typography>
+                <ol style={{ listStyle: settings.listStyle }}>
+                    <li>{problems.internetConnection}</li>
+                    <li>{problems.emailExpired}</li>
+                    <li>{problems.networkChanged}</li>
+                    <li>{problems.serverError}</li>
+                </ol>
+                <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button onClick={() => resend()}>{emailVerificationPage.resend}</Button>
+                    <Button onClick={() => redirect()} autoFocus>{emailVerificationPage.cancel}</Button>
+                </CardActions>
+            </>
+        );
+
+    };
 
     return (
         <>
@@ -74,36 +100,18 @@ const Verify: NextPage = () => {
             <Card dir={settings.rightToLeft ? 'rtl' : 'ltr'} sx={{ display: 'flex', flex: '1', justifyContent: 'center', alignItems: 'center' }}>
                 <Paper elevation={3} sx={{ margin: '5px' }}>
                     <CardContent sx={{ color: isLoading ? '' : 'error.main', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    {isLoading  ?
-                        <>
-                            <CircularLoading />
-                            <Typography>
-                                {isRedirecting ? emailVerificationPage.redirectingToHomePage:emailVerificationPage.loading}
-                            </Typography>
-                        </>
-                        :
-                        <>
-                                <Typography variant="h5" sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
-                                    <BiMessageSquareError />
-                                    {emailVerificationPage.operationFail}
-                                </Typography>
-                                <Divider variant="middle" />
+                        {isLoading ?
+                            <>
+                                <CircularLoading />
                                 <Typography>
-                                    {emailVerificationPage.reason + getResponseError(errorCode, language)}
-                                    <br />
+                                    {isRedirecting ? emailVerificationPage.redirectingToHomePage : emailVerificationPage.loading}
                                 </Typography>
-                                <ol style={{ listStyle: settings.listStyle }}>
-                                    <li>{problems.internetConnection}</li>
-                                    <li>{problems.emailExpired}</li>
-                                    <li>{problems.networkChanged}</li>
-                                    <li>{problems.serverError}</li>
-                                </ol>
-                            <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <Button onClick={() => resend()}>{emailVerificationPage.resend}</Button>
-                                <Button onClick={() => redirect()} autoFocus>{emailVerificationPage.cancel}</Button>
-                            </CardActions>
-                        </>
-                    }
+                            </>
+                            :
+                            <>
+                                <VerificationError />
+                            </>
+                        }
                     </CardContent>
 
                 </Paper>
