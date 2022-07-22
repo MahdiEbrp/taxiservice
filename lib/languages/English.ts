@@ -4,6 +4,7 @@ const English = {
         displayName: 'English',
         code: 'en',
         rightToLeft: false,
+        listStyle:'decimal',
     },
     sidebar: {
         home: 'Home',
@@ -36,19 +37,36 @@ const English = {
         ERR_SERVICE_UNAVAILABLE: 'The service is unavailable.',
         ERR_INVALID_REQUEST: 'The request is invalid.',
         ERR_REQUEST_EXPIRED: 'It\'s too late to submit your request.',
-        ERR_SERVER_COMMUNICATION: 'An error has occurred while communicating with the server.',
+        ERR_INTERNAL_UPDATE: 'A server issue is preventing the information from being edited. If you think it will help fix the problem, please contact us.',
+        ERR_NULL_RESPONSE: 'The server did not provide a correct response.',
+        HTML_ERROR_404: 'The page you are looking for does not exist.',
     },
     messageDialog: {
         ok: 'Ok',
-        userCreatedSuccessfully:{
+        userCreatedSuccessfully: {
             title: 'Congratulations!',
             message: 'Your account has been successfully created.Please check your email to activate your account.',
         }
     },
+    emailVerificationPage: {
+        title: 'Email Verification',
+        loading: 'Verifying your account...',
+        operationFail: 'The account verification process failed.',
+        reason: 'Reason:',
+        problems: {
+            internetConnection: 'Make sure your internet connection is working.',
+            emailExpired: 'The correct code will be emailed to you. (Make sure your spam folder is checked.)',
+            networkChanged: 'You can resend the request by clicking the "Resend" button.',
+            serverError:'Contact the system administrator if none of the methods work.',
+        },
+        resend: 'Resend',
+        cancel: 'Cancel',
+        redirectingToHomePage: 'Redirecting to home page...',
+    },
     loginDialog: {
         title: 'Login or Register',
         loginTab: {
-            title:'Login',
+            title: 'Login',
             email: 'Email',
             emailHelperText: 'An example would be: e_mail@email.com.',
             password: 'Password',
@@ -67,7 +85,7 @@ const English = {
             captchaHelperText: 'Captcha must be verified.',
             register: 'Register',
         },
-        captchaProviderError:'There has been an error with the captcha provider, perhaps from an internet disturbance. We recommend waiting a few seconds or reopening this dialog box if the captcha does not appear or does not work correctly.',
+        captchaProviderError: 'There has been an error with the captcha provider, perhaps from an internet disturbance. We recommend waiting a few seconds or reopening this dialog box if the captcha does not appear or does not work correctly.',
     }
 };
 

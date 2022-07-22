@@ -2,8 +2,8 @@ import nodemailer from 'nodemailer';
 import ReactDOMServer from 'react-dom/server';
 
 export const verificationEmailBody = (verificationCode: string) => {
-    const defaultUrl = `${process.env.NEXT_PUBLIC_WEB_URL}/verify?code=${verificationCode}`;
-    const persianVersion= `${process.env.NEXT_PUBLIC_WEB_URL}/fa/verify?code=${verificationCode}`;
+    const defaultUrl = `${process.env.NEXT_PUBLIC_WEB_URL}/emailVerification?code=${verificationCode}`;
+    const persianVersion = `${process.env.NEXT_PUBLIC_WEB_URL}/fa/emailVerification?code=${verificationCode}`;
     const root = process.env.NEXT_PUBLIC_ROOT_DOMAIN;
     const html = () => {
         return (

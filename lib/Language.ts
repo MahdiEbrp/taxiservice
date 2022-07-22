@@ -23,8 +23,6 @@ export const getResponseError = (error: string, language = getLanguage('en')) =>
             return responseError.ERR_UNKNOWN;
         case 'ERR_EMAIL_EXISTS':
             return responseError.ERR_EMAIL_EXISTS;
-        case 'ERR_SERVICE_UNAVAILABLE':
-            return responseError.ERR_SERVICE_UNAVAILABLE;
         case 'ERR_INVALID_CAPTCHA':
             return responseError.ERR_INVALID_CAPTCHA;
         case 'ERR_INVALID_FORMAT':
@@ -35,6 +33,18 @@ export const getResponseError = (error: string, language = getLanguage('en')) =>
             return responseError.ERR_POST_DATA;
         case 'ERR_UNKNOWN_CREATING_USER':
             return responseError.ERR_UNKNOWN_CREATING_USER;
+        case 'ERR_SERVICE_UNAVAILABLE':
+            return responseError.ERR_SERVICE_UNAVAILABLE;
+        case 'ERR_INVALID_REQUEST':
+            return responseError.ERR_INVALID_REQUEST;
+        case 'ERR_REQUEST_EXPIRED':
+            return responseError.ERR_REQUEST_EXPIRED;
+        case 'ERR_INTERNAL_UPDATE':
+            return responseError.ERR_INTERNAL_UPDATE;
+        case 'ERR_NULL_RESPONSE':
+            return responseError.ERR_NULL_RESPONSE;
+        case 'HTML_ERROR_404':
+            return responseError.HTML_ERROR_404;
         default:
             return responseError.ERR_UNKNOWN;
     }

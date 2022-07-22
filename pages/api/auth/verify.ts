@@ -25,15 +25,21 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const verificationCode = getRandomString(5) + Date.now().toString();
 
         if (diff > 24) {
-            await prisma.user.update({
+            const result= await prisma.user.update({
                 where: { id: user.id },
                 data: {
                     verifiedCode: verificationCode,
+                    verifiedCodeDate:new Date()
                 }
             });
-            sendEmail(user.email, `Email confirmation from ${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
-                , verificationEmailBody(verificationCode));
-            return res.status(400).json({ error: 'ERR_REQUEST_EXPIRED' });
+            if (result) {
+                sendEmail(user.email, `Email confirmation from ${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
+                    , verificationEmailBody(verificationCode));
+                return res.status(400).json({ error: 'ERR_REQUEST_EXPIRED' });
+            }
+            else
+                return res.status(503).json({ error: 'ERR_INTERNAL_UPDATE' });
+
         }
         await prisma.user.update({
             where: { id: user.id },

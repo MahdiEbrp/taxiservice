@@ -4,6 +4,7 @@ const Persian = {
         displayName: 'فارسی',
         code: 'fa',
         rightToLeft: true,
+        listStyle:'arabic-indic'
     },
     sidebar: {
         home: 'خونه',
@@ -24,6 +25,11 @@ const Persian = {
         ERR_POST_DATA: 'داده های ارسالی صحیح نیستند.',
         ERR_UNKNOWN_CREATING_USER: 'یک خطای ناشناخته در هنگام ساخت حسای کاربری رخ داده است.',
         ERR_SERVICE_UNAVAILABLE: 'سرویس در دسترس نیست.',
+        ERR_INVALID_REQUEST: 'درخواست نامعتبر است.',
+        ERR_REQUEST_EXPIRED: 'برای ارسال درخواستتان خیلی دیر است',
+        ERR_INTERNAL_UPDATE: 'یک مشکل سرور مانع از ویرایش اطلاعات می‌شود. اگر فکر می کنید به رفع مشکل کمک می کند، لطفاً با ما تماس بگیرید.',
+        ERR_NULL_RESPONSE: 'سرور پاسخ درستی ارائه نکرد.',
+        HTML_ERROR_404: 'صفحه ای که به دنبال آن هستید وجود ندارد.',
     },
     notification: {
         darkModeEnabled: 'حالت تاریک فعال شده است.',
@@ -41,10 +47,25 @@ const Persian = {
             message: 'حساب کاربری شما با موفقیت ایجاد شد. لطفاً ایمیل خود را برای فعال سازی حساب خود بررسی کنید.',
         }
     },
+    emailVerificationPage: {
+        title: 'تایید ایمیل',
+        loading: 'در حال تأیید حساب شما...',
+        operationFail: 'فرآیند تأیید حساب ناموفق بود.',
+        reason: 'دلیل:',
+        problems: {
+            internetConnection: 'مطمئن شوید که اتصال اینترنت شما کار می کند.',
+            emailExpired: 'کد صحیح برای شما ایمیل خواهد شد. (مطمئن شوید که پوشه اسپم شما بررسی شده است.)',
+            networkChanged: 'با کلیک بر روی دکمه "ارسال مجدد" می توانید درخواست را مجددا ارسال کنید.',
+            serverError: 'اگر هیچ یک از روش ها کار نکرد، با مدیر سیستم تماس بگیرید.',
+        },
+        resend: 'ارسال مجدد',
+        cancel: 'لغو',
+        redirectingToHomePage: 'در حال تغییر مسیر به صفحه اصلی...',
+    },
     loginDialog: {
         title: 'وارد شوید یا ثبت نام کنید',
         loginTab: {
-            title:'ورود',
+            title: 'ورود',
             email: 'ایمیل',
             emailHelperText: 'به عنوان مثال: e_mail@email.com.',
             password: 'رمز عبور',
@@ -63,7 +84,7 @@ const Persian = {
             captchaHelperText: 'کپچا باید تایید شود.',
             register: 'ثبت نام',
         },
-        captchaProviderError:'مشکلی در ارائه دهنده کپچا رخ داده است، شاید به دلیل اختلال در اینترنت. توصیه می کنیم در صورتی که کپچا ظاهر نشد یا درست کار نکرد، چند ثانیه صبر کنید یا این کادر محاوره ای را دوباره باز کنید.',
+        captchaProviderError: 'مشکلی در ارائه دهنده کپچا رخ داده است، شاید به دلیل اختلال در اینترنت. توصیه می کنیم در صورتی که کپچا ظاهر نشد یا درست کار نکرد، چند ثانیه صبر کنید یا این کادر محاوره ای را دوباره باز کنید.',
     }
 };
 export default Persian;
