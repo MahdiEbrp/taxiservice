@@ -26,7 +26,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
             const prisma = prismaClient;
             const verificationCode = getRandomString(5) + Date.now().toString();
             try {
-                await prisma.user.create({
+               const result=await prisma.user.create({
                     data: {
                         email: email,
                         password: encryptedPassword,
@@ -35,10 +35,15 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         verifiedCodeDate: new Date(),
                         createdAt: new Date(),
                     }
-                });
-                sendEmail(email, `Email confirmation from ${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
-                    , verificationEmailBody(verificationCode));
-                return res.status(200).end();
+               });
+                if (result) {
+                    sendEmail(email, `Email confirmation from ${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
+                        , verificationEmailBody(verificationCode));
+                    return res.status(200).end();
+                }
+                else
+                    return res.status(503).json({ error: 'ERR_UNKNOWN' });
+
             }
             catch (e) {
                 if (e instanceof Prisma.PrismaClientKnownRequestError) {

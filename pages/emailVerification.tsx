@@ -19,7 +19,13 @@ const Verify: NextPage = () => {
     const { language } = useContext(LanguageContext);
     const { settings, emailVerificationPage } = language;
     const { problems } = emailVerificationPage;
-    const [isRedirect, setRedirect] = useState(false);
+    const [isRedirecting, setRedirecting] = useState(false);
+
+    const resend = () => {
+        setReloadData(true);
+        setLoading(true);
+    };
+
     useEffect(() => {
         const loadData = async () => {
             const response = await GetData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/verify?code=' + code);
@@ -49,22 +55,16 @@ const Verify: NextPage = () => {
             }
         }
     }, [code, reloadData]);
-
-    const resend = () => {
-        setReloadData(true);
+    const redirect = async () => {
+        if (isRedirecting)
+            return;
+        setRedirecting(true);
         setLoading(true);
+        await router.push('/');
     };
-    useEffect(() => {
-        const redirect = async() => {
-            setLoading(true);
-            router.push('/');
-        };
-        if (isRedirect && !isLoading)
-            redirect();
-    }, [isLoading, isRedirect, router]);
 
     if (isVerified)
-        setRedirect(true);
+        redirect();
 
     return (
         <>
@@ -78,7 +78,7 @@ const Verify: NextPage = () => {
                         <>
                             <CircularLoading />
                             <Typography>
-                                {isRedirect ? emailVerificationPage.redirectingToHomePage:emailVerificationPage.loading}
+                                {isRedirecting ? emailVerificationPage.redirectingToHomePage:emailVerificationPage.loading}
                             </Typography>
                         </>
                         :
@@ -100,7 +100,7 @@ const Verify: NextPage = () => {
                                 </ol>
                             <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Button onClick={() => resend()}>{emailVerificationPage.resend}</Button>
-                                <Button onClick={() => setRedirect(true)} autoFocus>{emailVerificationPage.cancel}</Button>
+                                <Button onClick={() => redirect()} autoFocus>{emailVerificationPage.cancel}</Button>
                             </CardActions>
                         </>
                     }
