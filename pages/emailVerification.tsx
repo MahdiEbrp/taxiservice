@@ -98,7 +98,7 @@ const Verify: NextPage = () => {
                 </Typography>
                 <Divider variant="middle" />
                 <Typography>
-                    {emailVerificationPage.reason}
+                    {emailVerificationPage.successMessage}
                 </Typography>
                 <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Button onClick={() => redirect()}>{emailVerificationPage.return}</Button>
@@ -115,7 +115,7 @@ const Verify: NextPage = () => {
             <Head>
                 <title>{emailVerificationPage.title}</title>
             </Head>
-            <Card dir={settings.rightToLeft ? 'rtl' : 'ltr'} sx={{ display: 'flex', flex: '1', justifyContent: 'center', alignItems: 'center' }}>
+            <Card dir={settings.rightToLeft ? 'rtl' : 'ltr'} sx={{ display: 'flex', flex: '1', justifyContent: 'center', alignItems: 'center',margin:'15px' }}>
                 <Paper elevation={3} sx={{ margin: '5px' }}>
                     <CardContent sx={{ color: !isLoading && !isVerified ? 'error.main' : '', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {isLoading ?
@@ -127,8 +127,7 @@ const Verify: NextPage = () => {
                             </>
                             :
                             <>
-                                {/* {isVerified ? <VerificationSuccess /> : <VerificationError />} */}
-                                <VerificationSuccess />
+                                {isVerified ? <VerificationSuccess /> : <VerificationError />}
                             </>
                         }
                     </CardContent>

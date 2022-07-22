@@ -61,7 +61,8 @@ const English = {
         },
         resend: 'Resend',
         return: 'Return',
-        operationSuccess: 'The account verification process has been completed successfully.',
+        operationSuccess: 'Congratulations!',
+        successMessage: 'Verification of the account has been completed successfully. You can now access your account and use the site\'s features.To return to the main page, click the "Return" button.',
         redirectingToHomePage: 'Redirecting to home page...',
     },
     loginDialog: {
