@@ -27,7 +27,7 @@ export const options = {
                     const encryptedPassword = Sh256Encrypt(password, process.env.ENCRYPTION_PASSWORD_SALT as string);
 
                     if (isValid !== 200)
-                        throw new Error('ERR_INVALID_CAPTCHA');
+                        throw new Error('ERR_SERVER_INVALID_CAPTCHA');
                     else {
                         try {
                             const prisma = prismaClient;
@@ -35,12 +35,20 @@ export const options = {
                                 where: {
                                     email: email,
                                     password: encryptedPassword,
-                                    verified:true
                                 }
                             });
-                            return user;
+                            if (user) {
+                                if (!user.verified)
+                                    throw new Error('ERR_USER_NOT_VERIFIED');
+                                else
+                                    return {
+                                        user: user,
+                                        token: user.id,
+                                    };
+                            }
+                            return null;
                         }
-                        catch(e) {
+                        catch (e) {
                             throw new Error('ERR_UNKNOWN_AUTHORIZING_USER');
                         }
                     }

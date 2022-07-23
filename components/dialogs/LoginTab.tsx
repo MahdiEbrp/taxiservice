@@ -10,6 +10,7 @@ import CircularLoading from '../controls/CircularLoading';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { SigninResult } from '../../lib/FetchData';
+import { getResponseError } from '../../lib/Language';
 
 
 const LoginTab = () => {
@@ -46,10 +47,10 @@ const LoginTab = () => {
             const response = await signIn('credentials', values) as any as SigninResult;
             if (response.ok) {
                 setLoginDialogOpen(false);
-                setToast({ id: Date.now(), message: 'you are successfully logged in', alertColor: 'success' });
+                setToast({ id: Date.now(), message: notification.successfullyLogin, alertColor: 'success' });
             }
             else {
-                setToast({ id: Date.now(), message: response.error as string, alertColor: 'error' });
+                setToast({ id: Date.now(), message:getResponseError( response.error as string,language), alertColor: 'error' });
 
             }
             setIsLoading(false);

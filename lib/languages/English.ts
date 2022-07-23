@@ -25,6 +25,7 @@ const English = {
         invalidPasswordFormat: 'The password format is incorrect.',
         invalidConfirmPassword: 'There is a difference between a confirm password and a password entered!',
         invalidCaptchaFormat: 'The captcha format is incorrect.',
+        successfullyLogin: 'Congratulations, you have successfully logged in.',
     },
     responseError: {
         ERR_UNKNOWN: 'An unknown error has occurred.',
@@ -40,6 +41,10 @@ const English = {
         ERR_INTERNAL_UPDATE: 'A server issue is preventing the information from being edited. If you think it will help fix the problem, please contact us.',
         ERR_NULL_RESPONSE: 'The server did not provide a correct response.',
         HTML_ERROR_404: 'The page you are looking for does not exist.',
+        ERR_SERVER_INVALID_CAPTCHA: 'a captcha validator in server wont accept your request.',
+        ERR_USER_NOT_VERIFIED: 'The user is not verified.',
+        ERR_UNKNOWN_AUTHORIZING_USER: 'An unknown error has occurred while authorizing the user.',
+        CredentialsSignin: 'The username or password you entered is incorrect. Click on the "Reset password" button if you have forgotten your password.',
     },
     messageDialog: {
         ok: 'Ok',
