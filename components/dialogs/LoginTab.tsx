@@ -1,5 +1,5 @@
 import { Box, Button, FormHelperText, FormControl, TextField, Alert } from '@mui/material';
-import React,{ useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { isEmailValid, isPasswordValid } from '../../lib/Validator';
 import PasswordField from '../controls/PasswordField';
 import { ThemeContext } from '../../lib/context/ThemeContext';
@@ -50,7 +50,7 @@ const LoginTab = () => {
                 setToast({ id: Date.now(), message: notification.successfullyLogin, alertColor: 'success' });
             }
             else {
-                setToast({ id: Date.now(), message:getResponseError( response.error as string,language), alertColor: 'error' });
+                setToast({ id: Date.now(), message: getResponseError(response.error as string, language), alertColor: 'error' });
 
             }
             setIsLoading(false);
@@ -82,6 +82,20 @@ const LoginTab = () => {
         else {
             setCaptcha(false);
         }
+    };
+    const resetPassword = () => {
+        if (!validateEmail()) {
+            setToast({ id: Date.now(), message: notification.invalidEmailFormat, alertColor: 'error' });
+            return;
+        }
+        if (captcha !== false) {
+            setIsLoading(true);
+
+            setIsLoading(false);
+        }
+        else
+            setToast({ id: Date.now(), message: notification.invalidCaptchaFormat, alertColor: 'error' });
+
     };
     return (
         <FormControl component='form' onSubmit={handleSubmit}>
@@ -127,7 +141,11 @@ const LoginTab = () => {
             {isLoading ?
                 <CircularLoading />
                 :
-                <Button type='submit' sx={{ marginTop: '1rem' }}>{loginTab.login}</Button>
+                <>
+                    <Button type='submit' sx={{ marginTop: '1rem' }}>{loginTab.login}</Button>
+                    <Button onClick={()=>resetPassword()} sx={{ marginTop: '1rem' }}>{loginTab.resetPassword}</Button>
+                </>
+
             }
 
         </FormControl>

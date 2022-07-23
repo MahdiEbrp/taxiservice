@@ -19,4 +19,6 @@ model User {
   verifiedCodeDate DateTime @db.Timestamptz
   verifiedCode     String
   verified         Boolean  @default(false)
+  resetCodeDate    DateTime? @db.Timestamptz
+  resetCode        String?
 }

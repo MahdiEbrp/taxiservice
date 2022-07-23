@@ -79,6 +79,8 @@ const Persian = {
             passwordHelperText: 'برای ارسال رمز عبور به سرور، فرمت رمز عبور باید به درستی وارد شود.ما قبل از ارسال فرمت قابل قبول را بررسی می کنیم.',
             captchaHelperText: 'کپچا باید تایید شود.',
             login: 'ورود',
+            resetPassword: 'تنظیم مجدد رمز عبور',
+
         },
         registerTab: {
             title: 'ثبت نام',

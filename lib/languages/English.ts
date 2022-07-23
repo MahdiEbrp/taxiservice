@@ -80,6 +80,7 @@ const English = {
             passwordHelperText: 'In order to send the password to the server, the password format must be entered correctly. We check the acceptable format before sending.',
             captchaHelperText: 'Captcha must be verified.',
             login: 'Login',
+            resetPassword: 'Reset password',
         },
         registerTab: {
             title: 'Register',

@@ -8,6 +8,8 @@ CREATE TABLE "User" (
     "verifiedCodeDate" TIMESTAMPTZ NOT NULL,
     "verifiedCode" TEXT NOT NULL,
     "verified" BOOLEAN NOT NULL DEFAULT false,
+    "resetCodeDate" TIMESTAMPTZ,
+    "resetCode" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("_id")
 );
