@@ -26,7 +26,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
             const prisma = prismaClient;
             const verificationCode = getRandomString(5) + Date.now().toString();
             try {
-               const result=await prisma.user.create({
+                const result = await prisma.user.create({
                     data: {
                         email: email,
                         password: encryptedPassword,
@@ -35,7 +35,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         verifiedCodeDate: new Date(),
                         createdAt: new Date(),
                     }
-               });
+                });
                 if (result) {
                     sendEmail(email, `Email confirmation from ${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
                         , verificationEmailBody(verificationCode));
@@ -51,14 +51,14 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         if (e.code === 'P2002')
                             return res.status(400).json({ error: 'ERR_EMAIL_EXISTS' });
                         else
-                            return res.status(500).json({ error: 'ERR_UNKNOWN_CREATING_USER' });
+                            return res.status(503).json({ error: 'ERR_UNKNOWN_CREATING_USER' });
                     }
 
                 }
                 if (e instanceof Error)
                     if (e.message === 'ERR_SEND_MAIL')
                         return res.status(202).json({ error: 'ERR_SEND_MAIL' });
-                return res.status(500).json({ error: 'ERR_UNKNOWN' });
+                return res.status(503).json({ error: 'ERR_UNKNOWN' });
 
 
             }
