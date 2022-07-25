@@ -44,14 +44,18 @@ const English = {
         ERR_SERVER_INVALID_CAPTCHA: 'a captcha validator in server wont accept your request.',
         ERR_USER_NOT_VERIFIED: 'The user is not verified.',
         ERR_UNKNOWN_AUTHORIZING_USER: 'An unknown error has occurred while authorizing the user.',
-        CredentialsSignin: 'The username or password you entered is incorrect. Click on the "Reset password" button if you have forgotten your password.',
+        CredentialsSignin: 'The username or password you entered is incorrect.',
     },
     messageDialog: {
         ok: 'Ok',
         userCreatedSuccessfully: {
             title: 'Congratulations!',
-            message: 'Your account has been successfully created.Please check your email to activate your account.',
-        }
+            message: 'Your account has been successfully created.Please check your email to activate your account. You may find it in your spam folder (don\'t forget to check it).',
+        },
+        passwordReadyReset: {
+            title: 'Let\'s reset!',
+            message: 'You can reset your password now. An email with a reset link has been sent to you. You may find it in your spam folder (don\'t forget to check it).',
+        },
     },
     emailVerificationPage: {
         title: 'Email Verification',
@@ -81,6 +85,7 @@ const English = {
             captchaHelperText: 'Captcha must be verified.',
             login: 'Login',
             resetPassword: 'Reset password',
+            forgetPassword: 'if you forget your password click on "Reset password" button.',
         },
         registerTab: {
             title: 'Register',

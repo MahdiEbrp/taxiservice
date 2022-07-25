@@ -63,8 +63,9 @@ const RegisterTab = () => {
                 setMessageDialog({ isMessageDialogOpen: true, title: successfullyRegister.title, message: successfullyRegister.message });
             }
             else {
-                const result = response.data as { error: string};
-                setToast({ id: Date.now(), message: getResponseError(result.error,language), alertColor: 'error' });
+                let { error } = response.data as { error: string; };
+                error = !error ? `HTML_ERROR_${response.status}` : error;
+                setToast({ id: Date.now(), message: getResponseError(error, language), alertColor: 'error' });
             }
         }
         else

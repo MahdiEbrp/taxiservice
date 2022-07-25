@@ -4,9 +4,7 @@ import { ThemeContext } from './context/ThemeContext';
 
 const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => {
     const { prefersDarkMode } = useContext(ThemeContext);
-    //eslint-disable-singlequotes
     const fonts = '"Vazirmatn","Roboto","Helvetica","Arial",sans-serif';
-    //eslint-enable-singlequotes
     const theme = useMemo(
         () =>
             createTheme({
@@ -47,7 +45,6 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
                                 padding: '6px',
                             },
                             icon: {
-                                order: 1,
                                 alignItems: 'center',
                                 margin: '2px',
                                 padding: '2px',
@@ -58,6 +55,7 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
                                 display: 'inline-flex',
                             },
                             action: {
+                                order: 1,
                                 padding: '2px',
                                 margin: '2px',
                             }
