@@ -94,7 +94,7 @@ const LoginTab = () => {
         }
         if (captcha !== false) {
             setIsLoading(true);
-            const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/resetPassword', { email: emailRef.current!.value, requestId: captcha });
+            const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/resetPassword', { email: emailRef.current!.value, requestId: captcha });
             setIsLoading(false);
             if (!response) {
                 setToast({ id: Date.now(), message: getResponseError('ERR_NULL_RESPONSE', language), alertColor: 'error' });

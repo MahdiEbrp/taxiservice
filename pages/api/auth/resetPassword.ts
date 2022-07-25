@@ -15,7 +15,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!requestId && !email)
         return res.status(400).json({ error: 'ERR_POST_DATA' });
 
-    if (isEmailValid(email))
+    if (!isEmailValid(email))
         return res.status(405).json({ error: 'ERR_INVALID_FORMAT' });
 
     const isValid = await isCaptchaValid(requestId);

@@ -44,7 +44,7 @@ export const resetPasswordBody = (verificationCode: string) => {
             <div style={{ padding: '5px', borderColor: 'grey', borderStyle: 'solid' }}>
                 <h2 style={{ textAlign: 'center' }}>The confirmation email</h2>
                 <p style={{ textAlign: 'center', fontSize: '1.0rem' }}>
-                    Please click on the reset link if you wish to reset your password. You may ignore this email if you do not wish to reset your password.
+                    Please click on the &quot;Reset Password&quot; if you wish to reset your password. You may ignore this email if you do not wish to reset your password.
                 </p>
                 <p style={{ textAlign: 'center', fontSize: '1.0rem' }}>
                     <a style={{
