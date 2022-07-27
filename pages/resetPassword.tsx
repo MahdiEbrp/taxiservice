@@ -72,8 +72,8 @@ const ResetPassword: NextPage = () => {
 
         if (captcha !== false) {
             setIsLoading(true);
-            const values = { password: passwordRef.current!.value, requestId: captcha };
-            const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/resetPassword', values);
+            const values = { password: passwordRef.current!.value, requestId: captcha, updateCode:code };
+            const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/updatePassword', values);
             setIsLoading(false);
         }
         else
