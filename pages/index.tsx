@@ -9,17 +9,13 @@ const Home: NextPage = () => {
         <Head>
           <title>Home Page</title>
         </Head>
-        <Card sx={{ display: 'flex', flex: '1', justifyContent: 'center', alignItems: 'center' }}>
-          <Paper elevation={3} sx={{ margin: '5px' }}>
-
+        <Card>
             <CardContent>
-
               <Stepper activeStep={1} alternativeLabel >
 
                 <Step >
                   <StepLabel icon={<><RiEmotionHappyLine style={{ fontSize: 'x-large' }} /></>}>How can I help you?</StepLabel>
                 </Step>
-
                 <Step >
                   <StepLabel icon={<><RiEmotionHappyLine /></>}>How can I help you?</StepLabel>
                 </Step>
@@ -28,7 +24,6 @@ const Home: NextPage = () => {
             <CardActions>
               <Button size='small'>Next Step</Button>
             </CardActions>
-          </Paper>
         </Card>
     </>
   );

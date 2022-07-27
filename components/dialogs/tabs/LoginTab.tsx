@@ -37,6 +37,7 @@ const LoginTab = () => {
     const passwordReadyReset = messageDialog.passwordReadyReset;
     const rightToLeft = language.settings.rightToLeft;
     /* #endregion */
+    /* #region Functions section */
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
 
@@ -65,7 +66,6 @@ const LoginTab = () => {
         }
         else
             setToast({ id: Date.now(), message: notification.invalidCaptchaFormat, alertColor: 'error' });
-
 
     };
     const validateEmail = () => {
@@ -119,6 +119,7 @@ const LoginTab = () => {
             setToast({ id: Date.now(), message: notification.invalidCaptchaFormat, alertColor: 'error' });
 
     };
+    /* #endregion */
     return (
         <FormControl component='form' sx={{ gap: '1rem' }} onSubmit={handleSubmit}>
             <TextField
@@ -158,19 +159,16 @@ const LoginTab = () => {
                 />
                 {captcha === false && <FormHelperText error>{submitForm.captchaHelperText}</FormHelperText>}
                 {captchaError && <Alert severity='error'>{submitForm.captchaProviderError}</Alert>}
+                {isLoading ?
+                    <CircularLoading />
+                    :
+                    <>
+                        <Button type='submit'>{loginTab.login}</Button>
+                        <Button onClick={() => resetPassword()}>{loginTab.resetPassword}</Button>
+                    </>
 
+                }
             </Box>
-
-            {isLoading ?
-                <CircularLoading />
-                :
-                <>
-                    <Button type='submit'>{loginTab.login}</Button>
-                    <Button onClick={() => resetPassword()}>{loginTab.resetPassword}</Button>
-                </>
-
-            }
-
         </FormControl>
     );
 };

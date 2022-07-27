@@ -1,36 +1,36 @@
 import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
-import { useContext } from 'react';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { SidebarContext } from '../lib/context/SidebarContext';
-import { IoLanguageOutline } from 'react-icons/io5';
 import { CgProfile } from 'react-icons/cg';
-import { VscColorMode } from 'react-icons/vsc';
-import { ThemeContext } from '../lib/context/ThemeContext';
-import { LanguageDialogContext } from '../lib/context/LanguageDialogContext';
-import { UpdateSettings } from '../lib/Settings';
-import { LoginDialogContext } from '../lib/context/LoginDialogContext';
-import { ToastContext } from '../lib/context/ToastContext';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { IoLanguageOutline } from 'react-icons/io5';
 import { LanguageContext } from '../lib/context/LanguageContext';
+import { LanguageDialogContext } from '../lib/context/LanguageDialogContext';
+import { LoginDialogContext } from '../lib/context/LoginDialogContext';
+import { SidebarContext } from '../lib/context/SidebarContext';
+import { ThemeContext } from '../lib/context/ThemeContext';
+import { ToastContext } from '../lib/context/ToastContext';
+import { UpdateSettings } from '../lib/Settings';
+import { VscColorMode } from 'react-icons/vsc';
+import { useContext } from 'react';
 const Navbar = () => {
-
-    const { sidebarOpen, setSidebarOpen } = useContext(SidebarContext);
-    const { prefersDarkMode, setPrefersDarkMode } = useContext(ThemeContext);
+    /* #region Context section */
     const { isLanguageDialogOpen, setLanguageDialogOpen } = useContext(LanguageDialogContext);
+    const { language } = useContext(LanguageContext);
+    const { prefersDarkMode, setPrefersDarkMode } = useContext(ThemeContext);
     const { setLoginDialogOpen } = useContext(LoginDialogContext);
     const { setToast } = useContext(ToastContext);
-
-    const { language } = useContext(LanguageContext);
+    const { sidebarOpen, setSidebarOpen } = useContext(SidebarContext);
+    /* #endregion */
+    /* #region Language section */
     const rightToLeft = language.settings.rightToLeft;
     const notification = language.notification;
-
+    /* #endregion */
     const UpdateTheme = () => {
         setPrefersDarkMode(!prefersDarkMode);
         UpdateSettings('darkMode', (!prefersDarkMode).toString());
         setToast({ id: Date.now(), message: !prefersDarkMode ? notification.darkModeEnabled : notification.darkModeDisabled, alertColor: 'info' });
     };
-
     return (
-        <AppBar position='fixed' dir={rightToLeft ? 'rtl' : 'ltr'} sx={{ zIndex: (theme: { zIndex: { drawer: number; }; }) => theme.zIndex.drawer + 1 }}>
+        <AppBar position='static' dir={rightToLeft ? 'rtl' : 'ltr'} sx={{ zIndex: (theme: { zIndex: { drawer: number; }; }) => theme.zIndex.drawer + 1 }}>
             <Toolbar>
                 <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}
                     onClick={() => setSidebarOpen(!sidebarOpen)}

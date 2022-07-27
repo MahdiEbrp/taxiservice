@@ -42,7 +42,7 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
                     MuiButton: {
                         styleOverrides: {
                             root: {
-                                margin: 'auto',
+                                width: 'fit-content',
                             },
                         },
                     },

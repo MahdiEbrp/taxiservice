@@ -1,34 +1,38 @@
+import GetLanguage from '../../lib/Language';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { LanguageContext } from '../../lib/context/LanguageContext';
 import { LanguageDialogContext } from '../../lib/context/LanguageDialogContext';
 import { ToastContext } from '../../lib/context/ToastContext';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { LanguageContext } from '../../lib/context/LanguageContext';
-import  GetLanguage  from '../../lib/Language';
 const LanguageDialog = () => {
-
+    /* #region Context section */
     const { isLanguageDialogOpen, setLanguageDialogOpen } = useContext(LanguageDialogContext);
-    const { setToast } = useContext(ToastContext);
-    const router = useRouter();
     const { language } = useContext(LanguageContext);
+    const { setToast } = useContext(ToastContext);
+    /* #endregion */
+    const router = useRouter();
+    /* #region Language section */
     const { settings, languageDialog } = language;
     const [languageCode, setLanguageCode] = useState(settings.code);
-
     const rightToLeft = settings.rightToLeft;
-
+    /* #endregion */
+    /* #region Callback hook section */
     useEffect(() => {
         setLanguageCode(settings.code);
     }, [settings.code]);
-
+    /* #endregion */
+    /* #region Functions section */
     const handleClose = (saveMode: boolean) => {
         setLanguageDialogOpen(false);
         if (saveMode === true) {
             const changedLanguage = GetLanguage(languageCode).notification.changedLanguage;
             setToast({ id: Date.now(), message: changedLanguage, alertColor: 'success' });
-            router.push('/', undefined, { locale: languageCode, shallow: true });
+            router.push(router.pathname, undefined, { locale: languageCode, shallow: true });
         }
 
     };
+    /* #endregion */
     return (
 
         <Dialog
@@ -39,7 +43,7 @@ const LanguageDialog = () => {
             dir={rightToLeft ? 'rtl' : 'ltr'}
         >
             <DialogTitle id='language-dialog-title'>
-                    {languageDialog.title}
+                {languageDialog.title}
             </DialogTitle>
             <DialogContent >
                 <FormControl>
@@ -55,7 +59,7 @@ const LanguageDialog = () => {
 
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => handleClose(false)}>{ languageDialog.discard}</Button>
+                <Button onClick={() => handleClose(false)}>{languageDialog.discard}</Button>
                 <Button onClick={() => handleClose(true)} autoFocus>{languageDialog.save}</Button>
             </DialogActions>
 

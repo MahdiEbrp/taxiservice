@@ -11,7 +11,7 @@ import { LanguageContext } from '../lib/context/LanguageContext';
 import { LanguageDialogContext } from '../lib/context/LanguageDialogContext';
 import { LoginDialogContext } from '../lib/context/LoginDialogContext';
 import { MessageDialogContext } from '../lib/context/MessageDialogContext';
-import { Paper } from '@mui/material';
+import { Box } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import { SidebarContext } from '../lib/context/SidebarContext';
@@ -19,14 +19,14 @@ import { ThemeContext } from '../lib/context/ThemeContext';
 import { ToastContext } from '../lib/context/ToastContext';
 import { useRouter } from 'next/router';
 const ContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [prefersDarkMode, setPrefersDarkMode] = useState(false);
     const [isLanguageDialogOpen, setLanguageDialogOpen] = useState(false);
     const [isLoginDialogOpen, setLoginDialogOpen] = useState(false);
+    const [messageDialogInfo, setMessageDialog] = useState<MessageDialogProps>({ isMessageDialogOpen: false, message: '', title: '' });
+    const [prefersDarkMode, setPrefersDarkMode] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const [toast, setToast] = useState<ToastProps>(EmptyToast);
     const router = useRouter();
     const [language, setLanguage] = useState(getLanguage(router.locale));
-    const [messageDialogInfo, setMessageDialog] = useState<MessageDialogProps>({ isMessageDialogOpen: false, message: '', title: '' });
     useEffect(() => {
         const settings = GetSettings('darkMode', 'false') as string;
         setPrefersDarkMode(settings === 'true' ? true : false);
@@ -62,9 +62,9 @@ const MainLayout = (props: { children: ReactElement; }) => {
                 <Sidebar />
                 <LanguageDialog />
                 <LoginDialog />
-                <Paper className='main-content' sx={{ display: 'flex', gap: '1rem' }}>
+                <Box className='main-content' sx={{ bgcolor: 'background.paper',display: 'flex', gap: '1rem',alignItems:'center',justifyContent:'center' }}>
                     {props.children}
-                </Paper >
+                </Box >
                 <ToastHandler />
                 <MessageDialog />
             </ThemePresenter>

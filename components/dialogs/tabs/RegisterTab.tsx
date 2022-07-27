@@ -1,7 +1,7 @@
-import React, { useContext, useRef, useState } from 'react';
 import CircularLoading from '../../controls/CircularLoading';
 import PasswordField from '../../controls/PasswordField';
 import ReCAPTCHA from 'react-google-recaptcha';
+import React, { useContext, useRef, useState } from 'react';
 import { Alert, Box, Button, FormControl, FormHelperText, TextField } from '@mui/material';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { LoginDialogContext } from '../../../lib/context/LoginDialogContext';
@@ -33,11 +33,12 @@ const RegisterTab = () => {
     const { setToast } = useContext(ToastContext);
     /* #endregion */
     /* #region Language section */
-    const { loginDialog, notification, messageDialog,submitForm } = language;
-    const registerTab  = loginDialog.registerTab;
+    const { loginDialog, notification, messageDialog, submitForm } = language;
+    const registerTab = loginDialog.registerTab;
     const rightToLeft = language.settings.rightToLeft;
     const successfullyRegister = messageDialog.userCreatedSuccessfully;
     /* #endregion */
+    /* #region Functions sections */
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
 
@@ -91,7 +92,6 @@ const RegisterTab = () => {
         setPasswordError(!valid);
         return valid;
     };
-
     const validateConfirmPassword = () => {
         const password = passwordRef.current!.value || '';
         const confirmPassword = confirmPasswordRef.current?.value || '';
@@ -99,7 +99,6 @@ const RegisterTab = () => {
         setConfirmPasswordError(!valid);
         return valid;
     };
-
     const handleCaptchaChange = (token: string | null) => {
         if (captchaError)
             setCaptchaError(false);
@@ -111,7 +110,7 @@ const RegisterTab = () => {
             setCaptcha(false);
         }
     };
-
+    /* #endregion */
     return (
         <FormControl component='form' onSubmit={handleSubmit}>
             <TextField
@@ -159,14 +158,12 @@ const RegisterTab = () => {
                 />
                 {captcha === false && <FormHelperText error>{submitForm.captchaHelperText}</FormHelperText>}
                 {captchaError && <Alert severity='error'>{submitForm.captchaProviderError}</Alert>}
+                {isLoading ?
+                    <CircularLoading />
+                    :
+                    <Button type='submit' sx={{ marginTop: '1rem' }}>{registerTab.register}</Button>
+                }
             </Box>
-
-            {isLoading ?
-                <CircularLoading />
-                :
-                <Button type='submit' sx={{ marginTop: '1rem' }}>{registerTab.register}</Button>
-            }
-
         </FormControl>
     );
 };
