@@ -1,6 +1,6 @@
 import { ReactElement, useContext, useMemo } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material';
 import { ThemeContext } from './context/ThemeContext';
+import { createTheme, ThemeProvider } from '@mui/material';
 
 const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => {
     const { prefersDarkMode } = useContext(ThemeContext);
@@ -39,6 +39,13 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
                             }
                         }
                     },
+                    MuiButton: {
+                        styleOverrides: {
+                            root: {
+                                margin: 'auto',
+                            },
+                        },
+                    },
                     MuiAlert: {
                         styleOverrides: {
                             root: {
@@ -61,7 +68,13 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
                             }
                         }
                     },
-
+                    MuiCardHeader: {
+                        styleOverrides: {
+                            title: {
+                                textAlign: 'center',
+                            },
+                        },
+                    },
                 },
             }),
         [prefersDarkMode],

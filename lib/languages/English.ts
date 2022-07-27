@@ -18,13 +18,13 @@ const English = {
         discard: 'Discard',
     },
     notification: {
-        darkModeEnabled: 'The dark mode has been activated.',
-        darkModeDisabled: 'The dark mode has been deactivated.',
         changedLanguage: 'The language change has been applied successfully.',
+        darkModeDisabled: 'The dark mode has been deactivated.',
+        darkModeEnabled: 'The dark mode has been activated.',
+        invalidCaptchaFormat: 'The captcha format is incorrect.',
+        invalidConfirmPassword: 'There is a difference between a confirm password and a password entered!',
         invalidEmailFormat: 'The email format is incorrect.',
         invalidPasswordFormat: 'The password format is incorrect.',
-        invalidConfirmPassword: 'There is a difference between a confirm password and a password entered!',
-        invalidCaptchaFormat: 'The captcha format is incorrect.',
         successfullyLogin: 'Congratulations, you have successfully logged in.',
     },
     responseError: {
@@ -75,31 +75,48 @@ const English = {
         successMessage: 'Verification of the account has been completed successfully. You can now access your account and use the site\'s features.To return to the main page, click the "Return" button.',
         redirectingToHomePage: 'Redirecting to home page...',
     },
+    resetPasswordPage: {
+        title: 'Reset Password',
+        loading: 'Resetting your password...',
+        operationFail: 'The password reset process failed.',
+        reason: 'Reason:',
+        problems: {
+            internetConnection: 'Make sure your internet connection is working.',
+            emailExpired: 'The correct code will be emailed to you. (Make sure your spam folder is checked.)',
+            networkChanged: 'You can resend the request by clicking the "Resend" button.',
+            serverError: 'Contact the system administrator if none of the methods work.',
+        },
+        resetPassword: 'Reset Password',
+        return: 'Return',
+        operationSuccess: 'Congratulations!',
+        successMessage: 'The password reset process has been completed successfully. You can now access your account and use the site\'s features.To return to the main page, click the "Return" button.',
+        redirectingToHomePage: 'Redirecting to home page...',
+    },
     loginDialog: {
         title: 'Login or Register',
         loginTab: {
             title: 'Login',
-            email: 'Email',
-            emailHelperText: 'An example would be: e_mail@email.com.',
-            password: 'Password',
             passwordHelperText: 'In order to send the password to the server, the password format must be entered correctly. We check the acceptable format before sending.',
-            captchaHelperText: 'Captcha must be verified.',
             login: 'Login',
             resetPassword: 'Reset password',
             forgetPassword: 'if you forget your password click on "Reset password" button.',
         },
         registerTab: {
             title: 'Register',
-            email: 'Email',
-            emailHelperText: 'An example would be: e_mail@email.com.',
-            password: 'Password',
-            passwordHelperText: "Passwords should contain a minimum of eight characters, including at least one capital letter, one number, and one symbol. For example: 'Password_1'.",
-            confirmPassword: 'Password confirmation',
-            confirmPasswordHelperText: 'The password confirmation should be the same as the password entered.',
-            captchaHelperText: 'Captcha must be verified.',
             register: 'Register',
         },
+
+    },
+    submitForm: {
+        captchaHelperText: 'Captcha must be verified.',
         captchaProviderError: 'There has been an error with the captcha provider, perhaps from an internet disturbance. We recommend waiting a few seconds or reopening this dialog box if the captcha does not appear or does not work correctly.',
+        confirmPassword: 'Password confirmation',
+        confirmPasswordHelperText: 'The password confirmation should be the same as the password entered.',
+        email: 'Email',
+        emailHelperText: 'An example would be: e_mail@email.com.',
+        password: 'Password',
+        passwordHelperText: "Passwords should contain a minimum of eight characters, including at least one capital letter, one number, and one symbol. For example: 'Password_1'."
+
     }
 };
 

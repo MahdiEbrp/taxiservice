@@ -1,11 +1,11 @@
-import { Box, Dialog, DialogContent, DialogTitle, Tab, Tabs } from '@mui/material';
+import LoginTab from './tabs/LoginTab';
 import React,{ useContext, useState } from 'react';
-import { LoginDialogContext } from '../../lib/context/LoginDialogContext';
-import LoginTab from './LoginTab';
+import RegisterTab from './tabs/RegisterTab';
 import TabPanel from '../controls/TabPanel';
-import { useSession } from 'next-auth/react';
-import RegisterTab from './RegisterTab';
+import { Box, Dialog, DialogContent, DialogTitle, Tab, Tabs } from '@mui/material';
 import { LanguageContext } from '../../lib/context/LanguageContext';
+import { LoginDialogContext } from '../../lib/context/LoginDialogContext';
+import { useSession } from 'next-auth/react';
 
 const LoginDialog = () => {
     const { isLoginDialogOpen, setLoginDialogOpen } = useContext(LoginDialogContext);

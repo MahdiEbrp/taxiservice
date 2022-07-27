@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { MessageDialogContext } from '../../lib/context/MessageDialogContext';
@@ -9,10 +9,14 @@ export interface MessageDialogProps {
 }
 
 const MessageDialog = () => {
+    /* #region Context section */
     const { language } = useContext(LanguageContext);
-    const { settings, messageDialog } = language;
     const { messageDialogInfo, setMessageDialog } = useContext(MessageDialogContext);
+    /* #endregion */
+    /* #region Language section */
+    const { settings, messageDialog } = language;
     const rightToLeft = settings.rightToLeft;
+    /* #endregion */
     const handleClose = () => {
         setMessageDialog({ isMessageDialogOpen: false, message: '', title: '' });
     };
