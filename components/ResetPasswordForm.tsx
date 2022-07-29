@@ -2,7 +2,8 @@ import CircularLoading from './controls/CircularLoading';
 import PasswordField from '../components/controls/PasswordField';
 import ReCAPTCHA from 'react-google-recaptcha';
 import React, { useContext, useRef, useState } from 'react';
-import { Alert, Box, Button, FormControl, FormHelperText, Typography } from '@mui/material';
+import { Alert, Box, Button, Divider, FormControl, FormHelperText, Typography } from '@mui/material';
+import { FaHandPeace } from 'react-icons/fa';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { PostData } from '../lib/FetchData';
 import { ThemeContext } from '../lib/context/ThemeContext';
@@ -19,6 +20,8 @@ const ResetPasswordForm = () => {
     /* #region Response section */
     const [isRedirecting, setRedirecting] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isDone, setIsDone] = useState(false);
+    const [isCodeExpired, setIsCodeExpired] = useState(false);
     /* #endregion */
     /* #region Reference section */
     const passwordRef = useRef<HTMLInputElement>(null);
@@ -26,16 +29,18 @@ const ResetPasswordForm = () => {
     /* #endregion */
     /* #region Error section */
     const [captchaError, setCaptchaError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
     const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
     /* #endregion */
     /* #region Context section */
     const { language } = useContext(LanguageContext);
     const { prefersDarkMode } = useContext(ThemeContext);
     const { setToast } = useContext(ToastContext);
     /* #endregion */
+    /* #region Language section */
     const { settings, resetPasswordPage, submitForm, notification } = language;
     const { rightToLeft } = settings;
+    /* #endregion */
     /* #region  Functions section */
     const validatePassword = () => {
         const password = passwordRef.current!.value || '';
@@ -69,6 +74,10 @@ const ResetPasswordForm = () => {
         }
 
         if (captcha !== false) {
+            if (!code) {
+                setToast({ id: Date.now(), message: getResponseError('ERR_INVALID_CODE', language), alertColor: 'error' });
+                return;
+            }
             setIsLoading(true);
             const values = { password: passwordRef.current!.value, requestId: captcha, updateCode: code };
             const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/updatePassword', values);
@@ -78,11 +87,14 @@ const ResetPasswordForm = () => {
                 return;
             }
             if (response.status === 200) {
-                setToast({ id: Date.now(), message: resetPasswordPage.successMessage, alertColor: 'success' });
+                setToast({ id: Date.now(), message: resetPasswordPage.successToastMessage, alertColor: 'success' });
+                setIsDone(true);
                 return;
             }
             let { error } = response.data as { error: string; };
             error = !error ? `HTML_ERROR_${response.status}` : error;
+            if (error === 'ERR_REQUEST_EXPIRED')
+                setIsCodeExpired(true);
             setToast({ id: Date.now(), message: getResponseError(error, language), alertColor: 'error' });
         }
         else
@@ -99,13 +111,13 @@ const ResetPasswordForm = () => {
     /* #endregion */
     return (
         <>
-            <Box sx={{ display: isLoading? 'flex': 'none', flexDirection: 'column', justifyContent: 'center', gap: '1rem' }}>
+            <Box sx={{ display: isLoading ? 'flex' : 'none', flexDirection: 'column', justifyContent: 'center', gap: '1rem' }}>
                 <CircularLoading />
                 <Typography>
                     {isRedirecting ? resetPasswordPage.redirectingToHomePage : resetPasswordPage.loading}
                 </Typography>
             </Box>
-            <FormControl component='form' sx={{ display: !isLoading ? 'flex' : 'none', gap: '1rem' }} onSubmit={handleSubmit}>
+            <FormControl component='form' sx={{ display: !isLoading && !isDone && !isCodeExpired ? 'flex' : 'none', gap: '1rem' }} onSubmit={handleSubmit}>
                 <PasswordField
                     required
                     id='register-password-required'
@@ -128,7 +140,7 @@ const ResetPasswordForm = () => {
                     onBlur={() => validateConfirmPassword()}
                     inputProps={{ style: { direction: 'ltr', order: rightToLeft ? 1 : -1 } }}
                 />
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center',gap:'1rem' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
                     <ReCAPTCHA
                         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
                         size='compact'
@@ -139,9 +151,39 @@ const ResetPasswordForm = () => {
                     {captcha === false && <FormHelperText error>{submitForm.captchaHelperText}</FormHelperText>}
                     {captchaError && <Alert severity='error'>{submitForm.captchaProviderError}</Alert>}
                     <Button type='submit'>{resetPasswordPage.resetPassword}</Button>
-                    <Button onClick={() => redirect()}>{resetPasswordPage.return}</Button>
                 </Box>
             </FormControl>
+            {!isLoading ?
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                    {isDone ?
+                        <>
+                            <Typography variant="h5" sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                                <FaHandPeace />
+                                {resetPasswordPage.operationSuccess}
+                            </Typography>
+                            <Divider variant="middle" />
+                            <Typography>
+                                {resetPasswordPage.successMessage}
+                            </Typography>
+                        </>
+                        :
+                        <>
+                            {isCodeExpired ?
+                                <Typography>
+                                    {resetPasswordPage.expiredMessage}
+                                </Typography>
+                                :
+                                <></>
+                            }
+                        </>
+                    }
+
+                    <Button onClick={() => redirect()}>{resetPasswordPage.return}</Button>
+                </Box>
+                :
+                <></>
+            }
+
 
         </>
     );

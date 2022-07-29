@@ -4,7 +4,7 @@ const English = {
         displayName: 'English',
         code: 'en',
         rightToLeft: false,
-        listStyle:'decimal',
+        listStyle: 'decimal',
     },
     sidebar: {
         home: 'Home',
@@ -33,6 +33,7 @@ const English = {
         ERR_EMAIL_NOT_FOUND: 'We couldn\'t find any users with this email address!',
         ERR_INTERNAL_UPDATE: 'A server issue is preventing the information from being edited. If you think it will help fix the problem, please contact us.',
         ERR_INVALID_CAPTCHA: 'The captcha is invalid.',
+        ERR_INVALID_CODE: 'There is no request code or it is invalid!',
         ERR_INVALID_FORMAT: 'The format submitted is incorrect.',
         ERR_INVALID_METHOD: 'The method submitted is incorrect',
         ERR_INVALID_REQUEST: 'The request is invalid.',
@@ -67,7 +68,7 @@ const English = {
             internetConnection: 'Make sure your internet connection is working.',
             emailExpired: 'The correct code will be emailed to you. (Make sure your spam folder is checked.)',
             networkChanged: 'You can resend the request by clicking the "Resend" button.',
-            serverError:'Contact the system administrator if none of the methods work.',
+            serverError: 'Contact the system administrator if none of the methods work.',
         },
         resend: 'Resend',
         return: 'Return',
@@ -76,13 +77,15 @@ const English = {
         redirectingToHomePage: 'Redirecting to home page...',
     },
     resetPasswordPage: {
-        title: 'Reset Password',
+        expiredMessage: 'You have used an expired link. A new one has been emailed to you. (Make sure your spam folder is checked.)',
         loading: 'Resetting your password...',
+        operationSuccess: 'Congratulations!',
+        redirectingToHomePage: 'Redirecting to home page...',
         resetPassword: 'Reset Password',
         return: 'Return',
-        operationSuccess: 'Congratulations!',
-        successMessage: 'The password reset process has been completed successfully.',
-        redirectingToHomePage: 'Redirecting to home page...',
+        successMessage: 'Your password has been successfully changed. You can now access your account and use the site\'s features.Click "Return" to return to the main page.',
+        successToastMessage: 'The password reset process has been completed successfully.',
+        title: 'Reset Password',
     },
     loginDialog: {
         title: 'Login or Register',
@@ -102,14 +105,14 @@ const English = {
     submitForm: {
         captchaHelperText: 'Captcha must be verified.',
         captchaProviderError: 'There has been an error with the captcha provider, perhaps from an internet disturbance. We recommend waiting a few seconds or reopening this dialog box if the captcha does not appear or does not work correctly.',
+        confirmNewPassword: 'Confirm New Password',
         confirmPassword: 'Password confirmation',
         confirmPasswordHelperText: 'The password confirmation should be the same as the password entered.',
         email: 'Email',
         emailHelperText: 'An example would be: e_mail@email.com.',
+        newPassword: 'New Password',
         password: 'Password',
         passwordHelperText: "Passwords should contain a minimum of eight characters, including at least one capital letter, one number, and one symbol. For example: 'Password_1'.",
-        newPassword: 'New Password',
-        confirmNewPassword: 'Confirm New Password',
 
     }
 };

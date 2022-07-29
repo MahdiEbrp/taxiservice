@@ -5,13 +5,14 @@ export interface SigninResult {
     ok: boolean;
     url: string | null;
 }
-
+const timeout = 10000;
 export const PostData = async (url: string, data: any) => {
     try {
         const response = await axios.post(url, JSON.stringify(data), {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            timeout: timeout,
         });
         return response;
 
@@ -26,7 +27,7 @@ export const PostData = async (url: string, data: any) => {
 };
 export const GetData = async (url: string) => {
     try {
-        const response = await axios.get(url);
+        const response = await axios.get(url,{timeout: timeout});
         return response;
 
     }
@@ -43,7 +44,8 @@ export const PutData = async (url: string, data: any) => {
         const response = await axios.put(url, JSON.stringify(data), {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            timeout: timeout,
         });
         return response;
 
@@ -75,7 +77,8 @@ export const PatchData = async (url: string, data: any) => {
         const response = await axios.patch(url, JSON.stringify(data), {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            timeout: timeout,
         });
         return response;
 

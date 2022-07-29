@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 const Verify: NextPage = () => {
     /* #region Router section */
     const router = useRouter();
-    const code = router.query['code'] as string || '';
+    const code = router.query['code'] as string;
     /* #endregion */
     /* #region Context section */
     const { language } = useContext(LanguageContext);
@@ -45,6 +45,7 @@ const Verify: NextPage = () => {
     useEffect(() => {
         const loadData = async () => {
             const response = await GetData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/verify?code=' + code);
+            setLoading(false);
             if (!response) {
                 setError('ERR_NULL_RESPONSE');
                 return;
@@ -57,7 +58,6 @@ const Verify: NextPage = () => {
                 const { error } = response.data as { error: string; };
                 setError(!error ? `HTML_ERROR_${response.status}` : error);
             }
-            setLoading(false);
             setReloadData(false);
         };
         if (code !== undefined) {
@@ -66,12 +66,11 @@ const Verify: NextPage = () => {
                 setError('ERR_INVALID_FORMAT');
             }
             else {
-                if (isLoading && reloadData) {
+                if (isLoading && reloadData && !isVerified)
                     loadData();
-                }
             }
         }
-    }, [code, isLoading, reloadData]);
+    }, [code, isLoading, isVerified, reloadData]);
     /* #endregion */
     const VerificationError = () => {
         return (

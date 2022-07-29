@@ -20,7 +20,7 @@ const ResetPassword: NextPage = () => {
             <Card dir={rightToLeft ? 'rtl' : 'ltr'} sx={{ margin: '15px' }}>
                 <CardHeader title={resetPasswordPage.title} />
                 <CardContent>
-                    <ResetPasswordForm/>
+                    <ResetPasswordForm />
                 </CardContent>
             </Card>
         </>
