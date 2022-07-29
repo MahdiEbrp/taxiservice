@@ -78,18 +78,10 @@ const English = {
     resetPasswordPage: {
         title: 'Reset Password',
         loading: 'Resetting your password...',
-        operationFail: 'The password reset process failed.',
-        reason: 'Reason:',
-        problems: {
-            internetConnection: 'Make sure your internet connection is working.',
-            emailExpired: 'The correct code will be emailed to you. (Make sure your spam folder is checked.)',
-            networkChanged: 'You can resend the request by clicking the "Resend" button.',
-            serverError: 'Contact the system administrator if none of the methods work.',
-        },
         resetPassword: 'Reset Password',
         return: 'Return',
         operationSuccess: 'Congratulations!',
-        successMessage: 'The password reset process has been completed successfully. You can now access your account and use the site\'s features.To return to the main page, click the "Return" button.',
+        successMessage: 'The password reset process has been completed successfully.',
         redirectingToHomePage: 'Redirecting to home page...',
     },
     loginDialog: {
@@ -115,7 +107,9 @@ const English = {
         email: 'Email',
         emailHelperText: 'An example would be: e_mail@email.com.',
         password: 'Password',
-        passwordHelperText: "Passwords should contain a minimum of eight characters, including at least one capital letter, one number, and one symbol. For example: 'Password_1'."
+        passwordHelperText: "Passwords should contain a minimum of eight characters, including at least one capital letter, one number, and one symbol. For example: 'Password_1'.",
+        newPassword: 'New Password',
+        confirmNewPassword: 'Confirm New Password',
 
     }
 };

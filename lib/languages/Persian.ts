@@ -77,18 +77,9 @@ const Persian = {
     resetPasswordPage: {
         title: 'بازنشانی کلمه عبور',
         loading: 'در حال بازنشانی کلمه عبور...',
-        operationFail: 'فرآیند بازنشانی کلمه عبور ناموفق بود.',
-        reason: 'دلیل:',
-        problems: {
-            internetConnection: 'مطمئن شوید که اتصال اینترنت شما کار می کند.',
-            emailExpired: 'کد صحیح برای شما ایمیل خواهد شد. (مطمئن شوید که پوشه اسپم شما بررسی شده است.)',
-            networkChanged: 'با کلیک بر روی دکمه "ارسال مجدد" می توانید درخواست را مجددا ارسال کنید.',
-            serverError: 'اگر هیچ یک از روش ها کار نکرد، با مدیر سیستم تماس بگیرید.',
-        },
         resetPassword: 'تغییر کلمه عبور',
         return: 'بازگشت',
-        operationSuccess: 'تبریک!',
-        successMessage: 'بازنشانی کلمه عبور با موفقیت انجام شد. اکنون می توانید به حساب خود دسترسی داشته باشید و از ویژگی های سایت استفاده کنید. برای بازگشت به صفحه اصلی، روی دکمه "بازگشت" کلیک کنید.',
+        successMessage: 'بازنشانی کلمه عبور با موفقیت انجام شد.',
         redirectingToHomePage: 'در حال تغییر مسیر به صفحه اصلی...',
     },
     loginDialog: {
@@ -115,6 +106,8 @@ const Persian = {
         emailHelperText: 'به عنوان مثال: e_mail@email.com.',
         password: 'رمز عبور',
         passwordHelperText: "رمز عبور باید حداقل شامل هشت کاراکتر، شامل حداقل یک حرف بزرگ، یک عدد و یک نماد باشد. به عنوان مثال: 'Password_1'.",
+        newPassword: 'رمز عبور جدید',
+        confirmNewPassword: 'تایید رمز عبور جدید',
     }
 };
 export default Persian;

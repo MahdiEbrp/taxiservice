@@ -1,7 +1,7 @@
 import CircularLoading from '../components/controls/CircularLoading';
 import Head from 'next/head';
 import { BiMessageSquareError } from 'react-icons/bi';
-import { Button, Card, CardActions, CardContent, CardHeader, Divider, Typography } from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, CardHeader, Divider, Typography } from '@mui/material';
 import { FiUserCheck } from 'react-icons/fi';
 import { GetData } from '../lib/FetchData';
 import { LanguageContext } from '../lib/context/LanguageContext';
@@ -14,7 +14,7 @@ const Verify: NextPage = () => {
     const router = useRouter();
     const code = router.query['code'] as string || '';
     /* #endregion */
-    /* #region  Context section */
+    /* #region Context section */
     const { language } = useContext(LanguageContext);
     /* #endregion */
     /* #region Response section */
@@ -40,7 +40,7 @@ const Verify: NextPage = () => {
         setLoading(true);
         await router.push('/');
     };
-    /* #endregion */
+    /* #region Functions section */
     /* #region CallBack Hook section */
     useEffect(() => {
         const loadData = async () => {
@@ -66,13 +66,13 @@ const Verify: NextPage = () => {
                 setError('ERR_INVALID_FORMAT');
             }
             else {
-                if (reloadData)
+                if (isLoading && reloadData) {
                     loadData();
+                }
             }
         }
-    }, [code, reloadData]);
+    }, [code, isLoading, reloadData]);
     /* #endregion */
-    /* #region Functions section */
     const VerificationError = () => {
         return (
             <>
@@ -91,10 +91,6 @@ const Verify: NextPage = () => {
                     <li>{problems.networkChanged}</li>
                     <li>{problems.serverError}</li>
                 </ol>
-                <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button onClick={() => resend()}>{emailVerificationPage.resend}</Button>
-                    <Button onClick={() => redirect()}>{emailVerificationPage.return}</Button>
-                </CardActions>
             </>
         );
 
@@ -110,10 +106,6 @@ const Verify: NextPage = () => {
                 <Typography>
                     {emailVerificationPage.successMessage}
                 </Typography>
-                <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button onClick={() => redirect()}>{emailVerificationPage.return}</Button>
-                </CardActions>
-
             </>
 
         );
@@ -130,18 +122,24 @@ const Verify: NextPage = () => {
                     <CardHeader title={emailVerificationPage.title} sx={{ color: !isLoading && !isVerified ? 'error.main' : '' }} />
                     <CardContent sx={{ color: !isLoading && !isVerified ? 'error.main' : '', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {isLoading ?
-                            <>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '1rem' }}>
                                 <CircularLoading />
                                 <Typography>
                                     {isRedirecting ? emailVerificationPage.redirectingToHomePage : emailVerificationPage.loading}
                                 </Typography>
-                            </>
+                            </Box>
                             :
                             <>
                                 {isVerified ? <VerificationSuccess /> : <VerificationError />}
                             </>
                         }
                     </CardContent>
+                    {!isLoading &&
+                        <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
+                            {!isVerified && <Button onClick={() => resend()}>{emailVerificationPage.resend}</Button>}
+                            <Button onClick={() => redirect()}>{emailVerificationPage.return}</Button>
+                        </CardActions>
+                    }
                 </>
             </Card>
         </>
