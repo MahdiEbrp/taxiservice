@@ -1,8 +1,9 @@
+import CenterBox from '../../controls/CenterBox';
 import CircularLoading from '../../controls/CircularLoading';
 import PasswordField from '../../controls/PasswordField';
 import ReCAPTCHA from 'react-google-recaptcha';
 import React, { useContext, useRef, useState } from 'react';
-import { Alert, Box, Button, FormControl, FormHelperText, TextField } from '@mui/material';
+import { Alert,Button, FormControl, FormHelperText, TextField } from '@mui/material';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { LoginDialogContext } from '../../../lib/context/LoginDialogContext';
 import { MessageDialogContext } from '../../../lib/context/MessageDialogContext';
@@ -148,7 +149,7 @@ const RegisterTab = () => {
                 onBlur={() => validateConfirmPassword()}
                 inputProps={{ style: { direction: 'ltr', order: rightToLeft ? 1 : -1 } }}
             />
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <CenterBox>
                 <ReCAPTCHA
                     sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
                     size='compact'
@@ -163,7 +164,7 @@ const RegisterTab = () => {
                     :
                     <Button type='submit' sx={{ marginTop: '1rem' }}>{registerTab.register}</Button>
                 }
-            </Box>
+            </CenterBox>
         </FormControl>
     );
 };

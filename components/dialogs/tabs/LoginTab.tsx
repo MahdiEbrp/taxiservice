@@ -2,7 +2,7 @@ import CircularLoading from '../../controls/CircularLoading';
 import PasswordField from '../../controls/PasswordField';
 import ReCAPTCHA from 'react-google-recaptcha';
 import React, { useContext, useRef, useState } from 'react';
-import { Box, Button, FormHelperText, FormControl, TextField, Alert } from '@mui/material';
+import { Button, FormHelperText, FormControl, TextField, Alert } from '@mui/material';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { LoginDialogContext } from '../../../lib/context/LoginDialogContext';
 import { MessageDialogContext } from '../../../lib/context/MessageDialogContext';
@@ -12,6 +12,7 @@ import { ToastContext } from '../../../lib/context/ToastContext';
 import { getResponseError } from '../../../lib/Language';
 import { isEmailValid, isPasswordValid } from '../../../lib/Validator';
 import { signIn } from 'next-auth/react';
+import CenterBox from '../../controls/CenterBox';
 const LoginTab = () => {
     const [captcha, setCaptcha] = useState<string | false>(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -149,7 +150,7 @@ const LoginTab = () => {
 
             />
             <Alert severity='info'>{loginTab.forgetPassword}</Alert>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <CenterBox>
                 <ReCAPTCHA
                     sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
                     size='compact'
@@ -168,7 +169,7 @@ const LoginTab = () => {
                     </>
 
                 }
-            </Box>
+            </CenterBox>
         </FormControl>
     );
 };

@@ -1,5 +1,5 @@
+import CenterBox from './CenterBox';
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
 export interface TabPanelProps {
     children?: React.ReactNode;
     index: string;
@@ -13,9 +13,9 @@ const TabPanel = (props: TabPanelProps) => {
     if (!isActive)
         return <></>;
     return (
-        <Box sx={{ display: value === index ? 'flex' : 'none', padding: '1rem' }}  {...other}>
+        <CenterBox sx={{ display: value === index ? 'flex' : 'none', padding: '1rem' }}  {...other}>
             {children}
-        </Box >
+        </CenterBox >
     );
 };
 

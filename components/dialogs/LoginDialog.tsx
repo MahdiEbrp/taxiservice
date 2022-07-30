@@ -2,6 +2,7 @@ import LoginTab from './tabs/LoginTab';
 import React, { useContext, useState } from 'react';
 import RegisterTab from './tabs/RegisterTab';
 import TabPanel from '../controls/TabPanel';
+import UserInformationTab from './tabs/UserInformationTab';
 import { Box, Dialog, DialogContent, DialogTitle, Tab, Tabs } from '@mui/material';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { LoginDialogContext } from '../../lib/context/LoginDialogContext';
@@ -34,11 +35,13 @@ const LoginDialog = () => {
             dir={rightToLeft ? 'rtl' : 'ltr'}
         >
             <DialogTitle id='language-dialog-title'>
-                {loginDialog.title}
+                {!session ? loginDialog.title : loginDialog.userInformation.title}
             </DialogTitle>
             <DialogContent >
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    {session ? <p>You are logged in as {session.user?.email}</p> :
+                    {session?
+                        <UserInformationTab />
+                        :
                         <>
                             <Tabs value={tabID} onChange={handleChange} aria-label='login tabs'>
                                 <Tab value='login' label={loginDialog.loginTab.title} />

@@ -32,7 +32,7 @@ const Navbar = () => {
     };
     /* #endregion */
     return (
-        <AppBar position='static' dir={rightToLeft ? 'rtl' : 'ltr'} sx={{ zIndex: (theme: { zIndex: { drawer: number; }; }) => theme.zIndex.drawer + 1 }}>
+        <AppBar position='sticky' dir={rightToLeft ? 'rtl' : 'ltr'} sx={{ zIndex: (theme: { zIndex: { drawer: number; }; }) => theme.zIndex.drawer + 1 }}>
             <Toolbar>
                 <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}
                     onClick={() => setSidebarOpen(!sidebarOpen)}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import Link from 'next/link';
 
 export interface SidebarItemType {
 
@@ -16,7 +17,9 @@ const SidebarItem = (props: { item: SidebarItemType; }) => {
                 <ListItemIcon>
                     {icon}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <Link href={url}>
+                    <ListItemText primary={text} />
+                </Link>
             </ListItemButton>
         </ListItem>
     );

@@ -1,10 +1,10 @@
-import { Box,CircularProgress } from '@mui/material';
-
+import CenterBox from './CenterBox';
+import { CircularProgress } from '@mui/material';
 const CircularLoading = () => {
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+        <CenterBox>
             <CircularProgress />
-        </Box>
+        </CenterBox>
     );
 };
 

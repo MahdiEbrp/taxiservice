@@ -100,6 +100,9 @@ const Persian = {
             title: 'ثبت نام',
             register: 'ثبت نام',
         },
+        userInformation: {
+            title: 'اطلاعات کاربری',
+        },
     },
     submitForm: {
         captchaHelperText: 'کپچا باید تایید شود.',

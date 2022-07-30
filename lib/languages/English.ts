@@ -100,7 +100,9 @@ const English = {
             title: 'Register',
             register: 'Register',
         },
-
+        userInformation: {
+            title: 'User Information',
+        }
     },
     submitForm: {
         captchaHelperText: 'Captcha must be verified.',

@@ -1,8 +1,9 @@
+import CenterBox from './controls/CenterBox';
 import CircularLoading from './controls/CircularLoading';
 import PasswordField from '../components/controls/PasswordField';
 import ReCAPTCHA from 'react-google-recaptcha';
 import React, { useContext, useRef, useState } from 'react';
-import { Alert, Box, Button, Divider, FormControl, FormHelperText, Typography } from '@mui/material';
+import { Alert, Button, Divider, FormControl, FormHelperText, Typography } from '@mui/material';
 import { FaHandPeace } from 'react-icons/fa';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { PostData } from '../lib/FetchData';
@@ -111,12 +112,12 @@ const ResetPasswordForm = () => {
     /* #endregion */
     return (
         <>
-            <Box sx={{ display: isLoading ? 'flex' : 'none', flexDirection: 'column', justifyContent: 'center', gap: '1rem' }}>
+            <CenterBox sx={{ display: isLoading ? 'flex' : 'none'}}>
                 <CircularLoading />
                 <Typography>
                     {isRedirecting ? resetPasswordPage.redirectingToHomePage : resetPasswordPage.loading}
                 </Typography>
-            </Box>
+            </CenterBox>
             <FormControl component='form' sx={{ display: !isLoading && !isDone && !isCodeExpired ? 'flex' : 'none', gap: '1rem' }} onSubmit={handleSubmit}>
                 <PasswordField
                     required
@@ -140,7 +141,7 @@ const ResetPasswordForm = () => {
                     onBlur={() => validateConfirmPassword()}
                     inputProps={{ style: { direction: 'ltr', order: rightToLeft ? 1 : -1 } }}
                 />
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                <CenterBox>
                     <ReCAPTCHA
                         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
                         size='compact'
@@ -151,10 +152,10 @@ const ResetPasswordForm = () => {
                     {captcha === false && <FormHelperText error>{submitForm.captchaHelperText}</FormHelperText>}
                     {captchaError && <Alert severity='error'>{submitForm.captchaProviderError}</Alert>}
                     <Button type='submit'>{resetPasswordPage.resetPassword}</Button>
-                </Box>
+                </CenterBox>
             </FormControl>
             {!isLoading ?
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                <CenterBox>
                     {isDone ?
                         <>
                             <Typography variant="h5" sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
@@ -179,7 +180,7 @@ const ResetPasswordForm = () => {
                     }
 
                     <Button onClick={() => redirect()}>{resetPasswordPage.return}</Button>
-                </Box>
+                </CenterBox>
                 :
                 <></>
             }

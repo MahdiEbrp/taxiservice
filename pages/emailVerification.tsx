@@ -1,7 +1,7 @@
 import CircularLoading from '../components/controls/CircularLoading';
 import Head from 'next/head';
 import { BiMessageSquareError } from 'react-icons/bi';
-import { Box, Button, Card, CardActions, CardContent, CardHeader, Divider, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardHeader, Divider, Typography } from '@mui/material';
 import { FiUserCheck } from 'react-icons/fi';
 import { GetData } from '../lib/FetchData';
 import { LanguageContext } from '../lib/context/LanguageContext';
@@ -9,6 +9,7 @@ import { NextPage } from 'next';
 import { getResponseError } from '../lib/Language';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import CenterBox from '../components/controls/CenterBox';
 const Verify: NextPage = () => {
     /* #region Router section */
     const router = useRouter();
@@ -60,7 +61,7 @@ const Verify: NextPage = () => {
             }
             setReloadData(false);
         };
-        if (code !== undefined) {
+        if (router.isReady) {
             if (!code) {
                 setLoading(false);
                 setError('ERR_INVALID_FORMAT');
@@ -70,7 +71,7 @@ const Verify: NextPage = () => {
                     loadData();
             }
         }
-    }, [code, isLoading, isVerified, reloadData]);
+    }, [code, isLoading, isVerified, reloadData, router]);
     /* #endregion */
     const VerificationError = () => {
         return (
@@ -121,12 +122,12 @@ const Verify: NextPage = () => {
                     <CardHeader title={emailVerificationPage.title} sx={{ color: !isLoading && !isVerified ? 'error.main' : '' }} />
                     <CardContent sx={{ color: !isLoading && !isVerified ? 'error.main' : '', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {isLoading ?
-                            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '1rem' }}>
+                            <CenterBox>
                                 <CircularLoading />
                                 <Typography>
                                     {isRedirecting ? emailVerificationPage.redirectingToHomePage : emailVerificationPage.loading}
                                 </Typography>
-                            </Box>
+                            </CenterBox>
                             :
                             <>
                                 {isVerified ? <VerificationSuccess /> : <VerificationError />}

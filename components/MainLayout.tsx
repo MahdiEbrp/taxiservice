@@ -1,3 +1,4 @@
+import CenterBox from './controls/CenterBox';
 import GetSettings from '../lib/Settings';
 import LanguageDialog from './dialogs/LanguageDialog';
 import LoginDialog from './dialogs/LoginDialog';
@@ -7,7 +8,6 @@ import Sidebar from './Sidebar';
 import ThemePresenter from '../lib/ThemePresenter';
 import ToastHandler, { EmptyToast, ToastProps } from './controls/Toast';
 import getLanguage from '../lib/Language';
-import { Box } from '@mui/material';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { LanguageDialogContext } from '../lib/context/LanguageDialogContext';
 import { LoginDialogContext } from '../lib/context/LoginDialogContext';
@@ -66,9 +66,9 @@ const MainLayout = (props: { children: ReactElement; }) => {
                 <Sidebar />
                 <LanguageDialog />
                 <LoginDialog />
-                <Box className='main-content' sx={{ bgcolor: 'background.paper', display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'center' }}>
+                <CenterBox bgcolor= 'background.paper' className='main-content'>
                     {props.children}
-                </Box >
+                </CenterBox >
                 <ToastHandler />
                 <MessageDialog />
             </ThemePresenter>

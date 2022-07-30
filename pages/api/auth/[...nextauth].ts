@@ -42,7 +42,7 @@ export const options = {
                                     throw new Error('ERR_USER_NOT_VERIFIED');
                                 else
                                     return {
-                                        user: user,
+                                        email: user.email,
                                         token: user.id,
                                     };
                             }
