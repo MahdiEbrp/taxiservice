@@ -1,3 +1,4 @@
+import CenterBox from '../components/controls/CenterBox';
 import CircularLoading from '../components/controls/CircularLoading';
 import Head from 'next/head';
 import { BiMessageSquareError } from 'react-icons/bi';
@@ -9,7 +10,6 @@ import { NextPage } from 'next';
 import { getResponseError } from '../lib/Language';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import CenterBox from '../components/controls/CenterBox';
 const Verify: NextPage = () => {
     /* #region Router section */
     const router = useRouter();
