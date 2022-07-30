@@ -7,11 +7,11 @@ import Sidebar from './Sidebar';
 import ThemePresenter from '../lib/ThemePresenter';
 import ToastHandler, { EmptyToast, ToastProps } from './controls/Toast';
 import getLanguage from '../lib/Language';
+import { Box } from '@mui/material';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { LanguageDialogContext } from '../lib/context/LanguageDialogContext';
 import { LoginDialogContext } from '../lib/context/LoginDialogContext';
 import { MessageDialogContext } from '../lib/context/MessageDialogContext';
-import { Box } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import { SidebarContext } from '../lib/context/SidebarContext';
@@ -19,14 +19,17 @@ import { ThemeContext } from '../lib/context/ThemeContext';
 import { ToastContext } from '../lib/context/ToastContext';
 import { useRouter } from 'next/router';
 const ContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
+    /* #region Dialog section */
     const [isLanguageDialogOpen, setLanguageDialogOpen] = useState(false);
     const [isLoginDialogOpen, setLoginDialogOpen] = useState(false);
     const [messageDialogInfo, setMessageDialog] = useState<MessageDialogProps>({ isMessageDialogOpen: false, message: '', title: '' });
+    /* #endregion */
     const [prefersDarkMode, setPrefersDarkMode] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [toast, setToast] = useState<ToastProps>(EmptyToast);
     const router = useRouter();
     const [language, setLanguage] = useState(getLanguage(router.locale));
+    /* #region Callback hook section */
     useEffect(() => {
         const settings = GetSettings('darkMode', 'false') as string;
         setPrefersDarkMode(settings === 'true' ? true : false);
@@ -34,6 +37,7 @@ const ContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
     useEffect(() => {
         setLanguage(getLanguage(router.locale));
     }, [router.locale]);
+    /* #endregion */
     return (
         <SessionProvider >
             <ThemeContext.Provider value={{ prefersDarkMode, setPrefersDarkMode }}>
@@ -62,7 +66,7 @@ const MainLayout = (props: { children: ReactElement; }) => {
                 <Sidebar />
                 <LanguageDialog />
                 <LoginDialog />
-                <Box className='main-content' sx={{ bgcolor: 'background.paper',display: 'flex', gap: '1rem',alignItems:'center',justifyContent:'center' }}>
+                <Box className='main-content' sx={{ bgcolor: 'background.paper', display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'center' }}>
                     {props.children}
                 </Box >
                 <ToastHandler />

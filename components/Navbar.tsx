@@ -24,11 +24,13 @@ const Navbar = () => {
     const rightToLeft = language.settings.rightToLeft;
     const notification = language.notification;
     /* #endregion */
+    /* #region Functions section */
     const UpdateTheme = () => {
         setPrefersDarkMode(!prefersDarkMode);
         UpdateSettings('darkMode', (!prefersDarkMode).toString());
         setToast({ id: Date.now(), message: !prefersDarkMode ? notification.darkModeEnabled : notification.darkModeDisabled, alertColor: 'info' });
     };
+    /* #endregion */
     return (
         <AppBar position='static' dir={rightToLeft ? 'rtl' : 'ltr'} sx={{ zIndex: (theme: { zIndex: { drawer: number; }; }) => theme.zIndex.drawer + 1 }}>
             <Toolbar>
