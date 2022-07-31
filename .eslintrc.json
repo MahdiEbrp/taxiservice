@@ -25,11 +25,7 @@
         "eqeqeq": [
             "error", "allow-null"
         ],
-        "quotes": [
-            "error", "single", "avoid-escape"
-        ]
-
-
+        "quotes": ["error", "single", "avoid-escape"]
     },
     "parserOptions": {
         "ecmaVersion": 2018,

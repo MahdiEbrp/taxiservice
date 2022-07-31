@@ -59,6 +59,14 @@ const English = {
             message: 'You can reset your password now. An email with a reset link has been sent to you. You may find it in your spam folder (don\'t forget to check it).',
         },
     },
+    pageNotFound: {
+        title: 'Page not found!',
+        error404: 'Error 404',
+        message: 'Hmm...looks like you got lost or went the wrong way! Nothing to worry about, I\'ll take you home.Have a good time.',
+        returnHome: 'Return home',
+        redirectingToHomePage: 'Redirecting to home page...',
+        imageAlt:'404 map not found lost map',
+    },
     emailVerificationPage: {
         title: 'Email Verification',
         loading: 'Verifying your account...',
