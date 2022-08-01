@@ -2,8 +2,10 @@ import { Box, SxProps, Theme } from '@mui/material';
 import { ElementType, ReactNode } from 'react';
 const CenterBox: ElementType = (props: { children: ReactNode}) => {
     const { children, ...other } = props;
+    const newProps = { ...centerStyle, ...other };
+
     return (
-        <Box sx={{ padding: '2px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center', gap: '1rem' }}  {...other}>
+        <Box {...newProps}>
             {children}
         </Box>
     );

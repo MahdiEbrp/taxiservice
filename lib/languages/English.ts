@@ -27,6 +27,9 @@ const English = {
         invalidPasswordFormat: 'The password format is incorrect.',
         successfullyLogin: 'Congratulations, you have successfully logged in.',
     },
+    components: {
+        imageLoaderError:'The image is not loaded correctly.keyword:',
+    },
     responseError: {
         CredentialsSignin: 'The username or password you entered is incorrect.',
         ERR_EMAIL_EXISTS: 'You already have an account with this email address. Please login.',
@@ -65,7 +68,7 @@ const English = {
         message: 'Hmm...looks like you got lost or went the wrong way! Nothing to worry about, I\'ll take you home.Have a good time.',
         returnHome: 'Return home',
         redirectingToHomePage: 'Redirecting to home page...',
-        imageAlt:'404 map not found lost map',
+        imageAlt:'map 404 not found lost',
     },
     emailVerificationPage: {
         title: 'Email Verification',

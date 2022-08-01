@@ -26,6 +26,9 @@ const Persian = {
         invalidCaptchaFormat: 'فرمت کپچا نادرست است.',
         successfullyLogin: 'تبریک می گویم، شما با موفقیت وارد سیستم شدید.',
     },
+    components: {
+        imageLoaderError: 'تصویر بارگذاری نشد.کلمات کلیدی:',
+    },
     responseError: {
         CredentialsSignin: 'نام کاربری یا رمز عبور وارد شده اشتباه است.',
         ERR_EMAIL_EXISTS: 'شما قبلاً یک حساب کاربری با این آدرس ایمیل دارید. لطفا وارد شوید.',
