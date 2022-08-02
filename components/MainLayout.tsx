@@ -18,6 +18,7 @@ import { SidebarContext } from '../lib/context/SidebarContext';
 import { ThemeContext } from '../lib/context/ThemeContext';
 import { ToastContext } from '../lib/context/ToastContext';
 import { useRouter } from 'next/router';
+import { Box } from '@mui/material';
 const ContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
     /* #region Dialog section */
     const [isLanguageDialogOpen, setLanguageDialogOpen] = useState(false);
@@ -63,16 +64,21 @@ const MainLayout = (props: { children: ReactElement; }) => {
         <ContextHolder>
             <ThemePresenter>
                 <Navbar />
-                <Sidebar />
                 <LanguageDialog />
                 <LoginDialog />
-                <CenterBox bgcolor= 'background.paper' className='main-content'>
+                <Sidebar />
+                <CenterBox bgcolor='background.paper' className='main-content' sx={{
+                    background: 'url(/images/background.jpg)',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundAttachment: 'fixed',
+                }} >
                     {props.children}
                 </CenterBox >
                 <ToastHandler />
                 <MessageDialog />
             </ThemePresenter>
-        </ContextHolder>
+        </ContextHolder >
     );
 };
 
