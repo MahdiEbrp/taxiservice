@@ -10,6 +10,10 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
             createTheme({
                 palette: {
                     mode: prefersDarkMode ? 'dark' : 'light',
+                    background:{
+                        default: prefersDarkMode ? '#121212f2' : '#fffffff2',
+                        paper: prefersDarkMode ? '#121212f2' : '#fffffff2'
+                    }
                 },
                 typography: {
                     fontFamily: fonts,
@@ -18,13 +22,6 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
                     MuiDialogTitle: {
                         defaultProps: {
                             textAlign: 'center',
-                        }
-                    },
-                    MuiCard: {
-                        styleOverrides: {
-                            root: {
-                                backgroundColor: prefersDarkMode ? '#121212f7' : '#fffffff7',
-                            }
                         }
                     },
                     MuiListItemText: {

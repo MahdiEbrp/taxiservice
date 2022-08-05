@@ -1,4 +1,3 @@
-import CenterBox from './controls/CenterBox';
 import GetSettings from '../lib/Settings';
 import LanguageDialog from './dialogs/LanguageDialog';
 import LoginDialog from './dialogs/LoginDialog';
@@ -18,6 +17,8 @@ import { SidebarContext } from '../lib/context/SidebarContext';
 import { ThemeContext } from '../lib/context/ThemeContext';
 import { ToastContext } from '../lib/context/ToastContext';
 import { useRouter } from 'next/router';
+import CenterBox from './controls/CenterBox';
+import Image from 'next/image';
 const ContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
     /* #region Dialog section */
     const [isLanguageDialogOpen, setLanguageDialogOpen] = useState(false);
@@ -66,13 +67,11 @@ const MainLayout = (props: { children: ReactElement; }) => {
                 <LanguageDialog />
                 <LoginDialog />
                 <Sidebar />
-                <CenterBox bgcolor='background.paper' className='main-content' sx={{
-                    background: 'url(/images/background.jpg)',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundAttachment: 'fixed',
-                }} >
-                    {props.children}
+                <CenterBox bgcolor='background.paper' className='main-content' sx={{ position: 'relative' }} >
+                    <Image src='/images/background.jpg' alt='Background' layout='fill' objectFit='cover' objectPosition='left' />
+                    <CenterBox sx={{ zIndex: 70 }}>
+                        {props.children}
+                    </CenterBox>
                 </CenterBox >
                 <ToastHandler />
                 <MessageDialog />

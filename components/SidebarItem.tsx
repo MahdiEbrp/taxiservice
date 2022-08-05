@@ -12,16 +12,17 @@ export interface SidebarItemType {
 const SidebarItem = (props: { item: SidebarItemType; }) => {
     const { icon, text, url } = props.item;
     return (
-        <ListItem disablePadding>
-            <ListItemButton>
-                <ListItemIcon>
-                    {icon}
-                </ListItemIcon>
-                <Link href={url}>
+        <Link href={url}>
+            <ListItem disablePadding>
+                <ListItemButton>
+                    <ListItemIcon>
+                        {icon}
+                    </ListItemIcon>
                     <ListItemText primary={text} />
-                </Link>
-            </ListItemButton>
-        </ListItem>
+                </ListItemButton>
+            </ListItem>
+        </Link>
+
     );
 };
 

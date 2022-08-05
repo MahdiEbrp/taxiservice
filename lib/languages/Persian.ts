@@ -7,9 +7,15 @@ const Persian = {
         listStyle: 'arabic-indic'
     },
     sidebar: {
+        agencies: 'آژانس ها',
         home: 'خونه',
+        messages: 'پیام ها',
+        payments: 'پرداخت ها',
+        personnel: 'پرسنل',
         services: 'سرویس ها',
+        settings: 'تنظیمات',
         support: 'پشتیبانی',
+        trips: 'سفرها',
     },
     languageDialog: {
         title: 'زبانی را که می خواهید استفاده کنید انتخاب کنید.',
@@ -25,6 +31,11 @@ const Persian = {
         invalidConfirmPassword: 'بین تایید رمز عبور و رمز عبور وارد شده تفاوت وجود دارد!',
         invalidCaptchaFormat: 'فرمت کپچا نادرست است.',
         successfullyLogin: 'تبریک می گویم، شما با موفقیت وارد سیستم شدید.',
+        unauthenticated: 'شما وارد سیستم نشده اید!',
+    },
+    authorizedLayout: {
+        loading: 'در حال بارگذاری...',
+        redirectingToHomePage: 'در حال تغییر به صفحه اصلی...',
     },
     components: {
         imageLoaderError: 'تصویر بارگذاری نشد.کلمات کلیدی:',
@@ -59,6 +70,12 @@ const Persian = {
         passwordReadyReset: {
             title: 'بازنشانی کنیم!',
             message: 'اکنون می توانید رمز عبور خود را بازنشانی کنید. یک ایمیل با لینک بازنشانی برای شما ارسال شده است. ممکن است آن را در پوشه هرزنامه خود پیدا کنید (فراموش نکنید آن را بررسی کنید).',
+        },
+    },
+    agenciesPage: {
+        title: 'آژانس ها',
+        gridColumns: {
+            row: 'ردیف',
         },
     },
     pageNotFound: {

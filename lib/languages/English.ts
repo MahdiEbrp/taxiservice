@@ -7,10 +7,15 @@ const English = {
         listStyle: 'decimal',
     },
     sidebar: {
+        agencies: 'Agencies',
         home: 'Home',
+        messages: 'Messages',
+        payments: 'Payments',
+        personnel: 'Personnel',
         services: 'Services',
+        settings: 'Settings',
         support: 'Support',
-
+        trips: 'Trips',
     },
     languageDialog: {
         title: 'Select the language you would like to use.',
@@ -26,6 +31,11 @@ const English = {
         invalidEmailFormat: 'The email format is incorrect.',
         invalidPasswordFormat: 'The password format is incorrect.',
         successfullyLogin: 'Congratulations, you have successfully logged in.',
+        unauthenticated: 'You are not logged in!',
+    },
+    authorizedLayout: {
+        loading: 'Loading...',
+        redirectingToHomePage: 'Redirecting to the home page...',
     },
     components: {
         imageLoaderError:'The image is not loaded correctly.keyword:',
@@ -61,6 +71,12 @@ const English = {
             title: 'Let\'s reset!',
             message: 'You can reset your password now. An email with a reset link has been sent to you. You may find it in your spam folder (don\'t forget to check it).',
         },
+    },
+    agenciesPage: {
+        title: 'Agencies',
+        gridColumns: {
+            row: 'Row',
+        }
     },
     pageNotFound: {
         title: 'Page not found!',

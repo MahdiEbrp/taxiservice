@@ -16,9 +16,9 @@ import { useSession } from 'next-auth/react';
 const Navbar = () => {
     /* #region Context section */
     const { isLanguageDialogOpen, setLanguageDialogOpen } = useContext(LanguageDialogContext);
+    const { isLoginDialogOpen, setLoginDialogOpen } = useContext(LoginDialogContext);
     const { language } = useContext(LanguageContext);
     const { prefersDarkMode, setPrefersDarkMode } = useContext(ThemeContext);
-    const { isLoginDialogOpen, setLoginDialogOpen } = useContext(LoginDialogContext);
     const { setToast } = useContext(ToastContext);
     const { sidebarOpen, setSidebarOpen } = useContext(SidebarContext);
     /* #endregion */
@@ -35,13 +35,14 @@ const Navbar = () => {
         setToast({ id: Date.now(), message: !prefersDarkMode ? notification.darkModeEnabled : notification.darkModeDisabled, alertColor: 'info' });
     };
     /* #endregion */
+    /* #region Callback hook section */
     useEffect(() => {
         if (session.data)
             setUserValid(true);
         else
             setUserValid(false);
     }, [session]);
-
+    /* #endregion */
     return (
         <AppBar position='sticky' dir={rightToLeft ? 'rtl' : 'ltr'} sx={{ top: 0, zIndex: (theme: { zIndex: { drawer: number; }; }) => theme.zIndex.drawer + 1 }}>
             <Toolbar>
@@ -65,7 +66,12 @@ const Navbar = () => {
                     {isUserValid &&
                         <IconButton size='large' edge='start' color='inherit' sx={{ mr: 2 }}
                         >
-                            <Badge badgeContent={4} color="warning" >
+                            <Badge badgeContent={4} color="warning" sx={{
+                                '& .MuiBadge-standard': {
+                                    left: 0,
+                                    right: 'auto',
+                                }
+                            }}>
                                 <IoMdNotifications />
                             </Badge>
                         </IconButton>
