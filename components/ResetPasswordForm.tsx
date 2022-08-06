@@ -112,7 +112,7 @@ const ResetPasswordForm = () => {
     /* #endregion */
     return (
         <>
-            <CenterBox sx={{ display: isLoading ? 'flex' : 'none'}}>
+            <CenterBox sx={{ display: isLoading ? 'flex' : 'none' }}>
                 <CircularLoading />
                 <Typography>
                     {isRedirecting ? resetPasswordPage.redirectingToHomePage : resetPasswordPage.loading}
@@ -158,11 +158,11 @@ const ResetPasswordForm = () => {
                 <CenterBox>
                     {isDone ?
                         <>
-                            <Typography variant="h5" sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                            <Typography variant='h5' sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
                                 <FaHandPeace />
                                 {resetPasswordPage.operationSuccess}
                             </Typography>
-                            <Divider variant="middle" />
+                            <Divider variant='middle' />
                             <Typography>
                                 {resetPasswordPage.successMessage}
                             </Typography>

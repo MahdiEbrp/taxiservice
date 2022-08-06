@@ -66,7 +66,7 @@ const Navbar = () => {
                     {isUserValid &&
                         <IconButton size='large' edge='start' color='inherit' sx={{ mr: 2 }}
                         >
-                            <Badge badgeContent={4} color="warning" sx={{
+                            <Badge badgeContent={4} color='warning' sx={{
                                 '& .MuiBadge-standard': {
                                     left: 0,
                                     right: 'auto',

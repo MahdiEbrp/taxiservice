@@ -74,9 +74,7 @@ const Persian = {
     },
     agenciesPage: {
         title: 'آژانس ها',
-        gridColumns: {
-            row: 'ردیف',
-        },
+        agencyName: 'نام آژانس',
     },
     pageNotFound: {
         title: 'صفحه مورد نظر وجود ندارد!',

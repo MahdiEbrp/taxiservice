@@ -74,9 +74,7 @@ const English = {
     },
     agenciesPage: {
         title: 'Agencies',
-        gridColumns: {
-            row: 'Row',
-        }
+        agencyName: 'Agency Name',
     },
     pageNotFound: {
         title: 'Page not found!',

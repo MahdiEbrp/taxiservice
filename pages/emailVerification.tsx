@@ -76,11 +76,11 @@ const Verify: NextPage = () => {
     const VerificationError = () => {
         return (
             <>
-                <Typography variant="h5" sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                <Typography variant='h5' sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
                     <BiMessageSquareError />
                     {emailVerificationPage.operationFail}
                 </Typography>
-                <Divider variant="middle" />
+                <Divider variant='middle' />
                 <Typography>
                     {emailVerificationPage.reason + getResponseError(errorCode, language)}
                     <br />
@@ -98,11 +98,11 @@ const Verify: NextPage = () => {
     const VerificationSuccess = () => {
         return (
             <>
-                <Typography variant="h5" sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
+                <Typography variant='h5' sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }} >
                     <FiUserCheck />
                     {emailVerificationPage.operationSuccess}
                 </Typography>
-                <Divider variant="middle" />
+                <Divider variant='middle' />
                 <Typography>
                     {emailVerificationPage.successMessage}
                 </Typography>
