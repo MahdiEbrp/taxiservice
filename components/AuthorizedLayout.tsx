@@ -15,7 +15,7 @@ const AuthorizedLayout = (props: { children: ReactElement; }) => {
     /* #endregion */
     /* #region Language section */
     const { settings, authorizedLayout, notification } = language;
-    const { rightToLeft } = settings;
+    const { direction } = settings;
     /* #endregion */
     const [showNotifications, setShowNotification] = useState(false);
     if (showNotifications) {
@@ -39,7 +39,7 @@ const AuthorizedLayout = (props: { children: ReactElement; }) => {
                     <Head>
                         <title>{authorizedLayout.loading}</title>
                     </Head>
-                    <Card sx={{ dir: rightToLeft ? 'rtl' : 'ltr' }}>
+                    <Card sx={{ dir: direction }}>
                         <CardContent>
                             <CircularLoading />
                             <Typography>{session.status === 'loading' ? authorizedLayout.loading : authorizedLayout.redirectingToHomePage}</Typography>

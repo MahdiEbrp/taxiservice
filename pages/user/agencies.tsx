@@ -10,6 +10,7 @@ import { LanguageContext } from '../../lib/context/LanguageContext';
 import { ToastContext } from '../../lib/context/ToastContext';
 import { useContext, useState } from 'react';
 import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 const Agencies = () => {
     const [activeStep, setActiveStep] = useState(0);
     /* #region Context section */
@@ -18,7 +19,7 @@ const Agencies = () => {
     /* #endregion */
     /* #region Language section */
     const { settings, agenciesPage } = language;
-    const rightToLeft = settings.rightToLeft ? 'rtl' : 'ltr';
+    const { direction } = settings;
     /* #endregion */
     /* #region Functions section */
 
@@ -28,17 +29,19 @@ const Agencies = () => {
             <Head>
                 <title>{agenciesPage.title}</title>
             </Head>
-            <Card dir={rightToLeft}>
+            <Card dir={direction}>
                 <CardHeader title={agenciesPage.title} />
                 <CardMedia>
                     <ImageLoader src="/images/agencies.svg" alt='images' width={300} height={300} />
                 </CardMedia>
                 <CardContent>
-                    <Stepper nonLinear activeStep={activeStep}>
-                        <Step key={1}>
-
-                            <ComboBoxWithGroup items={['آژانس بانوان خورشید', '131 لاهیجان']} dir={rightToLeft}
+                    <Stepper activeStep={1} alternativeLabel >
+                        <Step key={1} >
+                            <StepLabel >How can I help you?</StepLabel>
+                            <ComboBoxWithGroup items={['آژانس بانوان خورشید', '131 لاهیجان']}
                                 label={agenciesPage.agencyName} />
+                        </Step>
+                        <Step >
                         </Step>
                     </Stepper>
                 </CardContent>

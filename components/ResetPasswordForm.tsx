@@ -40,7 +40,7 @@ const ResetPasswordForm = () => {
     /* #endregion */
     /* #region Language section */
     const { settings, resetPasswordPage, submitForm, notification } = language;
-    const { rightToLeft } = settings;
+    const { direction } = settings;
     /* #endregion */
     /* #region  Functions section */
     const validatePassword = () => {
@@ -128,7 +128,7 @@ const ResetPasswordForm = () => {
                     inputRef={passwordRef}
                     error={passwordError}
                     onBlur={() => validatePassword()}
-                    inputProps={{ style: { direction: 'ltr', order: rightToLeft ? 1 : -1 } }}
+                    inputProps={{ style: { direction: 'ltr', order: direction==='rtl' ? 1 : -1 } }}
                 />
                 <PasswordField
                     required
@@ -139,7 +139,7 @@ const ResetPasswordForm = () => {
                     inputRef={confirmPasswordRef}
                     error={confirmPasswordError}
                     onBlur={() => validateConfirmPassword()}
-                    inputProps={{ style: { direction: 'ltr', order: rightToLeft ? 1 : -1 } }}
+                    inputProps={{ style: { direction: 'ltr', order: direction === 'rtl' ? 1 : -1 } }}
                 />
                 <CenterBox>
                     <ReCAPTCHA

@@ -36,7 +36,7 @@ const RegisterTab = () => {
     /* #region Language section */
     const { loginDialog, notification, messageDialog, submitForm } = language;
     const registerTab = loginDialog.registerTab;
-    const rightToLeft = language.settings.rightToLeft;
+    const { direction } = language.settings;
     const successfullyRegister = messageDialog.userCreatedSuccessfully;
     /* #endregion */
     /* #region Functions sections */
@@ -136,7 +136,7 @@ const RegisterTab = () => {
                 inputRef={passwordRef}
                 error={passwordError}
                 onBlur={() => validatePassword()}
-                inputProps={{ style: { direction: 'ltr', order: rightToLeft ? 1 : -1 } }}
+                inputProps={{ style: { direction: 'ltr', order: direction==='rtl' ? 1 : -1 } }}
             />
             <PasswordField
                 required
@@ -147,7 +147,7 @@ const RegisterTab = () => {
                 inputRef={confirmPasswordRef}
                 error={confirmPasswordError}
                 onBlur={() => validateConfirmPassword()}
-                inputProps={{ style: { direction: 'ltr', order: rightToLeft ? 1 : -1 } }}
+                inputProps={{ style: { direction: 'ltr', order: direction==='rtl' ? 1 : -1 } }}
             />
             <CenterBox>
                 <ReCAPTCHA

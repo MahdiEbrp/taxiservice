@@ -3,7 +3,7 @@ const English = {
     settings: {
         displayName: 'English',
         code: 'en',
-        rightToLeft: false,
+        direction: 'ltr',
         listStyle: 'decimal',
     },
     sidebar: {
@@ -38,7 +38,8 @@ const English = {
         redirectingToHomePage: 'Redirecting to the home page...',
     },
     components: {
-        imageLoaderError:'The image is not loaded correctly.keyword:',
+        imageLoaderError: 'The image is not loaded correctly.keyword:',
+        noOptionsText: 'No results found!',
     },
     responseError: {
         CredentialsSignin: 'The username or password you entered is incorrect.',

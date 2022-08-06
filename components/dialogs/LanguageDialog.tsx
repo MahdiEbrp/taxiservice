@@ -15,7 +15,7 @@ const LanguageDialog = () => {
     /* #region Language section */
     const { settings, languageDialog } = language;
     const [languageCode, setLanguageCode] = useState(settings.code);
-    const rightToLeft = settings.rightToLeft;
+    const { direction } = settings;
     /* #endregion */
     /* #region Callback hook section */
     useEffect(() => {
@@ -40,7 +40,7 @@ const LanguageDialog = () => {
             onClose={handleClose}
             aria-labelledby='language-dialog-title'
             aria-describedby='language-dialog-description'
-            dir={rightToLeft ? 'rtl' : 'ltr'}
+            dir={direction}
         >
             <DialogTitle id='language-dialog-title'>
                 {languageDialog.title}

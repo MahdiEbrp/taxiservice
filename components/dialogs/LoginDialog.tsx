@@ -15,7 +15,7 @@ const LoginDialog = () => {
     const [tabID, setTabId] = useState('login');
     const { data: session } = useSession();
     /* #region Language section */
-    const rightToLeft = language.settings.rightToLeft;
+    const { direction } = language.settings;
     const loginDialog = language.loginDialog;
     /* #endregion */
     /* #region Functions sections */
@@ -32,7 +32,7 @@ const LoginDialog = () => {
             onClose={handleClose}
             aria-labelledby='language-dialog-title'
             aria-describedby='language-dialog-description'
-            dir={rightToLeft ? 'rtl' : 'ltr'}
+            dir={direction}
         >
             <DialogTitle id='language-dialog-title'>
                 {!session ? loginDialog.title : loginDialog.userInformation.title}

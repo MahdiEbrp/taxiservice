@@ -19,7 +19,7 @@ const ImageLoader: ElementType = (Props: ImageLoaderProps) => {
     const { settings, components } = language;
 
     return (
-        <CenterBox sx={{ dir: settings.rightToLeft ? 'rtl' : 'ltr' }}>
+        <CenterBox sx={{ dir: settings.direction }}>
             {isLoading && !hasError && <CircularLoading sx={{ position: 'absolute', zIndex: '1' }} />}
             {!hasError ?
                 <Image src={src} alt={alt} width={width} height={height} {...others}

@@ -14,7 +14,7 @@ const MessageDialog = () => {
     /* #endregion */
     /* #region Language section */
     const { settings, messageDialog } = language;
-    const rightToLeft = settings.rightToLeft;
+    const { direction } = settings;
     /* #endregion */
     /* #region Functions section */
     const handleClose = () => {
@@ -27,7 +27,7 @@ const MessageDialog = () => {
             onClose={handleClose}
             aria-labelledby='language-dialog-title'
             aria-describedby='language-dialog-description'
-            dir={rightToLeft ? 'rtl' : 'ltr'}
+            dir={direction}
         >
             <DialogTitle id='language-dialog-title'>
                 {messageDialogInfo.title}

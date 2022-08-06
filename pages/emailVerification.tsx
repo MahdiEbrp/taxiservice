@@ -117,7 +117,7 @@ const Verify: NextPage = () => {
             <Head>
                 <title>{emailVerificationPage.title}</title>
             </Head>
-            <Card dir={settings.rightToLeft ? 'rtl' : 'ltr'} sx={{ margin: '15px' }}>
+            <Card dir={settings.direction} sx={{ margin: '15px' }}>
                 <>
                     <CardHeader title={emailVerificationPage.title} sx={{ color: !isLoading && !isVerified ? 'error.main' : '' }} />
                     <CardContent sx={{ color: !isLoading && !isVerified ? 'error.main' : '', display: 'flex', flexDirection: 'column', gap: '1rem' }}>

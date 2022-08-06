@@ -18,7 +18,7 @@ const ToastHandler = () => {
     //3 second
     const autoHideDuration = 3 * 1000;
     /* #region Language section */
-    const rightToLeft = language.settings.rightToLeft;
+    const {direction} = language.settings;
     /* #endregion */
     /* #region Callback hook section */
     useEffect(() => {
@@ -38,7 +38,7 @@ const ToastHandler = () => {
     };
     /* #endregion */
     return (
-        <Snackbar dir={rightToLeft ? 'rtl' : 'ltr'} open={open} autoHideDuration={autoHideDuration} onClose={handleClose}>
+        <Snackbar dir={direction} open={open} autoHideDuration={autoHideDuration} onClose={handleClose}>
             <Alert onClose={handleClose} severity={alertColor} sx={{ width: '100%' }}>
                 <Typography>{message}</Typography>
             </Alert>

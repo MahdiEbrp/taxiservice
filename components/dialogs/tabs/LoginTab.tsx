@@ -36,7 +36,7 @@ const LoginTab = () => {
     const { loginDialog, notification, messageDialog, submitForm } = language;
     const loginTab = loginDialog.loginTab;
     const passwordReadyReset = messageDialog.passwordReadyReset;
-    const rightToLeft = language.settings.rightToLeft;
+    const { direction } = language.settings;
     /* #endregion */
     /* #region Functions section */
     const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -146,7 +146,7 @@ const LoginTab = () => {
                 inputRef={passwordRef}
                 error={passwordError}
                 onBlur={() => validatePassword()}
-                inputProps={{ style: { direction: 'ltr', order: rightToLeft ? 1 : -1 } }}
+                inputProps={{ style: { direction: 'ltr', order: direction==='rtl' ? 1 : -1 } }}
 
             />
             <Alert severity='info'>{loginTab.forgetPassword}</Alert>

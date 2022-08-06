@@ -23,7 +23,7 @@ const Navbar = () => {
     const { sidebarOpen, setSidebarOpen } = useContext(SidebarContext);
     /* #endregion */
     /* #region Language section */
-    const rightToLeft = language.settings.rightToLeft;
+    const {direction} = language.settings;
     const notification = language.notification;
     /* #endregion */
     const session = useSession();
@@ -44,7 +44,7 @@ const Navbar = () => {
     }, [session]);
     /* #endregion */
     return (
-        <AppBar position='sticky' dir={rightToLeft ? 'rtl' : 'ltr'} sx={{ top: 0, zIndex: (theme: { zIndex: { drawer: number; }; }) => theme.zIndex.drawer + 1 }}>
+        <AppBar position='sticky' dir={direction} sx={{ top: 0, zIndex: (theme: { zIndex: { drawer: number; }; }) => theme.zIndex.drawer + 1 }}>
             <Toolbar>
                 <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}
                     onClick={() => setSidebarOpen(!sidebarOpen)}

@@ -17,7 +17,7 @@ const Sidebar = () => {
     /* #endregion */
     /* #region language section */
     const { sidebar, settings } = language;
-    const { rightToLeft } = settings;
+    const { direction } = settings;
     /* #endregion */
     const session = useSession();
     const [isUserValid, setUserValid] = useState(false);
@@ -30,9 +30,9 @@ const Sidebar = () => {
     }, [session]);
     /* #endregion */
     return (
-        <Drawer anchor={rightToLeft ? 'right' : 'left'} variant='persistent' open={sidebarOpen} PaperProps={{ sx: { top: 'auto' } }}>
+        <Drawer anchor={direction==='rtl' ? 'right' : 'left'} variant='persistent' open={sidebarOpen} PaperProps={{ sx: { top: 'auto' } }}>
             <Box>
-                <List dir={rightToLeft ? 'rtl' : 'ltr'} >
+                <List dir={direction} >
                     {isUserValid &&
                         <>
                         <SidebarItem item={{ icon: <FaCarAlt />, text: sidebar.agencies, url: '/user/agencies' }} />

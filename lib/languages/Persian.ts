@@ -3,7 +3,7 @@ const Persian = {
     settings: {
         displayName: 'فارسی',
         code: 'fa',
-        rightToLeft: true,
+        direction: 'rtl',
         listStyle: 'arabic-indic'
     },
     sidebar: {
@@ -39,6 +39,7 @@ const Persian = {
     },
     components: {
         imageLoaderError: 'تصویر بارگذاری نشد.کلمات کلیدی:',
+        noOptionsText:'نتیجه ای یافت نشد!',
     },
     responseError: {
         CredentialsSignin: 'نام کاربری یا رمز عبور وارد شده اشتباه است.',

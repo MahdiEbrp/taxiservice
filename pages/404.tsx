@@ -31,7 +31,7 @@ const NotFound = () => {
                 <title>{pageNotFound.error404}</title>
             </Head>
 
-            <Card dir={settings.rightToLeft ? 'rtl' : 'ltr'} sx={{ margin: '15px' }}>
+            <Card dir={settings.direction} sx={{ margin: '15px' }}>
                 <CardHeader title={pageNotFound.title} />
                 <CardMedia sx={centerStyle}>
                     <ImageLoader src='/images/404.svg' alt={pageNotFound.imageAlt} width={300} height={300} />

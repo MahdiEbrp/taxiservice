@@ -10,14 +10,14 @@ const ResetPassword: NextPage = () => {
     /* #endregion */
     /* #region Language section */
     const { settings, resetPasswordPage } = language;
-    const { rightToLeft } = settings;
+    const { direction } = settings;
     /* #endregion */
     return (
         <>
             <Head>
                 <title>{resetPasswordPage.title}</title>
             </Head>
-            <Card dir={rightToLeft ? 'rtl' : 'ltr'} sx={{ margin: '15px' }}>
+            <Card dir={direction} sx={{ margin: '15px' }}>
                 <CardHeader title={resetPasswordPage.title} />
                 <CardContent>
                     <ResetPasswordForm />
