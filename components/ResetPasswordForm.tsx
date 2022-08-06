@@ -1,9 +1,14 @@
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
 import CenterBox from './controls/CenterBox';
 import CircularLoading from './controls/CircularLoading';
+import Divider from '@mui/material/Divider';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 import PasswordField from '../components/controls/PasswordField';
 import ReCAPTCHA from 'react-google-recaptcha';
 import React, { useContext, useRef, useState } from 'react';
-import { Alert, Button, Divider, FormControl, FormHelperText, Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import { FaHandPeace } from 'react-icons/fa';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { PostData } from '../lib/FetchData';

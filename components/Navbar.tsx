@@ -1,4 +1,9 @@
-import { AppBar, Badge, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Badge from '@mui/material/Badge';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import { CgProfile } from 'react-icons/cg';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoLanguageOutline } from 'react-icons/io5';

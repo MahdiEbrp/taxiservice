@@ -1,5 +1,7 @@
+import Alert, { AlertColor } from '@mui/material/Alert';
 import React, { SyntheticEvent, useContext, useEffect, useState } from 'react';
-import { Alert, AlertColor, Snackbar, Typography } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import Typography from '@mui/material/Typography';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { ToastContext } from '../../lib/context/ToastContext';
 export interface ToastProps {

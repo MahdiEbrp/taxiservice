@@ -1,6 +1,12 @@
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@mui/material/CardContent';
 import Head from 'next/head';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import Stepper from '@mui/material/Stepper';
 import type { NextPage } from 'next';
-import { Button, Card, CardActions, CardContent, Step, StepLabel, Stepper } from '@mui/material';
 import { RiEmotionHappyLine } from 'react-icons/ri';
 const Home: NextPage = () => {
   return (

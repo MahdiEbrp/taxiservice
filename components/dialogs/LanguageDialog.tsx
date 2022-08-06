@@ -1,5 +1,13 @@
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import GetLanguage from '../../lib/Language';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { LanguageDialogContext } from '../../lib/context/LanguageDialogContext';
 import { ToastContext } from '../../lib/context/ToastContext';
@@ -62,7 +70,6 @@ const LanguageDialog = () => {
                 <Button onClick={() => handleClose(false)}>{languageDialog.discard}</Button>
                 <Button onClick={() => handleClose(true)} autoFocus>{languageDialog.save}</Button>
             </DialogActions>
-
         </Dialog>
     );
 };

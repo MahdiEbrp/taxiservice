@@ -1,9 +1,11 @@
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 import Head from 'next/head';
 import React, { useContext } from 'react';
-import { Card, CardContent, CardHeader } from '@mui/material';
+import ResetPasswordForm from '../components/ResetPasswordForm';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { NextPage } from 'next';
-import ResetPasswordForm from '../components/ResetPasswordForm';
 const ResetPassword: NextPage = () => {
     /* #region Context section */
     const { language } = useContext(LanguageContext);

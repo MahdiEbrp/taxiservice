@@ -1,15 +1,18 @@
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
 import SidebarItem from './SidebarItem';
 import { AiFillHome } from 'react-icons/ai';
 import { BiSupport } from 'react-icons/bi';
-import { Box, Divider, Drawer, List } from '@mui/material';
 import { FaCar, FaCarAlt, FaMoneyBillAlt } from 'react-icons/fa';
+import { HiOutlineMail, HiUserGroup } from 'react-icons/hi';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { RiSettings3Fill } from 'react-icons/ri';
 import { SidebarContext } from '../lib/context/SidebarContext';
 import { TbRoad } from 'react-icons/tb';
 import { useContext, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { HiOutlineMail, HiUserGroup } from 'react-icons/hi';
 const Sidebar = () => {
     /* #region context section */
     const { sidebarOpen } = useContext(SidebarContext);

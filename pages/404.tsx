@@ -1,8 +1,14 @@
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
 import CenterBox, { centerStyle } from '../components/controls/CenterBox';
 import CircularLoading from '../components/controls/CircularLoading';
 import Head from 'next/head';
 import ImageLoader from '../components/controls/ImageLoader';
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -30,7 +36,6 @@ const NotFound = () => {
             <Head>
                 <title>{pageNotFound.error404}</title>
             </Head>
-
             <Card dir={settings.direction} sx={{ margin: '15px' }}>
                 <CardHeader title={pageNotFound.title} />
                 <CardMedia sx={centerStyle}>

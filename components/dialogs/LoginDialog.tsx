@@ -1,9 +1,14 @@
+import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import LoginTab from './tabs/LoginTab';
 import React, { useContext, useState } from 'react';
 import RegisterTab from './tabs/RegisterTab';
+import Tab from '@mui/material/Tab';
 import TabPanel from '../controls/TabPanel';
+import Tabs from '@mui/material/Tabs';
 import UserInformationTab from './tabs/UserInformationTab';
-import { Box, Dialog, DialogContent, DialogTitle, Tab, Tabs } from '@mui/material';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { LoginDialogContext } from '../../lib/context/LoginDialogContext';
 import { useSession } from 'next-auth/react';

@@ -1,7 +1,6 @@
 import { ReactElement, useContext, useMemo } from 'react';
 import { ThemeContext } from './context/ThemeContext';
-import { createTheme, ThemeProvider } from '@mui/material';
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => {
     const { prefersDarkMode } = useContext(ThemeContext);
     const fonts = '"Vazirmatn","Roboto","Helvetica","Arial",sans-serif';
@@ -10,7 +9,7 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
             createTheme({
                 palette: {
                     mode: prefersDarkMode ? 'dark' : 'light',
-                    background:{
+                    background: {
                         default: prefersDarkMode ? '#121212f2' : '#fffffff2',
                         paper: prefersDarkMode ? '#121212f2' : '#fffffff2'
                     }
@@ -19,6 +18,13 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
                     fontFamily: fonts,
                 },
                 components: {
+                    MuiAppBar: {
+                        styleOverrides: {
+                            root: {
+                                backgroundColor: prefersDarkMode ? '#121212' : '#1976d2',
+                            },
+                        },
+                    },
                     MuiDialogTitle: {
                         defaultProps: {
                             textAlign: 'center',

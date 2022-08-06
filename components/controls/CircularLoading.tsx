@@ -1,8 +1,8 @@
 import CenterBox from './CenterBox';
-import { CircularProgress } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import { ElementType, ReactNode } from 'react';
-const CircularLoading: ElementType = (props:{children:ReactNode}) => {
-    const {children,...other} = props;
+const CircularLoading: ElementType = (props: { children: ReactNode; }) => {
+    const { children, ...other } = props;
     return (
         <CenterBox {...other}>
             <CircularProgress />

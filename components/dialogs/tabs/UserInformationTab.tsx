@@ -1,6 +1,8 @@
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 import CenterBox from '../../controls/CenterBox';
 import React, { useState } from 'react';
-import { Avatar, Button, Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import { useSession, signOut } from 'next-auth/react';
 import {useRouter} from 'next/router';
 const UserInformationTab = () => {

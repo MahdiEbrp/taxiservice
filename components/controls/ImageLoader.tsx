@@ -1,9 +1,9 @@
 import CenterBox from './CenterBox';
 import CircularLoading from './CircularLoading';
 import Image from 'next/image';
+import Typography from '@mui/material/Typography';
 import { BsEmojiDizzy } from 'react-icons/bs';
 import { ElementType, useContext, useState } from 'react';
-import { Typography } from '@mui/material';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 interface ImageLoaderProps {
     src: string,

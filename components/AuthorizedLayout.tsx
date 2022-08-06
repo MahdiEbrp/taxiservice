@@ -1,6 +1,8 @@
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import CircularLoading from './controls/CircularLoading';
 import Head from 'next/head';
-import { Card, CardContent, Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { ReactElement, useContext, useEffect, useState } from 'react';
 import { ToastContext } from '../lib/context/ToastContext';

@@ -1,5 +1,7 @@
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
 import React, { useState } from 'react';
-import { IconButton, InputAdornment, StandardTextFieldProps, TextField } from '@mui/material';
+import TextField, { StandardTextFieldProps } from '@mui/material/TextField';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 export interface PasswordProps extends StandardTextFieldProps {
 }
