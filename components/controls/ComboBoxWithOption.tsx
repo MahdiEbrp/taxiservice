@@ -1,18 +1,20 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import Popper from '@mui/material/Popper';
+import React, { useContext } from 'react';
 import TextField from '@mui/material/TextField';
-import { useContext } from 'react';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 export interface ComboBoxWithOptionProps {
     items: string[];
     label: string;
+    // eslint-disable-next-line no-unused-vars
+    onValueChanged?: (element: string) => void;
 }
-const ComboBoxWithGroup = (props: ComboBoxWithOptionProps) => {
-    const { items, label } = props;
+const ComboBoxWithGroup: React.FC<ComboBoxWithOptionProps> = (props: ComboBoxWithOptionProps) => {
+    const { items, label, onValueChanged } = props;
     const { language } = useContext(LanguageContext);
     /* #region Language section */
     const { settings, components } = language;
-    const { direction } =settings;
+    const { direction } = settings;
     /* #endregion */
     /* #region Functions section */
     const options = items.map((item) => {
@@ -22,6 +24,10 @@ const ComboBoxWithGroup = (props: ComboBoxWithOptionProps) => {
             firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter
         };
     });
+    const inputBlur = (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>) => {
+        if (event.target && onValueChanged)
+            onValueChanged(event.target.value);
+    };
     /* #endregion */
     return (
         <Autocomplete
@@ -30,11 +36,12 @@ const ComboBoxWithGroup = (props: ComboBoxWithOptionProps) => {
             groupBy={(option) => option.firstLetter}
             getOptionLabel={(option) => option.item}
             sx={{ width: 300 }}
-            noOptionsText={'No results found'}
+            noOptionsText={components.noOptionsText}
             PopperComponent={(props) => <Popper dir={direction} {...props} />}
-            renderInput={(params) => <TextField label={label} {...params} />}
+            renderInput={(params) => <TextField onBlur={(event) => inputBlur(event)} label={label} {...params} />}
         />
     );
 };
+
 
 export default ComboBoxWithGroup;

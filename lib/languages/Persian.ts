@@ -7,7 +7,9 @@ const Persian = {
         listStyle: 'arabic-indic'
     },
     sidebar: {
-        agencies: 'آژانس ها',
+        agenciesManagement: 'مدیریت آژانس ها',
+        addNewAgency: 'افزودن آژانس جدید',
+        editAgency: 'ویرایش آژانس',
         home: 'خونه',
         messages: 'پیام ها',
         payments: 'پرداخت ها',
@@ -32,6 +34,7 @@ const Persian = {
         invalidCaptchaFormat: 'فرمت کپچا نادرست است.',
         successfullyLogin: 'تبریک می گویم، شما با موفقیت وارد سیستم شدید.',
         unauthenticated: 'شما وارد سیستم نشده اید!',
+        selectAgency: 'لطفا یک آژانس انتخاب کنید.',
     },
     authorizedLayout: {
         loading: 'در حال بارگذاری...',
@@ -76,6 +79,11 @@ const Persian = {
     agenciesPage: {
         title: 'آژانس ها',
         agencyName: 'نام آژانس',
+        agencySelection: 'انتخاب آژانس',
+        next: 'بعدی',
+        createAgency:'ایجاد آژانس جدید',
+        editAgency: 'ویرایش آژانس',
+        agencyManagement: 'مدیریت آژانس',
     },
     pageNotFound: {
         title: 'صفحه مورد نظر وجود ندارد!',

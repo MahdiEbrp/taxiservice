@@ -44,7 +44,7 @@ const LoginDialog = () => {
             </DialogTitle>
             <DialogContent >
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    {session?
+                    {session ?
                         <UserInformationTab />
                         :
                         <>
@@ -52,8 +52,8 @@ const LoginDialog = () => {
                                 <Tab value='login' label={loginDialog.loginTab.title} />
                                 <Tab value='register' label={loginDialog.registerTab.title} />
                             </Tabs>
-                            <TabPanel value={tabID} index='login'><LoginTab /></TabPanel>
-                            <TabPanel value={tabID} index='register'><RegisterTab /></TabPanel>
+                            <TabPanel activeIndex={tabID} index='login'><LoginTab /></TabPanel>
+                            <TabPanel activeIndex={tabID} index='register'><RegisterTab /></TabPanel>
                         </>
                     }
                 </Box>

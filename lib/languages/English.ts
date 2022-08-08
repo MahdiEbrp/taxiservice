@@ -7,7 +7,9 @@ const English = {
         listStyle: 'decimal',
     },
     sidebar: {
-        agencies: 'Agencies',
+        agenciesManagement: 'Agencies management',
+        addNewAgency: 'Add new agency',
+        editAgency: 'Edit agency',
         home: 'Home',
         messages: 'Messages',
         payments: 'Payments',
@@ -30,6 +32,7 @@ const English = {
         invalidConfirmPassword: 'There is a difference between a confirm password and a password entered!',
         invalidEmailFormat: 'The email format is incorrect.',
         invalidPasswordFormat: 'The password format is incorrect.',
+        selectAgency: 'Please select an agency.',
         successfullyLogin: 'Congratulations, you have successfully logged in.',
         unauthenticated: 'You are not logged in!',
     },
@@ -76,6 +79,11 @@ const English = {
     agenciesPage: {
         title: 'Agencies',
         agencyName: 'Agency Name',
+        agencySelection: 'Agency Selection',
+        next: 'Next',
+        createAgency: 'Creating a new agency',
+        editAgency: 'Editing an agency',
+        agencyManagement: 'Agency management',
     },
     pageNotFound: {
         title: 'Page not found!',

@@ -3,17 +3,17 @@ import React, { useState } from 'react';
 export interface TabPanelProps {
     children?: React.ReactNode;
     index: string;
-    value: string;
+    activeIndex: string;
 }
 const TabPanel = (props: TabPanelProps) => {
-    const { children, value, index, ...other } = props;
+    const { children, activeIndex, index, ...other } = props;
     const [isActive, setIsActive] = useState(false);
-    if (value === index && !isActive)
+    if (activeIndex === index && !isActive)
         setIsActive(true);
     if (!isActive)
         return <></>;
     return (
-        <CenterBox sx={{ display: value === index ? 'flex' : 'none', padding: '1rem' }}  {...other}>
+        <CenterBox sx={{ display: activeIndex === index ? 'flex' : 'none', padding: '1rem' }}  {...other}>
             {children}
         </CenterBox >
     );

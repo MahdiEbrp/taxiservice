@@ -1,7 +1,7 @@
 import { ReactElement, useContext, useMemo } from 'react';
 import { ThemeContext } from './context/ThemeContext';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => {
+const ThemePresenter= (props: { children: ReactElement | ReactElement[]; }) => {
     const { prefersDarkMode } = useContext(ThemeContext);
     const fonts = '"Vazirmatn","Roboto","Helvetica","Arial",sans-serif';
     const theme = useMemo(
@@ -12,7 +12,7 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
                     background: {
                         default: prefersDarkMode ? '#121212f2' : '#fffffff2',
                         paper: prefersDarkMode ? '#121212f2' : '#fffffff2'
-                    }
+                    },
                 },
                 typography: {
                     fontFamily: fonts,
@@ -22,6 +22,14 @@ const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => 
                         styleOverrides: {
                             root: {
                                 backgroundColor: prefersDarkMode ? '#121212' : '#1976d2',
+                            },
+                        },
+                    },
+                    MuiLink: {
+                        styleOverrides: {
+                            root: {
+                                textDecoration: 'none',
+                                cursor: 'pointer',
                             },
                         },
                     },

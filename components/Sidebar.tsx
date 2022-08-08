@@ -1,13 +1,15 @@
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
+import ExpandableItems from './ExpandableItems';
 import List from '@mui/material/List';
 import SidebarItem from './SidebarItem';
 import { AiFillHome } from 'react-icons/ai';
 import { BiSupport } from 'react-icons/bi';
-import { FaCar, FaCarAlt, FaMoneyBillAlt } from 'react-icons/fa';
+import { FaCar, FaMoneyBillAlt } from 'react-icons/fa';
 import { HiOutlineMail, HiUserGroup } from 'react-icons/hi';
 import { LanguageContext } from '../lib/context/LanguageContext';
+import { MdAddBusiness, MdOutlineEditRoad } from 'react-icons/md';
 import { RiSettings3Fill } from 'react-icons/ri';
 import { SidebarContext } from '../lib/context/SidebarContext';
 import { TbRoad } from 'react-icons/tb';
@@ -33,20 +35,23 @@ const Sidebar = () => {
     }, [session]);
     /* #endregion */
     return (
-        <Drawer anchor={direction==='rtl' ? 'right' : 'left'} variant='persistent' open={sidebarOpen} PaperProps={{ sx: { top: 'auto' } }}>
+        <Drawer anchor={direction === 'rtl' ? 'right' : 'left'} variant='persistent' open={sidebarOpen} PaperProps={{ sx: { top: 'auto' } }}>
             <Box>
                 <List dir={direction} >
                     {isUserValid &&
                         <>
-                        <SidebarItem item={{ icon: <FaCarAlt />, text: sidebar.agencies, url: '/user/agencies' }} />
-                        <SidebarItem item={{ icon: <HiUserGroup />, text: sidebar.personnel, url: '/personnel' }} />
-                        <Divider />
-                        <SidebarItem item={{ icon: <TbRoad />, text: sidebar.trips, url: '/trips' }} />
-                        <SidebarItem item={{ icon: <FaMoneyBillAlt />, text: sidebar.payments, url: '/payments' }} />
-                        <Divider />
-                        <SidebarItem item={{ icon: <HiOutlineMail />, text: sidebar.messages, url: '/messages' }} />
-                        <SidebarItem item={{ icon: <RiSettings3Fill />, text: sidebar.settings, url: '/settings' }} />
-                        <Divider />
+                            <ExpandableItems label={sidebar.agenciesManagement} isOpen={true} >
+                                <SidebarItem item={{ icon: <MdAddBusiness />, text: sidebar.addNewAgency, url: '/user/agencies?mode=create' }} />
+                                <SidebarItem item={{ icon: <MdOutlineEditRoad />, text: sidebar.editAgency, url: '/user/agencies?mode=edit' }} />
+                            </ExpandableItems>
+                            <SidebarItem item={{ icon: <HiUserGroup />, text: sidebar.personnel, url: '/personnel' }} />
+                            <Divider />
+                            <SidebarItem item={{ icon: <TbRoad />, text: sidebar.trips, url: '/trips' }} />
+                            <SidebarItem item={{ icon: <FaMoneyBillAlt />, text: sidebar.payments, url: '/payments' }} />
+                            <Divider />
+                            <SidebarItem item={{ icon: <HiOutlineMail />, text: sidebar.messages, url: '/messages' }} />
+                            <SidebarItem item={{ icon: <RiSettings3Fill />, text: sidebar.settings, url: '/settings' }} />
+                            <Divider />
                         </>
                     }
                     <SidebarItem item={{ icon: <AiFillHome />, text: sidebar.home, url: '/' }} />
