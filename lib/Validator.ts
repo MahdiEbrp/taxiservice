@@ -17,6 +17,14 @@ export const isPasswordValid = (value: string) => {
     const passwordRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)((?=.*\W)|(?=.*_))^.{8,}$/;
     return passwordRegex.test(value);
 };
+export const isPhoneNumberValid = (value: string) => {
+    if (!value)
+        return false;
+    if (value.length < 11)
+        return false;
+    const phoneNumberRegex = /^[0-9]/;
+    return phoneNumberRegex.test(value);
+};
 export const isCaptchaValid = async (value: string) => {
 
     const response = await fetch(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/robotCheck', {

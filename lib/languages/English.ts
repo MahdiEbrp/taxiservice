@@ -35,6 +35,7 @@ const English = {
         selectAgency: 'Please select an agency.',
         successfullyLogin: 'Congratulations, you have successfully logged in.',
         unauthenticated: 'You are not logged in!',
+        incorrectFormat: 'Incorrectly formatted information was entered!',
     },
     authorizedLayout: {
         loading: 'Loading...',
@@ -77,13 +78,24 @@ const English = {
         },
     },
     agenciesPage: {
-        title: 'Agencies',
-        agencyName: 'Agency Name',
-        agencySelection: 'Agency Selection',
+        title: 'Agencies management',
         next: 'Next',
-        createAgency: 'Creating a new agency',
-        editAgency: 'Editing an agency',
-        agencyManagement: 'Agency management',
+        preparing: 'Preparing...',
+        agencyName: 'Agency Name',
+        editAgency: {
+            agencyMainPhoneNumber: 'Agency Main Phone Number.',
+            agencySecondaryPhoneNumber: 'Agency\'s second phone number(not necessary).',
+            agencySelection: 'Agency Selection',
+            editPhone: 'Edit phone',
+            title: 'Editing an agency',
+            phoneNumberPlaceholder1: 'Work Phone Number 1',
+            phoneNumberPlaceholder2: 'Work Phone Number 2',
+            mobileNumberPlaceholder: 'Cell Phone Number',
+            mobileNumberVisibility: 'Other people cannot see your mobile phone number.',
+        },
+        addNewAgency: {
+            title: 'Adding a new agency',
+        },
     },
     pageNotFound: {
         title: 'Page not found!',
@@ -91,7 +103,7 @@ const English = {
         message: 'Hmm...looks like you got lost or went the wrong way! Nothing to worry about, I\'ll take you home.Have a good time.',
         returnHome: 'Return home',
         redirectingToHomePage: 'Redirecting to home page...',
-        imageAlt:'map 404 not found lost',
+        imageAlt: 'map 404 not found lost',
     },
     emailVerificationPage: {
         title: 'Email Verification',

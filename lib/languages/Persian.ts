@@ -35,6 +35,7 @@ const Persian = {
         successfullyLogin: 'تبریک می گویم، شما با موفقیت وارد سیستم شدید.',
         unauthenticated: 'شما وارد سیستم نشده اید!',
         selectAgency: 'لطفا یک آژانس انتخاب کنید.',
+        incorrectFormat:'اطلاعات با فرمت اشتباه وارد شد!',
     },
     authorizedLayout: {
         loading: 'در حال بارگذاری...',
@@ -77,13 +78,24 @@ const Persian = {
         },
     },
     agenciesPage: {
-        title: 'آژانس ها',
-        agencyName: 'نام آژانس',
-        agencySelection: 'انتخاب آژانس',
+        title:'مدیریت آژانس ها',
         next: 'بعدی',
-        createAgency:'ایجاد آژانس جدید',
-        editAgency: 'ویرایش آژانس',
-        agencyManagement: 'مدیریت آژانس',
+        preparing: 'در حال آماده سازی...',
+        agencyName: 'نام آژانس',
+        editAgency: {
+            agencyMainPhoneNumber: 'شماره تلفن اصلی آژانس',
+            agencySecondaryPhoneNumber:'شماره تلفن دوم آژانس (ضروری نیست).',
+            agencySelection: 'انتخاب آژانس',
+            editPhone: 'ویرایش شماره تلفن',
+            title: 'ویرایش آژانس',
+            phoneNumberPlaceholder1: 'شماره تلفن محل کار 1',
+            phoneNumberPlaceholder2: 'شماره تلفن محل کار 2',
+            mobileNumberPlaceholder: 'شماره تلفن همراه',
+            mobileNumberVisibility: 'سایر افراد نمی توانند شماره تلفن همراه شما را ببینند.',
+        },
+        addNewAgency: {
+            title: 'افزودن آژانس جدید',
+        },
     },
     pageNotFound: {
         title: 'صفحه مورد نظر وجود ندارد!',

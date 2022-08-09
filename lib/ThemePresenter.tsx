@@ -10,14 +10,21 @@ const ThemePresenter= (props: { children: ReactElement | ReactElement[]; }) => {
                 palette: {
                     mode: prefersDarkMode ? 'dark' : 'light',
                     background: {
-                        default: prefersDarkMode ? '#121212f2' : '#fffffff2',
-                        paper: prefersDarkMode ? '#121212f2' : '#fffffff2'
+                        default: prefersDarkMode ? '#121212c2' : '#ffffffc2',
+                        paper: prefersDarkMode ? '#121212c2' : '#ffffffc2'
                     },
                 },
                 typography: {
                     fontFamily: fonts,
                 },
                 components: {
+                    MuiPaper: {
+                        styleOverrides: {
+                            root: {
+                                backdropFilter: 'blur(3px)',
+                            },
+                        },
+                    },
                     MuiAppBar: {
                         styleOverrides: {
                             root: {
