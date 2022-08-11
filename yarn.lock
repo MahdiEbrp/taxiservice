@@ -587,6 +587,11 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.3.tgz"
   integrity sha512-WiBSI6JBIhC6LRIsB2Kwh8DsGTlbBU+mLRxJmAe3LjHTdkDpwIbEOZgoXBbZilk/vlfjK8i6nKRAvIRn1XaIMw==
 
+"@types/bingmaps@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@types/bingmaps/-/bingmaps-0.0.1.tgz#443996615c6aa1f9363d6a78d87415e8acf2effb"
+  integrity sha512-jNcii5qVe+CLqhj/IOOaZbjCpWUHUj6YbD9UHttgyQSiL4NbgQ5ERQWjIwuvhz73FCQdF/JuGVTnLswgEIdkow==
+
 "@types/crypto-js@^4.1.1":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.1.1.tgz#602859584cecc91894eb23a4892f38cfa927890d"
@@ -867,6 +872,11 @@ balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
+
+bingmaps@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/bingmaps/-/bingmaps-2.0.3.tgz#58507b3c7d629f35b556d60522b36ea3250f150e"
+  integrity sha512-U/ELxzym51uVYdfL/tOlNOo+CGUbQza3Bm5c86SH3POWN6RuLKytKQJ1VLZ3pWTgFuMhey8V3rYws7yUd2ZVew==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
