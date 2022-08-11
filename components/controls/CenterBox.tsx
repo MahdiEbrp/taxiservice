@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
-import { ElementType, ReactNode } from 'react';
 import { SxProps, Theme } from '@mui/material/styles';
+import { ElementType, ReactNode } from 'react';
 const CenterBox: ElementType = (props: { children: ReactNode}) => {
     const { children, ...other } = props;
     const newProps = { ...centerStyle, ...other };

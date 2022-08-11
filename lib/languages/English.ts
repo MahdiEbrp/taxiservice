@@ -92,6 +92,8 @@ const English = {
             phoneNumberPlaceholder2: 'Work Phone Number 2',
             mobileNumberPlaceholder: 'Cell Phone Number',
             mobileNumberVisibility: 'Other people cannot see your mobile phone number.',
+            phoneNumbersError:'It is necessary to have both a work number and a mobile number! (Phone numbers must have at least 10 digits)',
+            editAddress: 'Edit address',
         },
         addNewAgency: {
             title: 'Adding a new agency',

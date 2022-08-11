@@ -92,6 +92,8 @@ const Persian = {
             phoneNumberPlaceholder2: 'شماره تلفن محل کار 2',
             mobileNumberPlaceholder: 'شماره تلفن همراه',
             mobileNumberVisibility: 'سایر افراد نمی توانند شماره تلفن همراه شما را ببینند.',
+            phoneNumbersError: 'داشتن شماره تلفن محل کار و شماره تلفن همراه ضروری است! (شماره تلفن ها باید حداقل 10 رقم باشند)',
+            editAddress: 'ویرایش آدرس',
         },
         addNewAgency: {
             title: 'افزودن آژانس جدید',
