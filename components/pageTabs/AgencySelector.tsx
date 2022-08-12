@@ -6,13 +6,27 @@ import { LanguageContext } from '../../lib/context/LanguageContext';
 import { useContext, useMemo } from 'react';
 export interface AgencySelectorProps {
     currentStep: number;
-    onValueChanged: (agency: string) => void;
+    onAgencyChanged?: (agency: string) => void;
+    onCountryCodeChanged?: (country: string) => void;
 }
 const AgencySelector = (props: AgencySelectorProps) => {
+
+    const { currentStep, onAgencyChanged, onCountryCodeChanged } = props;
+
     const { language } = useContext(LanguageContext);
+
     const { agenciesPage } = language;
-    const {editAgency} = agenciesPage;
-    const { currentStep, onValueChanged } = props;
+    const { editAgency } = agenciesPage;
+
+    const agencyChanged = (agency: string) => {
+        if (onAgencyChanged)
+            onAgencyChanged(agency);
+    };
+    const countryCodeChanged = (country: string) => {
+        if (onCountryCodeChanged)
+            onCountryCodeChanged(country);
+    };
+
     const countryList = useMemo(() => {
         return CountryList.map(({ country_code, englishName, nativeName }) => (
             {
@@ -21,11 +35,12 @@ const AgencySelector = (props: AgencySelectorProps) => {
             }
         ));
     }, []);
+
     return (
         <TabPanel activeIndex={currentStep.toString()} index='0'>
-            <ComboBoxWithGroup onValueChanged={((agency) => onValueChanged(agency))} items={[{ key: '131s', value: 'آژانس بانوان خورشید' }, { key: '2', value: '131 لاهیجان' }]}
+            <ComboBoxWithGroup onChanged={(agency) => agencyChanged(!agency ? '' : agency.value)} items={[{ key: '131s', value: 'آژانس بانوان خورشید' }, { key: '2', value: '131 لاهیجان' }]}
                 label={agenciesPage.agencyName} />
-            <ComboBoxWithGroup items={countryList}
+            <ComboBoxWithGroup onChanged={(countryCode) => countryCodeChanged(!countryCode ? '' : countryCode.key)} items={countryList}
                 label={editAgency.localization} />
             <Alert severity='warning'>
                 {editAgency.localizationWarning}

@@ -7,14 +7,13 @@ export interface ItemProps {
     value: string;
     key: string;
 }
-export interface ComboBoxWithOptionProps {
+export interface ComboBoxWithGroupProps {
     items: ItemProps[];
     label: string;
-    onValueChanged?: (element: string) => void;
-    onKeyChanged?: (element: string) => void;
+    onChanged?: (element:ItemProps | null) => void;
 }
-const ComboBoxWithGroup: React.FC<ComboBoxWithOptionProps> = (props: ComboBoxWithOptionProps) => {
-    const { items, label, onValueChanged, onKeyChanged } = props;
+const ComboBoxWithGroup: React.FC<ComboBoxWithGroupProps> = (props: ComboBoxWithGroupProps) => {
+    const { items, label, onChanged } = props;
     const { language } = useContext(LanguageContext);
     /* #region Language section */
     const { settings, components } = language;
@@ -29,14 +28,7 @@ const ComboBoxWithGroup: React.FC<ComboBoxWithOptionProps> = (props: ComboBoxWit
             key: item.key,
         };
     });
-    const inputBlur = (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>) => {
-        if (event.target && onValueChanged)
-            onValueChanged(event.target.value);
-    };
-    const keyChange = (key: string) => {
-        if (onKeyChanged)
-            onKeyChanged(key);
-    };
+
     /* #endregion */
     return (
         <Autocomplete
@@ -53,9 +45,9 @@ const ComboBoxWithGroup: React.FC<ComboBoxWithOptionProps> = (props: ComboBoxWit
             }}
             sx={{ width: 300 }}
             noOptionsText={components.noOptionsText}
-            onChange={(event, item) => !item ? keyChange('') : keyChange(item.key)}
+            onChange={(event, item) => onChanged && onChanged(item)}
             PopperComponent={(props) => <Popper dir={direction} {...props} />}
-            renderInput={(params) => <TextField onBlur={(event) => inputBlur(event)} label={label} {...params} />}
+            renderInput={(params) => <TextField label={label} {...params} />}
         />
     );
 };

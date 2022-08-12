@@ -18,6 +18,7 @@ import { useContext, useEffect, useState } from 'react';
 const EditAgency = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const [selectedAgency, setSelectedAgency] = useState('');
+    const [selectedCountryCode, setSelectedCountryCode] = useState('');
     const [isValidPhone, setIsPhoneValid] = useState(false);
     const [showError, setShowError] = useState(false);
     /* #region Context section */
@@ -37,6 +38,10 @@ const EditAgency = () => {
             setToast({ id: Date.now(), message: notification.selectAgency, alertColor: 'info' });
             return;
         }
+        if (!selectedCountryCode) {
+            setToast({ id: Date.now(), message: 'no-country-code', alertColor: 'error' });
+            return;
+        }
         if (!isValidPhone && currentStep === 1) {
             setToast({ id: Date.now(), message: notification.incorrectFormat, alertColor: 'error' });
             setShowError(true);
@@ -49,7 +54,9 @@ const EditAgency = () => {
     useEffect(() => {
         if (selectedAgency)
             setTitle(selectedAgency);
-    }, [selectedAgency, title]);
+        else
+            setTitle(editAgency.title);
+    }, [editAgency.title, selectedAgency, title]);
     /* #endregion */
     return (
         <>
@@ -77,7 +84,8 @@ const EditAgency = () => {
                         }
                     </Breadcrumbs>
                     <CenterBox>
-                        <AgencySelector currentStep={currentStep} onValueChanged={(agency) => setSelectedAgency(agency)} />
+                        <AgencySelector currentStep={currentStep} onAgencyChanged={(agency) => setSelectedAgency(agency)}
+                            onCountryCodeChanged={(code) => setSelectedCountryCode(code)} />
                         <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setIsPhoneValid(isValid)} />
                         {showError && <Alert severity='error'>{editAgency.phoneNumbersError}</Alert>}
 
