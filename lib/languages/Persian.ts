@@ -83,6 +83,8 @@ const Persian = {
         preparing: 'در حال آماده سازی...',
         agencyName: 'نام آژانس',
         editAgency: {
+            localization: 'بومی سازی',
+            localizationWarning:'بومی سازی به دسترسی دقیق‌تر به داده‌ها کمک می‌کند، بنابراین لطفاً آن را با دقت انتخاب کنید.',
             agencyMainPhoneNumber: 'شماره تلفن اصلی آژانس',
             agencySecondaryPhoneNumber:'شماره تلفن دوم آژانس (ضروری نیست).',
             agencySelection: 'انتخاب آژانس',

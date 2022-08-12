@@ -14,8 +14,8 @@ import Link from '@mui/material/Link';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { ToastContext } from '../../lib/context/ToastContext';
 import { useContext, useEffect, useState } from 'react';
-const EditAgency = () => {
 
+const EditAgency = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const [selectedAgency, setSelectedAgency] = useState('');
     const [isValidPhone, setIsPhoneValid] = useState(false);
@@ -80,6 +80,7 @@ const EditAgency = () => {
                         <AgencySelector currentStep={currentStep} onValueChanged={(agency) => setSelectedAgency(agency)} />
                         <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setIsPhoneValid(isValid)} />
                         {showError && <Alert severity='error'>{editAgency.phoneNumbersError}</Alert>}
+
                     </CenterBox>
                 </CardContent>
                 <CardActions sx={{ flexDirection: 'row-reverse' }}>

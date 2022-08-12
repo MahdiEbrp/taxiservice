@@ -83,6 +83,8 @@ const English = {
         preparing: 'Preparing...',
         agencyName: 'Agency Name',
         editAgency: {
+            localization: 'Localization',
+            localizationWarning:'Localization helps to reach data more accurately, so choose it carefully please.',
             agencyMainPhoneNumber: 'Agency Main Phone Number.',
             agencySecondaryPhoneNumber: 'Agency\'s second phone number(not necessary).',
             agencySelection: 'Agency Selection',
