@@ -1,8 +1,8 @@
 import Alert from '@mui/material/Alert';
-import ComboBoxWithGroup from '../controls/ComboBoxWithOption';
-import CountryList from '../../lib/Geography';
-import TabPanel from '../controls/TabPanel';
-import { LanguageContext } from '../../lib/context/LanguageContext';
+import ComboBoxWithGroup from '../../controls/ComboBoxWithOption';
+import CountryList from '../../../lib/Geography';
+import TabPanel from '../../controls/TabPanel';
+import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { useContext, useMemo } from 'react';
 export interface AgencySelectorProps {
     currentStep: number;

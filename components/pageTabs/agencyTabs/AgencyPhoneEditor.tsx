@@ -1,10 +1,10 @@
-import TabPanel from '../controls/TabPanel';
-import { LanguageContext } from '../../lib/context/LanguageContext';
+import TabPanel from '../../controls/TabPanel';
+import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { useContext, useRef } from 'react';
-import CenterBox from '../controls/CenterBox';
+import CenterBox from '../../controls/CenterBox';
 import Alert from '@mui/material/Alert';
-import { isPhoneNumberValid, onlyNumbersRegex } from '../../lib/Validator';
-import ForcedPatternInput from '../controls/ForcedPatternInput';
+import { isPhoneNumberValid, onlyNumbersRegex } from '../../../lib/Validator';
+import ForcedPatternInput from '../../controls/ForcedPatternInput';
 export interface agencyPhoneEditorProps {
     currentStep: number;
     onValidationChanged: (isValid: boolean) => void;

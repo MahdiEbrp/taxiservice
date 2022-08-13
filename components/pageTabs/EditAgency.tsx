@@ -1,5 +1,6 @@
-import AgencyPhoneEditor from './AgencyPhoneEditor';
-import AgencySelector from './AgencySelector';
+
+import AgencyPhoneEditor from './agencyTabs/AgencyPhoneEditor';
+import AgencySelector from './agencyTabs/AgencySelector';
 import Alert from '@mui/material/Alert';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Button from '@mui/material/Button';
@@ -8,7 +9,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import CenterBox from '../../components/controls/CenterBox';
+import CenterBox from '../controls/CenterBox';
 import ImageLoader from '../controls/ImageLoader';
 import Link from '@mui/material/Link';
 import { LanguageContext } from '../../lib/context/LanguageContext';
@@ -19,7 +20,7 @@ const EditAgency = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const [selectedAgency, setSelectedAgency] = useState('');
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
-    const [isValidPhone, setIsPhoneValid] = useState(false);
+    const [allPhoneValid, setAllPhoneValid] = useState(false);
     const [showError, setShowError] = useState(false);
     /* #region Context section */
     const { language } = useContext(LanguageContext);
@@ -39,10 +40,10 @@ const EditAgency = () => {
             return;
         }
         if (!selectedCountryCode) {
-            setToast({ id: Date.now(), message: 'no-country-code', alertColor: 'error' });
+            setToast({ id: Date.now(), message: notification.selectCountry, alertColor: 'error' });
             return;
         }
-        if (!isValidPhone && currentStep === 1) {
+        if (!allPhoneValid && currentStep === 1) {
             setToast({ id: Date.now(), message: notification.incorrectFormat, alertColor: 'error' });
             setShowError(true);
             return;
@@ -86,7 +87,7 @@ const EditAgency = () => {
                     <CenterBox>
                         <AgencySelector currentStep={currentStep} onAgencyChanged={(agency) => setSelectedAgency(agency)}
                             onCountryCodeChanged={(code) => setSelectedCountryCode(code)} />
-                        <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setIsPhoneValid(isValid)} />
+                        <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setAllPhoneValid(isValid)} />
                         {showError && <Alert severity='error'>{editAgency.phoneNumbersError}</Alert>}
 
                     </CenterBox>

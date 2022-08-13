@@ -1,5 +1,5 @@
 import AuthorizedLayout from '../../components/AuthorizedLayout';
-import EditAgency from '../../components/pageTabs/EditAgency';
+import EditAgency from '../../components/pageTabs/agencyTabs/EditAgency';
 import Head from 'next/head';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { useContext } from 'react';
