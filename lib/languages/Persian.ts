@@ -45,7 +45,8 @@ const Persian = {
     components: {
         imageLoaderError: 'تصویر بارگذاری نشد.کلمات کلیدی:',
         noOptionsText:'نتیجه ای یافت نشد!',
-        loadingText:'در حال بارگذاری...',
+        loadingText: 'در حال بارگذاری...',
+        locations:'مکان ها',
     },
     responseError: {
         CredentialsSignin: 'نام کاربری یا رمز عبور وارد شده اشتباه است.',

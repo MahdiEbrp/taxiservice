@@ -2,7 +2,6 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-
 import DialogTitle from '@mui/material/DialogTitle';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -14,6 +13,7 @@ import { LanguageDialogContext } from '../../lib/context/LanguageDialogContext';
 import { ToastContext } from '../../lib/context/ToastContext';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+
 const LanguageDialog = () => {
 
     const { isLanguageDialogOpen, setLanguageDialogOpen } = useContext(LanguageDialogContext);
@@ -41,7 +41,6 @@ const LanguageDialog = () => {
     };
 
     return (
-
         <Dialog
             open={isLanguageDialogOpen}
             onClose={handleClose}
@@ -63,7 +62,6 @@ const LanguageDialog = () => {
                         <FormControlLabel value='fa' control={<Radio />} onClick={() => setLanguageCode('fa')} label='Persian-فارسی' />
                     </RadioGroup>
                 </FormControl>
-
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => handleClose(false)}>{languageDialog.discard}</Button>
