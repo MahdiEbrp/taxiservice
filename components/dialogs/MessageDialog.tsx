@@ -13,19 +13,17 @@ export interface MessageDialogProps {
     title: string;
 }
 const MessageDialog = () => {
-    /* #region Context section */
+
     const { language } = useContext(LanguageContext);
     const { messageDialogInfo, setMessageDialog } = useContext(MessageDialogContext);
-    /* #endregion */
-    /* #region Language section */
+
     const { settings, messageDialog } = language;
     const { direction } = settings;
-    /* #endregion */
-    /* #region Functions section */
+
     const handleClose = () => {
         setMessageDialog({ isMessageDialogOpen: false, message: '', title: '' });
     };
-    /* #endregion */
+
     return (
         <Dialog
             open={messageDialogInfo.isMessageDialogOpen}
@@ -48,7 +46,4 @@ const MessageDialog = () => {
 };
 
 export default MessageDialog;
-
-
-
 

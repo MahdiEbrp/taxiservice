@@ -23,17 +23,16 @@ const EditAgency = () => {
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
     const [allPhoneValid, setAllPhoneValid] = useState(false);
     const [showError, setShowError] = useState(false);
-    /* #region Context section */
+
     const { language } = useContext(LanguageContext);
     const { setToast } = useContext(ToastContext);
-    /* #endregion */
-    /* #region Language section */
+
     const { agenciesPage, notification, settings } = language;
     const { editAgency } = agenciesPage;
     const { direction } = settings;
-    /* #endregion */
+
     const [title, setTitle] = useState(editAgency.title);
-    /* #region Functions section */
+
     const nextStep = () => {
         setShowError(false);
         if (!selectedAgency) {
@@ -51,15 +50,14 @@ const EditAgency = () => {
         }
         setCurrentStep((currentStep) => currentStep + 1);
     };
-    /* #endregion */
-    /* #region Callback hook section */
+
     useEffect(() => {
         if (selectedAgency)
             setTitle(selectedAgency);
         else
             setTitle(editAgency.title);
     }, [editAgency.title, selectedAgency, title]);
-    /* #endregion */
+
     return (
         <>
             <Card dir={direction}>

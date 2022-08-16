@@ -20,25 +20,25 @@ import { useRouter } from 'next/router';
 import CenterBox from './controls/CenterBox';
 import Image from 'next/image';
 const ContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
-    /* #region Dialog section */
+
     const [isLanguageDialogOpen, setLanguageDialogOpen] = useState(false);
     const [isLoginDialogOpen, setLoginDialogOpen] = useState(false);
     const [messageDialogInfo, setMessageDialog] = useState<MessageDialogProps>({ isMessageDialogOpen: false, message: '', title: '' });
-    /* #endregion */
     const [prefersDarkMode, setPrefersDarkMode] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [toast, setToast] = useState<ToastProps>(EmptyToast);
     const router = useRouter();
     const [language, setLanguage] = useState(getLanguage(router.locale));
-    /* #region Callback hook section */
+
     useEffect(() => {
         const settings = GetSettings('darkMode', 'false') as string;
         setPrefersDarkMode(settings === 'true' ? true : false);
     }, [prefersDarkMode]);
+
     useEffect(() => {
         setLanguage(getLanguage(router.locale));
     }, [router.locale]);
-    /* #endregion */
+
     return (
         <SessionProvider >
             <ThemeContext.Provider value={{ prefersDarkMode, setPrefersDarkMode }}>

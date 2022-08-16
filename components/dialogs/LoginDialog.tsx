@@ -12,25 +12,26 @@ import UserInformationTab from './tabs/UserInformationTab';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { LoginDialogContext } from '../../lib/context/LoginDialogContext';
 import { useSession } from 'next-auth/react';
+
 const LoginDialog = () => {
-    /* #region Context section */
+
     const { isLoginDialogOpen, setLoginDialogOpen } = useContext(LoginDialogContext);
     const { language } = useContext(LanguageContext);
-    /* #endregion */
+
     const [tabID, setTabId] = useState('login');
     const { data: session } = useSession();
-    /* #region Language section */
+
     const { direction } = language.settings;
     const loginDialog = language.loginDialog;
-    /* #endregion */
-    /* #region Functions sections */
+
     const handleClose = () => {
         setLoginDialogOpen(false);
     };
+
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setTabId(newValue);
     };
-    /* #endregion */
+
     return (
         <Dialog
             open={isLoginDialogOpen}

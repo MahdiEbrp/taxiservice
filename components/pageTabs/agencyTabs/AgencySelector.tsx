@@ -4,11 +4,13 @@ import CountryList from '../../../lib/Geography';
 import TabPanel from '../../controls/TabPanel';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { useContext, useMemo } from 'react';
+
 export interface AgencySelectorProps {
     currentStep: number;
     onAgencyChanged?: (agency: string) => void;
     onCountryCodeChanged?: (country: string) => void;
 }
+
 const AgencySelector = (props: AgencySelectorProps) => {
 
     const { currentStep, onAgencyChanged, onCountryCodeChanged } = props;
@@ -21,10 +23,12 @@ const AgencySelector = (props: AgencySelectorProps) => {
         if (onAgencyChanged)
             onAgencyChanged(agency);
     };
+
     const countryCodeChanged = (country: string) => {
         if (onCountryCodeChanged)
             onCountryCodeChanged(country);
     };
+
     const countryList = useMemo(() => {
         return CountryList.map(({ country_code, englishName, nativeName }) => (
             {
@@ -47,4 +51,5 @@ const AgencySelector = (props: AgencySelectorProps) => {
     );
 
 };
+
 export default AgencySelector;

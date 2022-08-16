@@ -19,41 +19,36 @@ import { isPasswordValid } from '../lib/Validator';
 import { useRouter } from 'next/router';
 const ResetPasswordForm = () => {
     const [captcha, setCaptcha] = useState<string | false>(false);
-    /* #region Router section */
+
     const router = useRouter();
     const code = router.query['code'] as string || '';
-    /* #endregion */
-    /* #region Response section */
+
     const [isRedirecting, setRedirecting] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isDone, setIsDone] = useState(false);
     const [isCodeExpired, setIsCodeExpired] = useState(false);
-    /* #endregion */
-    /* #region Reference section */
+
     const passwordRef = useRef<HTMLInputElement>(null);
     const confirmPasswordRef = useRef<HTMLInputElement>(null);
-    /* #endregion */
-    /* #region Error section */
+
     const [captchaError, setCaptchaError] = useState(false);
     const [confirmPasswordError, setConfirmPasswordError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
-    /* #endregion */
-    /* #region Context section */
+
     const { language } = useContext(LanguageContext);
     const { prefersDarkMode } = useContext(ThemeContext);
     const { setToast } = useContext(ToastContext);
-    /* #endregion */
-    /* #region Language section */
+
     const { settings, resetPasswordPage, submitForm, notification } = language;
     const { direction } = settings;
-    /* #endregion */
-    /* #region  Functions section */
+
     const validatePassword = () => {
         const password = passwordRef.current!.value || '';
         const valid = isPasswordValid(password);
         setPasswordError(!valid);
         return valid;
     };
+
     const validateConfirmPassword = () => {
         const password = passwordRef.current!.value || '';
         const confirmPassword = confirmPasswordRef.current?.value || '';
@@ -61,6 +56,7 @@ const ResetPasswordForm = () => {
         setConfirmPasswordError(!valid);
         return valid;
     };
+
     const handleCaptchaChange = (token: string | null) => {
         if (captchaError)
             setCaptchaError(false);
@@ -72,6 +68,7 @@ const ResetPasswordForm = () => {
             setCaptcha(false);
         }
     };
+
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (!validatePassword()) {
@@ -107,6 +104,7 @@ const ResetPasswordForm = () => {
             setToast({ id: Date.now(), message: notification.invalidCaptchaFormat, alertColor: 'error' });
 
     };
+
     const redirect = async () => {
         if (isRedirecting)
             return;
@@ -114,7 +112,7 @@ const ResetPasswordForm = () => {
         setIsLoading(true);
         await router.push('/');
     };
-    /* #endregion */
+
     return (
         <>
             <CenterBox sx={{ display: isLoading ? 'flex' : 'none' }}>
@@ -133,7 +131,7 @@ const ResetPasswordForm = () => {
                     inputRef={passwordRef}
                     error={passwordError}
                     onBlur={() => validatePassword()}
-                    inputProps={{ style: { direction: 'ltr', order: direction==='rtl' ? 1 : -1 } }}
+                    inputProps={{ style: { direction: 'ltr', order: direction === 'rtl' ? 1 : -1 } }}
                 />
                 <PasswordField
                     required
@@ -189,7 +187,6 @@ const ResetPasswordForm = () => {
                 :
                 <></>
             }
-
 
         </>
     );

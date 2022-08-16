@@ -7,13 +7,12 @@ import ResetPasswordForm from '../components/ResetPasswordForm';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { NextPage } from 'next';
 const ResetPassword: NextPage = () => {
-    /* #region Context section */
+
     const { language } = useContext(LanguageContext);
-    /* #endregion */
-    /* #region Language section */
+
     const { settings, resetPasswordPage } = language;
     const { direction } = settings;
-    /* #endregion */
+
     return (
         <>
             <Head>

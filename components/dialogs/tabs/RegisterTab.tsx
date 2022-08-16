@@ -16,34 +16,32 @@ import { ThemeContext } from '../../../lib/context/ThemeContext';
 import { ToastContext } from '../../../lib/context/ToastContext';
 import { getResponseError } from '../../../lib/Language';
 import { isEmailValid, isPasswordValid } from '../../../lib/Validator';
+
 const RegisterTab = () => {
+
     const [captcha, setCaptcha] = useState<string | false>(false);
     const [isLoading, setIsLoading] = useState(false);
-    //#region  Reference section */
+
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const confirmPasswordRef = useRef<HTMLInputElement>(null);
-    //#endregion
-    /* #region Error section*/
+
     const [captchaError, setCaptchaError] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [confirmPasswordError, setConfirmPasswordError] = useState(false);
-    /* #endregion */
-    /* #region Necessary context */
+
     const { language } = useContext(LanguageContext);
     const { prefersDarkMode } = useContext(ThemeContext);
     const { setLoginDialogOpen } = useContext(LoginDialogContext);
     const { setMessageDialog } = useContext(MessageDialogContext);
     const { setToast } = useContext(ToastContext);
-    /* #endregion */
-    /* #region Language section */
+
     const { loginDialog, notification, messageDialog, submitForm } = language;
     const registerTab = loginDialog.registerTab;
     const { direction } = language.settings;
     const successfullyRegister = messageDialog.userCreatedSuccessfully;
-    /* #endregion */
-    /* #region Functions sections */
+
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
 
@@ -85,18 +83,21 @@ const RegisterTab = () => {
             setToast({ id: Date.now(), message: notification.invalidCaptchaFormat, alertColor: 'error' });
 
     };
+
     const validateEmail = () => {
         const email = emailRef.current!.value || '';
         const valid = isEmailValid(email);
         setEmailError(!valid);
         return valid;
     };
+
     const validatePassword = () => {
         const password = passwordRef.current!.value || '';
         const valid = isPasswordValid(password);
         setPasswordError(!valid);
         return valid;
     };
+
     const validateConfirmPassword = () => {
         const password = passwordRef.current!.value || '';
         const confirmPassword = confirmPasswordRef.current?.value || '';
@@ -104,6 +105,7 @@ const RegisterTab = () => {
         setConfirmPasswordError(!valid);
         return valid;
     };
+
     const handleCaptchaChange = (token: string | null) => {
         if (captchaError)
             setCaptchaError(false);
@@ -115,7 +117,7 @@ const RegisterTab = () => {
             setCaptcha(false);
         }
     };
-    /* #endregion */
+
     return (
         <FormControl component='form' onSubmit={handleSubmit}>
             <TextField
@@ -140,7 +142,7 @@ const RegisterTab = () => {
                 inputRef={passwordRef}
                 error={passwordError}
                 onBlur={() => validatePassword()}
-                inputProps={{ style: { direction: 'ltr', order: direction==='rtl' ? 1 : -1 } }}
+                inputProps={{ style: { direction: 'ltr', order: direction === 'rtl' ? 1 : -1 } }}
             />
             <PasswordField
                 required
@@ -151,7 +153,7 @@ const RegisterTab = () => {
                 inputRef={confirmPasswordRef}
                 error={confirmPasswordError}
                 onBlur={() => validateConfirmPassword()}
-                inputProps={{ style: { direction: 'ltr', order: direction==='rtl' ? 1 : -1 } }}
+                inputProps={{ style: { direction: 'ltr', order: direction === 'rtl' ? 1 : -1 } }}
             />
             <CenterBox>
                 <ReCAPTCHA

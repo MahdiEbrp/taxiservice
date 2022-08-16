@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getRandomString, Sh256Encrypt } from '../../../lib/Encryption';
-import { isCaptchaValid, isEmailValid, isPasswordValid } from '../../../lib/Validator';
+import { getCaptchaValidationStatus, isEmailValid, isPasswordValid } from '../../../lib/Validator';
 import { Prisma } from '@prisma/client';
 import sendEmail, { verificationEmailBody } from '../../../lib/Email';
 import prismaClient from '../../../lib/PrismaClient';
@@ -17,7 +17,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!requestId && !email && !password)
         return res.status(400).json({ error: 'ERR_POST_DATA' });
 
-    const isValid = await isCaptchaValid(requestId);
+    const isValid = await getCaptchaValidationStatus(requestId);
 
     if (isValid === 200) {
         if (isPasswordValid(password) && isEmailValid(email)) {

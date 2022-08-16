@@ -1,9 +1,9 @@
 import * as countries from './countries.json';
 import { GetData } from './FetchData';
 
-export type Cities = City[];
+export type cities = city[];
 
-export interface City {
+export interface city {
     place_id: number;
     licence: string;
     osm_type: string;
@@ -25,7 +25,7 @@ export const fetchCitiesLocation = async (cityName: string, countryCode: string)
     const response = await GetData(url);
     if (response) {
         if (response.status === 200) {
-            const data = response.data as Cities;
+            const data = response.data as cities;
             return data;
         }
     }

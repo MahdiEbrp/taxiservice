@@ -18,38 +18,37 @@ import { getResponseError } from '../../../lib/Language';
 import { isEmailValid, isPasswordValid } from '../../../lib/Validator';
 import { signIn } from 'next-auth/react';
 const LoginTab = () => {
+
     const [captcha, setCaptcha] = useState<string | false>(false);
     const [isLoading, setIsLoading] = useState(false);
-    /* #region Reference section */
+
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
-    /* #endregion */
-    /* #region Error section*/
+
     const [captchaError, setCaptchaError] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
-    /* #endregion */
-    /* #region Necessary context */
+
     const { language } = useContext(LanguageContext);
     const { prefersDarkMode } = useContext(ThemeContext);
     const { setLoginDialogOpen } = useContext(LoginDialogContext);
     const { setMessageDialog } = useContext(MessageDialogContext);
     const { setToast } = useContext(ToastContext);
-    /* #endregion */
-    /* #region Language section */
+
     const { loginDialog, notification, messageDialog, submitForm } = language;
     const loginTab = loginDialog.loginTab;
     const passwordReadyReset = messageDialog.passwordReadyReset;
     const { direction } = language.settings;
-    /* #endregion */
-    /* #region Functions section */
+
     const handleSubmit = async (e: React.SyntheticEvent) => {
+
         e.preventDefault();
 
         if (!validateEmail()) {
             setToast({ id: Date.now(), message: notification.invalidEmailFormat, alertColor: 'error' });
             return;
         }
+
         if (!validatePassword()) {
             setToast({ id: Date.now(), message: notification.invalidPasswordFormat, alertColor: 'error' });
             return;
@@ -73,18 +72,21 @@ const LoginTab = () => {
             setToast({ id: Date.now(), message: notification.invalidCaptchaFormat, alertColor: 'error' });
 
     };
+
     const validateEmail = () => {
         const email = emailRef.current!.value || '';
         const valid = isEmailValid(email);
         setEmailError(!valid);
         return valid;
     };
+
     const validatePassword = () => {
         const password = passwordRef.current!.value || '';
         const valid = isPasswordValid(password);
         setPasswordError(!valid);
         return valid;
     };
+
     const handleCaptchaChange = (token: string | null) => {
         if (captchaError)
             setCaptchaError(false);
@@ -96,6 +98,7 @@ const LoginTab = () => {
             setCaptcha(false);
         }
     };
+
     const resetPassword = async () => {
 
         if (!validateEmail()) {
@@ -124,7 +127,7 @@ const LoginTab = () => {
             setToast({ id: Date.now(), message: notification.invalidCaptchaFormat, alertColor: 'error' });
 
     };
-    /* #endregion */
+
     return (
         <FormControl component='form' sx={{ gap: '1rem' }} onSubmit={handleSubmit}>
             <TextField
@@ -150,7 +153,7 @@ const LoginTab = () => {
                 inputRef={passwordRef}
                 error={passwordError}
                 onBlur={() => validatePassword()}
-                inputProps={{ style: { direction: 'ltr', order: direction==='rtl' ? 1 : -1 } }}
+                inputProps={{ style: { direction: 'ltr', order: direction === 'rtl' ? 1 : -1 } }}
 
             />
             <Alert severity='info'>{loginTab.forgetPassword}</Alert>
@@ -179,6 +182,4 @@ const LoginTab = () => {
 };
 
 export default LoginTab;
-
-
 

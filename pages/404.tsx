@@ -13,16 +13,14 @@ import { LanguageContext } from '../lib/context/LanguageContext';
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 const NotFound = () => {
-    /* #region Context section */
+
     const { language } = useContext(LanguageContext);
-    /* #endregion */
-    /* #region Redirect section */
+
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
-    /* #endregion */
-    /* #region Language section */
+
     const { settings, pageNotFound } = language;
-    /* #endregion */    /* #region Functions section */
+
     const returnHome = async () => {
         setIsLoading(true);
         const response = await router.push('/');
@@ -30,7 +28,7 @@ const NotFound = () => {
         if (response)
             return;
     };
-    /* #endregion */
+
     return (
         <>
             <Head>

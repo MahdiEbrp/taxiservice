@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
-import { isCaptchaValid } from '../../../lib/Validator';
+import { getCaptchaValidationStatus } from '../../../lib/Validator';
 import prismaClient from '../../../lib/PrismaClient';
 import { Sh256Encrypt } from '../../../lib/Encryption';
 
@@ -23,7 +23,7 @@ export const options = {
                 const requestId = credentials?.requestId;
                 if (email && password && requestId) {
 
-                    const isValid = await isCaptchaValid(credentials?.requestId);
+                    const isValid = await getCaptchaValidationStatus(credentials?.requestId);
                     const encryptedPassword = Sh256Encrypt(password, process.env.ENCRYPTION_PASSWORD_SALT as string);
 
                     if (isValid !== 200)

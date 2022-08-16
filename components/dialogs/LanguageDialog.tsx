@@ -15,23 +15,21 @@ import { ToastContext } from '../../lib/context/ToastContext';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 const LanguageDialog = () => {
-    /* #region Context section */
+
     const { isLanguageDialogOpen, setLanguageDialogOpen } = useContext(LanguageDialogContext);
     const { language } = useContext(LanguageContext);
     const { setToast } = useContext(ToastContext);
-    /* #endregion */
+
     const router = useRouter();
-    /* #region Language section */
+
     const { settings, languageDialog } = language;
     const [languageCode, setLanguageCode] = useState(settings.code);
     const { direction } = settings;
-    /* #endregion */
-    /* #region Callback hook section */
+
     useEffect(() => {
         setLanguageCode(settings.code);
     }, [settings.code]);
-    /* #endregion */
-    /* #region Functions section */
+
     const handleClose = (saveMode: boolean) => {
         setLanguageDialogOpen(false);
         if (saveMode === true) {
@@ -41,7 +39,7 @@ const LanguageDialog = () => {
         }
 
     };
-    /* #endregion */
+
     return (
 
         <Dialog
@@ -76,5 +74,4 @@ const LanguageDialog = () => {
 };
 
 export default LanguageDialog;
-
 

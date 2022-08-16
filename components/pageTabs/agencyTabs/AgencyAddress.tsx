@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { fetchCitiesLocation } from '../../../lib/Geography';
-import AutoCompletedPro, { ItemProps } from '../../controls/AutoCompletePlus';
+import AutoCompletedPlus, { ItemProps } from '../../controls/AutoCompletePlus';
 import TabPanel from '../../controls/TabPanel';
 
 export interface AgencyAddressProps {
@@ -16,12 +16,13 @@ const AgencyAddress = (props: AgencyAddressProps) => {
 
     const delayTime = 1.5 * 1000;
     let city = '';
-    const tabIndex = '2';
+
     const onTextChange = (value: string) => {
         city = value;
         if (suggestState !== 'typing')
             setSuggestState('typing');
     };
+
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
     const lazySuggest = useCallback(async () => {
@@ -49,8 +50,8 @@ const AgencyAddress = (props: AgencyAddressProps) => {
     }, [lazySuggest]);
 
     return (
-        <TabPanel activeIndex={currentStep.toString()} index={tabIndex}>
-            <AutoCompletedPro onInputTextChanged={(city) => onTextChange(city)} loading={suggestState !== 'ready'} items={suggestionItems} label='locations' />
+        <TabPanel activeIndex={currentStep.toString()} index='2'>
+            <AutoCompletedPlus onInputTextChanged={(city) => onTextChange(city)} loading={suggestState !== 'ready'} items={suggestionItems} label='locations' />
         </TabPanel>
     );
 };

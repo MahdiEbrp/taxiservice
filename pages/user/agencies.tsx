@@ -5,16 +5,14 @@ import { LanguageContext } from '../../lib/context/LanguageContext';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
 const Agencies = () => {
-    /* #region Router section */
+
     const router = useRouter();
     const mode = router.query['mode'] as string | '';
-    /* #endregion */
-    /* #region Context section */
+
     const { language } = useContext(LanguageContext);
-    /* #endregion */
-    /* #region Language section */
+
     const { agenciesPage } = language;
-    /* #endregion */
+
     return (
         <>
             <Head>

@@ -13,32 +13,31 @@ const ToastHandler = () => {
     /* #region Context section*/
     const { language } = useContext(LanguageContext);
     const { toast } = useContext(ToastContext);
-    /* #endregion */
+
     const [open, setOpen] = useState(true);
     const [toastId, setToastId] = useState(0);
     const { id, message, alertColor } = toast;
     //3 second
     const autoHideDuration = 3 * 1000;
-    /* #region Language section */
-    const {direction} = language.settings;
-    /* #endregion */
-    /* #region Callback hook section */
+
+    const { direction } = language.settings;
+
     useEffect(() => {
         if (toastId !== id) {
             setOpen(true);
             setToastId(id);
         }
     }, [toastId, id]);
-    /* #endregion */
+
     if (id === 0)
         return <></>;
-    /* #region Functions section */
+
     const handleClose = (event?: SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway')
             return;
         setOpen(false);
     };
-    /* #endregion */
+
     return (
         <Snackbar dir={direction} open={open} autoHideDuration={autoHideDuration} onClose={handleClose}>
             <Alert onClose={handleClose} severity={alertColor} sx={{ width: '100%' }}>

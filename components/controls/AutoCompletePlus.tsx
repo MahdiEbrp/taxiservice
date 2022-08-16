@@ -3,6 +3,7 @@ import Popper from '@mui/material/Popper';
 import React, { useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import { LanguageContext } from '../../lib/context/LanguageContext';
+
 export interface ItemProps {
     value: string;
     key: string;
@@ -11,17 +12,16 @@ export interface AutoCompletePlusProps {
     items: ItemProps[];
     label: string;
     loading?: boolean;
-    onChanged?: (element:ItemProps | null) => void;
+    onChanged?: (element: ItemProps | null) => void;
     onInputTextChanged?: (value: string) => void;
 }
 const AutoCompletePlus: React.FC<AutoCompletePlusProps> = (props: AutoCompletePlusProps) => {
     const { items, label, loading, onChanged, onInputTextChanged } = props;
     const { language } = useContext(LanguageContext);
-    /* #region Language section */
+
     const { settings, components } = language;
     const { direction } = settings;
-    /* #endregion */
-    /* #region Functions section */
+
     const options = items.map((item) => {
         const firstLetter = item.value[0].toUpperCase();
         return {
@@ -30,7 +30,7 @@ const AutoCompletePlus: React.FC<AutoCompletePlusProps> = (props: AutoCompletePl
             key: item.key,
         };
     });
-    /* #endregion */
+
     return (
         <Autocomplete
             id='grouped-demo'
@@ -54,6 +54,5 @@ const AutoCompletePlus: React.FC<AutoCompletePlusProps> = (props: AutoCompletePl
         />
     );
 };
-
 
 export default AutoCompletePlus;

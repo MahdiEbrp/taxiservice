@@ -3,7 +3,7 @@ import sendEmail, { resetPasswordBody } from '../../../lib/Email';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Prisma } from '@prisma/client';
 import { getRandomString } from '../../../lib/Encryption';
-import { isCaptchaValid, isEmailValid } from '../../../lib/Validator';
+import { getCaptchaValidationStatus, isEmailValid } from '../../../lib/Validator';
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (req.method !== 'POST')
@@ -17,7 +17,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!isEmailValid(email))
         return res.status(405).json({ error: 'ERR_INVALID_FORMAT' });
 
-    const isValid = await isCaptchaValid(requestId);
+    const isValid = await getCaptchaValidationStatus(requestId);
     if (isValid === 200) {
 
         const prisma = prismaClient;

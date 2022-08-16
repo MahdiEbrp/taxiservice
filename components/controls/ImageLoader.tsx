@@ -5,17 +5,23 @@ import Typography from '@mui/material/Typography';
 import { BsEmojiDizzy } from 'react-icons/bs';
 import { ElementType, useContext, useState } from 'react';
 import { LanguageContext } from '../../lib/context/LanguageContext';
+
 interface ImageLoaderProps {
     src: string,
     alt: string,
     width: number,
     height: number;
 }
+
 const ImageLoader: ElementType = (Props: ImageLoaderProps) => {
+
     const { src, alt, width, height, ...others } = Props;
+
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
+
     const { language } = useContext(LanguageContext);
+
     const { settings, components } = language;
 
     return (

@@ -5,14 +5,18 @@ import ListItemText from '@mui/material/ListItemText';
 import { MdExpandLess, MdExpandMore } from 'react-icons/md';
 import { ReactElement, useState } from 'react';
 import Divider from '@mui/material/Divider';
+
 export interface ExpandableItemsProps {
     isOpen: boolean;
     label: string;
     children: ReactElement | ReactElement[];
 }
+
 const ExpandableItems = (props: ExpandableItemsProps) => {
+
     const { isOpen, label, children } = props;
     const [open, setOpen] = useState(isOpen);
+
     return (
         <>
             <ListItemButton sx={{backdropFilter:'opacity(0.5)'}} onClick={() => setOpen(!open)}>

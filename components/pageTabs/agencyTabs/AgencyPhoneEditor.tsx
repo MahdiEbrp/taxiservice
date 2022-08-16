@@ -15,14 +15,12 @@ const AgencyPhoneEditor = (props: agencyPhoneEditorProps) => {
     const phoneNumber1Ref = useRef<HTMLInputElement>(null);
     const phoneNumber2Ref = useRef<HTMLInputElement>(null);
     const mobileNumberRef = useRef<HTMLInputElement>(null);
-    /* #endregion */
-    /* #region Context section */
+
     const { language } = useContext(LanguageContext);
-    /* #endregion */
-    /* #region Language section */
+
     const { agenciesPage } = language;
     const { editAgency } = agenciesPage;
-    /* #endregion */
+
     const phoneNumbersValidation = () => {
         const phoneNumber1 = phoneNumber1Ref.current?.value;
         const phoneNumber2 = phoneNumber2Ref.current?.value;

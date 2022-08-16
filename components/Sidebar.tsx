@@ -16,24 +16,22 @@ import { TbRoad } from 'react-icons/tb';
 import { useContext, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 const Sidebar = () => {
-    /* #region context section */
+
     const { sidebarOpen } = useContext(SidebarContext);
     const { language } = useContext(LanguageContext);
-    /* #endregion */
-    /* #region language section */
+
     const { sidebar, settings } = language;
     const { direction } = settings;
-    /* #endregion */
+
     const session = useSession();
     const [isUserValid, setUserValid] = useState(false);
-    /* #region Callback hook section */
     useEffect(() => {
         if (session.data)
             setUserValid(true);
         else
             setUserValid(false);
     }, [session]);
-    /* #endregion */
+
     return (
         <Drawer anchor={direction === 'rtl' ? 'right' : 'left'} variant='persistent' open={sidebarOpen} PaperProps={{ sx: { top: 'auto' } }}>
             <Box>
@@ -62,6 +60,5 @@ const Sidebar = () => {
         </Drawer>
     );
 };
-
 
 export default Sidebar;

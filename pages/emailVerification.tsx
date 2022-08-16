@@ -17,25 +17,21 @@ import { getResponseError } from '../lib/Language';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 const Verify: NextPage = () => {
-    /* #region Router section */
+
     const router = useRouter();
     const code = router.query['code'] as string;
-    /* #endregion */
-    /* #region Context section */
+
     const { language } = useContext(LanguageContext);
-    /* #endregion */
-    /* #region Response section */
+
     const [errorCode, setError] = useState('');
     const [isLoading, setLoading] = useState(true);
     const [isRedirecting, setRedirecting] = useState(false);
     const [isVerified, setVerified] = useState(false);
     const [reloadData, setReloadData] = useState(true);
-    /* #endregion */
-    /* #region Language section */
+
     const { settings, emailVerificationPage } = language;
     const { problems } = emailVerificationPage;
-    /* #endregion */
-    /* #region Functions section */
+
     const resend = () => {
         setReloadData(true);
         setLoading(true);
@@ -47,8 +43,7 @@ const Verify: NextPage = () => {
         setLoading(true);
         await router.push('/');
     };
-    /* #region Functions section */
-    /* #region CallBack Hook section */
+
     useEffect(() => {
         const loadData = async () => {
             const response = await GetData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/verify?code=' + code);
@@ -78,7 +73,7 @@ const Verify: NextPage = () => {
             }
         }
     }, [code, isLoading, isVerified, reloadData, router]);
-    /* #endregion */
+
     const VerificationError = () => {
         return (
             <>
@@ -117,7 +112,7 @@ const Verify: NextPage = () => {
         );
 
     };
-    /* #endregion */
+
     return (
         <>
             <Head>
