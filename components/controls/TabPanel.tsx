@@ -1,12 +1,12 @@
 import CenterBox from './CenterBox';
 import React, { useState } from 'react';
 
-export interface TabPanelProps {
+export type TabPanelProps = {
     children?: React.ReactNode;
     index: string;
     activeIndex: string;
     wrapMode?: boolean;
-}
+};
 
 const TabPanel = (props: TabPanelProps) => {
 

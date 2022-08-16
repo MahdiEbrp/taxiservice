@@ -4,9 +4,7 @@ import React, { useState } from 'react';
 import TextField, { StandardTextFieldProps } from '@mui/material/TextField';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 
-export interface PasswordProps extends StandardTextFieldProps {
-}
-const PasswordField = (props: PasswordProps) => {
+const PasswordField = (props: StandardTextFieldProps) => {
 
     const [showPassword, setShowPassword] = useState(false);
 

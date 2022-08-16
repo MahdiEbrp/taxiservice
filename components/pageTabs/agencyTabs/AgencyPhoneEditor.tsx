@@ -6,11 +6,11 @@ import Alert from '@mui/material/Alert';
 import { isPhoneNumberValid, onlyNumbersRegex } from '../../../lib/Validator';
 import ForcedPatternInput from '../../controls/ForcedPatternInput';
 
-export interface agencyPhoneEditorProps {
+export type AgencyPhoneEditorProps = {
     currentStep: number;
     onValidationChanged: (isValid: boolean) => void;
 }
-const AgencyPhoneEditor = (props: agencyPhoneEditorProps) => {
+const AgencyPhoneEditor = (props: AgencyPhoneEditorProps) => {
 
     const { currentStep, onValidationChanged } = props;
 

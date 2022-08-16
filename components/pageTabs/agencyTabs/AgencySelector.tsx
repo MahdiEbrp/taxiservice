@@ -5,11 +5,11 @@ import TabPanel from '../../controls/TabPanel';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { useContext, useMemo } from 'react';
 
-export interface AgencySelectorProps {
+export type AgencySelectorProps = {
     currentStep: number;
     onAgencyChanged?: (agency: string) => void;
     onCountryCodeChanged?: (country: string) => void;
-}
+};
 
 const AgencySelector = (props: AgencySelectorProps) => {
 

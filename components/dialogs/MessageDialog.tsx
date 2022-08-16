@@ -7,11 +7,13 @@ import Typography from '@mui/material/Typography';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { MessageDialogContext } from '../../lib/context/MessageDialogContext';
 import { useContext } from 'react';
-export interface MessageDialogProps {
+
+export type MessageDialogProps = {
     isMessageDialogOpen: boolean;
     message: string;
     title: string;
-}
+};
+
 const MessageDialog = () => {
 
     const { language } = useContext(LanguageContext);

@@ -4,11 +4,13 @@ import Snackbar from '@mui/material/Snackbar';
 import Typography from '@mui/material/Typography';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { ToastContext } from '../../lib/context/ToastContext';
-export interface ToastProps {
+
+export type ToastProps = {
     id: number;
     message: string;
     alertColor: AlertColor;
-}
+};
+
 const ToastHandler = () => {
 
     const { language } = useContext(LanguageContext);
@@ -17,7 +19,7 @@ const ToastHandler = () => {
     const [open, setOpen] = useState(true);
     const [toastId, setToastId] = useState(0);
     const { id, message, alertColor } = toast;
-    //3 second
+    //3 seconds
     const autoHideDuration = 3 * 1000;
 
     const { direction } = language.settings;

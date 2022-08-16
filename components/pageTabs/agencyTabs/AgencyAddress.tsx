@@ -3,10 +3,11 @@ import { fetchCitiesLocation } from '../../../lib/Geography';
 import AutoCompletedPlus, { ItemProps } from '../../controls/AutoCompletePlus';
 import TabPanel from '../../controls/TabPanel';
 
-export interface AgencyAddressProps {
+export type AgencyAddressProps = {
     currentStep: number;
     localization: string,
-}
+};
+
 const AgencyAddress = (props: AgencyAddressProps) => {
 
     const { currentStep, localization } = props;

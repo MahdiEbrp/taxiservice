@@ -6,7 +6,7 @@ import { BsEmojiDizzy } from 'react-icons/bs';
 import { ElementType, useContext, useState } from 'react';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 
-interface ImageLoaderProps {
+export type ImageLoaderProps= {
     src: string,
     alt: string,
     width: number,

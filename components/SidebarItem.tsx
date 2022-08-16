@@ -5,11 +5,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import React from 'react';
 
-export interface SidebarItemType {
+export type SidebarItemType = {
     icon: React.ReactElement;
     text: string;
     url: string;
-}
+};
 
 const SidebarItem = (props: { item: SidebarItemType; }) => {
 

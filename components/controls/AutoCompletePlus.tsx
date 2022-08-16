@@ -4,17 +4,19 @@ import React, { useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 
-export interface ItemProps {
+export type ItemProps= {
     value: string;
     key: string;
 }
-export interface AutoCompletePlusProps {
+
+export type AutoCompletePlusProps= {
     items: ItemProps[];
     label: string;
     loading?: boolean;
     onChanged?: (element: ItemProps | null) => void;
     onInputTextChanged?: (value: string) => void;
 }
+
 const AutoCompletePlus: React.FC<AutoCompletePlusProps> = (props: AutoCompletePlusProps) => {
     const { items, label, loading, onChanged, onInputTextChanged } = props;
     const { language } = useContext(LanguageContext);

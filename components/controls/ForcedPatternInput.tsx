@@ -1,12 +1,13 @@
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import React, { ElementType } from 'react';
 
-export interface ForcedPatternInputProps {
+export type ForcedPatternInputProps = {
     pattern: RegExp;
-}
+};
+
 const ForcedPatternInput: ElementType<TextFieldProps | ForcedPatternInputProps> = (props: ForcedPatternInputProps | TextFieldProps) => {
 
-    let prevValue = '';
+    let previousValue = '';
 
     const { pattern } = props as ForcedPatternInputProps;
     const { ...others } = props as TextFieldProps;
@@ -16,13 +17,13 @@ const ForcedPatternInput: ElementType<TextFieldProps | ForcedPatternInputProps> 
         const { value } = event.target;
 
         if (value === '') {
-            prevValue = '';
+            previousValue = '';
             return;
         }
         if (!pattern.test(value))
-            event.target.value = prevValue;
+            event.target.value = previousValue;
         else
-            prevValue = value;
+            previousValue = value;
     };
 
     return (

@@ -6,7 +6,7 @@ import { MdExpandLess, MdExpandMore } from 'react-icons/md';
 import { ReactElement, useState } from 'react';
 import Divider from '@mui/material/Divider';
 
-export interface ExpandableItemsProps {
+export type ExpandableItemsProps= {
     isOpen: boolean;
     label: string;
     children: ReactElement | ReactElement[];
@@ -19,7 +19,7 @@ const ExpandableItems = (props: ExpandableItemsProps) => {
 
     return (
         <>
-            <ListItemButton sx={{backdropFilter:'opacity(0.5)'}} onClick={() => setOpen(!open)}>
+            <ListItemButton sx={{ backdropFilter: 'opacity(0.5)' }} onClick={() => setOpen(!open)}>
                 <ListItemIcon>
                     {open ? <MdExpandLess /> : <MdExpandMore />}
                 </ListItemIcon>
