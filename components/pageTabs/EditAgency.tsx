@@ -1,4 +1,5 @@
 
+import AgencyAddress from './agencyTabs/AgencyAddress';
 import AgencyPhoneEditor from './agencyTabs/AgencyPhoneEditor';
 import AgencySelector from './agencyTabs/AgencySelector';
 import Alert from '@mui/material/Alert';
@@ -88,6 +89,7 @@ const EditAgency = () => {
                         <AgencySelector currentStep={currentStep} onAgencyChanged={(agency) => setSelectedAgency(agency)}
                             onCountryCodeChanged={(code) => setSelectedCountryCode(code)} />
                         <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setAllPhoneValid(isValid)} />
+                        <AgencyAddress currentStep={currentStep} localization={'IR'} />
                         {showError && <Alert severity='error'>{editAgency.phoneNumbersError}</Alert>}
 
                     </CenterBox>

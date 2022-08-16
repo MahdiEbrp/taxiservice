@@ -7,13 +7,15 @@ export interface ItemProps {
     value: string;
     key: string;
 }
-export interface ComboBoxWithGroupProps {
+export interface AutoCompletePlusProps {
     items: ItemProps[];
     label: string;
+    loading?: boolean;
     onChanged?: (element:ItemProps | null) => void;
+    onInputTextChanged?: (value: string) => void;
 }
-const ComboBoxWithGroup: React.FC<ComboBoxWithGroupProps> = (props: ComboBoxWithGroupProps) => {
-    const { items, label, onChanged } = props;
+const AutoCompletePlus: React.FC<AutoCompletePlusProps> = (props: AutoCompletePlusProps) => {
+    const { items, label, loading, onChanged, onInputTextChanged } = props;
     const { language } = useContext(LanguageContext);
     /* #region Language section */
     const { settings, components } = language;
@@ -28,11 +30,11 @@ const ComboBoxWithGroup: React.FC<ComboBoxWithGroupProps> = (props: ComboBoxWith
             key: item.key,
         };
     });
-
     /* #endregion */
     return (
         <Autocomplete
             id='grouped-demo'
+            loading={loading && true}
             options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
             groupBy={(option) => option.firstLetter}
             getOptionLabel={(option) => option.value}
@@ -45,12 +47,13 @@ const ComboBoxWithGroup: React.FC<ComboBoxWithGroupProps> = (props: ComboBoxWith
             }}
             sx={{ width: 300 }}
             noOptionsText={components.noOptionsText}
+            loadingText={components.loadingText}
             onChange={(event, item) => onChanged && onChanged(item)}
             PopperComponent={(props) => <Popper dir={direction} {...props} />}
-            renderInput={(params) => <TextField label={label} {...params} />}
+            renderInput={(params) => <TextField onChange={e => onInputTextChanged && onInputTextChanged(e.target.value)} label={label} {...params} />}
         />
     );
 };
 
 
-export default ComboBoxWithGroup;
+export default AutoCompletePlus;

@@ -45,6 +45,7 @@ const English = {
     components: {
         imageLoaderError: 'The image is not loaded correctly.keyword:',
         noOptionsText: 'No results found!',
+        loadingText:'Loading...',
     },
     responseError: {
         CredentialsSignin: 'The username or password you entered is incorrect.',
