@@ -5,13 +5,15 @@ import CenterBox from '../../controls/CenterBox';
 import Alert from '@mui/material/Alert';
 import { isPhoneNumberValid, onlyNumbersRegex } from '../../../lib/Validator';
 import ForcedPatternInput from '../../controls/ForcedPatternInput';
+
 export interface agencyPhoneEditorProps {
     currentStep: number;
     onValidationChanged: (isValid: boolean) => void;
 }
 const AgencyPhoneEditor = (props: agencyPhoneEditorProps) => {
+
     const { currentStep, onValidationChanged } = props;
-    /* #region Reference section*/
+
     const phoneNumber1Ref = useRef<HTMLInputElement>(null);
     const phoneNumber2Ref = useRef<HTMLInputElement>(null);
     const mobileNumberRef = useRef<HTMLInputElement>(null);

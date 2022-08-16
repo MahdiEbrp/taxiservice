@@ -10,7 +10,7 @@ export interface ToastProps {
     alertColor: AlertColor;
 }
 const ToastHandler = () => {
-    /* #region Context section*/
+
     const { language } = useContext(LanguageContext);
     const { toast } = useContext(ToastContext);
 
