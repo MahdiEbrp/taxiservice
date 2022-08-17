@@ -3,9 +3,14 @@ import { LanguageContext } from '../../lib/context/LanguageContext';
 import { fetchCitiesLocation } from '../../lib/Geography';
 import { useCallback, useContext, useEffect, useState } from 'react';
 
-const PlacesSearchBox = (props: { localization:string}) => {
+export type PlacesSearchBoxProps = {
+    localization: string;
+    onChange?: (value: ItemProps | null) => void;
+};
 
-    const { localization } = props;
+const PlacesSearchBox = (props:PlacesSearchBoxProps) => {
+
+    const { localization,onChange } = props;
 
     const { language } = useContext(LanguageContext);
 
@@ -52,7 +57,7 @@ const PlacesSearchBox = (props: { localization:string}) => {
 
     return (
         <>
-            <AutoCompletedPlus onInputTextChanged={(city) => onTextChange(city)} loading={suggestState !== 'ready'} items={suggestionItems} label={components.locations} />
+            <AutoCompletedPlus onInputTextChanged={(city) => onTextChange(city)} loading={suggestState !== 'ready'} items={suggestionItems} label={components.locations} onChanged={(item)=> onChange && onChange(item)} />
         </>
     );
 };
