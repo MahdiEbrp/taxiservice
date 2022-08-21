@@ -1,4 +1,3 @@
-
 import AgencyAddress from './agencyTabs/AgencyAddress';
 import AgencyPhoneEditor from './agencyTabs/AgencyPhoneEditor';
 import AgencySelector from './agencyTabs/AgencySelector';
@@ -89,7 +88,6 @@ const EditAgency = () => {
                         <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setAllPhoneValid(isValid)} />
                         <AgencyAddress currentStep={currentStep} localization={'IR'} />
                         {showError && <Alert severity='error'>{editAgency.phoneNumbersError}</Alert>}
-
                     </CenterBox>
                 </CardContent>
                 <CardActions sx={{ flexDirection: 'row-reverse' }}>

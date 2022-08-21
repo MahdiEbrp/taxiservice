@@ -1,20 +1,15 @@
-
 import PlacesSearchBox from '../../controls/PlacesSearchBox';
 import TabPanel from '../../controls/TabPanel';
+import dynamic from 'next/dynamic';
 import { ItemProps } from '../../controls/AutoCompletePlus';
 import { useState } from 'react';
-
-import dynamic from 'next/dynamic';
-
-const Map = dynamic(() => import('../../controls/Map'), {
-    ssr: false
-});
-
 
 export type AgencyAddressProps = {
     currentStep: number;
     localization: string,
 };
+
+const Map = dynamic(() => import('../../controls/OpenLayerMap'), { ssr: false });
 
 const AgencyAddress = (props: AgencyAddressProps) => {
 
