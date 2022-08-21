@@ -8,9 +8,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CenterBox from '../controls/CenterBox';
-import ImageLoader from '../controls/ImageLoader';
 import Link from '@mui/material/Link';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { ToastContext } from '../../lib/context/ToastContext';
@@ -61,9 +59,6 @@ const EditAgency = () => {
         <>
             <Card dir={direction}>
                 <CardHeader title={title} />
-                <CardMedia>
-                    <ImageLoader src='/images/agencies.svg' alt='images' width={300} height={300} />
-                </CardMedia>
                 <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap', }}>
                     <Breadcrumbs separator='›' aria-label='agency-breadcrumb'>
                         {currentStep > -1 &&

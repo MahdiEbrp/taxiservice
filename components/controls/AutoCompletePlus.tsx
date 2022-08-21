@@ -10,7 +10,7 @@ export type ItemProps= {
 }
 
 export type AutoCompletePlusProps= {
-    items: ItemProps[];
+    items: ItemProps[] | undefined;
     label: string;
     loading?: boolean;
     onChanged?: (element: ItemProps | null) => void;
@@ -24,7 +24,7 @@ const AutoCompletePlus: React.FC<AutoCompletePlusProps> = (props: AutoCompletePl
     const { settings, components } = language;
     const { direction } = settings;
 
-    const options = items.map((item) => {
+    const options = items?.map((item) => {
         const firstLetter = item.value[0].toUpperCase();
         return {
             value: item.value,
@@ -37,7 +37,7 @@ const AutoCompletePlus: React.FC<AutoCompletePlusProps> = (props: AutoCompletePl
         <Autocomplete
             id='grouped-demo'
             loading={loading && true}
-            options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+            options={options ? options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter)): []}
             groupBy={(option) => option.firstLetter}
             getOptionLabel={(option) => option.value}
             renderOption={(props, option) => {

@@ -1,9 +1,8 @@
-import * as countries from './countries.json';
 import { GetData } from './FetchData';
 
 export type cities = city[];
 
-export interface city {
+export type city = {
     place_id: number;
     licence: string;
     osm_type: string;
@@ -16,7 +15,18 @@ export interface city {
     type: string;
     importance: number;
     icon: string;
+};
+
+export type country= {
+    country_code: string;
+    englishName: string;
+    nativeName: string;
 }
+
+export type countries= {
+    data: country[];
+}
+
 
 export const fetchCitiesLocation = async (cityName: string, countryCode: string) => {
 
@@ -33,7 +43,14 @@ export const fetchCitiesLocation = async (cityName: string, countryCode: string)
 
 };
 
+export const getCountryList = async () => {
+    const response = await GetData('/data/countries.json');
+    if (response)
+        if (response.status === 200) {
+            const data = response.data as countries;
+            return data;
+        }
+    return null;
+};
 
-const countryList = countries.data;
-
-export default countryList;
+export default getCountryList;
