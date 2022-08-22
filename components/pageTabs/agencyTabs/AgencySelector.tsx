@@ -3,7 +3,7 @@ import AutoCompletePlus, { ItemProps } from '../../controls/AutoCompletePlus';
 import { getCountryList } from '../../../lib/Geography';
 import TabPanel from '../../controls/TabPanel';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 export type AgencySelectorProps = {
     currentStep: number;
@@ -35,7 +35,7 @@ const AgencySelector = (props: AgencySelectorProps) => {
         getCountryList().then(countries => {
             if (countries) {
                 const _items = countries.data.map(country => {
-                    return { key: country.country_code, value: country.englishName + ' (' + country.nativeName + ')' };
+                    return { key: country.country_code, value: country.englishName + ' - ' + country.nativeName };
                 });
                 setItems(_items);
             }
