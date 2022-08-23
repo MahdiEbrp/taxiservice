@@ -1,37 +1,50 @@
 import { GetData } from './FetchData';
 
-export type cities = city[];
-
-export type city = {
-    place_id: number;
-    licence: string;
-    osm_type: string;
-    osm_id: number;
-    boundingbox: string[];
-    lat: string;
-    lon: string;
-    display_name: string;
-    class: string;
-    type: string;
-    importance: number;
-    icon: string;
+export type cities = {
+    features: Feature[];
 };
 
-export type country= {
+export type Feature = {
+    geometry: Geometry;
+    properties: Properties;
+};
+
+export type Geometry = {
+    coordinates: number[];
+};
+
+export type Properties = {
+    osm_type: string;
+    osm_id: number;
+    country: string;
+    osm_key: string;
+    countrycode: string;
+    osm_value: string;
+    postcode?: string;
+    name: string;
+    county?: string;
+    state?: string;
+    type: string;
+    extent?: number[];
+    city?: string;
+    street?: string;
+};
+
+export type country = {
     country_code: string;
     englishName: string;
     nativeName: string;
-}
+};
 
-export type countries= {
+export type countries = {
     data: country[];
-}
+};
 
 
-export const fetchCitiesLocation = async (cityName: string, countryCode: string) => {
+export const fetchCitiesLocation = async (cityName: string) => {
 
     // eslint-disable-next-line quotes
-    const url = encodeURI(`https://nominatim.openstreetmap.org/search?country=${countryCode}&city=${cityName}&format=json`);
+    const url = encodeURI(`https://photon.komoot.io/api/?q=${cityName}&lang=en`);
     const response = await GetData(url);
     if (response) {
         if (response.status === 200) {

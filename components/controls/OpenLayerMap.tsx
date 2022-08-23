@@ -1,26 +1,18 @@
-import 'ol/ol.css';
-import { Box } from '@mui/material';
-import { RMap, ROSM, RControl, MapBrowserEvent } from 'rlayers';
-import { fromLonLat, toLonLat } from 'ol/proj';
-import { useCallback } from 'react';
+import { LatLngExpression } from 'leaflet';
+import { MapContainer, TileLayer, ScaleControl } from 'react-leaflet';
+
 const OpenLayerMap = () => {
 
-    const center = fromLonLat([49.944444, 37.259722]);
+    const position = [37.259722, 49.944444] as LatLngExpression;
 
     return (
-        <Box sx={{ width: '70vw' }}>
-            <RMap width={'100%'} height={'60vh'} initial={{ center: center, zoom: 5 }} onClick={useCallback((e: MapBrowserEvent<UIEvent>) => {
-                const coords = e.map.getCoordinateFromPixel(e.pixel);
-                const lonlat = toLonLat(coords);
-            }, [])}>
-                <ROSM>
-                    <RControl.RScaleLine />
-                    <RControl.RZoom />
-                    <RControl.RZoomSlider />
-                </ROSM>
-            </RMap>
-        </Box>
+        <MapContainer center={position} zoom={15} scrollWheelZoom={false}>
+            <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <ScaleControl position='bottomleft' />
+        </MapContainer>
     );
 };
-
 export default OpenLayerMap;

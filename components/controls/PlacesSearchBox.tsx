@@ -1,21 +1,20 @@
-import AutoCompletedPlus, { ItemProps } from './AutoCompletePlus';
+import AutoCompletedPlus, { taggedItem } from './AutoCompletePlus';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { fetchCitiesLocation } from '../../lib/Geography';
 import { useCallback, useContext, useEffect, useState } from 'react';
 
 export type PlacesSearchBoxProps = {
-    localization: string;
-    onChange?: (value: ItemProps | null) => void;
+    onChange?: (value: taggedItem<number[]> | null) => void;
 };
 
-const PlacesSearchBox = (props:PlacesSearchBoxProps) => {
+const PlacesSearchBox = (props: PlacesSearchBoxProps) => {
 
-    const { localization,onChange } = props;
+    const { onChange } = props;
 
     const { language } = useContext(LanguageContext);
 
     const [suggestState, setSuggestState] = useState<'typing' | 'fetching' | 'ready'>('ready');
-    const [suggestionItems, setSuggestionItems] = useState<ItemProps[]>([]);
+    const [suggestionItems, setSuggestionItems] = useState<taggedItem<number[]>[]>([]);
 
     const delayTime = 1.5 * 1000;
     let city = '';
@@ -35,21 +34,21 @@ const PlacesSearchBox = (props:PlacesSearchBoxProps) => {
         await delay(delayTime);
         if (suggestState === 'typing' && city) {
             setSuggestState('fetching');
-            const cities = await fetchCitiesLocation(city, localization);
+            const cities = await fetchCitiesLocation(city);
             if (cities) {
-                const values = cities.map(({ display_name, lat, lon }) => (
+                const values = cities.features.map(({ properties, geometry }) => (
                     {
-                        value: display_name + ' - ' + city,
-                        key: lat + ',' + lon,
+                        displayText: properties.name,
+                        tag: geometry.coordinates,
                     }
-                ));
+                ) );
                 setSuggestionItems(values);
             }
             setSuggestState('ready');
         }
         if (city === '')
             setSuggestState('ready');
-    }, [delayTime, suggestState, city, localization]);
+    }, [delayTime, suggestState, city]);
 
     useEffect(() => {
         lazySuggest();
@@ -57,7 +56,7 @@ const PlacesSearchBox = (props:PlacesSearchBoxProps) => {
 
     return (
         <>
-            <AutoCompletedPlus onInputTextChanged={(city) => onTextChange(city)} loading={suggestState !== 'ready'} items={suggestionItems} label={components.locations} onChanged={(item)=> onChange && onChange(item)} />
+            <AutoCompletedPlus onInputTextChanged={(city) => onTextChange(city)} loading={suggestState !== 'ready'} items={suggestionItems} label={components.locations} onChanged={(item) => onChange && onChange(item)} />
         </>
     );
 };

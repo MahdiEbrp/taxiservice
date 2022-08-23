@@ -1,5 +1,5 @@
 import Alert from '@mui/material/Alert';
-import AutoCompletePlus, { ItemProps } from '../../controls/AutoCompletePlus';
+import AutoCompletePlus, { taggedItem } from '../../controls/AutoCompletePlus';
 import { getCountryList } from '../../../lib/Geography';
 import TabPanel from '../../controls/TabPanel';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
@@ -18,7 +18,7 @@ const AgencySelector = (props: AgencySelectorProps) => {
     const { language } = useContext(LanguageContext);
     const { agenciesPage } = language;
     const { editAgency } = agenciesPage;
-    const [items, setItems] = useState<ItemProps[]>();
+    const [items, setItems] = useState<taggedItem<string>[]>();
 
     const agencyChanged = (agency: string) => {
         if (onAgencyChanged)
@@ -35,7 +35,7 @@ const AgencySelector = (props: AgencySelectorProps) => {
         getCountryList().then(countries => {
             if (countries) {
                 const _items = countries.data.map(country => {
-                    return { key: country.country_code, value: country.englishName + ' - ' + country.nativeName };
+                    return { tag: country.country_code, displayText: country.englishName + ' - ' + country.nativeName };
                 });
                 setItems(_items);
             }
@@ -45,9 +45,9 @@ const AgencySelector = (props: AgencySelectorProps) => {
 
     return (
         <TabPanel activeIndex={currentStep.toString()} index='0'>
-            <AutoCompletePlus onChanged={(agency) => agencyChanged(!agency ? '' : agency.value)} items={[{ key: '131s', value: 'آژانس بانوان خورشید' }, { key: '2', value: '131 لاهیجان' }]}
+            <AutoCompletePlus onChanged={(agency) => agencyChanged(!agency ? '' : agency.displayText)} items={[{ tag: '131s', displayText: 'آژانس بانوان خورشید' }, { tag: '2', displayText: '131 لاهیجان' }]}
                 label={agenciesPage.agencyName} />
-            <AutoCompletePlus onChanged={(countryCode) => countryCodeChanged(!countryCode ? '' : countryCode.key)} items={items}
+            <AutoCompletePlus onChanged={(countryCode) => countryCodeChanged(!countryCode ? '' : countryCode.tag)} items={items}
                 label={editAgency.localization} />
             <Alert severity='warning'>
                 {editAgency.localizationWarning}

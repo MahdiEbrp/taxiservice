@@ -4,32 +4,33 @@ import React, { useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 
-export type ItemProps= {
-    value: string;
-    key: string;
-}
+export type taggedItem<T> = {
+    displayText: string;
+    tag: T;
+};
 
-export type AutoCompletePlusProps= {
-    items: ItemProps[] | undefined;
+export type AutoCompletePlusProps<T> = {
+    items: taggedItem<T>[] | undefined;
     label: string;
     loading?: boolean;
-    onChanged?: (element: ItemProps | null) => void;
+    onChanged?: (element: taggedItem<T> | null) => void;
     onInputTextChanged?: (value: string) => void;
-}
+};
 
-const AutoCompletePlus: React.FC<AutoCompletePlusProps> = (props: AutoCompletePlusProps) => {
+const AutoCompletePlus: React.FC<AutoCompletePlusProps<any>>= <T extends {}>(props: AutoCompletePlusProps<T>) => {
     const { items, label, loading, onChanged, onInputTextChanged } = props;
     const { language } = useContext(LanguageContext);
 
     const { settings, components } = language;
     const { direction } = settings;
 
-    const options = items?.map((item) => {
-        const firstLetter = item.value[0].toUpperCase();
+    const options = items?.map((item, index) => {
+        const firstLetter = item.displayText[0].toUpperCase();
         return {
-            value: item.value,
+            displayText: item.displayText,
             firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
-            key: item.key,
+            tag: item.tag,
+            key: index,
         };
     });
 
@@ -37,13 +38,13 @@ const AutoCompletePlus: React.FC<AutoCompletePlusProps> = (props: AutoCompletePl
         <Autocomplete
             id='grouped-demo'
             loading={loading && true}
-            options={options ? options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter)): []}
+            options={options ? options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter)) : []}
             groupBy={(option) => option.firstLetter}
-            getOptionLabel={(option) => option.value}
+            getOptionLabel={(option) => option.displayText}
             renderOption={(props, option) => {
                 return (
-                    <li key={option.key}  {...props}>
-                        {option.value}
+                    <li {...props} key={option.key}  >
+                        {option.displayText}
                     </li>
                 );
             }}

@@ -17,3 +17,8 @@ a {
   box-sizing: border-box;
   text-transform: none !important;
 }
+
+.leaflet-container {
+  width: 70vw;
+  height: 60vh;
+}
