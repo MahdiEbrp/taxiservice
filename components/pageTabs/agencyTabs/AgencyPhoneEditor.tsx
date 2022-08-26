@@ -21,7 +21,7 @@ const AgencyPhoneEditor = (props: AgencyPhoneEditorProps) => {
     const { language } = useContext(LanguageContext);
 
     const { agenciesPage } = language;
-    const { editAgency } = agenciesPage;
+
 
     const phoneNumbersValidation = () => {
         const phoneNumber1 = phoneNumber1Ref.current?.value;
@@ -40,13 +40,13 @@ const AgencyPhoneEditor = (props: AgencyPhoneEditorProps) => {
         <>
             <TabPanel wrapMode={true} activeIndex={currentStep.toString()} index='1'>
                 <ForcedPatternInput pattern={onlyNumbersRegex} onBlur={() => onValidationChanged(phoneNumbersValidation())}
-                    inputRef={phoneNumber1Ref} required helperText={editAgency.agencyMainPhoneNumber} dir='ltr' type='tel' label={editAgency.phoneNumberPlaceholder1} />
+                    inputRef={phoneNumber1Ref} required helperText={agenciesPage.agencyMainPhoneNumber} dir='ltr' type='tel' label={agenciesPage.phoneNumberPlaceholder1} />
                 <ForcedPatternInput pattern={onlyNumbersRegex} onBlur={() => onValidationChanged(phoneNumbersValidation())}
-                    inputRef={phoneNumber2Ref} dir='ltr' type='tel' helperText={editAgency.agencySecondaryPhoneNumber} label={editAgency.phoneNumberPlaceholder2} />
+                    inputRef={phoneNumber2Ref} dir='ltr' type='tel' helperText={agenciesPage.agencySecondaryPhoneNumber} label={agenciesPage.phoneNumberPlaceholder2} />
                 <CenterBox>
                     <ForcedPatternInput pattern={onlyNumbersRegex} onBlur={() => onValidationChanged(phoneNumbersValidation())}
-                        inputRef={mobileNumberRef} required dir='ltr' type='tel' label={editAgency.mobileNumberPlaceholder} />
-                    <Alert severity='info'>{editAgency.mobileNumberVisibility}</Alert>
+                        inputRef={mobileNumberRef} required dir='ltr' type='tel' label={agenciesPage.mobileNumberPlaceholder} />
+                    <Alert severity='info'>{agenciesPage.mobileNumberVisibility}</Alert>
                 </CenterBox>
             </TabPanel>
 

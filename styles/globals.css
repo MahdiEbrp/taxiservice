@@ -22,3 +22,9 @@ a {
   width: 70vw;
   height: 60vh;
 }
+
+@media (max-width: 600px) {
+  .leaflet-container {
+    width: 100vw;
+  }
+}

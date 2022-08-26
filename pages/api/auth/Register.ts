@@ -46,6 +46,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
             }
             catch (e) {
+
                 if (e instanceof Prisma.PrismaClientKnownRequestError) {
                     {
                         if (e.code === 'P2002')

@@ -16,8 +16,9 @@ const AgencySelector = (props: AgencySelectorProps) => {
     const { currentStep, onAgencyChanged, onCountryCodeChanged } = props;
 
     const { language } = useContext(LanguageContext);
+
     const { agenciesPage } = language;
-    const { editAgency } = agenciesPage;
+
     const [items, setItems] = useState<taggedItem<string>[]>();
 
     const agencyChanged = (agency: string) => {
@@ -48,9 +49,9 @@ const AgencySelector = (props: AgencySelectorProps) => {
             <AutoCompletePlus onChanged={(agency) => agencyChanged(!agency ? '' : agency.displayText)} items={[{ tag: '131s', displayText: 'آژانس بانوان خورشید' }, { tag: '2', displayText: '131 لاهیجان' }]}
                 label={agenciesPage.agencyName} />
             <AutoCompletePlus onChanged={(countryCode) => countryCodeChanged(!countryCode ? '' : countryCode.tag)} items={items}
-                label={editAgency.localization} />
+                label={agenciesPage.localization} />
             <Alert severity='warning'>
-                {editAgency.localizationWarning}
+                {agenciesPage.localizationWarning}
             </Alert>
         </TabPanel>
     );

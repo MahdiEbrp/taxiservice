@@ -13,13 +13,16 @@ import Link from '@mui/material/Link';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { ToastContext } from '../../lib/context/ToastContext';
 import { useContext, useEffect, useState } from 'react';
+import { taggedItem } from '../controls/AutoCompletePlus';
 
 const EditAgency = () => {
-    const [currentStep, setCurrentStep] = useState(2);
+    const [currentStep, setCurrentStep] = useState(0);
     const [selectedAgency, setSelectedAgency] = useState('');
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
     const [allPhoneValid, setAllPhoneValid] = useState(false);
     const [showError, setShowError] = useState(false);
+    const [address, setAddress] = useState('');
+    const [location, setLocation] = useState<taggedItem<number[]> | null>(null);
 
     const { language } = useContext(LanguageContext);
     const { setToast } = useContext(ToastContext);
@@ -45,6 +48,10 @@ const EditAgency = () => {
             setShowError(true);
             return;
         }
+        if (!location && address.length < 3 && currentStep === 2) {
+            setToast({ id: Date.now(), message: notification.addressError, alertColor: 'error' });
+            return;
+        }
         setCurrentStep((currentStep) => currentStep + 1);
     };
 
@@ -55,34 +62,35 @@ const EditAgency = () => {
             setTitle(editAgency.title);
     }, [editAgency.title, selectedAgency, title]);
 
+    const BreadcrumbsSteps = () => {
+        const stepsLabel = [agenciesPage.agencySelection, agenciesPage.editPhone, agenciesPage.editAddress].slice(0, currentStep + 1);
+        return (
+            <Breadcrumbs separator='›' aria-label='agency-breadcrumb'>
+
+                {stepsLabel.map((label, index) => {
+                    return (
+                        <Link key={index} onClick={() => setCurrentStep(index)} color='text.primary'>
+                            {label}
+                        </Link>
+                    );
+                }
+                )}
+            </Breadcrumbs>
+        );
+    };
+
     return (
         <>
             <Card dir={direction}>
                 <CardHeader title={title} />
                 <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap', }}>
-                    <Breadcrumbs separator='›' aria-label='agency-breadcrumb'>
-                        {currentStep > -1 &&
-                            <Link key='0' onClick={() => setCurrentStep(0)} color='text.primary'>
-                                {editAgency.agencySelection}
-                            </Link>
-                        }
-                        {currentStep > 0 &&
-                            <Link key='1' onClick={() => setCurrentStep(1)} color='text.primary'>
-                                {editAgency.editPhone}
-                            </Link>
-                        }
-                        {currentStep > 1 &&
-                            <Link key='1' onClick={() => setCurrentStep(2)} color='text.primary'>
-                                {editAgency.editAddress}
-                            </Link>
-                        }
-                    </Breadcrumbs>
+                    <BreadcrumbsSteps />
                     <CenterBox>
                         <AgencySelector currentStep={currentStep} onAgencyChanged={(agency) => setSelectedAgency(agency)}
                             onCountryCodeChanged={(code) => setSelectedCountryCode(code)} />
                         <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setAllPhoneValid(isValid)} />
-                        <AgencyAddress currentStep={currentStep} />
-                        {showError && <Alert severity='error'>{editAgency.phoneNumbersError}</Alert>}
+                        <AgencyAddress currentStep={currentStep} onAddressChanged={(address) => setAddress(address)} onLocationChanged={(location) => setLocation(location)} />
+                        {showError && <Alert severity='error'>{agenciesPage.phoneNumbersError}</Alert>}
                     </CenterBox>
                 </CardContent>
                 <CardActions sx={{ flexDirection: 'row-reverse' }}>

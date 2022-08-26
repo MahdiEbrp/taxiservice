@@ -6,34 +6,45 @@ import dynamic from 'next/dynamic';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { taggedItem } from '../../controls/AutoCompletePlus';
 import { useContext, useState } from 'react';
+import Alert from '@mui/material/Alert';
 
 export type AgencyAddressProps = {
     currentStep: number;
+    onLocationChanged?: (location: taggedItem<number[]> | null) => void;
+    onAddressChanged?: (address: string) => void;
 };
 
 const Map = dynamic(() => import('../../controls/OpenLayerMap'), { ssr: false });
 
 const AgencyAddress = (props: AgencyAddressProps) => {
 
-    const { currentStep } = props;
+    const { currentStep, onLocationChanged, onAddressChanged } = props;
 
     const [location, setLocation] = useState<taggedItem<number[]> | null>(null);
 
     const { language } = useContext(LanguageContext);
 
     const { settings, agenciesPage } = language;
-    const { editAgency } = agenciesPage;
 
     const updateLocation = (newLocation: taggedItem<number[]> | null) => {
-        if (newLocation)
+        if (newLocation) {
             setLocation(newLocation);
+            if (onLocationChanged)
+                onLocationChanged(newLocation);
+        }
     };
-
+    const updateAddress = (newAddress: string) => {
+        if (onAddressChanged)
+            onAddressChanged(newAddress);
+    };
     return (
         <TabPanel dir={settings.direction} activeIndex={currentStep.toString()} index='2'>
-            <FormControlLabel label={editAgency.businessLocation} control={<PlacesSearchBox sx={{ margin: 2, order: 1 }} onLocationChanged={(item) => updateLocation(item)} />} />
+            <FormControlLabel label={agenciesPage.businessLocation} control={<PlacesSearchBox sx={{ margin: 2, order: 1 }} onLocationChanged={(item) => updateLocation(item)} />} />
             <Map currentLocation={location?.tag || [0, 0]} />
-            <TextField multiline label={'address'} sx={{width:'70%'}} variant='filled' />
+            <TextField multiline required onBlur={e => updateAddress(e.target.value)} label={agenciesPage.addressOfBusiness} sx={{ width: '70%' }} variant='filled' />
+            <Alert severity='warning'>
+                {agenciesPage.addressWarning}
+            </Alert>
         </TabPanel>
     );
 };
