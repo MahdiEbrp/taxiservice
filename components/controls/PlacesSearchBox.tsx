@@ -2,14 +2,16 @@ import AutoCompletedPlus, { taggedItem } from './AutoCompletePlus';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { fetchCitiesLocation } from '../../lib/Geography';
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { SxProps, Theme } from '@mui/material/styles';
 
 export type PlacesSearchBoxProps = {
-    onChange?: (value: taggedItem<number[]> | null) => void;
+    onLocationChanged?: (value: taggedItem<number[]> | null) => void;
+    sx?: SxProps<Theme>;
 };
 
 const PlacesSearchBox = (props: PlacesSearchBoxProps) => {
 
-    const { onChange } = props;
+    const { onLocationChanged, sx } = props;
 
     const { language } = useContext(LanguageContext);
 
@@ -38,10 +40,10 @@ const PlacesSearchBox = (props: PlacesSearchBoxProps) => {
             if (cities) {
                 const values = cities.features.map(({ properties, geometry }) => (
                     {
-                        displayText: properties.name,
-                        tag: geometry.coordinates,
+                        displayText: properties.name + ' (' + city + '...)',
+                        tag: geometry.coordinates.length === 2 ? geometry.coordinates.reverse() : [0, 0],
                     }
-                ) );
+                ));
                 setSuggestionItems(values);
             }
             setSuggestState('ready');
@@ -56,7 +58,7 @@ const PlacesSearchBox = (props: PlacesSearchBoxProps) => {
 
     return (
         <>
-            <AutoCompletedPlus onInputTextChanged={(city) => onTextChange(city)} loading={suggestState !== 'ready'} items={suggestionItems} label={components.locations} onChanged={(item) => onChange && onChange(item)} />
+            <AutoCompletedPlus sx={sx} onInputTextChanged={(city) => onTextChange(city)} loading={suggestState !== 'ready'} items={suggestionItems} label={components.locations} onChanged={(item) => onLocationChanged && onLocationChanged(item)} />
         </>
     );
 };

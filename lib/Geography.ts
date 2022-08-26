@@ -56,6 +56,7 @@ export const fetchCitiesLocation = async (cityName: string) => {
 
 };
 
+
 export const getCountryList = async () => {
     const response = await GetData('/data/countries.json');
     if (response)

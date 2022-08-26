@@ -47,6 +47,7 @@ const English = {
         noOptionsText: 'No results found!',
         loadingText: 'Loading...',
         locations: 'Locations',
+        currentLocation: 'your current geographic location:',
     },
     responseError: {
         CredentialsSignin: 'The username or password you entered is incorrect.',

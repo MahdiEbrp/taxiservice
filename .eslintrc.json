@@ -2,7 +2,6 @@
     "extends": "next/core-web-vitals",
     "rules": {
         "no-console": "warn",
-        "no-unused-vars": "warn",
         "no-undef": "warn",
         "no-unused-expressions": "warn",
         "no-unused-labels": "warn",
@@ -15,6 +14,10 @@
         "no-debugger": "error",
         "no-empty": "error",
         "no-duplicate-imports": "error",
+        "no-empty-character-class": "error",
+        "no-empty-pattern": "error",
+        "no-eval": "error",
+        "no-unused-vars": "warn",
         "max-lines": [
             "error", {
                 "max": 200,
@@ -36,7 +39,8 @@
         "node": true,
         "es6": true,
         "jest": true
-    }
+    },
+    "plugins": ["@typescript-eslint"]
 
 
 }
