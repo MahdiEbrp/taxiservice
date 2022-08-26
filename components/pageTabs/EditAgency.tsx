@@ -81,7 +81,7 @@ const EditAgency = () => {
                         <AgencySelector currentStep={currentStep} onAgencyChanged={(agency) => setSelectedAgency(agency)}
                             onCountryCodeChanged={(code) => setSelectedCountryCode(code)} />
                         <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setAllPhoneValid(isValid)} />
-                        <AgencyAddress currentStep={currentStep} localization={'IR'} />
+                        <AgencyAddress currentStep={currentStep} />
                         {showError && <Alert severity='error'>{editAgency.phoneNumbersError}</Alert>}
                     </CenterBox>
                 </CardContent>
