@@ -100,6 +100,7 @@ const English = {
             mobileNumberVisibility: 'Other people cannot see your mobile phone number.',
             phoneNumbersError:'It is necessary to have both a work number and a mobile number! (Phone numbers must have at least 10 digits)',
             editAddress: 'Edit address',
+            businessLocation: 'Find your business location:',
         },
         addNewAgency: {
             title: 'Adding a new agency',

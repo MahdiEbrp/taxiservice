@@ -47,7 +47,7 @@ const Persian = {
         noOptionsText:'نتیجه ای یافت نشد!',
         loadingText: 'در حال بارگذاری...',
         locations: 'مکان ها',
-        currentLocation:'موقعیت فعلی جغرافیایی شما:',
+        currentLocation: 'موقعیت فعلی جغرافیایی شما:',
     },
     responseError: {
         CredentialsSignin: 'نام کاربری یا رمز عبور وارد شده اشتباه است.',
@@ -100,6 +100,7 @@ const Persian = {
             mobileNumberVisibility: 'سایر افراد نمی توانند شماره تلفن همراه شما را ببینند.',
             phoneNumbersError: 'داشتن شماره تلفن محل کار و شماره تلفن همراه ضروری است! (شماره تلفن ها باید حداقل 10 رقم باشند)',
             editAddress: 'ویرایش آدرس',
+            businessLocation: 'محل کسب و کار خود را بیابید:',
         },
         addNewAgency: {
             title: 'افزودن آژانس جدید',

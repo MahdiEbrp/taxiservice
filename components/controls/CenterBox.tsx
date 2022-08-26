@@ -1,11 +1,14 @@
-import Box from '@mui/material/Box';
-import { SxProps, Theme } from '@mui/material/styles';
+import Box, { BoxProps } from '@mui/material/Box';
 import { ElementType, ReactNode } from 'react';
+import { SxProps, Theme } from '@mui/material/styles';
 
-const CenterBox: ElementType = (props: { children: ReactNode; }) => {
+const CenterBox: ElementType<BoxProps> = (props: { children: ReactNode; } | BoxProps) => {
 
     const { children, ...other } = props;
-    const newProps = { ...centerStyle, ...other };
+
+    const newProps = { ...other };
+
+    newProps.sx = { ...centerStyle, ...newProps.sx} as SxProps<Theme>;
 
     return (
         <Box {...newProps}>

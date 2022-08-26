@@ -32,7 +32,7 @@ const Home: NextPage = () => {
           <Button size='small'>Next Step</Button>
         </CardActions>
       </Card>
-      <Map />
+      <Map currentLocation={[0,0]} />
     </>
   );
 };

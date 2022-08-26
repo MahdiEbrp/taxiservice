@@ -1,5 +1,6 @@
 import CenterBox from './CenterBox';
-import React, { useState } from 'react';
+import React, { ElementType, useState } from 'react';
+import { BoxProps } from '@mui/material';
 
 export type TabPanelProps = {
     children?: React.ReactNode;
@@ -8,10 +9,10 @@ export type TabPanelProps = {
     wrapMode?: boolean;
 };
 
-const TabPanel = (props: TabPanelProps) => {
+const TabPanel:ElementType = (props: TabPanelProps | BoxProps) => {
 
-    const { children, activeIndex, index, wrapMode, ...other } = props;
-
+    const { children, activeIndex, index, wrapMode} = props as TabPanelProps;
+    const {...rest} = props as BoxProps;
     const [isActive, setIsActive] = useState(false);
 
     let style = { display: activeIndex === index ? 'flex' : 'none', padding: '1rem' };
@@ -24,7 +25,7 @@ const TabPanel = (props: TabPanelProps) => {
         style = { ...style, ...{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseLine', } };
 
     return (
-        <CenterBox sx={style}  {...other}>
+        <CenterBox  sx={style}  {...rest}>
             {children}
         </CenterBox >
     );
