@@ -4,5 +4,5 @@ export const ThemeContext = createContext<{
     prefersDarkMode: boolean; setPrefersDarkMode: Dispatch<boolean>;
 }>({
     prefersDarkMode: false,
-    setPrefersDarkMode: () => { },
+    setPrefersDarkMode: () => void 0,
 });

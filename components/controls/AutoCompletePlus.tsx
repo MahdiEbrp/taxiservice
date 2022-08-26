@@ -19,7 +19,7 @@ export type AutoCompletePlusProps<T> = {
     sx?: SxProps<Theme>;
 };
 
-const AutoCompletePlus = <T extends {}>(props: AutoCompletePlusProps<T>) => {
+const AutoCompletePlus = <T,>(props: AutoCompletePlusProps<T>) => {
 
     const { items, label, loading, onChanged, onInputTextChanged, sx } = props as AutoCompletePlusProps<T>;
 

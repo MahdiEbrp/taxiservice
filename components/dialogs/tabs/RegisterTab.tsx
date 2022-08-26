@@ -85,21 +85,21 @@ const RegisterTab = () => {
     };
 
     const validateEmail = () => {
-        const email = emailRef.current!.value || '';
+        const email = emailRef.current?.value || '';
         const valid = isEmailValid(email);
         setEmailError(!valid);
         return valid;
     };
 
     const validatePassword = () => {
-        const password = passwordRef.current!.value || '';
+        const password = passwordRef.current?.value || '';
         const valid = isPasswordValid(password);
         setPasswordError(!valid);
         return valid;
     };
 
     const validateConfirmPassword = () => {
-        const password = passwordRef.current!.value || '';
+        const password = passwordRef.current?.value || '';
         const confirmPassword = confirmPasswordRef.current?.value || '';
         const valid = password === confirmPassword;
         setConfirmPasswordError(!valid);

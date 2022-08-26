@@ -6,7 +6,7 @@ export interface SigninResult {
     url: string | null;
 }
 const timeout = 10000;
-export const PostData = async (url: string, data: any) => {
+export const PostData = async (url: string, data: unknown) => {
     try {
         const response = await axios.post(url, JSON.stringify(data), {
             headers: {
@@ -39,7 +39,7 @@ export const GetData = async (url: string) => {
             return null;
     }
 };
-export const PutData = async (url: string, data: any) => {
+export const PutData = async (url: string, data: unknown) => {
     try {
         const response = await axios.put(url, JSON.stringify(data), {
             headers: {
@@ -72,7 +72,7 @@ export const DeleteData = async (url: string) => {
             return null;
     }
 };
-export const PatchData = async (url: string, data: any) => {
+export const PatchData = async (url: string, data: unknown) => {
     try {
         const response = await axios.patch(url, JSON.stringify(data), {
             headers: {

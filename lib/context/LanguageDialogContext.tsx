@@ -4,5 +4,5 @@ export const LanguageDialogContext = createContext<{
     isLanguageDialogOpen: boolean; setLanguageDialogOpen: Dispatch<boolean>;
 }>({
     isLanguageDialogOpen: false,
-    setLanguageDialogOpen: () => { },
+    setLanguageDialogOpen: () => void 0,
 });

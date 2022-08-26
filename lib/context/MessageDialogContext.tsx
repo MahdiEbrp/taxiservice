@@ -5,5 +5,5 @@ export const MessageDialogContext = createContext<{
     messageDialogInfo: MessageDialogProps; setMessageDialog: Dispatch<MessageDialogProps>;
 }>({
     messageDialogInfo: { isMessageDialogOpen: false, message: '', title: '' },
-    setMessageDialog: () => { },
+    setMessageDialog: () => void 0,
 });

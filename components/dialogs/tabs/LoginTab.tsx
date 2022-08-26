@@ -56,8 +56,8 @@ const LoginTab = () => {
 
         if (captcha !== false) {
             setIsLoading(true);
-            const values = { redirect: false, email: emailRef.current!.value, password: passwordRef.current!.value, requestId: captcha };
-            const response = await signIn('credentials', values) as any as SigninResult;
+            const values = { redirect: false, email: emailRef.current?.value, password: passwordRef.current?.value, requestId: captcha };
+            const response = await signIn('credentials', values) as unknown as SigninResult;
             if (response.ok) {
                 setLoginDialogOpen(false);
                 setToast({ id: Date.now(), message: notification.successfullyLogin, alertColor: 'success' });
@@ -74,14 +74,14 @@ const LoginTab = () => {
     };
 
     const validateEmail = () => {
-        const email = emailRef.current!.value || '';
+        const email = emailRef.current?.value || '';
         const valid = isEmailValid(email);
         setEmailError(!valid);
         return valid;
     };
 
     const validatePassword = () => {
-        const password = passwordRef.current!.value || '';
+        const password = passwordRef.current?.value || '';
         const valid = isPasswordValid(password);
         setPasswordError(!valid);
         return valid;
@@ -107,7 +107,7 @@ const LoginTab = () => {
         }
         if (captcha !== false) {
             setIsLoading(true);
-            const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/sendResetPassword', { email: emailRef.current!.value, requestId: captcha });
+            const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/sendResetPassword', { email: emailRef.current?.value, requestId: captcha });
             setIsLoading(false);
             if (!response) {
                 setToast({ id: Date.now(), message: getResponseError('ERR_NULL_RESPONSE', language), alertColor: 'error' });

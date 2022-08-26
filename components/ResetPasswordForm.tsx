@@ -43,14 +43,14 @@ const ResetPasswordForm = () => {
     const { direction } = settings;
 
     const validatePassword = () => {
-        const password = passwordRef.current!.value || '';
+        const password = passwordRef.current?.value || '';
         const valid = isPasswordValid(password);
         setPasswordError(!valid);
         return valid;
     };
 
     const validateConfirmPassword = () => {
-        const password = passwordRef.current!.value || '';
+        const password = passwordRef.current?.value || '';
         const confirmPassword = confirmPasswordRef.current?.value || '';
         const valid = password === confirmPassword;
         setConfirmPasswordError(!valid);
@@ -82,7 +82,7 @@ const ResetPasswordForm = () => {
                 return;
             }
             setIsLoading(true);
-            const values = { password: passwordRef.current!.value, requestId: captcha, updateCode: code };
+            const values = { password: passwordRef.current?.value, requestId: captcha, updateCode: code };
             const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/updatePassword', values);
             setIsLoading(false);
             if (!response) {
