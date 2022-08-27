@@ -25,6 +25,7 @@ const English = {
         discard: 'Discard',
     },
     notification: {
+        addressError:'A short address is entered or a location on the map has not been selected.',
         changedLanguage: 'The language change has been applied successfully.',
         darkModeDisabled: 'The dark mode has been deactivated.',
         darkModeEnabled: 'The dark mode has been activated.',
@@ -37,7 +38,6 @@ const English = {
         selectCountry: 'Please select a country.',
         successfullyLogin: 'Congratulations, you have successfully logged in.',
         unauthenticated: 'You are not logged in!',
-        addressError:'A short address is entered or a location on the map has not been selected.',
     },
     authorizedLayout: {
         loading: 'Loading...',
@@ -83,7 +83,7 @@ const English = {
         },
     },
     agenciesPage: {
-        addressOfBusiness:'Address of your business',
+        addressOfBusiness:'Address of your business:',
         addressWarning: 'The address should be entered accurately and completely.',
         agencyMainPhoneNumber: 'Agency Main Phone Number.',
         agencyName: 'Agency Name',
@@ -102,6 +102,7 @@ const English = {
         phoneNumbersError:'It is necessary to have both a work number and a mobile number! (Phone numbers must have at least 10 digits)',
         preparing: 'Preparing...',
         title: 'Agencies management',
+        workingHours:'Working hours',
         editAgency: {
             title: 'Editing an agency',
         },

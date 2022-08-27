@@ -1,4 +1,4 @@
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Alert from '@mui/material/Alert';
 import PlacesSearchBox from '../../controls/PlacesSearchBox';
 import TabPanel from '../../controls/TabPanel';
 import TextField from '@mui/material/TextField';
@@ -6,7 +6,8 @@ import dynamic from 'next/dynamic';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { taggedItem } from '../../controls/AutoCompletePlus';
 import { useContext, useState } from 'react';
-import Alert from '@mui/material/Alert';
+import CenterBox from '../../controls/CenterBox';
+import Typography from '@mui/material/Typography';
 
 export type AgencyAddressProps = {
     currentStep: number;
@@ -37,9 +38,13 @@ const AgencyAddress = (props: AgencyAddressProps) => {
         if (onAddressChanged)
             onAddressChanged(newAddress);
     };
+
     return (
         <TabPanel dir={settings.direction} activeIndex={currentStep.toString()} index='2'>
-            <FormControlLabel label={agenciesPage.businessLocation} control={<PlacesSearchBox sx={{ margin: 2, order: 1 }} onLocationChanged={(item) => updateLocation(item)} />} />
+            <CenterBox sx={{flexDirection:'row',flexWrap:'wrap'}}>
+                <Typography variant='body2'>{agenciesPage.addressOfBusiness}</Typography>
+                <PlacesSearchBox sx={{ margin: 2}} onLocationChanged={(item) => updateLocation(item)} />
+            </CenterBox>
             <Map currentLocation={location?.tag || [0, 0]} />
             <TextField multiline required onBlur={e => updateAddress(e.target.value)} label={agenciesPage.addressOfBusiness} sx={{ width: '70%' }} variant='filled' />
             <Alert severity='warning'>

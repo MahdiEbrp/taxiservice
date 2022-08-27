@@ -8,7 +8,7 @@ const CenterBox: ElementType<BoxProps> = (props: { children: ReactNode; } | BoxP
 
     const newProps = { ...other };
 
-    newProps.sx = { ...centerStyle, ...newProps.sx} as SxProps<Theme>;
+    newProps.sx = { ...centerStyle, ...newProps.sx } as SxProps<Theme>;
 
     return (
         <Box {...newProps}>
@@ -17,6 +17,9 @@ const CenterBox: ElementType<BoxProps> = (props: { children: ReactNode; } | BoxP
     );
 };
 
-export const centerStyle: SxProps<Theme> = { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1rem' };
+export const centerStyle: SxProps<Theme> = {
+    display: 'flex', flexDirection: 'column', maxWidth: '100vw'
+    , alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1rem'
+};
 
 export default CenterBox;

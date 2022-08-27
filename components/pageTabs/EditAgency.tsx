@@ -1,6 +1,7 @@
 import AgencyAddress from './agencyTabs/AgencyAddress';
 import AgencyPhoneEditor from './agencyTabs/AgencyPhoneEditor';
 import AgencySelector from './agencyTabs/AgencySelector';
+import AgencyWorkingHours from './agencyTabs/AgencyWorkingHours';
 import Alert from '@mui/material/Alert';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Button from '@mui/material/Button';
@@ -12,11 +13,11 @@ import CenterBox from '../controls/CenterBox';
 import Link from '@mui/material/Link';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { ToastContext } from '../../lib/context/ToastContext';
-import { useContext, useEffect, useState } from 'react';
 import { taggedItem } from '../controls/AutoCompletePlus';
+import { useContext, useEffect, useState } from 'react';
 
 const EditAgency = () => {
-    const [currentStep, setCurrentStep] = useState(0);
+    const [currentStep, setCurrentStep] = useState(3);
     const [selectedAgency, setSelectedAgency] = useState('');
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
     const [allPhoneValid, setAllPhoneValid] = useState(false);
@@ -34,7 +35,9 @@ const EditAgency = () => {
     const [title, setTitle] = useState(editAgency.title);
 
     const nextStep = () => {
+
         setShowError(false);
+
         if (!selectedAgency) {
             setToast({ id: Date.now(), message: notification.selectAgency, alertColor: 'info' });
             return;
@@ -48,6 +51,7 @@ const EditAgency = () => {
             setShowError(true);
             return;
         }
+
         if (!location && address.length < 3 && currentStep === 2) {
             setToast({ id: Date.now(), message: notification.addressError, alertColor: 'error' });
             return;
@@ -63,10 +67,9 @@ const EditAgency = () => {
     }, [editAgency.title, selectedAgency, title]);
 
     const BreadcrumbsSteps = () => {
-        const stepsLabel = [agenciesPage.agencySelection, agenciesPage.editPhone, agenciesPage.editAddress].slice(0, currentStep + 1);
+        const stepsLabel = [agenciesPage.agencySelection, agenciesPage.editPhone, agenciesPage.editAddress, agenciesPage.workingHours].slice(0, currentStep + 1);
         return (
             <Breadcrumbs separator='›' aria-label='agency-breadcrumb'>
-
                 {stepsLabel.map((label, index) => {
                     return (
                         <Link key={index} onClick={() => setCurrentStep(index)} color='text.primary'>
@@ -90,6 +93,7 @@ const EditAgency = () => {
                             onCountryCodeChanged={(code) => setSelectedCountryCode(code)} />
                         <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setAllPhoneValid(isValid)} />
                         <AgencyAddress currentStep={currentStep} onAddressChanged={(address) => setAddress(address)} onLocationChanged={(location) => setLocation(location)} />
+                        <AgencyWorkingHours currentStep={currentStep} />
                         {showError && <Alert severity='error'>{agenciesPage.phoneNumbersError}</Alert>}
                     </CenterBox>
                 </CardContent>

@@ -23,7 +23,7 @@ const AutoCompletePlus = <T,>(props: AutoCompletePlusProps<T>) => {
 
     const { items, label, loading, onChanged, onInputTextChanged, sx } = props as AutoCompletePlusProps<T>;
 
-    const style: SxProps<Theme> = { ...{ width: 300,...sx } };
+    const style: SxProps<Theme> = { ...{ width: 'min(70vw, 300px)', ...sx } };
     const { language } = useContext(LanguageContext);
 
     const { settings, components } = language;

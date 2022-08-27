@@ -22,6 +22,7 @@ const ThemePresenter= (props: { children: ReactElement | ReactElement[]; }) => {
                         styleOverrides: {
                             root: {
                                 backdropFilter: 'blur(3px)',
+                                maxWidth:'100%',
                             },
                         },
                     },
