@@ -17,7 +17,7 @@ import { taggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useEffect, useState } from 'react';
 
 const EditAgency = () => {
-    const [currentStep, setCurrentStep] = useState(3);
+    const [currentStep, setCurrentStep] = useState(0);
     const [selectedAgency, setSelectedAgency] = useState('');
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
     const [allPhoneValid, setAllPhoneValid] = useState(false);

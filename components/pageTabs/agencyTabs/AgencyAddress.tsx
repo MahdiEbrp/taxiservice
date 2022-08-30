@@ -42,11 +42,11 @@ const AgencyAddress = (props: AgencyAddressProps) => {
     return (
         <TabPanel dir={settings.direction} activeIndex={currentStep.toString()} index='2'>
             <CenterBox sx={{flexDirection:'row',flexWrap:'wrap'}}>
-                <Typography variant='body2'>{agenciesPage.addressOfBusiness}</Typography>
+                <Typography variant='body2'>{agenciesPage.businessLocation}</Typography>
                 <PlacesSearchBox sx={{ margin: 2}} onLocationChanged={(item) => updateLocation(item)} />
             </CenterBox>
             <Map currentLocation={location?.tag || [0, 0]} />
-            <TextField multiline required onBlur={e => updateAddress(e.target.value)} label={agenciesPage.addressOfBusiness} sx={{ width: '70%' }} variant='filled' />
+            <TextField multiline required onBlur={e => updateAddress(e.target.value)} label={agenciesPage.businessLocation} sx={{ width: '70%' }} variant='filled' />
             <Alert severity='warning'>
                 {agenciesPage.addressWarning}
             </Alert>

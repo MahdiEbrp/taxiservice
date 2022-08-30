@@ -19,7 +19,7 @@ import { ToastContext } from '../lib/context/ToastContext';
 import { useRouter } from 'next/router';
 import CenterBox from './controls/CenterBox';
 import Image from 'next/image';
-const ContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
+const GeneralContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
 
     const [isLanguageDialogOpen, setLanguageDialogOpen] = useState(false);
     const [isLoginDialogOpen, setLoginDialogOpen] = useState(false);
@@ -61,7 +61,7 @@ const ContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
 };
 const MainLayout = (props: { children: ReactElement; }) => {
     return (
-        <ContextHolder>
+        <GeneralContextHolder>
             <ThemePresenter>
                 <Navbar />
                 <LanguageDialog />
@@ -76,7 +76,7 @@ const MainLayout = (props: { children: ReactElement; }) => {
                 <ToastHandler />
                 <MessageDialog />
             </ThemePresenter>
-        </ContextHolder >
+        </GeneralContextHolder >
     );
 };
 

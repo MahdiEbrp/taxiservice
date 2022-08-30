@@ -83,7 +83,7 @@ const Persian = {
         },
     },
     agenciesPage: {
-        addressOfBusiness: 'آدرس محل کسب و کار:',
+        addressOfBusiness: 'آدرس محل کسب و کار',
         addressWarning: 'آدرس باید دقیق و کامل وارد شود.',
         agencyMainPhoneNumber: 'شماره تلفن اصلی آژانس',
         agencyName: 'نام آژانس',

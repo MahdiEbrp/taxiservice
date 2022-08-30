@@ -23,7 +23,7 @@ const AgencyWorkingHours = (props: WorkingHoursProps) => {
     const { settings, agenciesPage } = language;
 
     const handleChange = (newValue: Moment | null) => {
-        if(newValue)
+        if (newValue)
             setDate(newValue);
     };
     return (

@@ -83,7 +83,7 @@ const English = {
         },
     },
     agenciesPage: {
-        addressOfBusiness:'Address of your business:',
+        addressOfBusiness:'Address of your business',
         addressWarning: 'The address should be entered accurately and completely.',
         agencyMainPhoneNumber: 'Agency Main Phone Number.',
         agencyName: 'Agency Name',

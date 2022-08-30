@@ -8,8 +8,6 @@ import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import type { NextPage } from 'next';
 import { RiEmotionHappyLine } from 'react-icons/ri';
-import dynamic from 'next/dynamic';
-const Map = dynamic(() => import('../components/controls/OpenLayerMap'), { ssr: false });
 
 const Home: NextPage = () => {
   return (
@@ -32,7 +30,6 @@ const Home: NextPage = () => {
           <Button size='small'>Next Step</Button>
         </CardActions>
       </Card>
-      <Map currentLocation={[0,0]} />
     </>
   );
 };

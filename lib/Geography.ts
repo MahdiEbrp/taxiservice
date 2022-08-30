@@ -31,12 +31,11 @@ export type Properties = {
 };
 
 export type country = {
-    country_code: string;
-    englishName: string;
-    nativeName: string;
+    code: string;
+    name: string;
 };
 
-export type countries = {
+export type CountryType = {
     data: country[];
 };
 
@@ -57,14 +56,4 @@ export const fetchCitiesLocation = async (cityName: string) => {
 };
 
 
-export const getCountryList = async () => {
-    const response = await GetData('/data/countries.json');
-    if (response)
-        if (response.status === 200) {
-            const data = response.data as countries;
-            return data;
-        }
-    return null;
-};
-
-export default getCountryList;
+export default fetchCitiesLocation;
