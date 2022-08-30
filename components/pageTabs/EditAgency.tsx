@@ -66,6 +66,11 @@ const EditAgency = () => {
             setTitle(editAgency.title);
     }, [editAgency.title, selectedAgency, title]);
 
+    const setLocalization = (countryCode: string) => {
+
+        setSelectedCountryCode(countryCode);
+    };
+
     const BreadcrumbsSteps = () => {
         const stepsLabel = [agenciesPage.agencySelection, agenciesPage.editPhone, agenciesPage.editAddress, agenciesPage.workingHours].slice(0, currentStep + 1);
         return (
@@ -90,7 +95,7 @@ const EditAgency = () => {
                     <BreadcrumbsSteps />
                     <CenterBox>
                         <AgencySelector currentStep={currentStep} onAgencyChanged={(agency) => setSelectedAgency(agency)}
-                            onCountryCodeChanged={(code) => setSelectedCountryCode(code)} />
+                            onCountryCodeChanged={(code) => setLocalization(code)} />
                         <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setAllPhoneValid(isValid)} />
                         <AgencyAddress currentStep={currentStep} onAddressChanged={(address) => setAddress(address)} onLocationChanged={(location) => setLocation(location)} />
                         <AgencyWorkingHours currentStep={currentStep} />
