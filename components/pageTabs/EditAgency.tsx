@@ -15,6 +15,7 @@ import { LanguageContext } from '../../lib/context/LanguageContext';
 import { ToastContext } from '../../lib/context/ToastContext';
 import { taggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useEffect, useState } from 'react';
+import { LocalizationInfo } from '../../lib/Geography';
 
 const EditAgency = () => {
     const [currentStep, setCurrentStep] = useState(0);
@@ -66,7 +67,9 @@ const EditAgency = () => {
             setTitle(editAgency.title);
     }, [editAgency.title, selectedAgency, title]);
 
-    const setLocalization =async (countryCode: string)=> {
+    const setLocalization = async (countryCode: string) => {
+        if (!countryCode)
+            return;
         const response = await import('../../data/localization/' + countryCode + '.json');
         const localization = response.default;
 
