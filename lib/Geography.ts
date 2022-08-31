@@ -39,6 +39,13 @@ export type CountryType = {
     data: country[];
 };
 
+export type LocalizationInfo= {
+    name: string;
+    currency: string;
+    lat: string;
+    long: string;
+    firstDayOfWeek: string;
+}
 
 export const fetchCitiesLocation = async (cityName: string) => {
 
