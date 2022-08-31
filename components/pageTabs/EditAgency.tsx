@@ -66,7 +66,9 @@ const EditAgency = () => {
             setTitle(editAgency.title);
     }, [editAgency.title, selectedAgency, title]);
 
-    const setLocalization = (countryCode: string) => {
+    const setLocalization =async (countryCode: string)=> {
+        const response = await import('../../data/localization/' + countryCode + '.json');
+        const localization = response.default;
 
         setSelectedCountryCode(countryCode);
     };
