@@ -5,10 +5,11 @@ import { LanguageContext } from '../../lib/context/LanguageContext';
 
 export type MapProps = {
     currentLocation: number[];
+    whenReady?: (isReady:boolean) => void;
 };
 
 const OpenLayerMap = (props: MapProps) => {
-    const { currentLocation } = props;
+    const { currentLocation, whenReady } = props;
 
     const arrayToLatLong = (array: number[]) => {
         if (array.length !== 2)
@@ -35,8 +36,14 @@ const OpenLayerMap = (props: MapProps) => {
 
         return <></>;
     };
+
+    const isMapReady = (isReady: boolean) => {
+        if (whenReady)
+            whenReady(isReady);
+    };
+
     return (
-        <MapContainer center={location} zoom={15} scrollWheelZoom={false}>
+        <MapContainer center={location} zoom={15} scrollWheelZoom={false} whenReady={()=>isMapReady(true)}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

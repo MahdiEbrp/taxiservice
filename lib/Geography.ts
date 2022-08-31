@@ -39,13 +39,17 @@ export type CountryType = {
     data: country[];
 };
 
-export type LocalizationInfo= {
+export type LocalizationInfoType = {
     name: string;
     currency: string;
-    lat: string;
-    long: string;
-    firstDayOfWeek: string;
-}
+    lat: number;
+    long: number;
+    firstDayOfWeek: number;
+};
+
+export const defaultLocalizationInfo: LocalizationInfoType = {
+    name: 'United States-United States', currency: '$', lat: 38.89511, long: -77.03637, firstDayOfWeek: 0,
+};
 
 export const fetchCitiesLocation = async (cityName: string) => {
 

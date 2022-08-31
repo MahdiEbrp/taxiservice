@@ -1,13 +1,15 @@
 import Alert from '@mui/material/Alert';
+import CenterBox from '../../controls/CenterBox';
 import PlacesSearchBox from '../../controls/PlacesSearchBox';
 import TabPanel from '../../controls/TabPanel';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import dynamic from 'next/dynamic';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
+import { LocalizationInfoContext } from '../../../lib/context/LocalizationInfoContext';
 import { taggedItem } from '../../controls/AutoCompletePlus';
 import { useContext, useState } from 'react';
-import CenterBox from '../../controls/CenterBox';
-import Typography from '@mui/material/Typography';
+import CircularLoading from '../../controls/CircularLoading';
 
 export type AgencyAddressProps = {
     currentStep: number;
@@ -22,8 +24,10 @@ const AgencyAddress = (props: AgencyAddressProps) => {
     const { currentStep, onLocationChanged, onAddressChanged } = props;
 
     const [location, setLocation] = useState<taggedItem<number[]> | null>(null);
+    const [mapReady, setMapReady] = useState(false);
 
     const { language } = useContext(LanguageContext);
+    const { localizationInfo } = useContext(LocalizationInfoContext);
 
     const { settings, agenciesPage } = language;
 
@@ -41,11 +45,12 @@ const AgencyAddress = (props: AgencyAddressProps) => {
 
     return (
         <TabPanel dir={settings.direction} activeIndex={currentStep.toString()} index='2'>
-            <CenterBox sx={{flexDirection:'row',flexWrap:'wrap'}}>
+            <CenterBox sx={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                 <Typography variant='body2'>{agenciesPage.businessLocation}</Typography>
-                <PlacesSearchBox sx={{ margin: 2}} onLocationChanged={(item) => updateLocation(item)} />
+                <PlacesSearchBox sx={{ margin: 2 }} onLocationChanged={(item) => updateLocation(item)} />
             </CenterBox>
-            <Map currentLocation={location?.tag || [0, 0]} />
+            <Map currentLocation={location?.tag || [localizationInfo.lat, localizationInfo.long]} whenReady={(isReady) => setMapReady(isReady)} />
+            {!mapReady && <CircularLoading />}
             <TextField multiline required onBlur={e => updateAddress(e.target.value)} label={agenciesPage.businessLocation} sx={{ width: '70%' }} variant='filled' />
             <Alert severity='warning'>
                 {agenciesPage.addressWarning}

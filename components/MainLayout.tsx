@@ -1,4 +1,6 @@
+import CenterBox from './controls/CenterBox';
 import GetSettings from '../lib/Settings';
+import Image from 'next/image';
 import LanguageDialog from './dialogs/LanguageDialog';
 import LoginDialog from './dialogs/LoginDialog';
 import MessageDialog, { MessageDialogProps } from './dialogs/MessageDialog';
@@ -9,6 +11,7 @@ import ToastHandler, { EmptyToast, ToastProps } from './controls/Toast';
 import getLanguage from '../lib/Language';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { LanguageDialogContext } from '../lib/context/LanguageDialogContext';
+import { LocalizationInfoContext } from '../lib/context/LocalizationInfoContext';
 import { LoginDialogContext } from '../lib/context/LoginDialogContext';
 import { MessageDialogContext } from '../lib/context/MessageDialogContext';
 import { ReactElement, useEffect, useState } from 'react';
@@ -16,9 +19,9 @@ import { SessionProvider } from 'next-auth/react';
 import { SidebarContext } from '../lib/context/SidebarContext';
 import { ThemeContext } from '../lib/context/ThemeContext';
 import { ToastContext } from '../lib/context/ToastContext';
+import { defaultLocalizationInfo, LocalizationInfoType } from '../lib/Geography';
 import { useRouter } from 'next/router';
-import CenterBox from './controls/CenterBox';
-import Image from 'next/image';
+
 const GeneralContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
 
     const [isLanguageDialogOpen, setLanguageDialogOpen] = useState(false);
@@ -26,6 +29,7 @@ const GeneralContextHolder = (props: { children: ReactElement | ReactElement[]; 
     const [messageDialogInfo, setMessageDialog] = useState<MessageDialogProps>({ isMessageDialogOpen: false, message: '', title: '' });
     const [prefersDarkMode, setPrefersDarkMode] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [localizationInfo, setLocalizationInfo] = useState<LocalizationInfoType>(defaultLocalizationInfo);
     const [toast, setToast] = useState<ToastProps>(EmptyToast);
     const router = useRouter();
     const [language, setLanguage] = useState(getLanguage(router.locale));
@@ -48,7 +52,9 @@ const GeneralContextHolder = (props: { children: ReactElement | ReactElement[]; 
                             <LoginDialogContext.Provider value={{ isLoginDialogOpen, setLoginDialogOpen }}>
                                 <ToastContext.Provider value={{ toast, setToast }} >
                                     <MessageDialogContext.Provider value={{ messageDialogInfo, setMessageDialog }}>
-                                        {props.children}
+                                        <LocalizationInfoContext.Provider value={{ localizationInfo, setLocalizationInfo }}>
+                                            {props.children}
+                                        </LocalizationInfoContext.Provider>
                                     </MessageDialogContext.Provider>
                                 </ToastContext.Provider>
                             </LoginDialogContext.Provider>

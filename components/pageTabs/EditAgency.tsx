@@ -12,10 +12,11 @@ import CardHeader from '@mui/material/CardHeader';
 import CenterBox from '../controls/CenterBox';
 import Link from '@mui/material/Link';
 import { LanguageContext } from '../../lib/context/LanguageContext';
+import { LocalizationInfoType } from '../../lib/Geography';
+import { LocalizationInfoContext } from '../../lib/context/LocalizationInfoContext';
 import { ToastContext } from '../../lib/context/ToastContext';
 import { taggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useEffect, useState } from 'react';
-import { LocalizationInfo } from '../../lib/Geography';
 
 const EditAgency = () => {
     const [currentStep, setCurrentStep] = useState(0);
@@ -27,6 +28,7 @@ const EditAgency = () => {
     const [location, setLocation] = useState<taggedItem<number[]> | null>(null);
 
     const { language } = useContext(LanguageContext);
+    const { setLocalizationInfo } = useContext(LocalizationInfoContext);
     const { setToast } = useContext(ToastContext);
 
     const { agenciesPage, notification, settings } = language;
@@ -71,8 +73,8 @@ const EditAgency = () => {
         if (!countryCode)
             return;
         const response = await import('../../data/localization/' + countryCode + '.json');
-        const localization = response.default;
-
+        const localization = response.default as LocalizationInfoType;
+        setLocalizationInfo(localization);
         setSelectedCountryCode(countryCode);
     };
 
