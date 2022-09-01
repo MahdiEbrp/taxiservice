@@ -4,7 +4,8 @@ const Persian = {
         displayName: 'فارسی',
         code: 'fa',
         direction: 'rtl',
-        listStyle: 'arabic-indic'
+        listStyle: 'arabic-indic',
+        days: ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'],
     },
     sidebar: {
         agenciesManagement: 'مدیریت آژانس ها',
@@ -103,6 +104,7 @@ const Persian = {
         preparing: 'در حال آماده سازی...',
         title: 'مدیریت آژانس ها',
         workingHours: 'ساعات کاری',
+        activeAgency:'آژانس فعال است.',
         editAgency: {
             title: 'ویرایش آژانس',
         },

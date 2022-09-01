@@ -47,7 +47,7 @@ const Navbar = () => {
     }, [session]);
 
     return (
-        <AppBar position='sticky' dir={direction} sx={{ top: 0, zIndex: (theme: { zIndex: { drawer: number; }; }) => theme.zIndex.drawer + 1 }}>
+        <AppBar position='fixed' dir={direction} sx={{ top: 0, zIndex: (theme: { zIndex: { drawer: number; }; }) => theme.zIndex.drawer + 1 }}>
             <Toolbar>
                 <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}
                     onClick={() => setSidebarOpen(!sidebarOpen)}

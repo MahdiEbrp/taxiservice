@@ -1,10 +1,15 @@
+import MomentUtils from '@date-io/moment';
+import Switch from '@mui/material/Switch';
 import TabPanel from '../../controls/TabPanel';
-import { LanguageContext } from '../../../lib/context/LanguageContext';
-import { useContext, useState } from 'react';
-import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
 import moment, { Moment } from 'moment';
-import MomentUtils from '@date-io/moment';
+import { LanguageContext } from '../../../lib/context/LanguageContext';
+import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers';
+import { useContext, useState } from 'react';
+import CenterBox from '../../controls/CenterBox';
+import Typography from '@mui/material/Typography';
+import WorkingDaysList from '../../controls/WorkingDaysList';
+
 
 export type WorkingHoursProps = {
     currentStep: number;
@@ -26,11 +31,16 @@ const AgencyWorkingHours = (props: WorkingHoursProps) => {
         if (newValue)
             setDate(newValue);
     };
+
     return (
-        <TabPanel dir={settings.direction} activeIndex={currentStep.toString()} index='3'>
+        <LocalizationProvider dateAdapter={MomentUtils}>
+            <TabPanel dir={settings.direction} activeIndex={currentStep.toString()} index='3'>
 
-            <LocalizationProvider dateAdapter={MomentUtils}>
-
+                <CenterBox sx={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                    <Typography variant='body2'>{agenciesPage.activeAgency}</Typography>
+                    <Switch defaultChecked />
+                </CenterBox>
+                <WorkingDaysList />
                 <TimePicker
                     label={agenciesPage.workingHours}
                     value={selectedDate}
@@ -38,8 +48,8 @@ const AgencyWorkingHours = (props: WorkingHoursProps) => {
                     ampm={false}
                     renderInput={(params) => <TextField {...params} />}
                 />
-            </LocalizationProvider>
-        </TabPanel >
+            </TabPanel >
+        </LocalizationProvider>
     );
 };
 

@@ -5,6 +5,7 @@ const English = {
         code: 'en',
         direction: 'ltr',
         listStyle: 'decimal',
+        days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     },
     sidebar: {
         agenciesManagement: 'Agencies management',
@@ -102,7 +103,8 @@ const English = {
         phoneNumbersError:'It is necessary to have both a work number and a mobile number! (Phone numbers must have at least 10 digits)',
         preparing: 'Preparing...',
         title: 'Agencies management',
-        workingHours:'Working hours',
+        workingHours: 'Working hours',
+        activeAgency:'The agency is active.',
         editAgency: {
             title: 'Editing an agency',
         },

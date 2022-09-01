@@ -33,7 +33,7 @@ const Sidebar = () => {
     }, [session]);
 
     return (
-        <Drawer anchor={direction === 'rtl' ? 'right' : 'left'} variant='persistent' open={sidebarOpen} PaperProps={{ sx: { top: 'auto' } }}>
+        <Drawer anchor={direction === 'rtl' ? 'right' : 'left'} variant='persistent' open={sidebarOpen}>
             <Box>
                 <List dir={direction} >
                     {isUserValid &&

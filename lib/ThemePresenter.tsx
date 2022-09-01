@@ -1,9 +1,12 @@
 import { ReactElement, useContext, useMemo } from 'react';
 import { ThemeContext } from './context/ThemeContext';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-const ThemePresenter= (props: { children: ReactElement | ReactElement[]; }) => {
+import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
+const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => {
     const { prefersDarkMode } = useContext(ThemeContext);
     const fonts = '"Vazirmatn","Roboto","Helvetica","Arial",sans-serif';
+    const breakpoints = createBreakpoints({});
+    const appbarHeight = [breakpoints.up('md')] ? '64px' : '56px';
     const theme = useMemo(
         () =>
             createTheme({
@@ -22,7 +25,14 @@ const ThemePresenter= (props: { children: ReactElement | ReactElement[]; }) => {
                         styleOverrides: {
                             root: {
                                 backdropFilter: 'blur(3px)',
-                                maxWidth:'100%',
+                                maxWidth: '100%',
+                            },
+                        },
+                    },
+                    MuiDrawer: {
+                        styleOverrides: {
+                            paper: {
+                                marginTop: appbarHeight,
                             },
                         },
                     },
@@ -30,6 +40,7 @@ const ThemePresenter= (props: { children: ReactElement | ReactElement[]; }) => {
                         styleOverrides: {
                             root: {
                                 backgroundColor: prefersDarkMode ? '#121212' : '#1976d2',
+                                height: appbarHeight,
                             },
                         },
                     },
@@ -102,7 +113,7 @@ const ThemePresenter= (props: { children: ReactElement | ReactElement[]; }) => {
                     },
                 },
             }),
-        [prefersDarkMode],
+        [appbarHeight, prefersDarkMode],
     );
     return (
         <ThemeProvider theme={theme}>

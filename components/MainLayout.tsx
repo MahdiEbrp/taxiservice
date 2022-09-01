@@ -21,6 +21,7 @@ import { ThemeContext } from '../lib/context/ThemeContext';
 import { ToastContext } from '../lib/context/ToastContext';
 import { defaultLocalizationInfo, LocalizationInfoType } from '../lib/Geography';
 import { useRouter } from 'next/router';
+import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 
 const GeneralContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
 
@@ -66,6 +67,8 @@ const GeneralContextHolder = (props: { children: ReactElement | ReactElement[]; 
     );
 };
 const MainLayout = (props: { children: ReactElement; }) => {
+    const breakpoints = createBreakpoints({});
+    const appbarHeight = [breakpoints.up('md')] ? '64px' : '56px';
     return (
         <GeneralContextHolder>
             <ThemePresenter>
@@ -73,7 +76,7 @@ const MainLayout = (props: { children: ReactElement; }) => {
                 <LanguageDialog />
                 <LoginDialog />
                 <Sidebar />
-                <CenterBox bgcolor='background.paper' className='main-content' sx={{ position: 'relative' }} >
+                <CenterBox bgcolor='background.paper' className='main-content' sx={{ marginTop: appbarHeight + ' !important', position: 'relative' }} >
                     <Image src='/images/background.jpg' alt='Background' layout='fill' objectFit='cover' objectPosition='left' />
                     <CenterBox sx={{ zIndex: 70 }}>
                         {props.children}
