@@ -1,5 +1,5 @@
 import CenterBox from './controls/CenterBox';
-import GetSettings from '../lib/settings';
+import getSettings from '../lib/settings';
 import Image from 'next/image';
 import LanguageDialog from './dialogs/LanguageDialog';
 import LoginDialog from './dialogs/LoginDialog';
@@ -36,7 +36,7 @@ const GeneralContextHolder = (props: { children: ReactElement | ReactElement[]; 
     const [language, setLanguage] = useState(getLanguage(router.locale));
 
     useEffect(() => {
-        const settings = GetSettings('darkMode', 'false') as string;
+        const settings = getSettings('darkMode', 'false') as string;
         setPrefersDarkMode(settings === 'true' ? true : false);
     }, [prefersDarkMode]);
 
