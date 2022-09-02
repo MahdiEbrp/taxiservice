@@ -1,5 +1,5 @@
-import english from './languages/English';
-import persian from './languages/Persian';
+import english from './languages/english';
+import persian from './languages/persian';
 
 const getLanguage = (locale:string | undefined) => {
     switch (locale) {
