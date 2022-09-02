@@ -6,7 +6,7 @@ import LoginDialog from './dialogs/LoginDialog';
 import MessageDialog, { MessageDialogProps } from './dialogs/MessageDialog';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-import ThemePresenter from '../lib/ThemePresenter';
+import ThemePresenter from './ThemePresenter';
 import ToastHandler, { EmptyToast, ToastProps } from './controls/Toast';
 import getLanguage from '../lib/language';
 import { LanguageContext } from '../lib/context/LanguageContext';
