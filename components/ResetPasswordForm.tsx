@@ -11,7 +11,7 @@ import React, { useContext, useRef, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { FaHandPeace } from 'react-icons/fa';
 import { LanguageContext } from '../lib/context/LanguageContext';
-import { PostData } from '../lib/fetchData';
+import { postData } from '../lib/fetchData';
 import { ThemeContext } from '../lib/context/ThemeContext';
 import { ToastContext } from '../lib/context/ToastContext';
 import { getResponseError } from '../lib/language';
@@ -83,7 +83,7 @@ const ResetPasswordForm = () => {
             }
             setIsLoading(true);
             const values = { password: passwordRef.current?.value, requestId: captcha, updateCode: code };
-            const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/updatePassword', values);
+            const response = await postData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/updatePassword', values);
             setIsLoading(false);
             if (!response) {
                 setToast({ id: Date.now(), message: getResponseError('ERR_NULL_RESPONSE', language), alertColor: 'error' });

@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { LoginDialogContext } from '../../../lib/context/LoginDialogContext';
 import { MessageDialogContext } from '../../../lib/context/MessageDialogContext';
-import { PostData, SigninResult } from '../../../lib/fetchData';
+import { postData, SigninResult } from '../../../lib/fetchData';
 import { ThemeContext } from '../../../lib/context/ThemeContext';
 import { ToastContext } from '../../../lib/context/ToastContext';
 import { getResponseError } from '../../../lib/language';
@@ -107,7 +107,7 @@ const LoginTab = () => {
         }
         if (captcha !== false) {
             setIsLoading(true);
-            const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/sendResetPassword', { email: emailRef.current?.value, requestId: captcha });
+            const response = await postData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/sendResetPassword', { email: emailRef.current?.value, requestId: captcha });
             setIsLoading(false);
             if (!response) {
                 setToast({ id: Date.now(), message: getResponseError('ERR_NULL_RESPONSE', language), alertColor: 'error' });

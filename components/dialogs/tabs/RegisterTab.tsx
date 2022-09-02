@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { LoginDialogContext } from '../../../lib/context/LoginDialogContext';
 import { MessageDialogContext } from '../../../lib/context/MessageDialogContext';
-import { PostData } from '../../../lib/fetchData';
+import { postData } from '../../../lib/fetchData';
 import { ThemeContext } from '../../../lib/context/ThemeContext';
 import { ToastContext } from '../../../lib/context/ToastContext';
 import { getResponseError } from '../../../lib/language';
@@ -62,7 +62,7 @@ const RegisterTab = () => {
             const password = passwordRef.current?.value || '';
             const values = { email: email, password: password, requestId: captcha };
             setIsLoading(true);
-            const response = await PostData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/Register', values);
+            const response = await postData(process.env.NEXT_PUBLIC_WEB_URL + '/api/auth/Register', values);
             setIsLoading(false);
 
             if (!response) {

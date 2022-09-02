@@ -1,4 +1,4 @@
-import { GetData } from './fetchData';
+import { getData } from './fetchData';
 
 export type cities = {
     features: Feature[];
@@ -55,7 +55,7 @@ export const fetchCitiesLocation = async (cityName: string) => {
 
     // eslint-disable-next-line quotes
     const url = encodeURI(`https://photon.komoot.io/api/?q=${cityName}&lang=en`);
-    const response = await GetData(url);
+    const response = await getData(url);
     if (response) {
         if (response.status === 200) {
             const data = response.data as cities;

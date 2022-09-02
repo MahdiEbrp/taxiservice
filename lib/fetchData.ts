@@ -1,12 +1,12 @@
 import axios, { AxiosError } from 'axios';
-export interface SigninResult {
+export type SigninResult= {
     error: string | undefined;
     status: number;
     ok: boolean;
     url: string | null;
 }
 const timeout = 10000;
-export const PostData = async (url: string, data: unknown) => {
+export const postData = async (url: string, data: unknown) => {
     try {
         const response = await axios.post(url, JSON.stringify(data), {
             headers: {
@@ -25,9 +25,9 @@ export const PostData = async (url: string, data: unknown) => {
             return null;
     }
 };
-export const GetData = async (url: string) => {
+export const getData = async (url: string) => {
     try {
-        const response = await axios.get(url,{timeout: timeout});
+        const response = await axios.get(url, { timeout: timeout });
         return response;
 
     }
@@ -39,7 +39,7 @@ export const GetData = async (url: string) => {
             return null;
     }
 };
-export const PutData = async (url: string, data: unknown) => {
+export const putData = async (url: string, data: unknown) => {
     try {
         const response = await axios.put(url, JSON.stringify(data), {
             headers: {
@@ -58,7 +58,7 @@ export const PutData = async (url: string, data: unknown) => {
             return null;
     }
 };
-export const DeleteData = async (url: string) => {
+export const deleteData = async (url: string) => {
     try {
         const response = await axios.delete(url);
         return response;
@@ -72,7 +72,7 @@ export const DeleteData = async (url: string) => {
             return null;
     }
 };
-export const PatchData = async (url: string, data: unknown) => {
+export const patchData = async (url: string, data: unknown) => {
     try {
         const response = await axios.patch(url, JSON.stringify(data), {
             headers: {
