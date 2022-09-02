@@ -18,8 +18,11 @@ import { ToastContext } from '../../lib/context/ToastContext';
 import { taggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useEffect, useState } from 'react';
 
-const EditAgency = () => {
-    const [currentStep, setCurrentStep] = useState(3);
+const ModifyAgency = (props: { editMode: boolean; }) => {
+
+    const { editMode } = props;
+
+    const [currentStep, setCurrentStep] = useState(0);
     const [selectedAgency, setSelectedAgency] = useState('');
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
     const [allPhoneValid, setAllPhoneValid] = useState(false);
@@ -34,7 +37,7 @@ const EditAgency = () => {
     const { agenciesPage, notification, settings } = language;
     const { editAgency } = agenciesPage;
     const { direction } = settings;
-
+    const isLastStep = currentStep === 3;
     const [title, setTitle] = useState(editAgency.title);
 
     const nextStep = () => {
@@ -70,21 +73,29 @@ const EditAgency = () => {
     }, [editAgency.title, selectedAgency, title]);
 
     const setLocalization = async (countryCode: string) => {
+
+        setSelectedCountryCode(countryCode);
+
         if (!countryCode)
             return;
         const response = await import('../../data/localization/' + countryCode + '.json');
         const localization = response.default as LocalizationInfoType;
         setLocalizationInfo(localization);
-        setSelectedCountryCode(countryCode);
     };
+    const gotoStep = (step: number) => {
 
+        if (showError)
+            setShowError(false);
+        step = step < 0 ? 0 : step;
+        setCurrentStep(step);
+    };
     const BreadcrumbsSteps = () => {
         const stepsLabel = [agenciesPage.agencySelection, agenciesPage.editPhone, agenciesPage.editAddress, agenciesPage.workingHours].slice(0, currentStep + 1);
         return (
             <Breadcrumbs separator='›' aria-label='agency-breadcrumb'>
                 {stepsLabel.map((label, index) => {
                     return (
-                        <Link key={index} onClick={() => setCurrentStep(index)} color='text.primary'>
+                        <Link key={index} onClick={() => gotoStep(index)} color='text.primary'>
                             {label}
                         </Link>
                     );
@@ -109,8 +120,10 @@ const EditAgency = () => {
                         {showError && <Alert severity='error'>{agenciesPage.phoneNumbersError}</Alert>}
                     </CenterBox>
                 </CardContent>
-                <CardActions sx={{ flexDirection: 'row-reverse' }}>
-                    <Button variant='contained' color='primary' onClick={nextStep} >{agenciesPage.next}</Button>
+                <CardActions sx={{ flexDirection: 'row', gap: '1rem' }}>
+                    <Button disabled={currentStep === 0} variant='contained' color='primary' onClick={() => gotoStep(currentStep - 1)} >{agenciesPage.previous}</Button>
+                    <Button disabled={isLastStep} variant='contained' color='primary' onClick={nextStep} >{agenciesPage.next}</Button>
+                    {isLastStep && <Button variant='contained' color='primary' >{editMode ? agenciesPage.update : agenciesPage.add}</Button>}
                 </CardActions>
             </Card>
 
@@ -118,5 +131,5 @@ const EditAgency = () => {
     );
 };
 
-export default EditAgency;
+export default ModifyAgency;
 

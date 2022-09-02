@@ -1,5 +1,5 @@
 import AuthorizedLayout from '../../components/AuthorizedLayout';
-import EditAgency from '../../components/pageTabs/EditAgency';
+import ModifyAgency from '../../components/pageTabs/ModifyAgency';
 import Head from 'next/head';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { LanguageContext } from '../../lib/context/LanguageContext';
@@ -16,18 +16,15 @@ const Agencies = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>)
     const { language } = useContext(LanguageContext);
 
     const { agenciesPage } = language;
-
+    const editMode = mode === 'edit';
     return (
         <CountryListContext.Provider value={{ countryList: countries }}>
             <Head>
                 <title>{agenciesPage.title}</title>
             </Head>
             <AuthorizedLayout>
-                <>
-                    {mode === 'edit' && <EditAgency />}
-                </>
+                <ModifyAgency editMode={editMode} />
             </AuthorizedLayout>
-
         </CountryListContext.Provider>
     );
 };

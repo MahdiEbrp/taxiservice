@@ -38,8 +38,8 @@ const AuthorizedLayout = (props: { children: ReactElement; }) => {
                     <Head>
                         <title>{authorizedLayout.loading}</title>
                     </Head>
-                    <Card sx={{ dir: direction }}>
-                        <CardContent>
+                    <Card>
+                        <CardContent sx={{ dir: direction }}>
                             {showError && <Alert severity="error">{notification.unauthenticated}</Alert>}
                             <CircularLoading />
                             <Typography>{session.status === 'loading' ? authorizedLayout.loading : authorizedLayout.redirectingToHomePage}</Typography>
