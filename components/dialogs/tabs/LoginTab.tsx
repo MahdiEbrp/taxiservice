@@ -11,11 +11,11 @@ import TextField from '@mui/material/TextField';
 import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { LoginDialogContext } from '../../../lib/context/LoginDialogContext';
 import { MessageDialogContext } from '../../../lib/context/MessageDialogContext';
-import { PostData, SigninResult } from '../../../lib/FetchData';
+import { PostData, SigninResult } from '../../../lib/fetchData';
 import { ThemeContext } from '../../../lib/context/ThemeContext';
 import { ToastContext } from '../../../lib/context/ToastContext';
-import { getResponseError } from '../../../lib/Language';
-import { isEmailValid, isPasswordValid } from '../../../lib/Validator';
+import { getResponseError } from '../../../lib/language';
+import { isEmailValid, isPasswordValid } from '../../../lib/validator';
 import { signIn } from 'next-auth/react';
 const LoginTab = () => {
 

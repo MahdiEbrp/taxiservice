@@ -1,5 +1,5 @@
 
-const Persian = {
+const persian = {
     settings: {
         displayName: 'فارسی',
         code: 'fa',
@@ -84,6 +84,7 @@ const Persian = {
         },
     },
     agenciesPage: {
+        activeAgency: 'آژانس فعال است.',
         addressOfBusiness: 'آدرس محل کسب و کار',
         addressWarning: 'آدرس باید دقیق و کامل وارد شود.',
         agencyMainPhoneNumber: 'شماره تلفن اصلی آژانس',
@@ -93,6 +94,8 @@ const Persian = {
         businessLocation: 'محل کسب و کار خود را بیابید:',
         editAddress: 'ویرایش آدرس',
         editPhone: 'ویرایش شماره تلفن',
+        endOfWorkingHours:'پایان ساعات کاری',
+        inactiveAgency: 'آژانس غیر فعال است.',
         localization: 'بومی سازی',
         localizationWarning: 'بومی سازی به دسترسی دقیق‌تر به داده‌ها کمک می‌کند، بنابراین لطفاً آن را با دقت انتخاب کنید.',
         mobileNumberPlaceholder: 'شماره تلفن همراه',
@@ -102,9 +105,9 @@ const Persian = {
         phoneNumberPlaceholder2: 'شماره تلفن محل کار 2',
         phoneNumbersError: 'داشتن شماره تلفن محل کار و شماره تلفن همراه ضروری است! (شماره تلفن ها باید حداقل 10 رقم باشند)',
         preparing: 'در حال آماده سازی...',
+        startOfWorkingHours:'شروع ساعات کاری',
         title: 'مدیریت آژانس ها',
         workingHours: 'ساعات کاری',
-        activeAgency:'آژانس فعال است.',
         editAgency: {
             title: 'ویرایش آژانس',
         },
@@ -179,4 +182,4 @@ const Persian = {
         passwordHelperText: "رمز عبور باید حداقل شامل هشت کاراکتر، شامل حداقل یک حرف بزرگ، یک عدد و یک نماد باشد. به عنوان مثال: 'Password_1'.",
     }
 };
-export default Persian;
+export default persian;

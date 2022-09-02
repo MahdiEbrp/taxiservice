@@ -1,5 +1,5 @@
 
-const English = {
+const english = {
     settings: {
         displayName: 'English',
         code: 'en',
@@ -84,6 +84,7 @@ const English = {
         },
     },
     agenciesPage: {
+        activeAgency: 'The agency is active.',
         addressOfBusiness:'Address of your business',
         addressWarning: 'The address should be entered accurately and completely.',
         agencyMainPhoneNumber: 'Agency Main Phone Number.',
@@ -93,6 +94,8 @@ const English = {
         businessLocation: 'Find your business location:',
         editAddress: 'Edit address',
         editPhone: 'Edit phone',
+        endOfWorkingHours:'End of work hours',
+        inactiveAgency: 'The agency is inactive.',
         localization: 'Localization',
         localizationWarning:'Localization helps to reach data more accurately, so choose it carefully please.',
         mobileNumberPlaceholder: 'Cell Phone Number',
@@ -102,9 +105,9 @@ const English = {
         phoneNumberPlaceholder2: 'Work Phone Number 2',
         phoneNumbersError:'It is necessary to have both a work number and a mobile number! (Phone numbers must have at least 10 digits)',
         preparing: 'Preparing...',
+        startOfWorkingHours:'Start of work hours',
         title: 'Agencies management',
         workingHours: 'Working hours',
-        activeAgency:'The agency is active.',
         editAgency: {
             title: 'Editing an agency',
         },
@@ -180,4 +183,4 @@ const English = {
     }
 };
 
-export default English;
+export default english;

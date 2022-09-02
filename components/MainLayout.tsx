@@ -1,5 +1,5 @@
 import CenterBox from './controls/CenterBox';
-import GetSettings from '../lib/Settings';
+import GetSettings from '../lib/settings';
 import Image from 'next/image';
 import LanguageDialog from './dialogs/LanguageDialog';
 import LoginDialog from './dialogs/LoginDialog';
@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import ThemePresenter from '../lib/ThemePresenter';
 import ToastHandler, { EmptyToast, ToastProps } from './controls/Toast';
-import getLanguage from '../lib/Language';
+import getLanguage from '../lib/language';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { LanguageDialogContext } from '../lib/context/LanguageDialogContext';
 import { LocalizationInfoContext } from '../lib/context/LocalizationInfoContext';
@@ -19,7 +19,7 @@ import { SessionProvider } from 'next-auth/react';
 import { SidebarContext } from '../lib/context/SidebarContext';
 import { ThemeContext } from '../lib/context/ThemeContext';
 import { ToastContext } from '../lib/context/ToastContext';
-import { defaultLocalizationInfo, LocalizationInfoType } from '../lib/Geography';
+import { defaultLocalizationInfo, LocalizationInfoType } from '../lib/geography';
 import { useRouter } from 'next/router';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 

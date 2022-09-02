@@ -14,7 +14,7 @@ import { LoginDialogContext } from '../lib/context/LoginDialogContext';
 import { SidebarContext } from '../lib/context/SidebarContext';
 import { ThemeContext } from '../lib/context/ThemeContext';
 import { ToastContext } from '../lib/context/ToastContext';
-import { UpdateSettings } from '../lib/Settings';
+import { UpdateSettings } from '../lib/settings';
 import { VscColorMode } from 'react-icons/vsc';
 import { useContext, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';

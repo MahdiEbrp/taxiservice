@@ -3,7 +3,7 @@ import { LanguageContext } from '../../../lib/context/LanguageContext';
 import { useContext, useRef } from 'react';
 import CenterBox from '../../controls/CenterBox';
 import Alert from '@mui/material/Alert';
-import { isPhoneNumberValid, onlyNumbersRegex } from '../../../lib/Validator';
+import { isPhoneNumberValid, onlyNumbersRegex } from '../../../lib/validator';
 import ForcedPatternInput from '../../controls/ForcedPatternInput';
 
 export type AgencyPhoneEditorProps = {

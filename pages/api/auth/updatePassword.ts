@@ -1,10 +1,10 @@
 import differenceInHours from 'date-fns/differenceInHours';
-import prismaClient from '../../../lib/PrismaClient';
+import prismaClient from '../../../lib/prismaClient';
 import sendEmail, { resetPasswordBody } from '../../../lib/Email';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Prisma } from '@prisma/client';
-import { getRandomString, Sh256Encrypt } from '../../../lib/Encryption';
-import { getCaptchaValidationStatus, isPasswordValid } from '../../../lib/Validator';
+import { getRandomString, Sh256Encrypt } from '../../../lib/encryption';
+import { getCaptchaValidationStatus, isPasswordValid } from '../../../lib/validator';
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (req.method !== 'POST')

@@ -1,18 +1,18 @@
-import English from './languages/English';
-import Persian from './languages/Persian';
+import english from './languages/English';
+import persian from './languages/Persian';
 
 const getLanguage = (locale:string | undefined) => {
     switch (locale) {
         case 'en':
-            return English;
+            return english;
         case 'en-US':
-            return English;
+            return english;
         case 'fa':
-            return Persian;
+            return persian;
         case 'fa-IR':
-            return Persian;
+            return persian;
         default:
-            return English;
+            return english;
     }
 };
 export const getResponseError = (error: string, language = getLanguage('en')) => {

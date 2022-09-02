@@ -16,7 +16,12 @@ export enum WorkingDays {
     Friday = 32,
     Saturday = 64
 }
-const WorkingDaysList = () => {
+export type WorkingDaysListProps = {
+    onWorkingDaysChanged?: (days: number) => void;
+};
+const WorkingDaysList = (props: WorkingDaysListProps) => {
+
+    const { onWorkingDaysChanged } = props;
 
     const { localizationInfo } = useContext(LocalizationInfoContext);
     const { language } = useContext(LanguageContext);
@@ -29,17 +34,21 @@ const WorkingDaysList = () => {
         return days.slice(firstDay).concat(days.slice(0, firstDay));
     };
     const days = orderedWorkdays();
-    //127 is the equal of 1111111 in binary
-    //that's mean that if the bit is 1 the day is active
-    const [activeDays, setActiveDays] = useState(127);
+    //if bit is set, day is active
+    const [activeDaysFlag, setActiveDaysFlag] = useState(127);
 
     const changeActiveDays = (day: number) => {
-        const newActiveDays = activeDays ^ 1 << day;
-        setActiveDays(newActiveDays);
+        const newActiveDays = activeDaysFlag ^ 1 << day;
+
+        if (onWorkingDaysChanged)
+            onWorkingDaysChanged(newActiveDays);
+
+        setActiveDaysFlag(newActiveDays);
     };
     const checkActiveDay = (day: number) => {
-        return (activeDays & 1 << day) > 0;
+        return (activeDaysFlag & 1 << day) > 0;
     };
+
     return (
         <>
             <Paper sx={{ width: '100%', maxWidth: 360 }} >

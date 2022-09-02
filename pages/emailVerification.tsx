@@ -11,9 +11,9 @@ import Typography from '@mui/material/Typography';
 import type { NextPage } from 'next';
 import { BiMessageSquareError } from 'react-icons/bi';
 import { FiUserCheck } from 'react-icons/fi';
-import { GetData } from '../lib/FetchData';
+import { GetData } from '../lib/fetchData';
 import { LanguageContext } from '../lib/context/LanguageContext';
-import { getResponseError } from '../lib/Language';
+import { getResponseError } from '../lib/language';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 const Verify: NextPage = () => {

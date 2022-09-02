@@ -11,11 +11,11 @@ import React, { useContext, useRef, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { FaHandPeace } from 'react-icons/fa';
 import { LanguageContext } from '../lib/context/LanguageContext';
-import { PostData } from '../lib/FetchData';
+import { PostData } from '../lib/fetchData';
 import { ThemeContext } from '../lib/context/ThemeContext';
 import { ToastContext } from '../lib/context/ToastContext';
-import { getResponseError } from '../lib/Language';
-import { isPasswordValid } from '../lib/Validator';
+import { getResponseError } from '../lib/language';
+import { isPasswordValid } from '../lib/validator';
 import { useRouter } from 'next/router';
 const ResetPasswordForm = () => {
     const [captcha, setCaptcha] = useState<string | false>(false);

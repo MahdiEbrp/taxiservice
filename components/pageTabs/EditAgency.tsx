@@ -12,7 +12,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CenterBox from '../controls/CenterBox';
 import Link from '@mui/material/Link';
 import { LanguageContext } from '../../lib/context/LanguageContext';
-import { LocalizationInfoType } from '../../lib/Geography';
+import { LocalizationInfoType } from '../../lib/geography';
 import { LocalizationInfoContext } from '../../lib/context/LocalizationInfoContext';
 import { ToastContext } from '../../lib/context/ToastContext';
 import { taggedItem } from '../controls/AutoCompletePlus';

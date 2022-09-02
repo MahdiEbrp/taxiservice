@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import differenceInHours from 'date-fns/differenceInHours';
-import { getRandomString } from '../../../lib/Encryption';
+import { getRandomString } from '../../../lib/encryption';
 import sendEmail, { verificationEmailBody } from '../../../lib/Email';
-import prismaClient from '../../../lib/PrismaClient';
+import prismaClient from '../../../lib/prismaClient';
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== 'GET')

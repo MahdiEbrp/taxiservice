@@ -5,7 +5,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
-import { CountryType } from '../../lib/Geography';
+import { CountryType } from '../../lib/geography';
 import { CountryListContext } from '../../lib/context/CountryListContext';
 
 const Agencies = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {

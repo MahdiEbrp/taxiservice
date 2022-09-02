@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import getLanguage from '../Language';
+import getLanguage from '../language';
 
 export const LanguageContext = createContext({
     language:getLanguage('en'),

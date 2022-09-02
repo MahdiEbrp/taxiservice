@@ -1,4 +1,4 @@
-import { GetData } from './FetchData';
+import { GetData } from './fetchData';
 
 export type cities = {
     features: Feature[];
