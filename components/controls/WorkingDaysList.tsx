@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useMemo, useContext, useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -7,15 +7,8 @@ import Paper from '@mui/material/Paper';
 import Switch from '@mui/material/Switch';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { LocalizationInfoContext } from '../../lib/context/LocalizationInfoContext';
-export enum WorkingDays {
-    Sunday = 1,
-    Monday = 2,
-    Tuesday = 4,
-    Wednesday = 8,
-    Thursday = 16,
-    Friday = 32,
-    Saturday = 64
-}
+import { flaggedWorkingDays, orderedWorkingDays } from '../../lib/workingDays';
+
 export type WorkingDaysListProps = {
     onWorkingDaysChanged?: (days: number) => void;
 };
@@ -28,25 +21,24 @@ const WorkingDaysList = (props: WorkingDaysListProps) => {
 
     const { settings } = language;
 
-    const orderedWorkdays = () => {
-        const days = settings.days;
-        const firstDay = localizationInfo.firstDayOfWeek;
-        return days.slice(firstDay).concat(days.slice(0, firstDay));
-    };
-    const days = orderedWorkdays();
+    const days = useMemo(() => {
+        return orderedWorkingDays(settings.days, localizationInfo.firstDayOfWeek);
+    }, [settings.days, localizationInfo.firstDayOfWeek]);
+
     //if bit is set, day is active
     const [activeDaysFlag, setActiveDaysFlag] = useState(127);
 
+    const workdays = useMemo(() => {
+        return flaggedWorkingDays(activeDaysFlag);
+    }, [activeDaysFlag]);
+
     const changeActiveDays = (day: number) => {
-        const newActiveDays = activeDaysFlag ^ 1 << day;
+        const newActiveDays = workdays.changeActiveDays(day);
 
         if (onWorkingDaysChanged)
             onWorkingDaysChanged(newActiveDays);
 
         setActiveDaysFlag(newActiveDays);
-    };
-    const checkActiveDay = (day: number) => {
-        return (activeDaysFlag & 1 << day) > 0;
     };
 
     return (
@@ -57,7 +49,7 @@ const WorkingDaysList = (props: WorkingDaysListProps) => {
                         <ListItemButton key={index} onClick={() => changeActiveDays(index)}>
                             <ListItem key={index} >
                                 <ListItemText primary={day} />
-                                <Switch checked={checkActiveDay(index)} />
+                                <Switch checked={workdays.isDayActive(index)} />
                             </ListItem>
                         </ListItemButton>
                     )}
