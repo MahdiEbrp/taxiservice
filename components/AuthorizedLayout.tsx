@@ -5,9 +5,9 @@ import Head from 'next/head';
 import Typography from '@mui/material/Typography';
 import { LanguageContext } from '../lib/context/LanguageContext';
 import { ReactElement, useContext, useEffect, useState } from 'react';
-import { ToastContext } from '../lib/context/ToastContext';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
+import Alert from '@mui/material/Alert';
 
 const AuthorizedLayout = (props: { children: ReactElement; }) => {
 
@@ -15,21 +15,16 @@ const AuthorizedLayout = (props: { children: ReactElement; }) => {
     const router = useRouter();
 
     const { language } = useContext(LanguageContext);
-    const { setToast } = useContext(ToastContext);
 
     const { settings, authorizedLayout, notification } = language;
     const { direction } = settings;
+    const [showError, setShowError] = useState(false);
 
-    const [showNotifications, setShowNotification] = useState(false);
 
-    if (showNotifications) {
-        setToast({ id: Date.now(), message: notification.unauthenticated, alertColor: 'error' });
-        setShowNotification(false);
-    }
 
     useEffect(() => {
         if (session.status === 'unauthenticated') {
-            setShowNotification(true);
+            setShowError(true);
             router.push('/');
         }
     }, [session, router]);
@@ -45,6 +40,7 @@ const AuthorizedLayout = (props: { children: ReactElement; }) => {
                     </Head>
                     <Card sx={{ dir: direction }}>
                         <CardContent>
+                            {showError && <Alert severity="error">{notification.unauthenticated}</Alert>}
                             <CircularLoading />
                             <Typography>{session.status === 'loading' ? authorizedLayout.loading : authorizedLayout.redirectingToHomePage}</Typography>
                         </CardContent>
