@@ -35,7 +35,7 @@ const english = {
         invalidConfirmPassword: 'There is a difference between a confirm password and a password entered!',
         invalidEmailFormat: 'The email format is incorrect.',
         invalidPasswordFormat: 'The password format is incorrect.',
-        selectAgency: 'Please select an agency.',
+        selectAgency: 'There is no agency selected or the agency name is empty.',
         selectCountry: 'Please select a country.',
         successfullyLogin: 'Congratulations, you have successfully logged in.',
         unauthenticated: 'You are not logged in!',
@@ -111,6 +111,7 @@ const english = {
         startOfWorkingHours:'Start of work hours',
         title: 'Agencies management',
         workingHours: 'Working hours',
+        maximumLengthOfAgencyName: 'The maximum length of the agency name is 50 characters.',
         editAgency: {
             title: 'Editing an agency',
         },

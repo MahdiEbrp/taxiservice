@@ -40,12 +40,15 @@ const AgencyPhoneEditor = (props: AgencyPhoneEditorProps) => {
         <>
             <TabPanel wrapMode={true} activeIndex={currentStep.toString()} index='1'>
                 <ForcedPatternInput pattern={onlyNumbersRegex} onBlur={() => onValidationChanged(phoneNumbersValidation())}
-                    inputRef={phoneNumber1Ref} required helperText={agenciesPage.agencyMainPhoneNumber} dir='ltr' type='tel' label={agenciesPage.phoneNumberPlaceholder1} />
+                    inputRef={phoneNumber1Ref} required helperText={agenciesPage.agencyMainPhoneNumber} dir='ltr'
+                    type='tel' label={agenciesPage.phoneNumberPlaceholder1} inputProps={{ maxLength: 30 }} />
                 <ForcedPatternInput pattern={onlyNumbersRegex} onBlur={() => onValidationChanged(phoneNumbersValidation())}
-                    inputRef={phoneNumber2Ref} dir='ltr' type='tel' helperText={agenciesPage.agencySecondaryPhoneNumber} label={agenciesPage.phoneNumberPlaceholder2} />
+                    inputRef={phoneNumber2Ref} dir='ltr' type='tel' helperText={agenciesPage.agencySecondaryPhoneNumber}
+                    label={agenciesPage.phoneNumberPlaceholder2} inputProps={{ maxLength: 30 }} />
                 <CenterBox>
                     <ForcedPatternInput pattern={onlyNumbersRegex} onBlur={() => onValidationChanged(phoneNumbersValidation())}
-                        inputRef={mobileNumberRef} required dir='ltr' type='tel' label={agenciesPage.mobileNumberPlaceholder} />
+                        inputRef={mobileNumberRef} required dir='ltr' type='tel' label={agenciesPage.mobileNumberPlaceholder}
+                        inputProps={{ maxLength: 30 }}/>
                     <Alert severity='info'>{agenciesPage.mobileNumberVisibility}</Alert>
                 </CenterBox>
             </TabPanel>

@@ -51,7 +51,8 @@ const AgencyAddress = (props: AgencyAddressProps) => {
             </CenterBox>
             <Map currentLocation={location?.tag || [localizationInfo.lat, localizationInfo.long]} whenReady={(isReady) => setMapReady(isReady)} />
             {!mapReady && <CircularLoading />}
-            <TextField multiline required onBlur={e => updateAddress(e.target.value)} label={agenciesPage.businessLocation} sx={{ width: '70%' }} variant='filled' />
+            <TextField multiline required onBlur={e => updateAddress(e.target.value)} label={agenciesPage.businessLocation} sx={{ width: '70%' }}
+                variant='filled' inputProps={{ maxLength: 300 }} />
             <Alert severity='warning'>
                 {agenciesPage.addressWarning}
             </Alert>

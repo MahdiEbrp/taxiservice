@@ -35,7 +35,7 @@ const persian = {
         invalidConfirmPassword: 'بین تایید رمز عبور و رمز عبور وارد شده تفاوت وجود دارد!',
         invalidEmailFormat: 'فرمت ایمیل نادرست است.',
         invalidPasswordFormat: 'فرمت رمز عبور نادرست است.',
-        selectAgency: 'لطفا یک آژانس انتخاب کنید.',
+        selectAgency: 'هیچ آژانسی انتخاب نشده است یا نام آژانس خالی است.',
         selectCountry: 'لطفا یک کشور انتخاب کنید.',
         successfullyLogin: 'تبریک می گویم، شما با موفقیت وارد سیستم شدید.',
         unauthenticated: 'شما وارد سیستم نشده اید!',
@@ -111,6 +111,7 @@ const persian = {
         startOfWorkingHours:'شروع ساعات کاری',
         title: 'مدیریت آژانس ها',
         workingHours: 'ساعات کاری',
+        maximumLengthOfAgencyName: 'حداکثر طول نام آژانس 50 کاراکتر است.',
         editAgency: {
             title: 'ویرایش آژانس',
         },
