@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 export const flaggedWorkingDays = (activeDaysFlag: number) => {
 
@@ -29,4 +30,13 @@ export const orderedWorkingDays = (days: string[], firstDayOfWeek: number) => {
         return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     return days.slice(firstDayOfWeek).concat(days.slice(0, firstDayOfWeek));
+};
+
+export const convertTimeToUtcIso = (hour: number, minute: number) => {
+
+    const date = new Date();
+    date.setHours(hour);
+    date.setMinutes(minute);
+    date.setSeconds(0);
+    return moment(date).utc().toISOString();
 };

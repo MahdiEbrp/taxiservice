@@ -7,7 +7,7 @@ import Paper from '@mui/material/Paper';
 import Switch from '@mui/material/Switch';
 import { LanguageContext } from '../../lib/context/LanguageContext';
 import { LocalizationInfoContext } from '../../lib/context/LocalizationInfoContext';
-import { flaggedWorkingDays, orderedWorkingDays } from '../../lib/workingDays';
+import { flaggedWorkingDays, orderedWorkingDays } from '../../lib/dateTimeLocalization';
 
 export type WorkingDaysListProps = {
     onWorkingDaysChanged?: (days: number) => void;
