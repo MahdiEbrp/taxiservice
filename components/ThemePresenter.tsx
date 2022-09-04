@@ -1,5 +1,5 @@
 import { ReactElement, useContext, useMemo } from 'react';
-import { ThemeContext } from '../lib/context/ThemeContext';
+import { ThemeContext } from './context/ThemeContext';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 const ThemePresenter = (props: { children: ReactElement | ReactElement[]; }) => {

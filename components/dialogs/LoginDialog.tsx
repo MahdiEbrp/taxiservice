@@ -9,8 +9,8 @@ import Tab from '@mui/material/Tab';
 import TabPanel from '../controls/TabPanel';
 import Tabs from '@mui/material/Tabs';
 import UserInformationTab from './tabs/UserInformationTab';
-import { LanguageContext } from '../../lib/context/LanguageContext';
-import { LoginDialogContext } from '../../lib/context/LoginDialogContext';
+import { LanguageContext } from '../context/LanguageContext';
+import { LoginDialogContext } from '../context/LoginDialogContext';
 import { useSession } from 'next-auth/react';
 
 const LoginDialog = () => {

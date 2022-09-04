@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { CountryType } from '../geography';
+import { CountryType } from '../../lib/geography';
 
 export const CountryListContext = createContext<{
     countryList: CountryType | null;

@@ -11,10 +11,10 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import CenterBox from '../controls/CenterBox';
 import Link from '@mui/material/Link';
-import { LanguageContext } from '../../lib/context/LanguageContext';
+import { LanguageContext } from '../context/LanguageContext';
 import { LocalizationInfoType } from '../../lib/geography';
-import { LocalizationInfoContext } from '../../lib/context/LocalizationInfoContext';
-import { ToastContext } from '../../lib/context/ToastContext';
+import { LocalizationInfoContext } from '../context/LocalizationInfoContext';
+import { ToastContext } from '../context/ToastContext';
 import { taggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useEffect, useState } from 'react';
 
@@ -112,7 +112,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
                 <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap', }}>
                     <BreadcrumbsSteps />
                     <CenterBox>
-                        <AgencySelector currentStep={currentStep} onAgencyChanged={(agency) => setSelectedAgency(agency)}
+                        <AgencySelector editMode={editMode} currentStep={currentStep} onAgencyChanged={(agency) => setSelectedAgency(agency)}
                             onCountryCodeChanged={(code) => setLocalization(code)} />
                         <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setAllPhoneValid(isValid)} />
                         <AgencyAddress currentStep={currentStep} onAddressChanged={(address) => setAddress(address)} onLocationChanged={(location) => setLocation(location)} />

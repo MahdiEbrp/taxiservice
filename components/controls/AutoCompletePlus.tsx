@@ -2,7 +2,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Popper from '@mui/material/Popper';
 import React, { useContext } from 'react';
 import TextField from '@mui/material/TextField';
-import { LanguageContext } from '../../lib/context/LanguageContext';
+import { LanguageContext } from '../context/LanguageContext';
 import { SxProps, Theme } from '@mui/material/styles';
 
 export type taggedItem<T> = {

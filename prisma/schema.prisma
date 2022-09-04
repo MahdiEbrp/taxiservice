@@ -11,14 +11,32 @@ datasource db {
 }
 
 model User {
-  id               String   @id @default(cuid()) @map("_id")
-  displayName      String?
-  email            String   @unique
+  id               String    @id @default(cuid()) @map("_id")
+  email            String    @unique
   password         String
-  createdAt        DateTime @db.Timestamptz
-  verifiedCodeDate DateTime @db.Timestamptz
+  createdAt        DateTime  @db.Timestamptz
+  verifiedCodeDate DateTime  @db.Timestamptz
   verifiedCode     String
-  verified         Boolean  @default(false)
+  verified         Boolean   @default(false)
   resetCodeDate    DateTime? @db.Timestamptz
   resetCode        String?
+  Agency           Agency[]
+}
+
+model Agency {
+  id                  String   @id @default(cuid()) @map("_id")
+  agencyName          String   @unique @db.VarChar(50)
+  isEnable            Boolean  @default(true)
+  phoneNumber1        String   @db.VarChar(30)
+  phoneNumber2        String   @db.VarChar(30)
+  mobileNumber        String   @db.VarChar(30)
+  address             String   @db.VarChar(300)
+  latitude            Float
+  longitude           Float
+  workingDays         Int
+  startOfWorkingHours DateTime @db.Timestamptz
+  endOfWorkingHours   DateTime @db.Timestamptz
+  createdAt           DateTime @db.Timestamptz
+  user                User     @relation(fields: [userId], references: [id])
+  userId              String
 }

@@ -5,8 +5,8 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import Paper from '@mui/material/Paper';
 import Switch from '@mui/material/Switch';
-import { LanguageContext } from '../../lib/context/LanguageContext';
-import { LocalizationInfoContext } from '../../lib/context/LocalizationInfoContext';
+import { LanguageContext } from '../context/LanguageContext';
+import { LocalizationInfoContext } from '../context/LocalizationInfoContext';
 import { flaggedWorkingDays, orderedWorkingDays } from '../../lib/dateTimeLocalization';
 
 export type WorkingDaysListProps = {

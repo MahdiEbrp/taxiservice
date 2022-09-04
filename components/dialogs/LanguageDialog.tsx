@@ -8,9 +8,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import GetLanguage from '../../lib/language';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import { LanguageContext } from '../../lib/context/LanguageContext';
-import { LanguageDialogContext } from '../../lib/context/LanguageDialogContext';
-import { ToastContext } from '../../lib/context/ToastContext';
+import { LanguageContext } from '../context/LanguageContext';
+import { LanguageDialogContext } from '../context/LanguageDialogContext';
+import { ToastContext } from '../context/ToastContext';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 

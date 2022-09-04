@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import WorkingDaysList from '../../controls/WorkingDaysList';
 import moment, { Moment } from 'moment';
-import { LanguageContext } from '../../../lib/context/LanguageContext';
+import { LanguageContext } from '../../context/LanguageContext';
 import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers';
 import { useContext, useState } from 'react';
 

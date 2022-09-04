@@ -12,7 +12,7 @@ import type { NextPage } from 'next';
 import { BiMessageSquareError } from 'react-icons/bi';
 import { FiUserCheck } from 'react-icons/fi';
 import { getData } from '../lib/fetchData';
-import { LanguageContext } from '../lib/context/LanguageContext';
+import { LanguageContext } from '../components/context/LanguageContext';
 import { getResponseError } from '../lib/language';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';

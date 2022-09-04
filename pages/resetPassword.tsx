@@ -4,7 +4,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Head from 'next/head';
 import React, { useContext } from 'react';
 import ResetPasswordForm from '../components/ResetPasswordForm';
-import { LanguageContext } from '../lib/context/LanguageContext';
+import { LanguageContext } from '../components/context/LanguageContext';
 import { NextPage } from 'next';
 const ResetPassword: NextPage = () => {
 

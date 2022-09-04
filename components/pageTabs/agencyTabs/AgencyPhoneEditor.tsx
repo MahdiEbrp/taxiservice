@@ -1,5 +1,5 @@
 import TabPanel from '../../controls/TabPanel';
-import { LanguageContext } from '../../../lib/context/LanguageContext';
+import { LanguageContext } from '../../context/LanguageContext';
 import { useContext, useRef } from 'react';
 import CenterBox from '../../controls/CenterBox';
 import Alert from '@mui/material/Alert';

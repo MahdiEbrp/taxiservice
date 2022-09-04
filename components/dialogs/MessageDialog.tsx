@@ -4,8 +4,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
-import { LanguageContext } from '../../lib/context/LanguageContext';
-import { MessageDialogContext } from '../../lib/context/MessageDialogContext';
+import { LanguageContext } from '../context/LanguageContext';
+import { MessageDialogContext } from '../context/MessageDialogContext';
 import { useContext } from 'react';
 
 export type MessageDialogProps = {

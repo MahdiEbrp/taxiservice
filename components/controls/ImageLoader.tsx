@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Typography from '@mui/material/Typography';
 import { BsEmojiDizzy } from 'react-icons/bs';
 import { ElementType, useContext, useState } from 'react';
-import { LanguageContext } from '../../lib/context/LanguageContext';
+import { LanguageContext } from '../context/LanguageContext';
 
 export type ImageLoaderProps= {
     src: string,

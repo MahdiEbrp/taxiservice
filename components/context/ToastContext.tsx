@@ -1,5 +1,5 @@
 import { createContext, Dispatch } from 'react';
-import { EmptyToast, ToastProps } from '../../components/controls/Toast';
+import { EmptyToast, ToastProps } from '../controls/Toast';
 export const ToastContext = createContext<{
     toast: ToastProps;
     setToast: Dispatch<ToastProps>;

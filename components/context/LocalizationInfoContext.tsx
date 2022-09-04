@@ -1,5 +1,5 @@
 import { createContext, Dispatch } from 'react';
-import { defaultLocalizationInfo, LocalizationInfoType } from '../geography';
+import { defaultLocalizationInfo, LocalizationInfoType } from '../../lib/geography';
 export const LocalizationInfoContext = createContext<{
     localizationInfo: LocalizationInfoType;
     setLocalizationInfo: Dispatch<LocalizationInfoType>;

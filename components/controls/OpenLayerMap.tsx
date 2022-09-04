@@ -1,7 +1,7 @@
 import { LatLngExpression } from 'leaflet';
 import { useContext, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, ScaleControl, useMap, Marker, Popup, useMapEvents } from 'react-leaflet';
-import { LanguageContext } from '../../lib/context/LanguageContext';
+import { LanguageContext } from '../context/LanguageContext';
 
 export type MapProps = {
     currentLocation: number[];

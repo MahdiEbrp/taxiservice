@@ -2,11 +2,11 @@ import AuthorizedLayout from '../../components/AuthorizedLayout';
 import ModifyAgency from '../../components/pageTabs/ModifyAgency';
 import Head from 'next/head';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { LanguageContext } from '../../lib/context/LanguageContext';
+import { LanguageContext } from '../../components/context/LanguageContext';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { CountryType } from '../../lib/geography';
-import { CountryListContext } from '../../lib/context/CountryListContext';
+import { CountryListContext } from '../../components/context/CountryListContext';
 
 const Agencies = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {
 

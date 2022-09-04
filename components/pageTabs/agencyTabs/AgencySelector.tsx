@@ -1,9 +1,9 @@
 import Alert from '@mui/material/Alert';
 import AutoCompletePlus, { taggedItem } from '../../controls/AutoCompletePlus';
 import TabPanel from '../../controls/TabPanel';
-import { LanguageContext } from '../../../lib/context/LanguageContext';
+import { LanguageContext } from '../../context/LanguageContext';
 import { useContext, useEffect, useState } from 'react';
-import { CountryListContext } from '../../../lib/context/CountryListContext';
+import { CountryListContext } from '../../context/CountryListContext';
 import TextField from '@mui/material/TextField';
 
 export type AgencySelectorProps = {

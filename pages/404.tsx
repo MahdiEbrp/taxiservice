@@ -9,7 +9,7 @@ import CircularLoading from '../components/controls/CircularLoading';
 import Head from 'next/head';
 import ImageLoader from '../components/controls/ImageLoader';
 import Typography from '@mui/material/Typography';
-import { LanguageContext } from '../lib/context/LanguageContext';
+import { LanguageContext } from '../components/context/LanguageContext';
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 const NotFound = () => {
