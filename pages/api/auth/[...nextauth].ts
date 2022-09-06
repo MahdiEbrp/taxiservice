@@ -50,7 +50,7 @@ export const options = {
                             return null;
                         }
                         catch (e) {
-                            log.error(e);
+                            log.error(JSON.stringify(e));
                             throw new Error('ERR_UNKNOWN_AUTHORIZING_USER');
                         }
                     }
