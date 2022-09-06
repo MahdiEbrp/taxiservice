@@ -9,10 +9,11 @@ import ForcedPatternInput from '../../controls/ForcedPatternInput';
 export type AgencyPhoneEditorProps = {
     currentStep: number;
     onValidationChanged: (isValid: boolean) => void;
-}
+    onValuesChange: (phoneNumber1: string,phoneNumber2:string,mobileNumber:string) => void;
+};
 const AgencyPhoneEditor = (props: AgencyPhoneEditorProps) => {
 
-    const { currentStep, onValidationChanged } = props;
+    const { currentStep, onValidationChanged, onValuesChange } = props;
 
     const phoneNumber1Ref = useRef<HTMLInputElement>(null);
     const phoneNumber2Ref = useRef<HTMLInputElement>(null);
@@ -22,11 +23,13 @@ const AgencyPhoneEditor = (props: AgencyPhoneEditorProps) => {
 
     const { agenciesPage } = language;
 
-
     const phoneNumbersValidation = () => {
+
         const phoneNumber1 = phoneNumber1Ref.current?.value;
         const phoneNumber2 = phoneNumber2Ref.current?.value;
         const mobileNumber = mobileNumberRef.current?.value;
+
+        onValuesChange(phoneNumber1 || '', phoneNumber2 || '', mobileNumber || '');
         if (phoneNumber1 && mobileNumber) {
             const requiredValidation = isPhoneNumberValid(phoneNumber1) && isPhoneNumberValid(mobileNumber);
             if (phoneNumber2)
@@ -48,7 +51,7 @@ const AgencyPhoneEditor = (props: AgencyPhoneEditorProps) => {
                 <CenterBox>
                     <ForcedPatternInput pattern={onlyNumbersRegex} onBlur={() => onValidationChanged(phoneNumbersValidation())}
                         inputRef={mobileNumberRef} required dir='ltr' type='tel' label={agenciesPage.mobileNumberPlaceholder}
-                        inputProps={{ maxLength: 30 }}/>
+                        inputProps={{ maxLength: 30 }} />
                     <Alert severity='info'>{agenciesPage.mobileNumberVisibility}</Alert>
                 </CenterBox>
             </TabPanel>

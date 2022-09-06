@@ -28,6 +28,7 @@ export const postData = async (url: string, data: unknown) => {
 export const getData = async (url: string) => {
     try {
         const response = await axios.get(url, { timeout: timeout });
+
         return response;
 
     }

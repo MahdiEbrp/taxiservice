@@ -8,32 +8,38 @@ import TextField from '@mui/material/TextField';
 
 export type AgencySelectorProps = {
     currentStep: number;
-    onAgencyChanged?: (agency: string) => void;
-    onCountryCodeChanged?: (country: string) => void;
+    onValidationChanged: (isValid: boolean) => void;
+    onValuesChanged: (agencyName: string, countryCode: string) => void;
     editMode: boolean;
 };
 
 const AgencySelector = (props: AgencySelectorProps) => {
 
-    const { currentStep, onAgencyChanged, onCountryCodeChanged, editMode } = props;
+    const { currentStep, onValidationChanged, onValuesChanged, editMode } = props;
 
     const { language } = useContext(LanguageContext);
     const { countryList } = useContext(CountryListContext);
+
+    const [agencyName, setAgencyName] = useState('');
+    const [countryCode, setCountryCode] = useState('');
 
     const { agenciesPage } = language;
 
     const [items, setItems] = useState<taggedItem<string>[]>();
 
     const agencyChanged = (agency: string) => {
-        if (onAgencyChanged)
-            onAgencyChanged(agency);
+        setAgencyName(agency);
+        onValuesChanged(agency, countryCode);
     };
 
     const countryCodeChanged = (country: string) => {
-        if (onCountryCodeChanged)
-            onCountryCodeChanged(country);
+        setCountryCode(country);
+        onValuesChanged(agencyName, country);
     };
 
+    useEffect(() => {
+        onValidationChanged(agencyName.length > 0 && countryCode.length > 0);
+    }, [agencyName, countryCode, onValidationChanged]);
 
     useEffect(() => {
         if (countryList) {

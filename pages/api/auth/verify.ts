@@ -5,6 +5,7 @@ import sendEmail, { verificationEmailBody } from '../../../lib/Email';
 import prismaClient from '../../../lib/prismaClient';
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
+
     if (req.method !== 'GET')
         return res.status(405).json({ error: 'ERR_INVALID_METHOD' });
     const code = req.query['code'] as string;
@@ -17,19 +18,22 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 verifiedCode: code
             }
         });
+
         if (!user) {
             return res.status(400).json({ error: 'ERR_INVALID_REQUEST' });
         }
+        if (user.verified)
+            return res.status(200).end();
 
         const diff = differenceInHours(new Date(), user.verifiedCodeDate);
         const verificationCode = getRandomString(5) + Date.now().toString();
 
         if (diff > 24) {
-            const result= await prisma.user.update({
+            const result = await prisma.user.update({
                 where: { id: user.id },
                 data: {
                     verifiedCode: verificationCode,
-                    verifiedCodeDate:new Date()
+                    verifiedCodeDate: new Date()
                 }
             });
             if (result) {
@@ -45,7 +49,6 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
             where: { id: user.id },
             data: {
                 verified: true,
-                verifiedCode: '',
             }
         });
 

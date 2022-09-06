@@ -17,18 +17,32 @@ import { LocalizationInfoContext } from '../context/LocalizationInfoContext';
 import { ToastContext } from '../context/ToastContext';
 import { taggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useEffect, useState } from 'react';
+import { postData } from '../../lib/fetchData';
 
 const ModifyAgency = (props: { editMode: boolean; }) => {
 
     const { editMode } = props;
 
     const [currentStep, setCurrentStep] = useState(0);
-    const [selectedAgency, setSelectedAgency] = useState('');
-    const [selectedCountryCode, setSelectedCountryCode] = useState('');
-    const [allPhoneValid, setAllPhoneValid] = useState(false);
+
+    const [isAgencyTabValid, setIsAgencyTabValid] = useState(false);
+    const [isPhoneTabValid, setIsPhoneTabValid] = useState(false);
+    const [isAddressTabValid, setIsAddressTabValid] = useState(false);
+    const [isWorkingHoursTabValid, setIsWorkingHoursTabValid] = useState(false);
+
     const [showError, setShowError] = useState(false);
-    const [address, setAddress] = useState('');
+
+    const [agencyName, setAgencyName] = useState('');
+    const [countryCode, setCountryCode] = useState('');
+    const [phoneNumber1, setPhoneNumber1] = useState('');
+    const [phoneNumber2, setPhoneNumber2] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
     const [location, setLocation] = useState<taggedItem<number[]> | null>(null);
+    const [address, setAddress] = useState('');
+    const [isAgencyEnabled, setAgencyEnabled] = useState(false);
+    const [workingDays, setWorkingDays] = useState(127);
+    const [startOfWorkingHours, setStartOfWorkingHours] = useState('');
+    const [endOfWorkingHours, setEndOfWorkingHours] = useState('');
 
     const { language } = useContext(LanguageContext);
     const { setLocalizationInfo } = useContext(LocalizationInfoContext);
@@ -44,21 +58,18 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
 
         setShowError(false);
 
-        if (!selectedAgency) {
-            setToast({ id: Date.now(), message: notification.selectAgency, alertColor: 'info' });
+        if (!isAgencyTabValid) {
+            setToast({ id: Date.now(), message: !countryCode ? notification.selectCountry : notification.selectAgency, alertColor: 'error' });
             return;
         }
-        if (!selectedCountryCode) {
-            setToast({ id: Date.now(), message: notification.selectCountry, alertColor: 'error' });
-            return;
-        }
-        if (!allPhoneValid && currentStep === 1) {
+
+        if (!isPhoneTabValid && currentStep === 1) {
             setToast({ id: Date.now(), message: notification.incorrectFormat, alertColor: 'error' });
             setShowError(true);
             return;
         }
 
-        if (!location && address.length < 3 && currentStep === 2) {
+        if (!isAddressTabValid && currentStep === 2) {
             setToast({ id: Date.now(), message: notification.addressError, alertColor: 'error' });
             return;
         }
@@ -66,15 +77,15 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     };
 
     useEffect(() => {
-        if (selectedAgency)
-            setTitle(selectedAgency);
+        if (agencyName)
+            setTitle(agencyName);
         else
             setTitle(editAgency.title);
-    }, [editAgency.title, selectedAgency, title]);
+    }, [editAgency.title, agencyName, title]);
 
     const setLocalization = async (countryCode: string) => {
 
-        setSelectedCountryCode(countryCode);
+        setCountryCode(countryCode);
 
         if (!countryCode)
             return;
@@ -105,6 +116,29 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
         );
     };
 
+    const sendModifyRequest = async () => {
+
+        if (!isWorkingHoursTabValid)
+        {
+            setToast({ id: Date.now(), message: notification.invalidWorkingHoursTab, alertColor: 'error' });
+            return;
+        }
+
+        const modifyType = editMode ? 'update' : 'insert';
+        const values = {
+            agencyName: agencyName, isEnable: isAgencyEnabled,
+            phoneNumber1: phoneNumber1, phoneNumber2: phoneNumber2, mobileNumber: mobileNumber,
+            address: address, latitude: location?.tag[0] || 0, longitude: location?.tag[1] || 0, workingDays: workingDays
+            , startOfWorkingHours: startOfWorkingHours, endOfWorkingHours: endOfWorkingHours
+        };
+        // eslint-disable-next-line quotes
+        const response = await postData(`${process.env.NEXT_PUBLIC_WEB_URL}/api/agency/${modifyType}`, values);
+        if (!response) {
+            setToast({ id: Date.now(), message:'ERR', alertColor: 'error' });
+            return;
+        }
+
+    };
     return (
         <>
             <Card dir={direction}>
@@ -112,18 +146,35 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
                 <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap', }}>
                     <BreadcrumbsSteps />
                     <CenterBox>
-                        <AgencySelector editMode={editMode} currentStep={currentStep} onAgencyChanged={(agency) => setSelectedAgency(agency)}
-                            onCountryCodeChanged={(code) => setLocalization(code)} />
-                        <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setAllPhoneValid(isValid)} />
-                        <AgencyAddress currentStep={currentStep} onAddressChanged={(address) => setAddress(address)} onLocationChanged={(location) => setLocation(location)} />
-                        <AgencyWorkingHours currentStep={currentStep} />
+                        <AgencySelector editMode={editMode} currentStep={currentStep} onValidationChanged={(isValid) => setIsAgencyTabValid(isValid)}
+                            onValuesChanged={(agency, countryCode) => {
+                                setAgencyName(agency);
+                                setLocalization(countryCode);
+                            }} />
+                        <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setIsPhoneTabValid(isValid)} onValuesChange={(phone1, phone2, mobile) => {
+                            setPhoneNumber1(phone1);
+                            setPhoneNumber2(phone2);
+                            setMobileNumber(mobile);
+                        }} />
+                        <AgencyAddress currentStep={currentStep} onValidationChanged={(isValid) => setIsAddressTabValid(isValid)}
+                            onValuesChange={(address, location) => {
+                                setAddress(address);
+                                setLocation(location);
+                            }} />
+                        <AgencyWorkingHours currentStep={currentStep} onValidationChanged={(isValid) => setIsWorkingHoursTabValid(isValid)}
+                            onValuesChange={(isEnable, workingDays, startOfWorkingHours, endOfWorkingHours) => {
+                                setWorkingDays(workingDays);
+                                setStartOfWorkingHours(startOfWorkingHours.clone().utc().toISOString());
+                                setEndOfWorkingHours(endOfWorkingHours.clone().utc().toISOString());
+                                setAgencyEnabled(isEnable);
+                            }} />
                         {showError && <Alert severity='error'>{agenciesPage.phoneNumbersError}</Alert>}
                     </CenterBox>
                 </CardContent>
                 <CardActions sx={{ flexDirection: 'row', gap: '1rem' }}>
                     <Button disabled={currentStep === 0} variant='contained' color='primary' onClick={() => gotoStep(currentStep - 1)} >{agenciesPage.previous}</Button>
                     <Button disabled={isLastStep} variant='contained' color='primary' onClick={nextStep} >{agenciesPage.next}</Button>
-                    {isLastStep && <Button variant='contained' color='primary' >{editMode ? agenciesPage.update : agenciesPage.add}</Button>}
+                    {isLastStep && <Button variant='contained' color='primary' onClick={() => sendModifyRequest()}>{editMode ? agenciesPage.update : agenciesPage.add}</Button>}
                 </CardActions>
             </Card>
 

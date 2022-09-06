@@ -39,6 +39,9 @@ const persian = {
         selectCountry: 'لطفا یک کشور انتخاب کنید.',
         successfullyLogin: 'تبریک می گویم، شما با موفقیت وارد سیستم شدید.',
         unauthenticated: 'شما وارد سیستم نشده اید!',
+        startDateError: 'در ساعات کاری، زمان شروع باید زودتر از زمان پایان باشد.',
+        endDateError: 'در ساعات کاری، زمان پایان باید بعدتر از زمان شروع باشد.',
+        invalidWorkingHoursTab:'هیچ روز انتخابی وجود ندارد یا زمان شروع بیشتر از زمان پایان است.'
     },
     authorizedLayout: {
         loading: 'در حال بارگذاری...',
@@ -94,7 +97,7 @@ const persian = {
         businessLocation: 'محل کسب و کار خود را بیابید:',
         editAddress: 'ویرایش آدرس',
         editPhone: 'ویرایش شماره تلفن',
-        endOfWorkingHours:'پایان ساعات کاری',
+        endOfWorkingHours: 'پایان ساعات کاری',
         inactiveAgency: 'آژانس غیر فعال است.',
         localization: 'بومی سازی',
         localizationWarning: 'بومی سازی به دسترسی دقیق‌تر به داده‌ها کمک می‌کند، بنابراین لطفاً آن را با دقت انتخاب کنید.',
@@ -108,7 +111,7 @@ const persian = {
         phoneNumberPlaceholder2: 'شماره تلفن محل کار 2',
         phoneNumbersError: 'داشتن شماره تلفن محل کار و شماره تلفن همراه ضروری است! (شماره تلفن ها باید حداقل 10 رقم باشند)',
         preparing: 'در حال آماده سازی...',
-        startOfWorkingHours:'شروع ساعات کاری',
+        startOfWorkingHours: 'شروع ساعات کاری',
         title: 'مدیریت آژانس ها',
         workingHours: 'ساعات کاری',
         maximumLengthOfAgencyName: 'حداکثر طول نام آژانس 50 کاراکتر است.',

@@ -9,6 +9,10 @@ CREATE TABLE "User" (
     "verified" BOOLEAN NOT NULL DEFAULT false,
     "resetCodeDate" TIMESTAMPTZ,
     "resetCode" TEXT,
+    "profilePicture" TEXT,
+    "name" TEXT,
+    "localisation" TEXT NOT NULL DEFAULT 'US',
+    "language" TEXT NOT NULL DEFAULT 'en',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("_id")
 );

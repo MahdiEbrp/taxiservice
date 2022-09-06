@@ -8,55 +8,66 @@ import WorkingDaysList from '../../controls/WorkingDaysList';
 import moment, { Moment } from 'moment';
 import { LanguageContext } from '../../context/LanguageContext';
 import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { ToastContext } from '../../context/ToastContext';
 
 export type WorkingHoursProps = {
     currentStep: number;
-    onActiveDaysChanged?: (days: number) => void;
-    onAgencyActiveChanged?: (isActive: boolean) => void;
-    onActiveHoursChanged?: (start: Moment, end: Moment) => void;
+    onValidationChanged: (isValid: boolean) => void;
+    onValuesChange: (isActive: boolean, workingDays: number, startOfWorkingHours: Moment, endOfWorkingHours: Moment) => void;
 };
 
 const AgencyWorkingHours = (props: WorkingHoursProps) => {
 
-    const { currentStep, onActiveDaysChanged, onAgencyActiveChanged, onActiveHoursChanged } = props;
+    const { currentStep, onValidationChanged, onValuesChange } = props;
 
     const { language } = useContext(LanguageContext);
+    const { setToast } = useContext(ToastContext);
 
     const [startOfWorkingHours, setStartOfWorkingHours] = useState(moment());
     const [endOfWorkingHours, setEndOfWorkingHours] = useState(moment());
     const [isAgencyActive, setIsAgencyActive] = useState(true);
-    const { settings, agenciesPage } = language;
+    const [workingDays, setWorkingDays] = useState(127);
+    const { settings, agenciesPage, notification } = language;
 
     const startHandleChange = (newValue: Moment | null) => {
-        if (newValue)
-            setStartOfWorkingHours(newValue);
-        else
-            return;
 
-        if (onActiveHoursChanged)
-            onActiveHoursChanged(newValue, endOfWorkingHours);
+        if (!newValue)
+            return;
+        if (newValue.isBefore(endOfWorkingHours)) {
+            setStartOfWorkingHours(newValue);
+            onValuesChange(isAgencyActive, workingDays, newValue, endOfWorkingHours);
+        }
+        else
+            setToast({ id: Date.now(), message: notification.startDateError, alertColor: 'error' });
+
     };
 
     const endHandleChange = (newValue: Moment | null) => {
-        if (newValue)
-            setEndOfWorkingHours(newValue);
-        else
-            return;
 
-        if (onActiveHoursChanged)
-            onActiveHoursChanged(startOfWorkingHours, newValue);
+        if (!newValue)
+            return;
+        if (newValue.isAfter(startOfWorkingHours)) {
+            setEndOfWorkingHours(newValue);
+            onValuesChange(isAgencyActive, workingDays, startOfWorkingHours, newValue);
+        }
+        else
+            setToast({ id: Date.now(), message: notification.endDateError, alertColor: 'error' });
     };
 
     const activeDaysChanged = (days: number) => {
-        if (onActiveDaysChanged)
-            onActiveDaysChanged(days);
+        setWorkingDays(days);
+        onValuesChange(isAgencyActive, days, startOfWorkingHours, endOfWorkingHours);
     };
     const agencyActiveChanged = (isActive: boolean) => {
-        if (onAgencyActiveChanged)
-            onAgencyActiveChanged(isActive);
         setIsAgencyActive(isActive);
+        onValuesChange(isActive, workingDays, startOfWorkingHours, endOfWorkingHours);
     };
+
+    useEffect(() => {
+        const isValid = workingDays > 0 && startOfWorkingHours.isBefore(endOfWorkingHours) && endOfWorkingHours.isAfter(startOfWorkingHours);
+        onValidationChanged(isValid);
+    }, [workingDays, startOfWorkingHours, endOfWorkingHours, onValidationChanged]);
 
     return (
         <LocalizationProvider dateAdapter={MomentUtils}>
@@ -80,7 +91,7 @@ const AgencyWorkingHours = (props: WorkingHoursProps) => {
                     />
                 </CenterBox>
                 <CenterBox sx={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                    <Typography variant='body2'>{isAgencyActive? agenciesPage.activeAgency : agenciesPage.inactiveAgency}</Typography>
+                    <Typography variant='body2'>{isAgencyActive ? agenciesPage.activeAgency : agenciesPage.inactiveAgency}</Typography>
                     <Switch checked={isAgencyActive} onChange={(e) => agencyActiveChanged(e.target.checked)} />
                 </CenterBox>
             </TabPanel >

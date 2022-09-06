@@ -5,11 +5,12 @@ import { LanguageContext } from '../context/LanguageContext';
 
 export type MapProps = {
     currentLocation: number[];
-    whenReady?: (isReady:boolean) => void;
+    whenReady?: (isReady: boolean) => void;
+    onLocationChanged: (location: number[]) => void;
 };
 
 const OpenLayerMap = (props: MapProps) => {
-    const { currentLocation, whenReady } = props;
+    const { currentLocation, whenReady,onLocationChanged} = props;
 
     const arrayToLatLong = (array: number[]) => {
         if (array.length !== 2)
@@ -30,6 +31,7 @@ const OpenLayerMap = (props: MapProps) => {
         useMapEvents({
             click(e) {
                 setLocation(e.latlng);
+                onLocationChanged([e.latlng.lat, e.latlng.lng]);
             },
         });
         map.flyTo(location);

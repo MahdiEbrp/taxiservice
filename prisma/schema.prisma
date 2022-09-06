@@ -20,8 +20,13 @@ model User {
   verified         Boolean   @default(false)
   resetCodeDate    DateTime? @db.Timestamptz
   resetCode        String?
+  profilePicture   String?
+  name             String?
+  localisation     String    @default("US")
+  language         String    @default("en")
   Agency           Agency[]
 }
+
 
 model Agency {
   id                  String   @id @default(cuid()) @map("_id")
