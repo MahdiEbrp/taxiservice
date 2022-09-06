@@ -3,6 +3,7 @@ import CredentialProvider from 'next-auth/providers/credentials';
 import { getCaptchaValidationStatus } from '../../../lib/validator';
 import prismaClient from '../../../lib/prismaClient';
 import { Sh256Encrypt } from '../../../lib/encryption';
+import { log } from 'next-axiom';
 
 export const options = {
     providers: [
@@ -49,6 +50,7 @@ export const options = {
                             return null;
                         }
                         catch (e) {
+                            log.error(e);
                             throw new Error('ERR_UNKNOWN_AUTHORIZING_USER');
                         }
                     }
