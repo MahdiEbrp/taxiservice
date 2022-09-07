@@ -3,6 +3,7 @@ import differenceInHours from 'date-fns/differenceInHours';
 import { getRandomString } from '../../../lib/encryption';
 import sendEmail, { verificationEmailBody } from '../../../lib/Email';
 import prismaClient from '../../../lib/prismaClient';
+import { log } from 'next-axiom';
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
@@ -53,7 +54,8 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
         });
 
     }
-    catch {
+    catch (e) {
+        log.error(JSON.stringify(e));
         return res.status(503).json({ error: 'ERR_INTERNAL_UPDATE' });
     }
     return res.status(200).end();

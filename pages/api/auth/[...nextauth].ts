@@ -1,8 +1,8 @@
-import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
-import { getCaptchaValidationStatus } from '../../../lib/validator';
+import NextAuth from 'next-auth';
 import prismaClient from '../../../lib/prismaClient';
 import { Sh256Encrypt } from '../../../lib/encryption';
+import { getCaptchaValidationStatus } from '../../../lib/validator';
 import { log } from 'next-axiom';
 
 export const options = {

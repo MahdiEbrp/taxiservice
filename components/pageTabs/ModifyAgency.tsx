@@ -18,6 +18,7 @@ import { ToastContext } from '../context/ToastContext';
 import { taggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useEffect, useState } from 'react';
 import { postData } from '../../lib/fetchData';
+import { getResponseError } from '../../lib/language';
 
 const ModifyAgency = (props: { editMode: boolean; }) => {
 
@@ -133,10 +134,18 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
         };
         // eslint-disable-next-line quotes
         const response = await postData(`${process.env.NEXT_PUBLIC_WEB_URL}/api/agency/${modifyType}`, values);
-        if (!response) {
-            setToast({ id: Date.now(), message:'ERR', alertColor: 'error' });
+        if (!response)
+        {
+            setToast({ id: Date.now(), message: getResponseError('ERR_NULL_RESPONSE',language), alertColor: 'error' });
             return;
         }
+
+        if (response.status === 200) {
+            setToast({ id: Date.now(), message: notification.successfullyAddAgency, alertColor: 'success' });
+            setCurrentStep(0);
+            return;
+        }
+        setToast({ id: Date.now(), message: response.data, alertColor: 'error' });
 
     };
     return (

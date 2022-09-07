@@ -41,7 +41,8 @@ const persian = {
         unauthenticated: 'شما وارد سیستم نشده اید!',
         startDateError: 'در ساعات کاری، زمان شروع باید زودتر از زمان پایان باشد.',
         endDateError: 'در ساعات کاری، زمان پایان باید بعدتر از زمان شروع باشد.',
-        invalidWorkingHoursTab:'هیچ روز انتخابی وجود ندارد یا زمان شروع بیشتر از زمان پایان است.'
+        invalidWorkingHoursTab: 'هیچ روز انتخابی وجود ندارد یا زمان شروع بیشتر از زمان پایان است.',
+        successfullyAddAgency:'آفرین! آژانس با موفقیت توسط شما ایجاد شده است.',
     },
     authorizedLayout: {
         loading: 'در حال بارگذاری...',

@@ -3,8 +3,10 @@ import prismaClient from '../../../lib/prismaClient';
 import sendEmail, { resetPasswordBody } from '../../../lib/Email';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Prisma } from '@prisma/client';
-import { getRandomString, Sh256Encrypt } from '../../../lib/encryption';
 import { getCaptchaValidationStatus, isPasswordValid } from '../../../lib/validator';
+import { getRandomString, Sh256Encrypt } from '../../../lib/encryption';
+import { log } from 'next-axiom';
+
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (req.method !== 'POST')
@@ -76,6 +78,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 if (e.message === 'ERR_SEND_MAIL')
                     return res.status(202).json({ error: 'ERR_SEND_MAIL' });
 
+            log.error(JSON.stringify(e));
             return res.status(503).json({ error: 'ERR_UNKNOWN' });
 
 

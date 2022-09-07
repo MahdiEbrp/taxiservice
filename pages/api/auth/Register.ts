@@ -1,11 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getRandomString, Sh256Encrypt } from '../../../lib/encryption';
-import { getCaptchaValidationStatus, isEmailValid, isPasswordValid } from '../../../lib/validator';
-import { Prisma } from '@prisma/client';
-import sendEmail, { verificationEmailBody } from '../../../lib/Email';
 import prismaClient from '../../../lib/prismaClient';
-
-
+import sendEmail, { verificationEmailBody } from '../../../lib/Email';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { Prisma } from '@prisma/client';
+import { getCaptchaValidationStatus, isEmailValid, isPasswordValid } from '../../../lib/validator';
+import { getRandomString, Sh256Encrypt } from '../../../lib/encryption';
+import { log } from 'next-axiom';
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
@@ -59,6 +58,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 if (e instanceof Error)
                     if (e.message === 'ERR_SEND_MAIL')
                         return res.status(202).json({ error: 'ERR_SEND_MAIL' });
+                log.error(JSON.stringify(e));
                 return res.status(503).json({ error: 'ERR_UNKNOWN' });
 
 

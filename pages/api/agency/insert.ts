@@ -1,8 +1,9 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
 import memoryCache, { CacheClass } from 'memory-cache';
 import prismaClient from '../../../lib/prismaClient';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { Prisma } from '@prisma/client';
+import { getSession } from 'next-auth/react';
+import { log } from 'next-axiom';
 
 export const memCache: CacheClass<string, string> = new memoryCache.Cache();
 
@@ -21,8 +22,8 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     let { address } = <{ address: string; }>req.body;
     const { latitude, longitude } = <{ latitude: number; longitude: number; }>req.body;
     const { workingDays, startOfWorkingHours, endOfWorkingHours } = <{ workingDays: number, startOfWorkingHours: Date, endOfWorkingHours: Date; }>req.body;
-
-    const isValid = !ArrayHasNullOrEmptyItem([agencyName, isEnable, phoneNumber1, phoneNumber2, mobileNumber, address, latitude, longitude, workingDays, startOfWorkingHours, endOfWorkingHours]);
+    //phoneNumber 2 is optional
+    const isValid = !arrayHasNullOrEmptyItem([agencyName, isEnable, phoneNumber1, mobileNumber, address, latitude, longitude, workingDays, startOfWorkingHours, endOfWorkingHours]);
     if (!isValid)
         return res.status(400).json({ error: 'ERR_INVALID_REQUEST' });
 
@@ -33,6 +34,8 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const maxAgencyLength = 50;
     const maxPhoneNumberLength = 30;
     const maxAddressLength = 300;
+
+    phoneNumber2 = phoneNumber2 ? phoneNumber2 : '';
 
     agencyName = agencyName.trim().substring(0, maxAgencyLength);
     phoneNumber1 = phoneNumber1.trim().substring(0, maxPhoneNumberLength);
@@ -79,20 +82,21 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(200).json({ message: 'OK' });
         }
         else
-            return res.status(503).json({ error: 'ERR_UNKNOWN' });
+            return res.status(503).json({ error: 'ERR_UPDATE_FAILS' });
 
     }
     catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
             if (e.code === 'P2002')
-                return res.status(409).json({ error: 'ERR_DUPLICATE' });
+                return res.status(406).json({ error: 'ERR_DUPLICATE' });
         }
+        log.error(JSON.stringify(e));
         return res.status(500).json({ error: 'ERR_UNKNOWN' });
     }
 };
 
-const ArrayHasNullOrEmptyItem = (arr: unknown[]) => {
-    return arr.some((item) => item === null || item === undefined || item==='');
+const arrayHasNullOrEmptyItem = (arr: unknown[]) => {
+    return arr.some((item) => item === null || item === undefined || item === '');
 };
 
 export default Handler;
