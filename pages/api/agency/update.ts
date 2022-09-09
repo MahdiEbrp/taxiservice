@@ -1,16 +1,13 @@
-import memoryCache, { CacheClass } from 'memory-cache';
-import prismaClient from '../../../lib/prismaClient';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Prisma } from '@prisma/client';
 import { getSession } from 'next-auth/react';
-import { log } from 'next-axiom';
+import prismaClient from '../../../lib/prismaClient';
 import { arrayHasNullOrEmptyItem } from '../../../lib/validator';
 
-const memCache: CacheClass<string, string> = new memoryCache.Cache();
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const session = await getSession({ req });
+
     if (req.method !== 'POST')
         return res.status(405).json({ message: 'ERR_INVALID_METHOD' });
 
@@ -23,32 +20,24 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     let { address } = <{ address: string; }>req.body;
     const { latitude, longitude } = <{ latitude: number; longitude: number; }>req.body;
     const { workingDays, startOfWorkingHours, endOfWorkingHours } = <{ workingDays: number, startOfWorkingHours: Date, endOfWorkingHours: Date; }>req.body;
+
     //phoneNumber 2 is optional
     const isValid = !arrayHasNullOrEmptyItem([agencyName, isEnable, phoneNumber1, mobileNumber, address, latitude, longitude, workingDays, startOfWorkingHours, endOfWorkingHours]);
     if (!isValid)
         return res.status(400).json({ error: 'ERR_INVALID_REQUEST' });
-
     const email = session.user.email;
-    const cacheTime = 1000 * 60;
-    const value = memCache.get(email);
-
     const maxAgencyLength = 50;
     const maxPhoneNumberLength = 30;
     const maxAddressLength = 300;
-
     phoneNumber2 = phoneNumber2 ? phoneNumber2 : '';
-
     agencyName = agencyName.trim().substring(0, maxAgencyLength);
     phoneNumber1 = phoneNumber1.trim().substring(0, maxPhoneNumberLength);
     phoneNumber2 = phoneNumber2.trim().substring(0, maxPhoneNumberLength);
     mobileNumber = mobileNumber.trim().substring(0, maxPhoneNumberLength);
     address = address.trim().substring(0, maxAddressLength);
 
-    if (value !== null)
-        return res.status(429).json({ error: 'ERR_TOO_MANY_REQUESTS' });
     try {
         const prisma = prismaClient;
-
         const user = await prisma.user.findFirst({
             where: {
                 email: email
@@ -57,7 +46,10 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
         if (!user)
             return res.status(404).json({ error: 'ERR_USER_NOT_FOUND' });
 
-        const agency = await prisma.agency.create({
+        const agency = await prisma.agency.update({
+            where: {
+                id: user.id
+            },
             data: {
                 agencyName: agencyName,
                 isEnable: isEnable,
@@ -69,33 +61,12 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 longitude: longitude,
                 workingDays: workingDays,
                 startOfWorkingHours: startOfWorkingHours,
-                endOfWorkingHours: endOfWorkingHours,
-                createdAt: new Date(),
-                user: {
-                    connect: {
-                        id: user.id
-                    }
-                }
+                endOfWorkingHours: endOfWorkingHours
             }
         });
-        if (agency) {
-            memCache.put(email, 'true', cacheTime);
-            return res.status(200).json({ message: 'OK' });
-        }
-        else
-            return res.status(503).json({ error: 'ERR_UPDATE_FAILS' });
-
-    }
-    catch (e) {
-        if (e instanceof Prisma.PrismaClientKnownRequestError) {
-            if (e.code === 'P2002')
-                return res.status(406).json({ error: 'ERR_AGENCY_DUPLICATE' });
-        }
-        log.error(JSON.stringify(e));
-        return res.status(500).json({ error: 'ERR_UNKNOWN' });
+        return res.status(200).json({ agency: agency });
+    } catch (error) {
+        return res.status(500).json({ error: 'ERR_INTERNAL_SERVER_ERROR' });
     }
 };
-
-
-
 export default Handler;

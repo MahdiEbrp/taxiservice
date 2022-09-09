@@ -57,6 +57,7 @@ const persian = {
     },
     responseError: {
         CredentialsSignin: 'نام کاربری یا رمز عبور وارد شده اشتباه است.',
+        ERR_AGENCY_DUPLICATE: 'آژانسی با این نام وجود دارد.',
         ERR_EMAIL_EXISTS: 'شما قبلاً یک حساب کاربری با این آدرس ایمیل دارید. لطفا وارد شوید.',
         ERR_EMAIL_NOT_FOUND: 'هیچ کاربری با این آدرس ایمیل پیدا نکردیم!',
         ERR_INTERNAL_UPDATE: 'یک مشکل سرور مانع از ویرایش اطلاعات می‌شود. اگر فکر می کنید به رفع مشکل کمک می کند، لطفاً با ما تماس بگیرید.',
@@ -70,11 +71,15 @@ const persian = {
         ERR_REQUEST_EXPIRED: 'برای ارسال درخواستتان خیلی دیر است',
         ERR_SERVER_INVALID_CAPTCHA: 'اعتبار سنجی کپچا در سرور درخواست شما را نمی پذیرد.',
         ERR_SERVICE_UNAVAILABLE: 'سرویس در دسترس نیست.',
+        ERR_UNAUTHORIZED: 'شما اجازه دسترسی به این صفحه را ندارید.',
         ERR_UNKNOWN: 'یک خطای ناشناخته رخ داده است.',
         ERR_UNKNOWN_AUTHORIZING_USER: 'یک خطای ناشناخته در هنگام تایید حساب کاربری رخ داده است.',
         ERR_UNKNOWN_CREATING_USER: 'یک خطای ناشناخته در هنگام ساخت حسای کاربری رخ داده است.',
         ERR_USER_NOT_VERIFIED: 'کاربر تایید نشده است.',
         HTML_ERROR_404: 'صفحه ای که به دنبال آن هستید وجود ندارد.',
+        ERR_TOO_MANY_REQUESTS: 'شما بیش از حد مجاز درخواست ارسال کرده اید. لطفا بعدا دوباره تلاش کنید.',
+        ERR_USER_NOT_FOUND: 'کاربری با این مشخصات پیدا نشد.',
+        ERR_UPDATE_FAILS: 'خطایی در هنگام بروزرسانی اطلاعات رخ داده است.',
     },
     messageDialog: {
         ok: 'تایید',
@@ -118,9 +123,11 @@ const persian = {
         maximumLengthOfAgencyName: 'حداکثر طول نام آژانس 50 کاراکتر است.',
         editAgency: {
             title: 'ویرایش آژانس',
+            updating:'در حال به روز رسانی آژانس...',
         },
         addNewAgency: {
             title: 'افزودن آژانس جدید',
+            updating:'در حال افزودن آژانس جدید...',
         },
     },
     pageNotFound: {

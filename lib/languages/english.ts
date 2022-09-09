@@ -57,6 +57,7 @@ const english = {
     },
     responseError: {
         CredentialsSignin: 'The username or password you entered is incorrect.',
+        ERR_AGENCY_DUPLICATE: 'The agency name is already in use.',
         ERR_EMAIL_EXISTS: 'You already have an account with this email address. Please login.',
         ERR_EMAIL_NOT_FOUND: 'We couldn\'t find any users with this email address!',
         ERR_INTERNAL_UPDATE: 'A server issue is preventing the information from being edited. If you think it will help fix the problem, please contact us.',
@@ -70,9 +71,13 @@ const english = {
         ERR_REQUEST_EXPIRED: 'It\'s too late to submit your request.',
         ERR_SERVER_INVALID_CAPTCHA: 'a captcha validator in server wont accept your request.',
         ERR_SERVICE_UNAVAILABLE: 'The service is unavailable.',
+        ERR_TOO_MANY_REQUESTS: 'Too many requests have been sent to the server. Please try again later.',
+        ERR_UNAUTHORIZED: 'You are not authorized to access this page.',
         ERR_UNKNOWN: 'An unknown error has occurred.',
         ERR_UNKNOWN_AUTHORIZING_USER: 'An unknown error has occurred while authorizing the user.',
         ERR_UNKNOWN_CREATING_USER: 'An unknown error has occurred while creating a user.',
+        ERR_UPDATE_FAILS: 'The updating of information was interrupted by an error.',
+        ERR_USER_NOT_FOUND: 'The user is not found.',
         ERR_USER_NOT_VERIFIED: 'The user is not verified.',
         HTML_ERROR_404: 'The page you are looking for does not exist.',
     },
@@ -118,9 +123,11 @@ const english = {
         maximumLengthOfAgencyName: 'The maximum length of the agency name is 50 characters.',
         editAgency: {
             title: 'Editing an agency',
+            updating:'Updating an agency...',
         },
         addNewAgency: {
             title: 'Adding a new agency',
+            updating:'Adding a new agency...',
         },
     },
     pageNotFound: {

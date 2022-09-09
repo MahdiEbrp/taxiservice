@@ -19,6 +19,8 @@ import { taggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useEffect, useState } from 'react';
 import { postData } from '../../lib/fetchData';
 import { getResponseError } from '../../lib/language';
+import CircularLoading from '../controls/CircularLoading';
+import Typography from '@mui/material/Typography';
 
 const ModifyAgency = (props: { editMode: boolean; }) => {
 
@@ -44,16 +46,17 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     const [workingDays, setWorkingDays] = useState(127);
     const [startOfWorkingHours, setStartOfWorkingHours] = useState('');
     const [endOfWorkingHours, setEndOfWorkingHours] = useState('');
-
+    const [isUpdating, setIsUpdating] = useState(false);
     const { language } = useContext(LanguageContext);
     const { setLocalizationInfo } = useContext(LocalizationInfoContext);
     const { setToast } = useContext(ToastContext);
 
     const { agenciesPage, notification, settings } = language;
-    const { editAgency } = agenciesPage;
+    const { editAgency,addNewAgency } = agenciesPage;
     const { direction } = settings;
     const isLastStep = currentStep === 3;
-    const [title, setTitle] = useState(editAgency.title);
+    const agencyCardTitle = editMode ? editAgency.title : addNewAgency.title;
+    const [title, setTitle] = useState(agencyCardTitle);
 
     const nextStep = () => {
 
@@ -81,8 +84,8 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
         if (agencyName)
             setTitle(agencyName);
         else
-            setTitle(editAgency.title);
-    }, [editAgency.title, agencyName, title]);
+            setTitle(agencyCardTitle);
+    }, [agencyCardTitle, agencyName, title]);
 
     const setLocalization = async (countryCode: string) => {
 
@@ -103,6 +106,8 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     };
     const BreadcrumbsSteps = () => {
         const stepsLabel = [agenciesPage.agencySelection, agenciesPage.editPhone, agenciesPage.editAddress, agenciesPage.workingHours].slice(0, currentStep + 1);
+        if (isUpdating)
+            return <></>;
         return (
             <Breadcrumbs separator='›' aria-label='agency-breadcrumb'>
                 {stepsLabel.map((label, index) => {
@@ -119,8 +124,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
 
     const sendModifyRequest = async () => {
 
-        if (!isWorkingHoursTabValid)
-        {
+        if (!isWorkingHoursTabValid) {
             setToast({ id: Date.now(), message: notification.invalidWorkingHoursTab, alertColor: 'error' });
             return;
         }
@@ -132,11 +136,14 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
             address: address, latitude: location?.tag[0] || 0, longitude: location?.tag[1] || 0, workingDays: workingDays
             , startOfWorkingHours: startOfWorkingHours, endOfWorkingHours: endOfWorkingHours
         };
+        setIsUpdating(true);
         // eslint-disable-next-line quotes
         const response = await postData(`${process.env.NEXT_PUBLIC_WEB_URL}/api/agency/${modifyType}`, values);
-        if (!response)
-        {
-            setToast({ id: Date.now(), message: getResponseError('ERR_NULL_RESPONSE',language), alertColor: 'error' });
+
+        setIsUpdating(false);
+
+        if (!response) {
+            setToast({ id: Date.now(), message: getResponseError('ERR_NULL_RESPONSE', language), alertColor: 'error' });
             return;
         }
 
@@ -145,7 +152,9 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
             setCurrentStep(0);
             return;
         }
-        setToast({ id: Date.now(), message: response.data, alertColor: 'error' });
+        const { error } = response.data as { error: string; };
+
+        setToast({ id: Date.now(), message: getResponseError(error,language), alertColor: 'error' });
 
     };
     return (
@@ -154,7 +163,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
                 <CardHeader title={title} />
                 <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap', }}>
                     <BreadcrumbsSteps />
-                    <CenterBox>
+                    <CenterBox sx={{ display: isUpdating ? 'none' : 'flex' }}>
                         <AgencySelector editMode={editMode} currentStep={currentStep} onValidationChanged={(isValid) => setIsAgencyTabValid(isValid)}
                             onValuesChanged={(agency, countryCode) => {
                                 setAgencyName(agency);
@@ -179,8 +188,14 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
                             }} />
                         {showError && <Alert severity='error'>{agenciesPage.phoneNumbersError}</Alert>}
                     </CenterBox>
+                    {isUpdating &&
+                        <>
+                            <CircularLoading />
+                            <Typography>{editMode ? editAgency.updating : addNewAgency.updating}</Typography>
+                        </>
+                    }
                 </CardContent>
-                <CardActions sx={{ flexDirection: 'row', gap: '1rem' }}>
+                <CardActions sx={{ display: isUpdating ? 'none' : 'flex', flexDirection: 'row', gap: '1rem' }}>
                     <Button disabled={currentStep === 0} variant='contained' color='primary' onClick={() => gotoStep(currentStep - 1)} >{agenciesPage.previous}</Button>
                     <Button disabled={isLastStep} variant='contained' color='primary' onClick={nextStep} >{agenciesPage.next}</Button>
                     {isLastStep && <Button variant='contained' color='primary' onClick={() => sendModifyRequest()}>{editMode ? agenciesPage.update : agenciesPage.add}</Button>}

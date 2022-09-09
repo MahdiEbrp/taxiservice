@@ -1,8 +1,8 @@
 import Box, { BoxProps } from '@mui/material/Box';
-import { ElementType, ReactNode } from 'react';
+import { ElementType } from 'react';
 import { SxProps, Theme } from '@mui/material/styles';
 
-const CenterBox: ElementType<BoxProps> = (props: { children: ReactNode; } | BoxProps) => {
+const CenterBox: ElementType<BoxProps> = (props: BoxProps) => {
 
     const { children, ...other } = props;
 

@@ -44,4 +44,6 @@ export const getCaptchaValidationStatus = async (captchaID: string) => {
     return response.status;
 
 };
-
+export const arrayHasNullOrEmptyItem = (arr: unknown[]) => {
+    return arr.some((item) => item === null || item === undefined || item === '');
+};
