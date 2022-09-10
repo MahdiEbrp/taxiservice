@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
+import { log } from 'next-axiom';
 import prismaClient from '../../../lib/prismaClient';
 import { arrayHasNullOrEmptyItem } from '../../../lib/validator';
 
@@ -48,10 +49,9 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         const agency = await prisma.agency.update({
             where: {
-                id: user.id
+                agencyName: agencyName
             },
             data: {
-                agencyName: agencyName,
                 isEnable: isEnable,
                 phoneNumber1: phoneNumber1,
                 phoneNumber2: phoneNumber2,
@@ -61,11 +61,15 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 longitude: longitude,
                 workingDays: workingDays,
                 startOfWorkingHours: startOfWorkingHours,
-                endOfWorkingHours: endOfWorkingHours
+                endOfWorkingHours: endOfWorkingHours,
             }
         });
-        return res.status(200).json({ agency: agency });
+        if (!agency)
+            return res.status(404).json({ error: 'ERR_AGENCY_NOT_FOUND' });
+        else
+            return res.status(200).end();
     } catch (error) {
+        log.error(JSON.stringify(error));
         return res.status(500).json({ error: 'ERR_INTERNAL_SERVER_ERROR' });
     }
 };
