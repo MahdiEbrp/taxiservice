@@ -21,7 +21,7 @@
         "no-useless-escape": "error",
         "max-lines": [
             "error", {
-                "max": 200,
+                "max": 250,
                 "skipBlankLines": true,
                 "skipComments": true
             }

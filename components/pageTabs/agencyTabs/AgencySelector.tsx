@@ -6,16 +6,18 @@ import { useContext, useEffect, useState } from 'react';
 import { CountryListContext } from '../../context/CountryListContext';
 import TextField from '@mui/material/TextField';
 
+
 export type AgencySelectorProps = {
     currentStep: number;
     onValidationChanged: (isValid: boolean) => void;
     onValuesChanged: (agencyName: string, countryCode: string) => void;
     editMode: boolean;
+    agencyList: taggedItem<string>[];
 };
 
 const AgencySelector = (props: AgencySelectorProps) => {
 
-    const { currentStep, onValidationChanged, onValuesChanged, editMode } = props;
+    const { currentStep, onValidationChanged, onValuesChanged, editMode,agencyList } = props;
 
     const { language } = useContext(LanguageContext);
     const { countryList } = useContext(CountryListContext);
@@ -53,8 +55,7 @@ const AgencySelector = (props: AgencySelectorProps) => {
     return (
         <TabPanel activeIndex={currentStep.toString()} index='0'>
             {editMode ?
-                <AutoCompletePlus onChanged={(agency) => agencyChanged(!agency ? '' : agency.displayText)} items={[{ tag: '131s', displayText: 'آژانس بانوان خورشید' }, { tag: '2', displayText: '131 لاهیجان' }]}
-                    label={agenciesPage.agencyName} />
+                <AutoCompletePlus onChanged={(agency) => agencyChanged(!agency ? '' : agency.displayText)} items={agencyList} label={agenciesPage.agencyName} />
                 :
                 <TextField sx={{ width: 'min(70vw, 300px)' }} label={agenciesPage.agencyName} onBlur={(e) => agencyChanged(e.target.value)}
                     inputProps={{ maxLength: 50 }} helperText={agenciesPage.maximumLengthOfAgencyName} />

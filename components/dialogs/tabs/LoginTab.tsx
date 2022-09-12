@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import { LanguageContext } from '../../context/LanguageContext';
 import { LoginDialogContext } from '../../context/LoginDialogContext';
 import { MessageDialogContext } from '../../context/MessageDialogContext';
-import { postData, SigninResult } from '../../../lib/fetchData';
+import { postData, SigninResult } from '../../../lib/axiosRequest';
 import { ThemeContext } from '../../context/ThemeContext';
 import { ToastContext } from '../../context/ToastContext';
 import { getResponseError } from '../../../lib/language';

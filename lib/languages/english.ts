@@ -43,6 +43,7 @@ const english = {
         endDateError: 'During working hours, the end time must be later than the start time.',
         invalidWorkingHoursTab: 'There is no selected day or the start time is greater than the end time.',
         successfullyAddAgency: 'Well done! The agency has been created successfully by you.',
+        agencyDuplicateError: 'There is already an agency with the same name.',
     },
     authorizedLayout: {
         loading: 'Loading...',

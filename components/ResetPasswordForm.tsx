@@ -11,7 +11,7 @@ import React, { useContext, useRef, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { FaHandPeace } from 'react-icons/fa';
 import { LanguageContext } from './context/LanguageContext';
-import { postData } from '../lib/fetchData';
+import { postData } from '../lib/axiosRequest';
 import { ThemeContext } from './context/ThemeContext';
 import { ToastContext } from './context/ToastContext';
 import { getResponseError } from '../lib/language';

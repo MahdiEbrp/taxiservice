@@ -16,11 +16,13 @@ import { LocalizationInfoType } from '../../lib/geography';
 import { LocalizationInfoContext } from '../context/LocalizationInfoContext';
 import { ToastContext } from '../context/ToastContext';
 import { taggedItem } from '../controls/AutoCompletePlus';
-import { useContext, useEffect, useState } from 'react';
-import { postData } from '../../lib/fetchData';
+import { useContext, useMemo, useEffect, useState } from 'react';
+import { postData } from '../../lib/axiosRequest';
 import { getResponseError } from '../../lib/language';
 import { AllAgenciesContext } from '../context/AllAgenciesContext';
 import Loader from '../controls/Loader';
+import { UserAgenciesContext } from '../context/UserAgenciesContext';
+import { AgencyDataList } from '../../lib/types/agencies';
 
 const ModifyAgency = (props: { editMode: boolean; }) => {
 
@@ -32,9 +34,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     const [isPhoneTabValid, setIsPhoneTabValid] = useState(false);
     const [isAddressTabValid, setIsAddressTabValid] = useState(false);
     const [isWorkingHoursTabValid, setIsWorkingHoursTabValid] = useState(false);
-
     const [showError, setShowError] = useState(false);
-
     const [agencyName, setAgencyName] = useState('');
     const [countryCode, setCountryCode] = useState('');
     const [phoneNumber1, setPhoneNumber1] = useState('');
@@ -52,6 +52,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     const { setLocalizationInfo } = useContext(LocalizationInfoContext);
     const { setToast } = useContext(ToastContext);
     const { agencyNames } = useContext(AllAgenciesContext);
+    const { agencyData } = useContext(UserAgenciesContext);
 
     const { agenciesPage, notification, settings } = language;
     const { editAgency, addNewAgency } = agenciesPage;
@@ -59,6 +60,24 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     const isLastStep = currentStep === 3;
     const agencyCardTitle = editMode ? editAgency.title : addNewAgency.title;
     const [title, setTitle] = useState(agencyCardTitle);
+    const agencyItems: taggedItem<string>[] = useMemo(() => {
+        if (agencyData && agencyData.length > 0) {
+            const values = agencyData as AgencyDataList;
+            return values.map(agency => {
+                return { tag: agency.id, displayText: agency.agencyName };
+            });
+        }
+        return [];
+    }, [agencyData]);
+    const selectedAgencyData = useMemo(() => {
+        if (agencyData && agencyData.length > 0 && editMode) {
+            const values = agencyData as AgencyDataList;
+            const agency = values.find(agency => agency.agencyName === agencyName);
+            if (agency)
+                return agency;
+        }
+        return null;
+    }, [agencyData, agencyName, editMode]);
 
     const nextStep = () => {
 
@@ -69,8 +88,8 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
             return;
         }
 
-        if (agencyNames.includes(agencyName)) {
-            setToast({ id: Date.now(), message: 'notification.agencyAlreadyExists', alertColor: 'error' });
+        if (agencyNames.includes(agencyName) && !editMode) {
+            setToast({ id: Date.now(), message: notification.agencyDuplicateError, alertColor: 'error' });
             return;
         }
 
@@ -86,7 +105,6 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
         }
         setCurrentStep((currentStep) => currentStep + 1);
     };
-
     useEffect(() => {
         if (agencyName)
             setTitle(agencyName);
@@ -171,7 +189,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
                 <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap', }}>
                     <BreadcrumbsSteps />
                     <CenterBox sx={{ display: isUpdating ? 'none' : 'flex' }}>
-                        <AgencySelector editMode={editMode} currentStep={currentStep} onValidationChanged={(isValid) => setIsAgencyTabValid(isValid)}
+                        <AgencySelector agencyList={agencyItems} editMode={editMode} currentStep={currentStep} onValidationChanged={(isValid) => setIsAgencyTabValid(isValid)}
                             onValuesChanged={(agency, countryCode) => {
                                 setAgencyName(agency);
                                 setLocalization(countryCode);

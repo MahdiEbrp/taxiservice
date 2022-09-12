@@ -1,4 +1,4 @@
-import { getData } from './fetchData';
+import { getData } from './axiosRequest';
 
 export type cities = {
     features: Feature[];
