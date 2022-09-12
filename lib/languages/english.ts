@@ -93,6 +93,7 @@ const english = {
         },
     },
     agenciesPage: {
+        fetchingAgencies: 'Receiving information from the server...',
         activeAgency: 'The agency is active.',
         addressOfBusiness: 'Address of your business',
         addressWarning: 'The address should be entered accurately and completely.',

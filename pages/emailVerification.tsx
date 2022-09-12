@@ -3,8 +3,6 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import CenterBox from '../components/controls/CenterBox';
-import CircularLoading from '../components/controls/CircularLoading';
 import Divider from '@mui/material/Divider';
 import Head from 'next/head';
 import Typography from '@mui/material/Typography';
@@ -16,6 +14,7 @@ import { LanguageContext } from '../components/context/LanguageContext';
 import { getResponseError } from '../lib/language';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Loader from '../components/controls/Loader';
 const Verify: NextPage = () => {
 
     const router = useRouter();
@@ -123,12 +122,7 @@ const Verify: NextPage = () => {
                     <CardHeader title={emailVerificationPage.title} sx={{ color: !isLoading && !isVerified ? 'error.main' : '' }} />
                     <CardContent sx={{ color: !isLoading && !isVerified ? 'error.main' : '', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {isLoading ?
-                            <CenterBox>
-                                <CircularLoading />
-                                <Typography>
-                                    {isRedirecting ? emailVerificationPage.redirectingToHomePage : emailVerificationPage.loading}
-                                </Typography>
-                            </CenterBox>
+                            <Loader text={isRedirecting ? emailVerificationPage.redirectingToHomePage : emailVerificationPage.loading} />
                             :
                             <>
                                 {isVerified ? <VerificationSuccess /> : <VerificationError />}

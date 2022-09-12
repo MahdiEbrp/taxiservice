@@ -19,8 +19,8 @@ import { taggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useEffect, useState } from 'react';
 import { postData } from '../../lib/fetchData';
 import { getResponseError } from '../../lib/language';
-import CircularLoading from '../controls/CircularLoading';
-import Typography from '@mui/material/Typography';
+import { AllAgenciesContext } from '../context/AllAgenciesContext';
+import Loader from '../controls/Loader';
 
 const ModifyAgency = (props: { editMode: boolean; }) => {
 
@@ -47,12 +47,14 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     const [startOfWorkingHours, setStartOfWorkingHours] = useState('');
     const [endOfWorkingHours, setEndOfWorkingHours] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
+
     const { language } = useContext(LanguageContext);
     const { setLocalizationInfo } = useContext(LocalizationInfoContext);
     const { setToast } = useContext(ToastContext);
+    const { agencyNames } = useContext(AllAgenciesContext);
 
     const { agenciesPage, notification, settings } = language;
-    const { editAgency,addNewAgency } = agenciesPage;
+    const { editAgency, addNewAgency } = agenciesPage;
     const { direction } = settings;
     const isLastStep = currentStep === 3;
     const agencyCardTitle = editMode ? editAgency.title : addNewAgency.title;
@@ -64,6 +66,11 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
 
         if (!isAgencyTabValid) {
             setToast({ id: Date.now(), message: !countryCode ? notification.selectCountry : notification.selectAgency, alertColor: 'error' });
+            return;
+        }
+
+        if (agencyNames.includes(agencyName)) {
+            setToast({ id: Date.now(), message: 'notification.agencyAlreadyExists', alertColor: 'error' });
             return;
         }
 
@@ -154,7 +161,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
         }
         const { error } = response.data as { error: string; };
 
-        setToast({ id: Date.now(), message: getResponseError(error,language), alertColor: 'error' });
+        setToast({ id: Date.now(), message: getResponseError(error, language), alertColor: 'error' });
 
     };
     return (
@@ -190,8 +197,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
                     </CenterBox>
                     {isUpdating &&
                         <>
-                            <CircularLoading />
-                            <Typography>{editMode ? editAgency.updating : addNewAgency.updating}</Typography>
+                            <Loader text={editMode ? editAgency.updating : addNewAgency.updating} />
                         </>
                     }
                 </CardContent>

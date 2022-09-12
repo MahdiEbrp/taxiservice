@@ -4,14 +4,14 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import CenterBox, { centerStyle } from '../components/controls/CenterBox';
-import CircularLoading from '../components/controls/CircularLoading';
+import { centerStyle } from '../components/controls/CenterBox';
 import Head from 'next/head';
 import ImageLoader from '../components/controls/ImageLoader';
 import Typography from '@mui/material/Typography';
 import { LanguageContext } from '../components/context/LanguageContext';
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
+import Loader from '../components/controls/Loader';
 const NotFound = () => {
 
     const { language } = useContext(LanguageContext);
@@ -41,12 +41,7 @@ const NotFound = () => {
                 </CardMedia>
                 <CardContent sx={centerStyle}>
                     {isLoading ?
-                        <CenterBox >
-                            <CircularLoading />
-                            <Typography>
-                                {pageNotFound.redirectingToHomePage}
-                            </Typography>
-                        </CenterBox>
+                        <Loader text={pageNotFound.redirectingToHomePage} />
                         :
                         <Typography variant='body1'>
                             {pageNotFound.message}

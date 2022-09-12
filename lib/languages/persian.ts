@@ -93,6 +93,7 @@ const persian = {
         },
     },
     agenciesPage: {
+        fetchingAgencies: 'در حال دریافت اطلاعات از سرور...',
         activeAgency: 'آژانس فعال است.',
         addressOfBusiness: 'آدرس محل کسب و کار',
         addressWarning: 'آدرس باید دقیق و کامل وارد شود.',
