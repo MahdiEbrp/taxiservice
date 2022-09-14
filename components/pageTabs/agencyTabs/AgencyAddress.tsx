@@ -8,45 +8,66 @@ import dynamic from 'next/dynamic';
 import { LanguageContext } from '../../context/LanguageContext';
 import { LocalizationInfoContext } from '../../context/LocalizationInfoContext';
 import { taggedItem } from '../../controls/AutoCompletePlus';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import CircularLoading from '../../controls/CircularLoading';
+import { AgencyData } from '../../../lib/types/agencies';
 
 export type AgencyAddressProps = {
     currentStep: number;
     onValidationChanged: (isValid: boolean) => void;
     onValuesChange: (address: string, location: taggedItem<number[]> | null) => void;
+    selectedAgencyData: AgencyData | null;
 };
 
 const Map = dynamic(() => import('../../controls/OpenLayerMap'), { ssr: false });
 
 const AgencyAddress = (props: AgencyAddressProps) => {
 
-    const { currentStep, onValidationChanged, onValuesChange } = props;
+    const { currentStep, onValidationChanged, onValuesChange, selectedAgencyData } = props;
+    const addressRef = useRef<HTMLInputElement>(null);
+    const defaultAddress = selectedAgencyData?.address || '';
+    const latitude = selectedAgencyData?.latitude;
+    const longitude = selectedAgencyData?.longitude;
+    const agencyName = selectedAgencyData?.agencyName || '';
+    const defaultLocation = useMemo(() => {
+        return latitude && longitude ? { tag: [latitude, longitude], displayText: '' } : null;
+    }, [latitude, longitude]);
 
-    const [location, setLocation] = useState<taggedItem<number[]> | null>(null);
+    const [location, setLocation] = useState<taggedItem<number[]> | null>(defaultLocation);
     const [mapReady, setMapReady] = useState(false);
-    const [address, setAddress] = useState('');
+    const [defaultAgencyName, setDefaultAgencyName] = useState(agencyName);
 
     const { language } = useContext(LanguageContext);
     const { localizationInfo } = useContext(LocalizationInfoContext);
 
     const { settings, agenciesPage } = language;
-
     const updateLocation = (newLocation: taggedItem<number[]> | null) => {
+        const address = addressRef.current?.value || '';
         if (newLocation) {
             setLocation(newLocation);
             onValuesChange(address, newLocation);
+            validationChange();
         }
     };
-
-    const updateAddress = (newAddress: string) => {
-        setAddress(newAddress);
-        onValuesChange(newAddress, location);
+    const updateAddress = () => {
+        const address = addressRef.current?.value || '';
+        onValuesChange(address, location);
+        validationChange();
     };
 
-    useEffect(() => {
+    const validationChange = () => {
+        const address = addressRef.current?.value || '';
         onValidationChanged(address.length > 0 && location !== null);
-    }, [address, location, onValidationChanged]);
+    };
+    useEffect(() => {
+        if (agencyName !== defaultAgencyName && addressRef.current) {
+            setDefaultAgencyName(agencyName);
+            setLocation(defaultLocation);
+            addressRef.current.value = defaultAddress;
+            onValuesChange(defaultAddress, defaultLocation);
+            onValidationChanged(defaultAddress.length > 0 && defaultLocation !== null);
+        }
+    }, [agencyName, defaultAddress, defaultAgencyName, defaultLocation, onValidationChanged, onValuesChange]);
 
     return (
         <TabPanel dir={settings.direction} activeIndex={currentStep.toString()} index='2'>
@@ -57,7 +78,7 @@ const AgencyAddress = (props: AgencyAddressProps) => {
             <Map currentLocation={location?.tag || [localizationInfo.lat, localizationInfo.long]} whenReady={(isReady) => setMapReady(isReady)}
                 onLocationChanged={(location) => updateLocation({ displayText: '', tag: location })} />
             {!mapReady && <CircularLoading />}
-            <TextField multiline required onBlur={e => updateAddress(e.target.value)} label={agenciesPage.businessLocation} sx={{ width: '70%' }}
+            <TextField inputRef={addressRef} multiline required onBlur={() => updateAddress()} label={agenciesPage.businessLocation} sx={{ width: '70%' }}
                 variant='filled' inputProps={{ maxLength: 300 }} />
             <Alert severity='warning'>
                 {agenciesPage.addressWarning}

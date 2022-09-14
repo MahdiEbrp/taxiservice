@@ -10,24 +10,32 @@ import { LanguageContext } from '../../context/LanguageContext';
 import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers';
 import { useContext, useEffect, useState } from 'react';
 import { ToastContext } from '../../context/ToastContext';
+import { AgencyData } from '../../../lib/types/agencies';
 
 export type WorkingHoursProps = {
     currentStep: number;
     onValidationChanged: (isValid: boolean) => void;
     onValuesChange: (isActive: boolean, workingDays: number, startOfWorkingHours: Moment, endOfWorkingHours: Moment) => void;
+    selectedAgencyData: AgencyData | null;
 };
-
 const AgencyWorkingHours = (props: WorkingHoursProps) => {
 
-    const { currentStep, onValidationChanged, onValuesChange } = props;
+    const { currentStep, onValidationChanged, onValuesChange, selectedAgencyData } = props;
+    const defaultAgencyName = selectedAgencyData?.agencyName || '';
+    const defaultActive = selectedAgencyData?.isEnable || true;
+    const defaultWorkingDays = selectedAgencyData?.workingDays || 127;
+    const defulatStartOfWorkingHours = selectedAgencyData?.startOfWorkingHours;
+    const defualtEndOfWorkingHours = selectedAgencyData?.endOfWorkingHours;
+
 
     const { language } = useContext(LanguageContext);
     const { setToast } = useContext(ToastContext);
 
+    const [agencyName, setAgencyName] = useState(defaultAgencyName);
+    const [workingDays, setWorkingDays] = useState(defaultWorkingDays);
+    const [isAgencyActive, setIsAgencyActive] = useState<boolean>(defaultActive);
     const [startOfWorkingHours, setStartOfWorkingHours] = useState(moment());
     const [endOfWorkingHours, setEndOfWorkingHours] = useState(moment());
-    const [isAgencyActive, setIsAgencyActive] = useState(true);
-    const [workingDays, setWorkingDays] = useState(127);
     const { settings, agenciesPage, notification } = language;
 
     const startHandleChange = (newValue: Moment | null) => {
@@ -65,6 +73,14 @@ const AgencyWorkingHours = (props: WorkingHoursProps) => {
     };
 
     useEffect(() => {
+        if (agencyName !== defaultAgencyName && selectedAgencyData) {
+            console.log('agencyName', defaultWorkingDays);
+            setAgencyName(defaultAgencyName);
+            setIsAgencyActive(defaultActive);
+            setWorkingDays(defaultWorkingDays);
+        }
+    }, [agencyName, defaultActive, defaultAgencyName, defaultWorkingDays, selectedAgencyData]);
+    useEffect(() => {
         const isValid = workingDays > 0 && startOfWorkingHours.isBefore(endOfWorkingHours) && endOfWorkingHours.isAfter(startOfWorkingHours);
         onValidationChanged(isValid);
     }, [workingDays, startOfWorkingHours, endOfWorkingHours, onValidationChanged]);
@@ -73,7 +89,7 @@ const AgencyWorkingHours = (props: WorkingHoursProps) => {
         <LocalizationProvider dateAdapter={MomentUtils}>
             <TabPanel wrapMode={true} dir={settings.direction} activeIndex={currentStep.toString()} index='3'>
 
-                <WorkingDaysList onWorkingDaysChanged={(flag) => activeDaysChanged(flag)} />
+                <WorkingDaysList defaultWorkingDays={workingDays} onWorkingDaysChanged={(flag) => activeDaysChanged(flag)} />
                 <CenterBox >
                     <TimePicker
                         label={agenciesPage.startOfWorkingHours}

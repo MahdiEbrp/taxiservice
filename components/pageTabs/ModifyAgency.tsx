@@ -34,7 +34,9 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     const [isPhoneTabValid, setIsPhoneTabValid] = useState(false);
     const [isAddressTabValid, setIsAddressTabValid] = useState(false);
     const [isWorkingHoursTabValid, setIsWorkingHoursTabValid] = useState(false);
+
     const [showError, setShowError] = useState(false);
+
     const [agencyName, setAgencyName] = useState('');
     const [countryCode, setCountryCode] = useState('');
     const [phoneNumber1, setPhoneNumber1] = useState('');
@@ -60,17 +62,8 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     const isLastStep = currentStep === 3;
     const agencyCardTitle = editMode ? editAgency.title : addNewAgency.title;
     const [title, setTitle] = useState(agencyCardTitle);
-    const agencyItems: taggedItem<string>[] = useMemo(() => {
-        if (agencyData && agencyData.length > 0) {
-            const values = agencyData as AgencyDataList;
-            return values.map(agency => {
-                return { tag: agency.id, displayText: agency.agencyName };
-            });
-        }
-        return [];
-    }, [agencyData]);
     const selectedAgencyData = useMemo(() => {
-        if (agencyData && agencyData.length > 0 && editMode) {
+        if (Array.isArray(agencyData) && agencyData.length > 0 && editMode) {
             const values = agencyData as AgencyDataList;
             const agency = values.find(agency => agency.agencyName === agencyName);
             if (agency)
@@ -189,22 +182,22 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
                 <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap', }}>
                     <BreadcrumbsSteps />
                     <CenterBox sx={{ display: isUpdating ? 'none' : 'flex' }}>
-                        <AgencySelector agencyList={agencyItems} editMode={editMode} currentStep={currentStep} onValidationChanged={(isValid) => setIsAgencyTabValid(isValid)}
+                        <AgencySelector editMode={editMode} currentStep={currentStep} onValidationChanged={(isValid) => setIsAgencyTabValid(isValid)}
                             onValuesChanged={(agency, countryCode) => {
                                 setAgencyName(agency);
                                 setLocalization(countryCode);
                             }} />
-                        <AgencyPhoneEditor currentStep={currentStep} onValidationChanged={(isValid) => setIsPhoneTabValid(isValid)} onValuesChange={(phone1, phone2, mobile) => {
+                        <AgencyPhoneEditor currentStep={currentStep} selectedAgencyData={selectedAgencyData} onValidationChanged={(isValid) => setIsPhoneTabValid(isValid)} onValuesChange={(phone1, phone2, mobile) => {
                             setPhoneNumber1(phone1);
                             setPhoneNumber2(phone2);
                             setMobileNumber(mobile);
                         }} />
-                        <AgencyAddress currentStep={currentStep} onValidationChanged={(isValid) => setIsAddressTabValid(isValid)}
+                        <AgencyAddress currentStep={currentStep} selectedAgencyData={selectedAgencyData} onValidationChanged={(isValid) => setIsAddressTabValid(isValid)}
                             onValuesChange={(address, location) => {
                                 setAddress(address);
                                 setLocation(location);
                             }} />
-                        <AgencyWorkingHours currentStep={currentStep} onValidationChanged={(isValid) => setIsWorkingHoursTabValid(isValid)}
+                        <AgencyWorkingHours currentStep={currentStep} selectedAgencyData={selectedAgencyData} onValidationChanged={(isValid) => setIsWorkingHoursTabValid(isValid)}
                             onValuesChange={(isEnable, workingDays, startOfWorkingHours, endOfWorkingHours) => {
                                 setWorkingDays(workingDays);
                                 setStartOfWorkingHours(startOfWorkingHours.clone().utc().toISOString());

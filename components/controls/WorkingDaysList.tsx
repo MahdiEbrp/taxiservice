@@ -11,10 +11,11 @@ import { flaggedWorkingDays, orderedWorkingDays } from '../../lib/dateTimeLocali
 
 export type WorkingDaysListProps = {
     onWorkingDaysChanged?: (days: number) => void;
+    defaultWorkingDays?: number;
 };
 const WorkingDaysList = (props: WorkingDaysListProps) => {
 
-    const { onWorkingDaysChanged } = props;
+    const { onWorkingDaysChanged, defaultWorkingDays } = props;
 
     const { localizationInfo } = useContext(LocalizationInfoContext);
     const { language } = useContext(LanguageContext);
@@ -26,7 +27,7 @@ const WorkingDaysList = (props: WorkingDaysListProps) => {
     }, [settings.days, localizationInfo.firstDayOfWeek]);
 
     //if bit is set, day is active
-    const [activeDaysFlag, setActiveDaysFlag] = useState(127);
+    const [activeDaysFlag, setActiveDaysFlag] = useState<number>(defaultWorkingDays || 127);
 
     const workdays = useMemo(() => {
         return flaggedWorkingDays(activeDaysFlag);

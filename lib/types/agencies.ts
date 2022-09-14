@@ -3,7 +3,7 @@ type Agency = {
 };
 export type AgencyList = Agency[];
 
-type AgencyData = {
+export type AgencyData = {
     id: string;
     agencyName: string;
     isEnable: boolean;

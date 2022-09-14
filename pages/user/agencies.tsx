@@ -13,7 +13,12 @@ import { getData } from '../../lib/axiosRequest';
 import { AgencyList, AgencyDataList } from '../../lib/types/agencies';
 import Loader from '../../components/controls/Loader';
 import { UserAgenciesContext } from '../../components/context/UserAgenciesContext';
-const fetcher = (url: string) => getData(url).then(res => res?.data || []);
+const fetcher = async (url: string) => {
+    const data = await getData(url);
+    if (!data)
+        return [];
+    return data.data ;
+};
 const Agencies = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
     const router = useRouter();
@@ -29,15 +34,14 @@ const Agencies = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>)
 
     const { data: allAgencyData, error: allAgencyError } = useSWR(process.env.NEXT_PUBLIC_WEB_URL + '/api/agency/getNamesOfAll', fetcher);
     const { data: userAgencyData, error: userAgencyError } = useSWR(process.env.NEXT_PUBLIC_WEB_URL + '/api/agency/retrieve', fetcher);
-
-    const isLoading = !allAgencyData && !allAgencyError && !userAgencyData && !userAgencyError;
+    const isLoading = editMode ? !userAgencyData && !userAgencyError : !allAgencyData && !allAgencyError;
     useEffect(() => {
         if (allAgencyData) {
             const values = allAgencyData as AgencyList;
-            setAgencyNames(values.map(_ => _.agencyName));
+            if (Array.isArray(values))
+                setAgencyNames(values.map(_ => _.agencyName));
         }
     }, [allAgencyData]);
-
     useEffect(() => {
         if (userAgencyData)
             setAgencyData(userAgencyData as AgencyDataList);
