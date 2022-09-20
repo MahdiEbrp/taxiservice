@@ -43,6 +43,7 @@ const persian = {
         endDateError: 'در ساعات کاری، زمان پایان باید بعدتر از زمان شروع باشد.',
         invalidWorkingHoursTab: 'هیچ روز انتخابی وجود ندارد یا زمان شروع بیشتر از زمان پایان است.',
         successfullyAddAgency: 'آفرین! آژانس با موفقیت توسط شما ایجاد شده است.',
+        successfullyEditAgency: 'آفرین! آژانس با موفقیت توسط شما ویرایش شده است.',
         agencyDuplicateError: 'در حال حاضر آژانسی با همین نام وجود دارد.',
     },
     authorizedLayout: {

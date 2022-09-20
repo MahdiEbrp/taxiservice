@@ -24,9 +24,8 @@ const AgencyWorkingHours = (props: WorkingHoursProps) => {
     const defaultAgencyName = selectedAgencyData?.agencyName || '';
     const defaultActive = selectedAgencyData?.isEnable || true;
     const defaultWorkingDays = selectedAgencyData?.workingDays || 127;
-    const defulatStartOfWorkingHours = selectedAgencyData?.startOfWorkingHours;
-    const defualtEndOfWorkingHours = selectedAgencyData?.endOfWorkingHours;
-
+    const defaultStartOfWorkingHours = selectedAgencyData?.startOfWorkingHours;
+    const defaultEndOfWorkingHours = selectedAgencyData?.endOfWorkingHours;
 
     const { language } = useContext(LanguageContext);
     const { setToast } = useContext(ToastContext);
@@ -74,12 +73,15 @@ const AgencyWorkingHours = (props: WorkingHoursProps) => {
 
     useEffect(() => {
         if (agencyName !== defaultAgencyName && selectedAgencyData) {
-            console.log('agencyName', defaultWorkingDays);
             setAgencyName(defaultAgencyName);
             setIsAgencyActive(defaultActive);
             setWorkingDays(defaultWorkingDays);
+            setStartOfWorkingHours(moment(defaultStartOfWorkingHours));
+            setEndOfWorkingHours(moment(defaultEndOfWorkingHours));
+            onValuesChange(defaultActive, defaultWorkingDays, moment(defaultStartOfWorkingHours), moment(defaultEndOfWorkingHours));
         }
-    }, [agencyName, defaultActive, defaultAgencyName, defaultWorkingDays, selectedAgencyData]);
+    }, [agencyName, defaultActive, defaultAgencyName, defaultEndOfWorkingHours, defaultStartOfWorkingHours, defaultWorkingDays, onValuesChange, selectedAgencyData]);
+
     useEffect(() => {
         const isValid = workingDays > 0 && startOfWorkingHours.isBefore(endOfWorkingHours) && endOfWorkingHours.isAfter(startOfWorkingHours);
         onValidationChanged(isValid);

@@ -13,13 +13,16 @@ import { getData } from '../../lib/axiosRequest';
 import { AgencyList, AgencyDataList } from '../../lib/types/agencies';
 import Loader from '../../components/controls/Loader';
 import { UserAgenciesContext } from '../../components/context/UserAgenciesContext';
+// eslint-disable-next-line no-duplicate-imports
+import type { NextPage } from 'next';
+
 const fetcher = async (url: string) => {
     const data = await getData(url);
     if (!data)
         return [];
     return data.data ;
 };
-const Agencies = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Agencies: NextPage = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
     const router = useRouter();
     const mode = router.query['mode'] as string | '';

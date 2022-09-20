@@ -166,12 +166,11 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
         }
 
         if (response.status === 200) {
-            setToast({ id: Date.now(), message: notification.successfullyAddAgency, alertColor: 'success' });
+            setToast({ id: Date.now(), message:editMode ? notification.successfullyEditAgency : notification.successfullyAddAgency, alertColor: 'success' });
             setCurrentStep(0);
             return;
         }
         const { error } = response.data as { error: string; };
-
         setToast({ id: Date.now(), message: getResponseError(error, language), alertColor: 'error' });
 
     };

@@ -12,7 +12,9 @@ import { LanguageContext } from '../components/context/LanguageContext';
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import Loader from '../components/controls/Loader';
-const NotFound = () => {
+import type { NextPage } from 'next';
+
+const NotFound: NextPage = () => {
 
     const { language } = useContext(LanguageContext);
 

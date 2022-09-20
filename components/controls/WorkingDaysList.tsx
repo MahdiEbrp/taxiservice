@@ -1,14 +1,13 @@
-import React, { useMemo, useContext, useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import Switch from '@mui/material/Switch';
 import { LanguageContext } from '../context/LanguageContext';
 import { LocalizationInfoContext } from '../context/LocalizationInfoContext';
 import { flaggedWorkingDays, orderedWorkingDays } from '../../lib/dateTimeLocalization';
-
+import { useMemo, useContext, useState, useEffect } from 'react';
 export type WorkingDaysListProps = {
     onWorkingDaysChanged?: (days: number) => void;
     defaultWorkingDays?: number;
@@ -27,11 +26,11 @@ const WorkingDaysList = (props: WorkingDaysListProps) => {
     }, [settings.days, localizationInfo.firstDayOfWeek]);
 
     //if bit is set, day is active
-    const [activeDaysFlag, setActiveDaysFlag] = useState<number>(defaultWorkingDays || 127);
+    const [activeDaysFlag, setActiveDaysFlag] = useState<number>(127);
 
     const workdays = useMemo(() => {
-        return flaggedWorkingDays(activeDaysFlag);
-    }, [activeDaysFlag]);
+        return flaggedWorkingDays(activeDaysFlag, localizationInfo.firstDayOfWeek);
+    }, [activeDaysFlag, localizationInfo.firstDayOfWeek]);
 
     const changeActiveDays = (day: number) => {
         const newActiveDays = workdays.changeActiveDays(day);
@@ -41,6 +40,11 @@ const WorkingDaysList = (props: WorkingDaysListProps) => {
 
         setActiveDaysFlag(newActiveDays);
     };
+
+    useEffect(() => {
+        if (defaultWorkingDays)
+            setActiveDaysFlag(defaultWorkingDays);
+    }, [defaultWorkingDays]);
 
     return (
         <>

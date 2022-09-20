@@ -1,12 +1,15 @@
 import moment from 'moment';
 
-export const flaggedWorkingDays = (activeDaysFlag: number) => {
+export const flaggedWorkingDays = (activeDaysFlag: number,firstDayOfWeek:number) => {
+
+    const days = [0, 1, 2, 3, 4, 5, 6];
+    const daysShifted = days.slice(firstDayOfWeek).concat(days.slice(0, firstDayOfWeek));
 
     const isDayActive = (day: number) => {
-        return (activeDaysFlag & 1 << day) > 0;
+        return (activeDaysFlag & 1 << daysShifted[day]) > 0;
     };
     const changeActiveDays = (day: number) => {
-        return activeDaysFlag ^= 1 << day;
+        return activeDaysFlag ^= 1 << daysShifted[day];
     };
     const daysToString = (days: string[]) => {
         const result:string[] = [];
