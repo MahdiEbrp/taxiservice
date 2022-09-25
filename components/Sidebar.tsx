@@ -9,7 +9,7 @@ import { BiSupport } from 'react-icons/bi';
 import { FaCar, FaMoneyBillAlt } from 'react-icons/fa';
 import { HiOutlineMail, HiUserGroup } from 'react-icons/hi';
 import { LanguageContext } from './context/LanguageContext';
-import { MdAddBusiness, MdOutlineEditRoad } from 'react-icons/md';
+import { MdAddBusiness, MdOutlineEditRoad, MdOutlineGroupAdd } from 'react-icons/md';
 import { RiSettings3Fill } from 'react-icons/ri';
 import { SidebarContext } from './context/SidebarContext';
 import { TbRoad } from 'react-icons/tb';
@@ -42,7 +42,10 @@ const Sidebar = () => {
                                 <SidebarItem item={{ icon: <MdAddBusiness />, text: sidebar.addNewAgency, url: '/user/agencies?mode=create' }} />
                                 <SidebarItem item={{ icon: <MdOutlineEditRoad />, text: sidebar.editAgency, url: '/user/agencies?mode=edit' }} />
                             </ExpandableItems>
-                            <SidebarItem item={{ icon: <HiUserGroup />, text: sidebar.personnel, url: '/personnel' }} />
+                            <ExpandableItems label={sidebar.personnel} isOpen={true} >
+                            <SidebarItem item={{ icon: <MdOutlineGroupAdd />, text: sidebar.jobRequests, url: '/user/personnel/jobRequests' }} />
+                                <SidebarItem item={{ icon: <HiUserGroup />, text: sidebar.managePersonnel, url: '/user/personnel/manage' }} />
+                            </ExpandableItems>
                             <Divider />
                             <SidebarItem item={{ icon: <TbRoad />, text: sidebar.trips, url: '/trips' }} />
                             <SidebarItem item={{ icon: <FaMoneyBillAlt />, text: sidebar.payments, url: '/payments' }} />

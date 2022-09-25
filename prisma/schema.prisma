@@ -11,37 +11,72 @@ datasource db {
 }
 
 model User {
-  id               String    @id @default(cuid()) @map("_id")
-  email            String    @unique
+  id               String     @id @default(cuid()) @map("_id")
+  email            String     @unique
   password         String
-  createdAt        DateTime  @db.Timestamptz
-  verifiedCodeDate DateTime  @db.Timestamptz
+  createdAt        DateTime   @db.Timestamptz
+  verifiedCodeDate DateTime   @db.Timestamptz
   verifiedCode     String
-  verified         Boolean   @default(false)
-  resetCodeDate    DateTime? @db.Timestamptz
+  verified         Boolean    @default(false)
+  resetCodeDate    DateTime?  @db.Timestamptz
   resetCode        String?
-  profilePicture   String?
-  name             String?
-  localisation     String    @default("US")
-  language         String    @default("en")
+  profilePicture   String     @default("")
+  name             String     @default("") @db.VarChar(300)
+  firstRun         Boolean    @default(true)
+  localisation     String     @default("US")
   Agency           Agency[]
+  Personel         Personel[]
+  Trips            Trips[]
 }
 
-
 model Agency {
-  id                  String   @id @default(cuid()) @map("_id")
-  agencyName          String   @unique @db.VarChar(50)
-  isEnable            Boolean  @default(true)
-  phoneNumber1        String   @db.VarChar(30)
-  phoneNumber2        String   @db.VarChar(30)
-  mobileNumber        String   @db.VarChar(30)
-  address             String   @db.VarChar(300)
+  id                  String     @id @default(cuid()) @map("_id")
+  agencyName          String     @unique @db.VarChar(50)
+  isEnable            Boolean    @default(true)
+  phoneNumber1        String     @db.VarChar(30)
+  phoneNumber2        String     @db.VarChar(30)
+  mobileNumber        String     @db.VarChar(30)
+  address             String     @db.VarChar(300)
   latitude            Float
   longitude           Float
   workingDays         Int
-  startOfWorkingHours DateTime @db.Timestamptz
-  endOfWorkingHours   DateTime @db.Timestamptz
-  createdAt           DateTime @db.Timestamptz
-  user                User     @relation(fields: [userId], references: [id])
+  startOfWorkingHours DateTime   @db.Timestamptz
+  endOfWorkingHours   DateTime   @db.Timestamptz
+  createdAt           DateTime   @db.Timestamptz
+  user                User       @relation(fields: [userId], references: [id])
   userId              String
+  Personels           Personel[]
+}
+
+model Personel {
+  id             String  @id @default(cuid()) @map("_id")
+  User           User    @relation(fields: [userId], references: [id])
+  userId         String
+  position       String  @db.VarChar(50)
+  canDrive       Boolean @default(false)
+  canSeeReports  Boolean @default(false)
+  canSeeRequests Boolean @default(false)
+  isEnable       Boolean @default(true)
+  isManager      Boolean @default(false)
+  Trips          Trips[]
+  Agency         Agency  @relation(fields: [agencyId], references: [id])
+  agencyId       String
+}
+
+model Trips {
+  id                   String   @id @default(cuid()) @map("_id")
+  tripName             String   @db.VarChar(50)
+  tripDescription      String   @db.VarChar(300)
+  price                Float
+  startDateTime        DateTime @db.Timestamptz
+  endDateTime          DateTime @db.Timestamptz
+  destination          String   @db.VarChar(300)
+  destinationLatitude  Float
+  destinationLongitude Float
+  sourceLatitude       Float
+  sourceLongitude      Float
+  User                 User     @relation(fields: [userId], references: [id])
+  userId               String
+  Personel             Personel @relation(fields: [personelId], references: [id])
+  personelId           String
 }

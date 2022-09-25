@@ -19,6 +19,8 @@ const persian = {
         settings: 'تنظیمات',
         support: 'پشتیبانی',
         trips: 'سفرها',
+        jobRequests: 'درخواست های شغلی',
+        managePersonnel: 'مدیریت پرسنل',
     },
     languageDialog: {
         title: 'زبانی را که می خواهید استفاده کنید انتخاب کنید.',
@@ -132,6 +134,9 @@ const persian = {
             title: 'افزودن آژانس جدید',
             updating:'در حال افزودن آژانس جدید...',
         },
+    },
+    jobRequestsPage: {
+        title: 'درخواست های شغلی',
     },
     pageNotFound: {
         title: 'صفحه مورد نظر وجود ندارد!',

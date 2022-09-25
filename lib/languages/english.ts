@@ -19,6 +19,8 @@ const english = {
         settings: 'Settings',
         support: 'Support',
         trips: 'Trips',
+        jobRequests: 'Job requests',
+        managePersonnel: 'Manage personnel',
     },
     languageDialog: {
         title: 'Select the language you would like to use.',
@@ -132,6 +134,9 @@ const english = {
             title: 'Adding a new agency',
             updating:'Adding a new agency...',
         },
+    },
+    jobRequestsPage: {
+       title: 'Job requests',
     },
     pageNotFound: {
         title: 'Page not found!',
