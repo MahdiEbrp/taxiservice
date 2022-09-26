@@ -4,10 +4,11 @@ import CenterBox from '../../controls/CenterBox';
 import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { useSession, signOut } from 'next-auth/react';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
+import Loader from '../../controls/Loader';
 const UserInformationTab = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const router=useRouter();
+    const router = useRouter();
     const { data: session } = useSession();
     const redirect = async () => {
         setIsLoading(true);
@@ -21,16 +22,21 @@ const UserInformationTab = () => {
         setIsLoading(true);
         const response = await signOut({ redirect: false });
         if (response)
-           redirect();
+            redirect();
     };
     return (
-        <CenterBox>
-            <Avatar sx={{ width: 56, height: 56 }}>E</Avatar>
-            <Typography>
-                Email:{session?.user?.email}
-            </Typography>
-            <Button onClick={()=>signOutUser()}>SingOut</Button>
-        </CenterBox>
+        <>
+            {
+                isLoading ?
+                    <Loader text='Signing out...' />
+                    :
+                    <CenterBox>
+                        <Avatar sx={{ width: 100, height: 100 }} />
+                        <Typography variant='body2'>{session?.user?.email}</Typography>
+                        <Button variant='contained' onClick={signOutUser}>Sign out</Button>
+                    </CenterBox>
+            }
+        </>
     );
 };
 
