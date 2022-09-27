@@ -14,7 +14,9 @@ import Alert from '@mui/material/Alert';
 export const settingFetcher = async (url: string) => {
     const data = await getData(url);
     if (!data)
-        return [];
+        throw new Error('No data');
+    if (data.status !== 200)
+        throw new Error('Error');
     return data.data;
 };
 
@@ -44,12 +46,13 @@ const UserInformationTab = () => {
         <div dir={settings.direction}>
             {
                 isLoading ?
-                    <Loader text='Loading...' />
+                    <Loader text={userInformationDialog.loading} />
                     :
                     <CenterBox>
                         {setting ?
                             <>
                                 <Avatar src={publicUrl + '/images/profiles/' + setting.profilePicture} sx={{ width: 100, height: 100 }} />
+                                <Typography variant='h5'>{setting.name}</Typography>
                                 <Typography variant='body2'>{userInformationDialog.emailAddress + ':' + setting.email}</Typography>
                             </>
                             :
