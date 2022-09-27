@@ -27,6 +27,12 @@ const persian = {
         save: 'ذخیره',
         discard: 'بی خیال',
     },
+    userInformationDialog: {
+        signOut: 'خروج',
+        emailAddress: 'آدرس ایمیل',
+        settingsNotFound: 'متأسفیم، نتوانستیم اطلاعاتی را که از سرور درخواست کرده بودیم دریافت کنیم.',
+        loading: 'در حال بارگذاری...',
+    },
     notification: {
         addressError: 'آدرس کوتاهی وارد شده است یا مکانی روی نقشه انتخاب نشده است.',
         changedLanguage: 'تغییر زبان با موفقیت اعمال شد.',

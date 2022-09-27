@@ -27,6 +27,12 @@ const english = {
         save: 'Save',
         discard: 'Discard',
     },
+    userInformationDialog: {
+        signOut: 'Sign out',
+        emailAddress: 'Email address',
+        settingsNotFound: 'Sorry,we were unable to get the information we requested from the server.',
+        loading: 'Loading...',
+    },
     notification: {
         addressError: 'A short address is entered or a location on the map has not been selected.',
         changedLanguage: 'The language change has been applied successfully.',

@@ -1,42 +1,64 @@
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CenterBox from '../../controls/CenterBox';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { useSession, signOut } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import Loader from '../../controls/Loader';
-const UserInformationTab = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const router = useRouter();
-    const { data: session } = useSession();
-    const redirect = async () => {
-        setIsLoading(true);
-        await router.push('/');
-        setIsLoading(false);
+import { getData } from '../../../lib/axiosRequest';
+import useSWR from 'swr';
+import { Settings } from '../../../lib/types/settings';
+import { LanguageContext } from '../../context/LanguageContext';
+import Alert from '@mui/material/Alert';
 
-    };
-    if (!session)
-        redirect();
-    const signOutUser = async () => {
+export const settingFetcher = async (url: string) => {
+    const data = await getData(url);
+    if (!data)
+        return [];
+    return data.data;
+};
+
+const UserInformationTab = () => {
+    const publicUrl = process.env.NEXT_PUBLIC_WEB_URL;
+    const { data: settingsData, error: settingsError } = useSWR(publicUrl + '/api/settings/getAllSettings', settingFetcher);
+    const [isLoading, setIsLoading] = useState(true);
+    const { data: session } = useSession();
+    const [setting, setSetting] = useState<Settings | null>(null);
+    //     const response = await signOut({ redirect: false });
+    const { language } = useContext(LanguageContext);
+    const { userInformationDialog, settings } = language;
+    const singOut = async () => {
         setIsLoading(true);
-        const response = await signOut({ redirect: false });
-        if (response)
-            redirect();
+        await signOut({ redirect: false });
+        setIsLoading(false);
     };
+    useEffect(() => {
+        if (session && settingsData || settingsError) {
+            setIsLoading(false);
+            if (settingsData)
+                setSetting(settingsData as Settings);
+        }
+    }, [session, settingsData, settingsError]);
+
     return (
-        <>
+        <div dir={settings.direction}>
             {
                 isLoading ?
-                    <Loader text='Signing out...' />
+                    <Loader text='Loading...' />
                     :
                     <CenterBox>
-                        <Avatar sx={{ width: 100, height: 100 }} />
-                        <Typography variant='body2'>{session?.user?.email}</Typography>
-                        <Button variant='contained' onClick={signOutUser}>Sign out</Button>
+                        {setting ?
+                            <>
+                                <Avatar src={publicUrl + '/images/profiles/' + setting.profilePicture} sx={{ width: 100, height: 100 }} />
+                                <Typography variant='body2'>{userInformationDialog.emailAddress + ':' + setting.email}</Typography>
+                            </>
+                            :
+                            <Alert severity='warning'>{userInformationDialog.settingsNotFound}</Alert>
+                        }
+                        <Button variant='contained' onClick={singOut}>{userInformationDialog.signOut}</Button>
                     </CenterBox>
             }
-        </>
+        </div>
     );
 };
 
