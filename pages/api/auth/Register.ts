@@ -33,6 +33,10 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         verified: false,
                         verifiedCodeDate: new Date(),
                         createdAt: new Date(),
+                        name: 'new user',
+                        profilePicture: 'profile0.svg',
+                        firstRun: true,
+                        localization: 'US',
                     }
                 });
                 if (result) {

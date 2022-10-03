@@ -20,6 +20,8 @@ const fetcher = async (url: string) => {
     const data = await getData(url);
     if (!data)
         return [];
+    if(data.status !== 200)
+        throw new Error(data.statusText);
     return data.data ;
 };
 const Agencies: NextPage = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -38,6 +40,7 @@ const Agencies: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
     const { data: allAgencyData, error: allAgencyError } = useSWR(process.env.NEXT_PUBLIC_WEB_URL + '/api/agency/getNamesOfAll', fetcher);
     const { data: userAgencyData, error: userAgencyError } = useSWR(process.env.NEXT_PUBLIC_WEB_URL + '/api/agency/retrieve', fetcher);
     const isLoading = editMode ? !userAgencyData && !userAgencyError : !allAgencyData && !allAgencyError;
+
     useEffect(() => {
         if (allAgencyData) {
             const values = allAgencyData as AgencyList;

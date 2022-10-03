@@ -18,14 +18,12 @@ const AuthorizedLayout = (props: { children: ReactElement; }) => {
     const { settings, authorizedLayout, notification } = language;
     const { direction } = settings;
     const [showError, setShowError] = useState(false);
-
     useEffect(() => {
         if (session.status === 'unauthenticated') {
             setShowError(true);
             router.push('/');
         }
     }, [session, router]);
-
     return (
         <>
             {session.status === 'authenticated' ?

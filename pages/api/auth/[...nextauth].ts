@@ -1,9 +1,10 @@
 import CredentialProvider from 'next-auth/providers/credentials';
-import NextAuth from 'next-auth';
+import NextAuth, { Session, User } from 'next-auth';
 import prismaClient from '../../../lib/prismaClient';
 import { Sh256Encrypt } from '../../../lib/encryption';
 import { getCaptchaValidationStatus } from '../../../lib/validator';
 import { log } from 'next-axiom';
+import { JWT } from 'next-auth/jwt';
 
 export const options = {
     providers: [
@@ -42,10 +43,7 @@ export const options = {
                                 if (!user.verified)
                                     throw new Error('ERR_USER_NOT_VERIFIED');
                                 else
-                                    return {
-                                        email: user.email,
-                                        token: user.id,
-                                    };
+                                    return { email: user.email, name: user.name };
                             }
                             return null;
                         }
@@ -62,6 +60,7 @@ export const options = {
         }),
 
     ],
+
     pages: {
         signIn: '/',
 
@@ -71,10 +70,30 @@ export const options = {
         secret: process.env.NEXT_AUTH_SECRET,
         encryption: 'HS256',
     },
+    callbacks: {
+        async session(params: {session: Session;token: JWT;}) {
+            const { session, token } = params;
+            session.token = token;
+            const prisma = prismaClient;
+            try {
+                const user = await prisma.user.findFirst({
+                    where: {
+                        email: token.email || '',
+                    }
+                });
+                if (user) {
+                    session.user = {email: user.email, name: user.name,lastLogin: user.createdAt};
+                    return Promise.resolve(session);
+                }
+                return Promise.reject();
+            }
+            catch (e) {
+                log.error(JSON.stringify(e));
+                return Promise.reject();
+            }
+        },
+
+    },
 
 };
 export default NextAuth(options);
-
-
-
-

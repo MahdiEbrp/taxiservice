@@ -19,11 +19,11 @@ model User {
   verifiedCode     String
   verified         Boolean    @default(false)
   resetCodeDate    DateTime?  @db.Timestamptz
+  lastLogin        DateTime?  @db.Timestamptz
   resetCode        String?
   profilePicture   String     @default("")
   name             String     @default("") @db.VarChar(300)
-  firstRun         Boolean    @default(true)
-  localisation     String     @default("US")
+  localization     String     @default("US")
   Agency           Agency[]
   Personel         Personel[]
   Trips            Trips[]
@@ -61,6 +61,7 @@ model Personel {
   Trips          Trips[]
   Agency         Agency  @relation(fields: [agencyId], references: [id])
   agencyId       String
+  isRequest      Boolean @default(true)
 }
 
 model Trips {

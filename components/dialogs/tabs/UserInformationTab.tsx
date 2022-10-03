@@ -7,7 +7,7 @@ import { useSession, signOut } from 'next-auth/react';
 import Loader from '../../controls/Loader';
 import { getData } from '../../../lib/axiosRequest';
 import useSWR from 'swr';
-import { Settings } from '../../../lib/types/settings';
+import { Settings } from '../../../types/settings';
 import { LanguageContext } from '../../context/LanguageContext';
 import Alert from '@mui/material/Alert';
 
@@ -16,7 +16,7 @@ export const settingFetcher = async (url: string) => {
     if (!data)
         throw new Error('No data');
     if (data.status !== 200)
-        throw new Error('Error');
+        throw new Error(data.statusText);
     return data.data;
 };
 
@@ -26,9 +26,10 @@ const UserInformationTab = () => {
     const [isLoading, setIsLoading] = useState(true);
     const { data: session } = useSession();
     const [setting, setSetting] = useState<Settings | null>(null);
-    //     const response = await signOut({ redirect: false });
+
     const { language } = useContext(LanguageContext);
     const { userInformationDialog, settings } = language;
+
     const singOut = async () => {
         setIsLoading(true);
         await signOut({ redirect: false });
@@ -41,7 +42,6 @@ const UserInformationTab = () => {
                 setSetting(settingsData as Settings);
         }
     }, [session, settingsData, settingsError]);
-
     return (
         <div dir={settings.direction}>
             {
