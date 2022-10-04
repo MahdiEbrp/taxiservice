@@ -2,7 +2,7 @@ import Alert from '@mui/material/Alert';
 import CenterBox from '../../controls/CenterBox';
 import ForcedPatternInput from '../../controls/ForcedPatternInput';
 import TabPanel from '../../controls/TabPanel';
-import { AgencyData } from '../../../lib/types/agencies';
+import { AgencyData } from '../../../types/agencies';
 import { LanguageContext } from '../../context/LanguageContext';
 import { isPhoneNumberValid, onlyNumbersRegex } from '../../../lib/validator';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';

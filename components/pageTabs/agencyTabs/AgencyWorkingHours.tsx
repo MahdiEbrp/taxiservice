@@ -10,7 +10,7 @@ import { LanguageContext } from '../../context/LanguageContext';
 import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers';
 import { useContext, useEffect, useState } from 'react';
 import { ToastContext } from '../../context/ToastContext';
-import { AgencyData } from '../../../lib/types/agencies';
+import { AgencyData } from '../../../types/agencies';
 
 export type WorkingHoursProps = {
     currentStep: number;

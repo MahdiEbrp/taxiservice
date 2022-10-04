@@ -10,7 +10,7 @@ import { CountryListContext } from '../../components/context/CountryListContext'
 import { AllAgenciesContext } from '../../components/context/AllAgenciesContext';
 import useSWR from 'swr';
 import { getData } from '../../lib/axiosRequest';
-import { AgencyList, AgencyDataList } from '../../lib/types/agencies';
+import { AgencyList, AgencyDataList } from '../../types/agencies';
 import Loader from '../../components/controls/Loader';
 import { UserAgenciesContext } from '../../components/context/UserAgenciesContext';
 // eslint-disable-next-line no-duplicate-imports
@@ -20,9 +20,9 @@ const fetcher = async (url: string) => {
     const data = await getData(url);
     if (!data)
         return [];
-    if(data.status !== 200)
+    if (data.status !== 200)
         throw new Error(data.statusText);
-    return data.data ;
+    return data.data;
 };
 const Agencies: NextPage = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {
 

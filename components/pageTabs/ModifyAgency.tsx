@@ -22,7 +22,7 @@ import { getResponseError } from '../../lib/language';
 import { AllAgenciesContext } from '../context/AllAgenciesContext';
 import Loader from '../controls/Loader';
 import { UserAgenciesContext } from '../context/UserAgenciesContext';
-import { AgencyDataList } from '../../lib/types/agencies';
+import { AgencyDataList } from '../../types/agencies';
 
 const ModifyAgency = (props: { editMode: boolean; }) => {
 
@@ -166,7 +166,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
         }
 
         if (response.status === 200) {
-            setToast({ id: Date.now(), message:editMode ? notification.successfullyEditAgency : notification.successfullyAddAgency, alertColor: 'success' });
+            setToast({ id: Date.now(), message: editMode ? notification.successfullyEditAgency : notification.successfullyAddAgency, alertColor: 'success' });
             setCurrentStep(0);
             return;
         }

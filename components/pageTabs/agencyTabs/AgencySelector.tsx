@@ -6,7 +6,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { CountryListContext } from '../../context/CountryListContext';
 import TextField from '@mui/material/TextField';
 import { UserAgenciesContext } from '../../context/UserAgenciesContext';
-import { AgencyDataList } from '../../../lib/types/agencies';
+import { AgencyDataList } from '../../../types/agencies';
 
 export type AgencySelectorProps = {
     currentStep: number;

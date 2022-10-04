@@ -6,7 +6,7 @@ import TabPanel from '../../controls/TabPanel';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import dynamic from 'next/dynamic';
-import { AgencyData } from '../../../lib/types/agencies';
+import { AgencyData } from '../../../types/agencies';
 import { LanguageContext } from '../../context/LanguageContext';
 import { LocalizationInfoContext } from '../../context/LocalizationInfoContext';
 import { taggedItem } from '../../controls/AutoCompletePlus';

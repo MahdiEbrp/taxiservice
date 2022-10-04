@@ -1,5 +1,5 @@
 import CredentialProvider from 'next-auth/providers/credentials';
-import NextAuth, { Session, User } from 'next-auth';
+import NextAuth, { Session } from 'next-auth';
 import prismaClient from '../../../lib/prismaClient';
 import { Sh256Encrypt } from '../../../lib/encryption';
 import { getCaptchaValidationStatus } from '../../../lib/validator';
@@ -81,8 +81,18 @@ export const options = {
                         email: token.email || '',
                     }
                 });
+
                 if (user) {
-                    session.user = {email: user.email, name: user.name,lastLogin: user.createdAt};
+                    const lastLogin = user.lastLogin;
+                    await prisma.user.update({
+                        where: {
+                            email: user.email,
+                        },
+                        data: {
+                            lastLogin: new Date(),
+                        }
+                    });
+                    session.user = {email: user.email, name: user.name,lastLogin: lastLogin};
                     return Promise.resolve(session);
                 }
                 return Promise.reject();

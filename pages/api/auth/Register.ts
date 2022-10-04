@@ -33,9 +33,9 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         verified: false,
                         verifiedCodeDate: new Date(),
                         createdAt: new Date(),
-                        name: 'new user',
+                        name: '',
                         profilePicture: 'profile0.svg',
-                        firstRun: true,
+                        lastLogin:null,
                         localization: 'US',
                     }
                 });

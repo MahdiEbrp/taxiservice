@@ -6,7 +6,7 @@ declare module 'next-auth' {
      */
     interface Session {
         user: {
-            lastLogin?: undefined | Date;
+            lastLogin?: null | Date;
         } & DefaultSession['user'];
     }
 }

@@ -1,5 +1,5 @@
 import { createContext, Dispatch } from 'react';
-import { AgencyDataList } from '../../lib/types/agencies';
+import { AgencyDataList } from '../../types/agencies';
 
 export const UserAgenciesContext = createContext<{
     agencyData: AgencyDataList | [];
