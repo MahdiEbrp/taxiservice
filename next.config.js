@@ -8,6 +8,9 @@ const nextConfig = withAxiom({
     locales: ['en', 'en-US', 'fa', 'fa-IR'],
     defaultLocale: 'en',
   },
+  images: {
+    domains: ['localhost','taxiservice.vercel.app'],
+  },
 });
 
 module.exports = nextConfig;

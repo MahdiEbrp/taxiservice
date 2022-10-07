@@ -51,7 +51,7 @@ const Sidebar = () => {
                             <SidebarItem item={{ icon: <FaMoneyBillAlt />, text: sidebar.payments, url: '/payments' }} />
                             <Divider />
                             <SidebarItem item={{ icon: <HiOutlineMail />, text: sidebar.messages, url: '/messages' }} />
-                            <SidebarItem item={{ icon: <RiSettings3Fill />, text: sidebar.settings, url: '/settings' }} />
+                            <SidebarItem item={{ icon: <RiSettings3Fill />, text: sidebar.settings, url: '/user/settings' }} />
                             <Divider />
                         </>
                     }

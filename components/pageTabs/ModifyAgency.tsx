@@ -178,7 +178,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
         <>
             <Card dir={direction}>
                 <CardHeader title={title} />
-                <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap', }}>
+                <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap'}}>
                     <BreadcrumbsSteps />
                     <CenterBox sx={{ display: isUpdating ? 'none' : 'flex' }}>
                         <AgencySelector editMode={editMode} currentStep={currentStep} onValidationChanged={(isValid) => setIsAgencyTabValid(isValid)}

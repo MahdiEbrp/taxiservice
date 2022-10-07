@@ -144,6 +144,11 @@ const persian = {
     jobRequestsPage: {
         title: 'درخواست های شغلی',
     },
+    settingsPage: {
+        title: 'تنظیمات',
+        fullName: 'نام و نام خانوادگی',
+        fullNameDescription:'لطفا نام و نام خانوادگی خود را وارد کنید.',
+    },
     pageNotFound: {
         title: 'صفحه مورد نظر وجود ندارد!',
         error404: 'خطای 404',

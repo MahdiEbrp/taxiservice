@@ -144,6 +144,11 @@ const english = {
     jobRequestsPage: {
        title: 'Job requests',
     },
+    settingsPage: {
+        title: 'Settings',
+        fullName: 'Full name',
+        fullNameDescription: 'Please enter your full name.',
+    },
     pageNotFound: {
         title: 'Page not found!',
         error404: 'Error 404',
