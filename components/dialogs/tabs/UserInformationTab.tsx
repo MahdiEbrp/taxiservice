@@ -3,31 +3,24 @@ import Button from '@mui/material/Button';
 import CenterBox from '../../controls/CenterBox';
 import React, { useContext, useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
-import { useSession, signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import Loader from '../../controls/Loader';
 import { getData } from '../../../lib/axiosRequest';
-import useSWR from 'swr';
 import { Settings } from '../../../types/settings';
 import { LanguageContext } from '../../context/LanguageContext';
 import Alert from '@mui/material/Alert';
+import { AllSettingsContext } from '../../context/AllSettingsContext';
 
-export const settingFetcher = async (url: string) => {
-    const data = await getData(url);
-    if (!data)
-        throw new Error('No data');
-    if (data.status !== 200)
-        throw new Error(data.statusText);
-    return data.data;
-};
 
 const UserInformationTab = () => {
+
     const publicUrl = process.env.NEXT_PUBLIC_WEB_URL;
-    const { data: settingsData, error: settingsError } = useSWR(publicUrl + '/api/settings/getAllSettings', settingFetcher);
+
     const [isLoading, setIsLoading] = useState(true);
-    const { data: session } = useSession();
-    const [setting, setSetting] = useState<Settings | null>(null);
 
     const { language } = useContext(LanguageContext);
+    const { userSettings, setUserSettings } = useContext(AllSettingsContext);
+
     const { userInformationDialog, settings } = language;
 
     const singOut = async () => {
@@ -36,12 +29,19 @@ const UserInformationTab = () => {
         setIsLoading(false);
     };
     useEffect(() => {
-        if (session && settingsData || settingsError) {
-            setIsLoading(false);
-            if (settingsData)
-                setSetting(settingsData as Settings);
+        setIsLoading(true);
+        if (!userSettings) {
+            const getDataAsync = async () => {
+                const response = await getData(publicUrl + '/api/settings/getAllSettings');
+                if (response && response.status === 200) {
+                    setUserSettings(response.data as Settings);
+                }
+            };
+            getDataAsync();
         }
-    }, [session, settingsData, settingsError]);
+        setIsLoading(false);
+    }, [publicUrl, setUserSettings, userSettings]);
+
     return (
         <div dir={settings.direction}>
             {
@@ -49,11 +49,11 @@ const UserInformationTab = () => {
                     <Loader text={userInformationDialog.loading} />
                     :
                     <CenterBox>
-                        {setting ?
+                        {userSettings ?
                             <>
-                                <Avatar src={publicUrl + '/images/profiles/' + setting.profilePicture} sx={{ width: 100, height: 100 }} />
-                                <Typography variant='h5'>{setting.name}</Typography>
-                                <Typography variant='body2'>{userInformationDialog.emailAddress + ':' + setting.email}</Typography>
+                                <Avatar src={publicUrl + '/images/profiles/' + userSettings.profilePicture} sx={{ width: 100, height: 100 }} />
+                                <Typography variant='h5'>{userSettings.name}</Typography>
+                                <Typography variant='body2'>{userInformationDialog.emailAddress + ':' + userSettings.email}</Typography>
                             </>
                             :
                             <Alert severity='warning'>{userInformationDialog.settingsNotFound}</Alert>

@@ -1,12 +1,9 @@
 import AuthorizedLayout from '../../components/AuthorizedLayout';
 import ModifyAgency from '../../components/pageTabs/ModifyAgency';
 import Head from 'next/head';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { LanguageContext } from '../../components/context/LanguageContext';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { CountryType } from '../../lib/geography';
-import { CountryListContext } from '../../components/context/CountryListContext';
 import { AllAgenciesContext } from '../../components/context/AllAgenciesContext';
 import useSWR from 'swr';
 import { getData } from '../../lib/axiosRequest';
@@ -24,7 +21,7 @@ const fetcher = async (url: string) => {
         throw new Error(data.statusText);
     return data.data;
 };
-const Agencies: NextPage = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Agencies: NextPage = () => {
 
     const router = useRouter();
     const mode = router.query['mode'] as string | '';
@@ -54,7 +51,7 @@ const Agencies: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
     }, [userAgencyData]);
 
     return (
-        <CountryListContext.Provider value={{ countryList: countries }}>
+        <>
             <Head>
                 <title>{agenciesPage.title}</title>
             </Head>
@@ -65,18 +62,10 @@ const Agencies: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
                     </UserAgenciesContext.Provider>
                 </AllAgenciesContext.Provider>
             </AuthorizedLayout>
-        </CountryListContext.Provider>
+        </>
     );
 };
-export const getStaticProps: GetStaticProps<{ [key: string]: CountryType; }> = async () => {
-    const response = await import('../../data/countryList.json');
-    const countryList = response.default as CountryType;
-    return {
-        props: {
-            countries: countryList
-        }
-    };
-};
+
 
 
 export default Agencies;

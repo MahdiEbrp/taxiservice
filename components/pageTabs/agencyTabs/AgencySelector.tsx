@@ -1,12 +1,15 @@
-import Alert from '@mui/material/Alert';
 import AutoCompletePlus, { taggedItem } from '../../controls/AutoCompletePlus';
 import TabPanel from '../../controls/TabPanel';
 import { LanguageContext } from '../../context/LanguageContext';
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { CountryListContext } from '../../context/CountryListContext';
 import TextField from '@mui/material/TextField';
 import { UserAgenciesContext } from '../../context/UserAgenciesContext';
 import { AgencyDataList } from '../../../types/agencies';
+import { AllSettingsContext } from '../../context/AllSettingsContext';
+import SettingFetcher from '../../controls/SettingFetcher';
+import Typography from '@mui/material/Typography';
+import { LocalizationInfoContext } from '../../context/LocalizationInfoContext';
+import { LocalizationInfoType } from '../../../lib/geography';
 
 export type AgencySelectorProps = {
     currentStep: number;
@@ -17,41 +20,41 @@ export type AgencySelectorProps = {
 
 const AgencySelector = (props: AgencySelectorProps) => {
 
+
     const { currentStep, onValidationChanged, onValuesChanged, editMode } = props;
 
     const { language } = useContext(LanguageContext);
-    const { countryList } = useContext(CountryListContext);
     const { agencyData } = useContext(UserAgenciesContext);
+    const { userSettings } = useContext(AllSettingsContext);
+    const { localizationInfo,setLocalizationInfo } = useContext(LocalizationInfoContext);
 
     const [agencyName, setAgencyName] = useState('');
     const [countryCode, setCountryCode] = useState('');
 
     const { agenciesPage } = language;
 
-    const [items, setItems] = useState<taggedItem<string>[]>();
 
     const agencyChanged = (agency: string) => {
         setAgencyName(agency);
         onValuesChanged(agency, countryCode);
     };
 
-    const countryCodeChanged = (country: string) => {
-        setCountryCode(country);
-        onValuesChanged(agencyName, country);
-    };
 
     useEffect(() => {
         onValidationChanged(agencyName.length > 0 && countryCode.length > 0);
     }, [agencyName, countryCode, onValidationChanged]);
-
     useEffect(() => {
-        if (countryList) {
-            const _items = countryList.data.map(country => {
-                return { tag: country.code, displayText: country.name };
-            });
-            setItems(_items);
+        if (userSettings) {
+            const setLocalization = async () => {
+                const response = await import('../../../data/localization/' + userSettings.localization + '.json');
+                const localization = response.default as LocalizationInfoType;
+                setLocalizationInfo(localization);
+            };
+            setCountryCode(userSettings.localization);
+            onValuesChanged(agencyName, userSettings.localization);
+            setLocalization();
         }
-    }, [countryList]);
+    }, [agencyName, onValuesChanged, setLocalizationInfo, userSettings]);
 
     const agencyItems: taggedItem<string>[] = useMemo(() => {
         if (agencyData && agencyData.length > 0) {
@@ -71,11 +74,11 @@ const AgencySelector = (props: AgencySelectorProps) => {
                 <TextField sx={{ width: 'min(70vw, 300px)' }} label={agenciesPage.agencyName} onBlur={(e) => agencyChanged(e.target.value)}
                     inputProps={{ maxLength: 50 }} helperText={agenciesPage.maximumLengthOfAgencyName} />
             }
-            <AutoCompletePlus onChanged={(countryCode) => countryCodeChanged(!countryCode ? '' : countryCode.tag)} items={items}
-                label={agenciesPage.localization} />
-            <Alert severity='warning'>
-                {agenciesPage.localizationWarning}
-            </Alert>
+            {userSettings ?
+                <Typography sx={{ mt: 2 }} variant='body2'>{agenciesPage.localization}: {localizationInfo.name}</Typography>
+                :
+                <SettingFetcher />
+            }
         </TabPanel>
     );
 

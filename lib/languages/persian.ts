@@ -64,6 +64,9 @@ const persian = {
         loadingText: 'در حال بارگذاری...',
         locations: 'مکان ها',
         currentLocation: 'موقعیت فعلی جغرافیایی شما:',
+        requestAgain: 'درخواست مجدد',
+        errorLoading: 'ما نتوانستیم اطلاعات درخواستی شما را دریافت کنیم. برای درخواست مجدد روی دکمه زیر کلیک کنید.',
+
     },
     responseError: {
         CredentialsSignin: 'نام کاربری یا رمز عبور وارد شده اشتباه است.',
@@ -102,6 +105,12 @@ const persian = {
             message: 'اکنون می توانید رمز عبور خود را بازنشانی کنید. یک ایمیل با لینک بازنشانی برای شما ارسال شده است. ممکن است آن را در پوشه هرزنامه خود پیدا کنید (فراموش نکنید آن را بررسی کنید).',
         },
     },
+    profilePictureDialog: {
+        title: 'انتخاب تصویر پروفایل',
+        description: 'یک عکس نمایه برای حساب کاربری خود انتخاب کنید.',
+        save: 'ذخیره',
+        discard: 'بی خیال',
+    },
     agenciesPage: {
         fetchingAgencies: 'در حال دریافت اطلاعات از سرور...',
         activeAgency: 'آژانس فعال است.',
@@ -117,7 +126,6 @@ const persian = {
         endOfWorkingHours: 'پایان ساعات کاری',
         inactiveAgency: 'آژانس غیر فعال است.',
         localization: 'بومی سازی',
-        localizationWarning: 'بومی سازی به دسترسی دقیق‌تر به داده‌ها کمک می‌کند، بنابراین لطفاً آن را با دقت انتخاب کنید.',
         mobileNumberPlaceholder: 'شماره تلفن همراه',
         mobileNumberVisibility: 'سایر افراد نمی توانند شماره تلفن همراه شما را ببینند.',
         next: 'بعدی',
@@ -147,7 +155,14 @@ const persian = {
     settingsPage: {
         title: 'تنظیمات',
         fullName: 'نام و نام خانوادگی',
-        fullNameDescription:'لطفا نام و نام خانوادگی خود را وارد کنید.',
+        fullNameDescription: 'لطفا نام و نام خانوادگی خود را وارد کنید.',
+        profilePictureDescription: 'با کلیک بر روی تصویر پروفایل خود می توانید آن را تغییر دهید.',
+        advancedSettingsDescription:'برای تغییر رمز عبور و آدرس ایمیل خود، روی "تنظیمات پیشرفته" کلیک کنید.',
+        advancedSettings: 'تنظیمات پیشرفته',
+        localization: 'بومی سازی',
+        localizationWarning: 'بومی سازی به دسترسی دقیق‌تر به داده‌ها کمک می‌کند، بنابراین لطفاً آن را با دقت انتخاب کنید.',
+        save: 'ذخیره',
+        loading: 'در حال بارگزاری تنظیمات...',
     },
     pageNotFound: {
         title: 'صفحه مورد نظر وجود ندارد!',

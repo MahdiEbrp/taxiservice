@@ -64,6 +64,9 @@ const english = {
         loadingText: 'Loading...',
         locations: 'Locations',
         currentLocation: 'your current geographic location:',
+        requestAgain: 'Request again',
+        errorLoading: 'We were unable to get the information you requested. Click on the button below to request again.',
+
     },
     responseError: {
         CredentialsSignin: 'The username or password you entered is incorrect.',
@@ -102,6 +105,12 @@ const english = {
             message: 'You can reset your password now. An email with a reset link has been sent to you. You may find it in your spam folder (don\'t forget to check it).',
         },
     },
+    profilePictureDialog: {
+        title: 'Profile picture selection',
+        description:'Choose a profile picture for your account.',
+        save: 'Save',
+        discard: 'Discard',
+    },
     agenciesPage: {
         fetchingAgencies: 'Receiving information from the server...',
         activeAgency: 'The agency is active.',
@@ -117,7 +126,6 @@ const english = {
         endOfWorkingHours: 'End of work hours',
         inactiveAgency: 'The agency is inactive.',
         localization: 'Localization',
-        localizationWarning: 'Localization helps to reach data more accurately, so choose it carefully please.',
         mobileNumberPlaceholder: 'Cell Phone Number',
         mobileNumberVisibility: 'Other people cannot see your mobile phone number.',
         next: 'Next',
@@ -148,6 +156,13 @@ const english = {
         title: 'Settings',
         fullName: 'Full name',
         fullNameDescription: 'Please enter your full name.',
+        profilePictureDescription: 'You can change your profile picture by clicking on it.',
+        advancedSettingsDescription: 'In order to change your password and email address, click on "Advanced Settings".',
+        advancedSettings: 'Advanced settings',
+        localization: 'Localization',
+        localizationWarning: 'Localization helps to reach data more accurately, so choose it carefully please.',
+        save: 'Save',
+        loading: 'loading settings...',
     },
     pageNotFound: {
         title: 'Page not found!',

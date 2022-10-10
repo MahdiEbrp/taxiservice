@@ -31,7 +31,9 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const agencyCount = agency.length;
         const profilePicture = user.profilePicture;
         const name = user.name;
-        return res.status(200).json({ email,name, profilePicture, agencyCount });
+        const localization = user.localization;
+
+        return res.status(200).json({ email, name, profilePicture, agencyCount, localization });
 
     }
     catch (error) {

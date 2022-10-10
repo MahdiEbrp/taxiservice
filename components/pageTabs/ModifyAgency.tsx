@@ -13,7 +13,6 @@ import CenterBox from '../controls/CenterBox';
 import Link from '@mui/material/Link';
 import { LanguageContext } from '../context/LanguageContext';
 import { LocalizationInfoType } from '../../lib/geography';
-import { LocalizationInfoContext } from '../context/LocalizationInfoContext';
 import { ToastContext } from '../context/ToastContext';
 import { taggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useMemo, useEffect, useState } from 'react';
@@ -51,7 +50,6 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     const [isUpdating, setIsUpdating] = useState(false);
 
     const { language } = useContext(LanguageContext);
-    const { setLocalizationInfo } = useContext(LocalizationInfoContext);
     const { setToast } = useContext(ToastContext);
     const { agencyNames } = useContext(AllAgenciesContext);
     const { agencyData } = useContext(UserAgenciesContext);
@@ -105,16 +103,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
             setTitle(agencyCardTitle);
     }, [agencyCardTitle, agencyName, title]);
 
-    const setLocalization = async (countryCode: string) => {
 
-        setCountryCode(countryCode);
-
-        if (!countryCode)
-            return;
-        const response = await import('../../data/localization/' + countryCode + '.json');
-        const localization = response.default as LocalizationInfoType;
-        setLocalizationInfo(localization);
-    };
     const gotoStep = (step: number) => {
 
         if (showError)
@@ -184,7 +173,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
                         <AgencySelector editMode={editMode} currentStep={currentStep} onValidationChanged={(isValid) => setIsAgencyTabValid(isValid)}
                             onValuesChanged={(agency, countryCode) => {
                                 setAgencyName(agency);
-                                setLocalization(countryCode);
+                                setCountryCode(countryCode);
                             }} />
                         <AgencyPhoneEditor currentStep={currentStep} selectedAgencyData={selectedAgencyData} onValidationChanged={(isValid) => setIsPhoneTabValid(isValid)} onValuesChange={(phone1, phone2, mobile) => {
                             setPhoneNumber1(phone1);

@@ -22,6 +22,8 @@ import { ToastContext } from './context/ToastContext';
 import { defaultLocalizationInfo, LocalizationInfoType } from '../lib/geography';
 import { useRouter } from 'next/router';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
+import { Settings } from '../types/settings';
+import { AllSettingsContext } from './context/AllSettingsContext';
 
 const GeneralContextHolder = (props: { children: ReactElement | ReactElement[]; }) => {
 
@@ -34,6 +36,7 @@ const GeneralContextHolder = (props: { children: ReactElement | ReactElement[]; 
     const [toast, setToast] = useState<ToastProps>(EmptyToast);
     const router = useRouter();
     const [language, setLanguage] = useState(getLanguage(router.locale));
+    const [userSettings, setUserSettings] = useState<Settings | null>(null);
 
     useEffect(() => {
         const settings = getSettings('darkMode', 'false') as string;
@@ -54,7 +57,9 @@ const GeneralContextHolder = (props: { children: ReactElement | ReactElement[]; 
                                 <ToastContext.Provider value={{ toast, setToast }} >
                                     <MessageDialogContext.Provider value={{ messageDialogInfo, setMessageDialog }}>
                                         <LocalizationInfoContext.Provider value={{ localizationInfo, setLocalizationInfo }}>
-                                            {props.children}
+                                            <AllSettingsContext.Provider value={{ userSettings, setUserSettings }}>
+                                                {props.children}
+                                            </AllSettingsContext.Provider>
                                         </LocalizationInfoContext.Provider>
                                     </MessageDialogContext.Provider>
                                 </ToastContext.Provider>
