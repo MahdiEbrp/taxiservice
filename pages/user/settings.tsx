@@ -39,7 +39,6 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
     const [isLoading, setIsLoading] = useState(false);
     const [countryList, setCountryList] = useState<TaggedItem<string>[]>();
     const [localization, setLocalization] = useState<string>('');
-    const [defaultLocalization, setDefaultLocalization] = useState<TaggedItem<string> | undefined>(undefined);
     const fullNameChanged = (value: string) => {
         setFullName(value);
     };
@@ -52,8 +51,6 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
             setProfilePicture(`${publicUrl}/images/profiles/${userSettings.profilePicture}`);
             setFullName(userSettings.name);
             setLocalization(userSettings.localization);
-            if (countryList)
-                setDefaultLocalization(countryList.find((country) => country.tag === userSettings.localization));
 
         }
     }, [countryList, publicUrl, userSettings]);
