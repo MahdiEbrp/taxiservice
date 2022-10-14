@@ -19,7 +19,7 @@ import { ToastContext } from '../context/ToastContext';
 import { UserAgenciesContext } from '../context/UserAgenciesContext';
 import { getResponseError } from '../../lib/language';
 import { postData } from '../../lib/axiosRequest';
-import { taggedItem } from '../controls/AutoCompletePlus';
+import { TaggedItem } from '../controls/AutoCompletePlus';
 import { useContext, useMemo, useEffect, useState } from 'react';
 
 const ModifyAgency = (props: { editMode: boolean; }) => {
@@ -40,7 +40,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
     const [phoneNumber1, setPhoneNumber1] = useState('');
     const [phoneNumber2, setPhoneNumber2] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
-    const [location, setLocation] = useState<taggedItem<number[]> | null>(null);
+    const [location, setLocation] = useState<TaggedItem<number[]> | null>(null);
     const [address, setAddress] = useState('');
     const [isAgencyEnabled, setAgencyEnabled] = useState(false);
     const [workingDays, setWorkingDays] = useState(127);
@@ -166,7 +166,7 @@ const ModifyAgency = (props: { editMode: boolean; }) => {
         <>
             <Card dir={direction}>
                 <CardHeader title={title} />
-                <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap'}}>
+                <CardContent sx={{ alignmentItem: 'baseline', flexDirection: 'row', flexWrap: 'wrap' }}>
                     <BreadcrumbsSteps />
                     <CenterBox sx={{ display: isUpdating ? 'none' : 'flex' }}>
                         <AgencySelector editMode={editMode} currentStep={currentStep} onValidationChanged={(isValid) => setIsAgencyTabValid(isValid)}

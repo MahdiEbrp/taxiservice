@@ -1,4 +1,4 @@
-import AutoCompletePlus, { taggedItem } from '../../controls/AutoCompletePlus';
+import AutoCompletePlus, { TaggedItem } from '../../controls/AutoCompletePlus';
 import TabPanel from '../../controls/TabPanel';
 import { LanguageContext } from '../../context/LanguageContext';
 import { useContext, useEffect, useMemo, useState } from 'react';
@@ -26,7 +26,7 @@ const AgencySelector = (props: AgencySelectorProps) => {
     const { language } = useContext(LanguageContext);
     const { agencyData } = useContext(UserAgenciesContext);
     const { userSettings } = useContext(AllSettingsContext);
-    const { localizationInfo,setLocalizationInfo } = useContext(LocalizationInfoContext);
+    const { localizationInfo, setLocalizationInfo } = useContext(LocalizationInfoContext);
 
     const [agencyName, setAgencyName] = useState('');
     const [countryCode, setCountryCode] = useState('');
@@ -56,7 +56,7 @@ const AgencySelector = (props: AgencySelectorProps) => {
         }
     }, [agencyName, onValuesChanged, setLocalizationInfo, userSettings]);
 
-    const agencyItems: taggedItem<string>[] = useMemo(() => {
+    const agencyItems: TaggedItem<string>[] = useMemo(() => {
         if (agencyData && agencyData.length > 0) {
             const values = agencyData as AgencyDataList;
             return values.map(agency => {

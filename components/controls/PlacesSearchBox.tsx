@@ -1,11 +1,11 @@
-import AutoCompletedPlus, { taggedItem } from './AutoCompletePlus';
+import AutoCompletedPlus, { TaggedItem } from './AutoCompletePlus';
 import { LanguageContext } from '../context/LanguageContext';
 import { fetchCitiesLocation } from '../../lib/geography';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { SxProps, Theme } from '@mui/material/styles';
 
 export type PlacesSearchBoxProps = {
-    onLocationChanged?: (value: taggedItem<number[]> | null) => void;
+    onLocationChanged?: (value: TaggedItem<number[]> | null) => void;
     sx?: SxProps<Theme>;
 };
 
@@ -16,7 +16,7 @@ const PlacesSearchBox = (props: PlacesSearchBoxProps) => {
     const { language } = useContext(LanguageContext);
 
     const [suggestState, setSuggestState] = useState<'typing' | 'fetching' | 'ready'>('ready');
-    const [suggestionItems, setSuggestionItems] = useState<taggedItem<number[]>[]>([]);
+    const [suggestionItems, setSuggestionItems] = useState<TaggedItem<number[]>[]>([]);
 
     const delayTime = 1.5 * 1000;
     let city = '';

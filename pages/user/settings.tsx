@@ -20,7 +20,7 @@ import Alert from '@mui/material/Alert';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { CountryType } from '../../lib/geography';
 import SettingFetcher from '../../components/controls/SettingFetcher';
-import AutoCompletePlus, { taggedItem } from '../../components/controls/AutoCompletePlus';
+import AutoCompletePlus, { TaggedItem } from '../../components/controls/AutoCompletePlus';
 import { postData } from '../../lib/axiosRequest';
 import { ToastContext } from '../../components/context/ToastContext';
 import { getResponseError } from '../../lib/language';
@@ -37,9 +37,9 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
     const [profilePicture, setProfilePicture] = useState('');
     const [fullName, setFullName] = useState<string>('');
     const [isLoading, setIsLoading] = useState(false);
-    const [countryList, setCountryList] = useState<taggedItem<string>[]>();
+    const [countryList, setCountryList] = useState<TaggedItem<string>[]>();
     const [localization, setLocalization] = useState<string>('');
-
+    const [defaultLocalization, setDefaultLocalization] = useState<TaggedItem<string> | undefined>(undefined);
     const fullNameChanged = (value: string) => {
         setFullName(value);
     };
@@ -52,8 +52,11 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
             setProfilePicture(`${publicUrl}/images/profiles/${userSettings.profilePicture}`);
             setFullName(userSettings.name);
             setLocalization(userSettings.localization);
+            if (countryList)
+                setDefaultLocalization(countryList.find((country) => country.tag === userSettings.localization));
+
         }
-    }, [publicUrl, userSettings]);
+    }, [countryList, publicUrl, userSettings]);
     useEffect(() => {
         if (countries) {
             const _items = countries.data.map(country => {
@@ -127,7 +130,7 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
                                                     <Typography variant="caption" display="block" gutterBottom>
                                                         {settingsPage.profilePictureDescription}
                                                     </Typography>
-                                                    <AutoCompletePlus onChanged={(country) => setLocalization(!country ? '' : country.tag)} items={countryList}
+                                                    <AutoCompletePlus selectedValue={localization} onChanged={(country) => setLocalization(!country ? '' : country.tag)} items={countryList}
                                                         label={settingsPage.localization} />
                                                     <Alert severity='warning'>
                                                         {settingsPage.localizationWarning}

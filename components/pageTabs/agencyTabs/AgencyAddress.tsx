@@ -9,13 +9,13 @@ import dynamic from 'next/dynamic';
 import { AgencyData } from '../../../types/agencies';
 import { LanguageContext } from '../../context/LanguageContext';
 import { LocalizationInfoContext } from '../../context/LocalizationInfoContext';
-import { taggedItem } from '../../controls/AutoCompletePlus';
+import { TaggedItem } from '../../controls/AutoCompletePlus';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 export type AgencyAddressProps = {
     currentStep: number;
     onValidationChanged: (isValid: boolean) => void;
-    onValuesChange: (address: string, location: taggedItem<number[]> | null) => void;
+    onValuesChange: (address: string, location: TaggedItem<number[]> | null) => void;
     selectedAgencyData: AgencyData | null;
 };
 
@@ -33,7 +33,7 @@ const AgencyAddress = (props: AgencyAddressProps) => {
         return latitude && longitude ? { tag: [latitude, longitude], displayText: '' } : null;
     }, [latitude, longitude]);
 
-    const [location, setLocation] = useState<taggedItem<number[]> | null>(defaultLocation);
+    const [location, setLocation] = useState<TaggedItem<number[]> | null>(defaultLocation);
     const [mapReady, setMapReady] = useState(false);
     const [defaultAgencyName, setDefaultAgencyName] = useState(agencyName);
 
@@ -41,7 +41,7 @@ const AgencyAddress = (props: AgencyAddressProps) => {
     const { localizationInfo } = useContext(LocalizationInfoContext);
 
     const { settings, agenciesPage } = language;
-    const updateLocation = (newLocation: taggedItem<number[]> | null) => {
+    const updateLocation = (newLocation: TaggedItem<number[]> | null) => {
         const address = addressRef.current?.value || '';
         if (newLocation) {
             setLocation(newLocation);

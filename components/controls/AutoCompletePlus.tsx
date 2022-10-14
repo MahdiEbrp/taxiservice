@@ -5,23 +5,24 @@ import TextField from '@mui/material/TextField';
 import { LanguageContext } from '../context/LanguageContext';
 import { SxProps, Theme } from '@mui/material/styles';
 
-export type taggedItem<T> = {
+export type TaggedItem<T> = {
     displayText: string;
     tag: T;
 };
 
 export type AutoCompletePlusProps<T> = {
-    items: taggedItem<T>[] | undefined;
+    items: TaggedItem<T>[] | undefined;
     label: string;
     loading?: boolean;
-    onChanged?: (element: taggedItem<T> | null) => void;
+    onChanged?: (element: TaggedItem<T> | null) => void;
     onInputTextChanged?: (value: string) => void;
+    selectedValue?: string;
     sx?: SxProps<Theme>;
 };
 
 const AutoCompletePlus = <T,>(props: AutoCompletePlusProps<T>) => {
 
-    const { items, label, loading, onChanged, onInputTextChanged, sx } = props as AutoCompletePlusProps<T>;
+    const { items, label, loading, selectedValue, onChanged, onInputTextChanged, sx } = props as AutoCompletePlusProps<T>;
 
     const style: SxProps<Theme> = { ...{ width: 'min(70vw, 300px)', ...sx } };
     const { language } = useContext(LanguageContext);
@@ -39,6 +40,7 @@ const AutoCompletePlus = <T,>(props: AutoCompletePlusProps<T>) => {
         };
     });
 
+    const selectedItem = options?.find((item) => item.tag === selectedValue);
     return (
         <Autocomplete
             id='grouped-demo'
@@ -56,9 +58,9 @@ const AutoCompletePlus = <T,>(props: AutoCompletePlusProps<T>) => {
             sx={style}
             noOptionsText={components.noOptionsText}
             loadingText={components.loadingText}
+            value={selectedItem || null}
             onChange={(event, item) => onChanged && onChanged(item)}
-            PopperComponent={(props) => <Popper dir={direction} {...props} />
-            }
+            PopperComponent={(props) => <Popper dir={direction} {...props} />}
             renderInput={(params) => <TextField onChange={e => onInputTextChanged && onInputTextChanged(e.target.value)} label={label} {...params} />}
         />
     );
