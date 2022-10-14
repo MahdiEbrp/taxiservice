@@ -71,9 +71,8 @@ export const options = {
         encryption: 'HS256',
     },
     callbacks: {
-        async session(params: {session: Session;token: JWT;}) {
+        async session(params: { session: Session; token: JWT; }) {
             const { session, token } = params;
-            session.token = token;
             const prisma = prismaClient;
             try {
                 const user = await prisma.user.findFirst({
@@ -92,7 +91,7 @@ export const options = {
                             lastLogin: new Date(),
                         }
                     });
-                    session.user = {email: user.email, name: user.name,lastLogin: lastLogin};
+                    session.user = { email: user.email, name: user.name, lastLogin: lastLogin };
                     return Promise.resolve(session);
                 }
                 return Promise.reject();

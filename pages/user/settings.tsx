@@ -21,12 +21,17 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { CountryType } from '../../lib/geography';
 import SettingFetcher from '../../components/controls/SettingFetcher';
 import AutoCompletePlus, { taggedItem } from '../../components/controls/AutoCompletePlus';
+import { postData } from '../../lib/axiosRequest';
+import { ToastContext } from '../../components/context/ToastContext';
+import { getResponseError } from '../../lib/language';
 
 const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
+    const publicUrl = process.env.NEXT_PUBLIC_WEB_URL;
 
     const { language } = useContext(LanguageContext);
-    const { userSettings } = useContext(AllSettingsContext);
+    const { userSettings, setUserSettings } = useContext(AllSettingsContext);
+    const { setToast } = useContext(ToastContext);
 
     const [showProfilePictureDialog, setShowProfilePictureDialog] = useState(false);
     const [profilePicture, setProfilePicture] = useState('');
@@ -39,13 +44,16 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
         setFullName(value);
     };
 
-    const { settingsPage, settings } = language;
+    const { settingsPage, settings, notification } = language;
 
     useEffect(() => {
         if (userSettings) {
-            setProfilePicture(userSettings.profilePicture);
+            // eslint-disable-next-line quotes
+            setProfilePicture(`${publicUrl}/images/profiles/${userSettings.profilePicture}`);
+            setFullName(userSettings.name);
+            setLocalization(userSettings.localization);
         }
-    }, [userSettings]);
+    }, [publicUrl, userSettings]);
     useEffect(() => {
         if (countries) {
             const _items = countries.data.map(country => {
@@ -54,6 +62,43 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
             setCountryList(_items);
         }
     }, [countries]);
+
+    const handleClick = async () => {
+
+        const fileName = profilePicture.split('/').pop() || '';
+
+        if (fullName.length < 3) {
+            setToast({ id: Date.now(), message: notification.nameIsTooShort, alertColor: 'error' });
+            return;
+        }
+        if (fileName === '') {
+            setToast({ id: Date.now(), message: notification.profilePictureEmpty, alertColor: 'error' });
+            return;
+        }
+        if (localization === '') {
+            setToast({ id: Date.now(), message: notification.localizationEmpty, alertColor: 'error' });
+            return;
+        }
+        const values = {
+            name: fullName, profilePicture: fileName, localization: localization
+        };
+        setIsLoading(true);
+        // eslint-disable-next-line quotes
+        const response = await postData(`${publicUrl}/api/settings/update`, values);
+        setIsLoading(false);
+        if (!response) {
+            setToast({ id: Date.now(), message: getResponseError('ERR_NULL_RESPONSE', language), alertColor: 'error' });
+            return;
+        }
+        if (response.status === 200) {
+            setToast({ id: Date.now(), message: notification.successfullyEditUser, alertColor: 'success' });
+            if (userSettings)
+                setUserSettings({ ...userSettings, name: fullName, profilePicture: fileName, localization: localization });
+            return;
+        }
+        const { error } = response.data as { error: string; };
+        setToast({ id: Date.now(), message: getResponseError(error, language), alertColor: 'error' });
+    };
 
     return (
         <AuthorizedLayout>
@@ -82,10 +127,10 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
                                                     <Typography variant="caption" display="block" gutterBottom>
                                                         {settingsPage.profilePictureDescription}
                                                     </Typography>
-                                                    <AutoCompletePlus onChanged={(code) => setLocalization(!code ? '' : code.tag)} items={countryList}
+                                                    <AutoCompletePlus onChanged={(country) => setLocalization(!country ? '' : country.tag)} items={countryList}
                                                         label={settingsPage.localization} />
                                                     <Alert severity='warning'>
-                                                        {settingsPage .localizationWarning}
+                                                        {settingsPage.localizationWarning}
                                                     </Alert>
                                                     <Button variant="contained" >{settingsPage.advancedSettings}</Button>
                                                     <Typography variant="caption" display="block" gutterBottom>
@@ -94,13 +139,13 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
                                                 </CenterBox>
                                             </CardContent>
                                             <CardActions sx={{ justifyContent: 'end' }}>
-                                                <Button variant="contained" color="primary">
+                                                <Button variant="contained" color="primary" onClick={() => handleClick()}>
                                                     {settingsPage.save}
                                                 </Button>
                                             </CardActions>
                                         </>
                                         :
-                                      <SettingFetcher/>
+                                        <SettingFetcher />
                                 }
                             </>
                     }

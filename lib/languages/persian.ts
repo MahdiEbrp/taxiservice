@@ -53,6 +53,10 @@ const persian = {
         successfullyAddAgency: 'آفرین! آژانس با موفقیت توسط شما ایجاد شده است.',
         successfullyEditAgency: 'آفرین! آژانس با موفقیت توسط شما ویرایش شده است.',
         agencyDuplicateError: 'در حال حاضر آژانسی با همین نام وجود دارد.',
+        nameIsTooShort: 'نامی را وارد کنید که حداقل سه کاراکتر داشته باشد!',
+        profilePictureEmpty: 'لطفا یک عکس پروفایل انتخاب کنید.',
+        localizationEmpty: 'یک کشور را از لیست انتخاب کنید.',
+        successfullyEditUser: 'آفرین! کاربر با موفقیت توسط شما ویرایش شده است.',
     },
     authorizedLayout: {
         loading: 'در حال بارگذاری...',

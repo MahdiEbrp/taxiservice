@@ -1,10 +1,10 @@
 import axios, { AxiosError } from 'axios';
-export type SigninResult= {
+export type SigninResult = {
     error: string | undefined;
     status: number;
     ok: boolean;
     url: string | null;
-}
+};
 const timeout = 10000;
 export const postData = async (url: string, data: unknown) => {
     try {
@@ -18,9 +18,9 @@ export const postData = async (url: string, data: unknown) => {
 
     }
     catch (err) {
-        if (err instanceof AxiosError) {
-            return err.response;
-        }
+        const { response } = err as AxiosError;
+        if (response)
+            return response;
         else
             return null;
     }
@@ -32,9 +32,9 @@ export const getData = async (url: string) => {
 
     }
     catch (err) {
-        if (err instanceof AxiosError) {
-            return err.response;
-        }
+        const { response } = err as AxiosError;
+        if (response)
+            return response;
         else
             return null;
     }
@@ -51,9 +51,9 @@ export const putData = async (url: string, data: unknown) => {
 
     }
     catch (err) {
-        if (err instanceof AxiosError) {
-            return err.response;
-        }
+        const { response } = err as AxiosError;
+        if (response)
+            return response;
         else
             return null;
     }
@@ -65,9 +65,9 @@ export const deleteData = async (url: string) => {
 
     }
     catch (err) {
-        if (err instanceof AxiosError) {
-            return err.response;
-        }
+        const { response } = err as AxiosError;
+        if (response)
+            return response;
         else
             return null;
     }
@@ -84,9 +84,9 @@ export const patchData = async (url: string, data: unknown) => {
 
     }
     catch (err) {
-        if (err instanceof AxiosError) {
-            return err.response;
-        }
+        const { response } = err as AxiosError;
+        if (response)
+            return response;
         else
             return null;
     }

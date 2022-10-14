@@ -53,6 +53,10 @@ const english = {
         successfullyAddAgency: 'Well done! The agency has been created successfully by you.',
         successfullyEditAgency: 'Well done! The agency has been edited successfully by you.',
         agencyDuplicateError: 'There is already an agency with the same name.',
+        nameIsTooShort: 'Enter a name that has at least three characters!',
+        profilePictureEmpty: 'Please select a profile picture.',
+        localizationEmpty: 'Select a country from the list.',
+        successfullyEditUser: 'Well done! The user has been edited successfully by you.',
     },
     authorizedLayout: {
         loading: 'Loading...',
