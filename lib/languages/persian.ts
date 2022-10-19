@@ -167,6 +167,13 @@ const persian = {
         localizationWarning: 'بومی سازی به دسترسی دقیق‌تر به داده‌ها کمک می‌کند، بنابراین لطفاً آن را با دقت انتخاب کنید.',
         save: 'ذخیره',
         loading: 'در حال بارگزاری تنظیمات...',
+        customer: 'مشتری',
+        personnel: 'پرسنل',
+        entrepreneur: 'کارآفرین',
+        customerAccess: 'درخواست سفر کنید یا سفرهای قبلی را مشاهده کنید',
+        personnelAccess: 'درخواست کار کنید و پیشنهاد سفر را بپذیرید',
+        entrepreneurAccess: 'دسترسی به کلیه فعالیت های آژانس و پرسنل',
+        selectAccountType:'نوع حساب کاربری را انتخاب کنید:',
     },
     pageNotFound: {
         title: 'صفحه مورد نظر وجود ندارد!',

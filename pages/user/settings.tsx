@@ -1,4 +1,6 @@
+import Alert from '@mui/material/Alert';
 import AuthorizedLayout from '../../components/AuthorizedLayout';
+import AutoCompletePlus, { TaggedItem } from '../../components/controls/AutoCompletePlus';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -7,23 +9,25 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import CenterBox from '../../components/controls/CenterBox';
 import Head from 'next/head';
+import Loader from '../../components/controls/Loader';
 import ProfilePictureDialog from '../../components/dialogs/ProfilePictureDialog';
 import React, { useContext, useEffect, useState } from 'react';
+import SettingFetcher from '../../components/controls/SettingFetcher';
+import Switch from '@mui/material/Switch';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import type { NextPage } from 'next';
-import { LanguageContext } from '../../components/context/LanguageContext';
 import { AllSettingsContext } from '../../components/context/AllSettingsContext';
-import Loader from '../../components/controls/Loader';
-import Alert from '@mui/material/Alert';
+import { CountryType } from '../../lib/geography';
+import { FormControlLabel } from '@mui/material';
 // eslint-disable-next-line no-duplicate-imports
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { CountryType } from '../../lib/geography';
-import SettingFetcher from '../../components/controls/SettingFetcher';
-import AutoCompletePlus, { TaggedItem } from '../../components/controls/AutoCompletePlus';
-import { postData } from '../../lib/axiosRequest';
+import { LanguageContext } from '../../components/context/LanguageContext';
 import { ToastContext } from '../../components/context/ToastContext';
 import { getResponseError } from '../../lib/language';
+import { postData } from '../../lib/axiosRequest';
 
 const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
@@ -39,6 +43,8 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
     const [isLoading, setIsLoading] = useState(false);
     const [countryList, setCountryList] = useState<TaggedItem<string>[]>();
     const [localization, setLocalization] = useState<string>('');
+    const [accountType, setAccountType] = useState(0);
+
     const fullNameChanged = (value: string) => {
         setFullName(value);
     };
@@ -51,6 +57,7 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
             setProfilePicture(`${publicUrl}/images/profiles/${userSettings.profilePicture}`);
             setFullName(userSettings.name);
             setLocalization(userSettings.localization);
+            setAccountType(userSettings.accountType);
 
         }
     }, [countryList, publicUrl, userSettings]);
@@ -80,7 +87,7 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
             return;
         }
         const values = {
-            name: fullName, profilePicture: fileName, localization: localization
+            name: fullName, profilePicture: fileName, localization: localization,accountType:accountType
         };
         setIsLoading(true);
         // eslint-disable-next-line quotes
@@ -93,12 +100,14 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
         if (response.status === 200) {
             setToast({ id: Date.now(), message: notification.successfullyEditUser, alertColor: 'success' });
             if (userSettings)
-                setUserSettings({ ...userSettings, name: fullName, profilePicture: fileName, localization: localization });
+                setUserSettings({ ...userSettings, name: fullName, profilePicture: fileName, localization: localization,accountType:accountType });
             return;
         }
         const { error } = response.data as { error: string; };
         setToast({ id: Date.now(), message: getResponseError(error, language), alertColor: 'error' });
     };
+
+    const accessList = [settingsPage.customerAccess, settingsPage.personnelAccess, settingsPage.entrepreneurAccess];
 
     return (
         <AuthorizedLayout>
@@ -124,7 +133,7 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
                                                         defaultValue={userSettings?.name} />
                                                     <Avatar sx={{ width: 100, height: 100, marginTop: 2, marginBottom: 2, cursor: 'pointer' }} src={profilePicture}
                                                         onClick={() => setShowProfilePictureDialog(true)} />
-                                                    <Typography variant="caption" display="block" gutterBottom>
+                                                    <Typography variant='caption' display='block' gutterBottom>
                                                         {settingsPage.profilePictureDescription}
                                                     </Typography>
                                                     <AutoCompletePlus selectedValue={localization} onChanged={(country) => setLocalization(!country ? '' : country.tag)} items={countryList}
@@ -132,14 +141,33 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
                                                     <Alert severity='warning'>
                                                         {settingsPage.localizationWarning}
                                                     </Alert>
-                                                    <Button variant="contained" >{settingsPage.advancedSettings}</Button>
-                                                    <Typography variant="caption" display="block" gutterBottom>
+                                                    <CenterBox>
+                                                        <Typography variant='body1' display='block'>
+                                                            {settingsPage.selectAccountType}
+                                                        </Typography>
+                                                        <Tabs value={accountType} onChange={(e, newValue) => setAccountType(newValue)} aria-label='account type'>
+                                                            <Tab label={settingsPage.customer} value={0} />
+                                                            <Tab label={settingsPage.personnel} value={1} />
+                                                            <Tab label={settingsPage.entrepreneur} value={2} />
+                                                        </Tabs>
+                                                        <CenterBox sx={{ alignItems: 'baseline' }}>
+                                                            {accessList.map((item, index) => {
+                                                                return (
+                                                                    <FormControlLabel key={index} label={item}
+                                                                        control={<Switch checked={accountType > index - 1} onChange={(e) => e.preventDefault()} onClick={(e) => e.preventDefault()} />}
+                                                                    />
+                                                                );
+                                                            })}
+                                                        </CenterBox>
+                                                    </CenterBox>
+                                                    <Button variant='contained' >{settingsPage.advancedSettings}</Button>
+                                                    <Typography variant='body1' display='block' gutterBottom>
                                                         {settingsPage.advancedSettingsDescription}
                                                     </Typography>
                                                 </CenterBox>
                                             </CardContent>
                                             <CardActions sx={{ justifyContent: 'end' }}>
-                                                <Button variant="contained" color="primary" onClick={() => handleClick()}>
+                                                <Button variant='contained' color='primary' onClick={() => handleClick()}>
                                                     {settingsPage.save}
                                                 </Button>
                                             </CardActions>

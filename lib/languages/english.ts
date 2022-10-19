@@ -111,7 +111,7 @@ const english = {
     },
     profilePictureDialog: {
         title: 'Profile picture selection',
-        description:'Choose a profile picture for your account.',
+        description: 'Choose a profile picture for your account.',
         save: 'Save',
         discard: 'Discard',
     },
@@ -146,15 +146,15 @@ const english = {
         maximumLengthOfAgencyName: 'The maximum length of the agency name is 50 characters.',
         editAgency: {
             title: 'Editing an agency',
-            updating:'Updating an agency...',
+            updating: 'Updating an agency...',
         },
         addNewAgency: {
             title: 'Adding a new agency',
-            updating:'Adding a new agency...',
+            updating: 'Adding a new agency...',
         },
     },
     jobRequestsPage: {
-       title: 'Job requests',
+        title: 'Job requests',
     },
     settingsPage: {
         title: 'Settings',
@@ -167,6 +167,13 @@ const english = {
         localizationWarning: 'Localization helps to reach data more accurately, so choose it carefully please.',
         save: 'Save',
         loading: 'loading settings...',
+        customer: 'Customer',
+        personnel: 'Personnel',
+        entrepreneur: 'Entrepreneur',
+        customerAccess: 'Request a trip or view previous trips',
+        personnelAccess: 'Request a job and accept the travel offer',
+        entrepreneurAccess: 'Access to all agency and personnel activities',
+        selectAccountType:'Select the user account type:',
     },
     pageNotFound: {
         title: 'Page not found!',

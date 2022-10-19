@@ -1,14 +1,17 @@
 import Box, { BoxProps } from '@mui/material/Box';
 import { ElementType } from 'react';
 import { SxProps, Theme } from '@mui/material/styles';
+export type ExtendedBoxProps = BoxProps & {
+    wrapMode?: boolean;
+};
 
-const CenterBox: ElementType<BoxProps> = (props: BoxProps) => {
+const CenterBox: ElementType<ExtendedBoxProps> = (props: ExtendedBoxProps) => {
 
-    const { children, ...other } = props;
+    const { children,wrapMode, ...other } = props;
 
     const newProps = { ...other };
-
-    newProps.sx = { ...centerStyle, ...newProps.sx } as SxProps<Theme>;
+    const wrapStyle: SxProps<Theme> =wrapMode ? { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseLine'} : null;
+    newProps.sx = {  ...centerStyle,...wrapStyle, ...newProps.sx } as SxProps<Theme>;
 
     return (
         <Box {...newProps}>

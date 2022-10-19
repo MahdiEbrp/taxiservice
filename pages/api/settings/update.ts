@@ -16,6 +16,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(401).json({ error: 'ERR_UNAUTHORIZED' });
 
     const { localization, profilePicture } = <{ localization: string, profilePicture: string; }>req.body;
+    const {accountType} = <{accountType: number}>req.body;
     let { name } = <{ name: string; }>req.body;
 
     const isValid = !arrayHasNullOrEmptyItem([name, localization, profilePicture]);
@@ -43,7 +44,8 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
             data: {
                 name: name,
                 localization: localization,
-                profilePicture: profilePicture
+                profilePicture: profilePicture,
+                accountType: accountType
             }
         });
         if (!agency)

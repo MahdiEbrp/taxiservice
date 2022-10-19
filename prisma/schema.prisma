@@ -24,6 +24,7 @@ model User {
   profilePicture   String     @default("")
   name             String     @default("") @db.VarChar(300)
   localization     String     @default("US")
+  accountType      Int        @default(0)
   Agency           Agency[]
   Personel         Personel[]
   Trips            Trips[]
