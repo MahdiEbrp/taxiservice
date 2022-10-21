@@ -28,6 +28,7 @@ import { LanguageContext } from '../../components/context/LanguageContext';
 import { ToastContext } from '../../components/context/ToastContext';
 import { getResponseError } from '../../lib/language';
 import { postData } from '../../lib/axiosRequest';
+import AdvanceSettingsDialog from '../../components/dialogs/AdvanceSettingsDialog';
 
 const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
@@ -38,6 +39,7 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
     const { setToast } = useContext(ToastContext);
 
     const [showProfilePictureDialog, setShowProfilePictureDialog] = useState(false);
+    const [showAdvanceSettingsDialog, setShowAdvanceSettingsDialog] = useState(false);
     const [profilePicture, setProfilePicture] = useState('');
     const [fullName, setFullName] = useState<string>('');
     const [isLoading, setIsLoading] = useState(false);
@@ -160,7 +162,9 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
                                                             })}
                                                         </CenterBox>
                                                     </CenterBox>
-                                                    <Button variant='contained' >{settingsPage.advancedSettings}</Button>
+                                                    <Button variant='contained' onClick={()=>setShowAdvanceSettingsDialog(true)} >
+                                                        {settingsPage.advancedSettings}
+                                                    </Button>
                                                     <Typography variant='body1' display='block' gutterBottom>
                                                         {settingsPage.advancedSettingsDescription}
                                                     </Typography>
@@ -180,6 +184,7 @@ const Settings: NextPage = ({ countries }: InferGetStaticPropsType<typeof getSta
                 </Card>
                 <ProfilePictureDialog isDialogOpen={showProfilePictureDialog} onProfileChange={(profilePicture) => setProfilePicture(profilePicture)}
                     onClose={() => setShowProfilePictureDialog(false)} />
+                <AdvanceSettingsDialog isDialogOpen={showAdvanceSettingsDialog} onClose={() => setShowAdvanceSettingsDialog(false)} />
             </>
         </AuthorizedLayout>
     );

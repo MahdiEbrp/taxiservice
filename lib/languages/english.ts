@@ -109,6 +109,9 @@ const english = {
             message: 'You can reset your password now. An email with a reset link has been sent to you. You may find it in your spam folder (don\'t forget to check it).',
         },
     },
+    advanceSettingsDialog: {
+        title: 'Advance settings',
+    },
     profilePictureDialog: {
         title: 'Profile picture selection',
         description: 'Choose a profile picture for your account.',

@@ -1,15 +1,15 @@
+import Button from '@mui/material/Button';
+import ButtonBase from '@mui/material/ButtonBase';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { LanguageContext } from '../context/LanguageContext';
-import { useContext, useState, useMemo, useEffect } from 'react';
-import Button from '@mui/material/Button';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageLoader from '../controls/ImageLoader';
-import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
+import { LanguageContext } from '../context/LanguageContext';
+import { useContext, useState, useMemo, useEffect } from 'react';
 
 export type profilePictureProps = {
     isDialogOpen: boolean;
@@ -21,11 +21,12 @@ const ProfilePictureDialog = (props: profilePictureProps) => {
 
     const { isDialogOpen, onProfileChange, onClose } = props;
 
+    const [open, setOpen] = useState(false);
+    const [profilePicture, setProfilePicture] = useState('');
+
     const { language } = useContext(LanguageContext);
 
     const { settings, profilePictureDialog } = language;
-    const [open, setOpen] = useState(false);
-    const [profilePicture, setProfilePicture] = useState('');
 
     const handleClose = () => {
         setOpen(false);
