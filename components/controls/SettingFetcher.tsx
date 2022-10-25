@@ -1,11 +1,12 @@
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getData } from '../../lib/axiosRequest';
 import { Settings } from '../../types/settings';
 import { AllSettingsContext } from '../context/AllSettingsContext';
 import { LanguageContext } from '../context/LanguageContext';
 import CenterBox from './CenterBox';
+import Loader from './Loader';
 
 const SettingFetcher = () => {
 
@@ -34,12 +35,20 @@ const SettingFetcher = () => {
     }, [publicUrl, requestId, setUserSettings, userSettings]);
 
     return (
-        <CenterBox>
-            <Alert severity="error">{components.errorLoading}</Alert>
-            <Button onClick={() => setRequestId(1 + Math.random())}>
-                {components.requestAgain}
-            </Button>
-        </CenterBox>
+        <>
+            <CenterBox>
+                {isLoading ?
+                    <Loader text={components.loadingText} />
+                    :
+                    <>
+                        <Alert severity="error">{components.errorLoading}</Alert>
+                        <Button onClick={() => setRequestId(1 + Math.random())}>
+                            {components.requestAgain}
+                        </Button>
+                    </>
+                }
+            </CenterBox>
+        </>
     );
 };
 

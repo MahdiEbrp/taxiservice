@@ -1,5 +1,14 @@
 {
-    "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+    "extends": [
+        "next/core-web-vitals", "plugin:@typescript-eslint/recommended"
+    ],
+    "ignorePatterns": [
+        "node_modules/",
+        "out/",
+        "next.config.js",
+        "next-env.d.ts",
+        "lib/languages/*"
+    ],
     "rules": {
         "no-console": "warn",
         "no-undef": "warn",

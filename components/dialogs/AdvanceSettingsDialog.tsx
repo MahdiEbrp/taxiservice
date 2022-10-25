@@ -1,9 +1,12 @@
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import PasswordTab from './tabs/PasswordTab';
+import React,{ useContext, useState, useEffect } from 'react';
+import Tab from '@mui/material/Tab';
+import TabPanel from '../controls/TabPanel';
+import Tabs from '@mui/material/Tabs';
 import { LanguageContext } from '../context/LanguageContext';
-import { useContext, useState, useEffect } from 'react';
 
 export type advancedSettingsProps = {
     isDialogOpen: boolean;
@@ -12,10 +15,12 @@ export type advancedSettingsProps = {
 
 const AdvanceSettingsDialog = (props: advancedSettingsProps) => {
 
+    const [activeTab, setActiveTab] = useState('password');
     const { isDialogOpen, onClose } = props;
     const { language } = useContext(LanguageContext);
 
     const [open, setOpen] = useState(false);
+
 
     const { settings, advanceSettingsDialog } = language;
 
@@ -26,6 +31,12 @@ const AdvanceSettingsDialog = (props: advancedSettingsProps) => {
     useEffect(() => {
         setOpen(isDialogOpen);
     }, [isDialogOpen]);
+
+
+
+    const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+        setActiveTab(newValue);
+    };
 
     return (
         <Dialog
@@ -39,11 +50,12 @@ const AdvanceSettingsDialog = (props: advancedSettingsProps) => {
                 {advanceSettingsDialog.title}
             </DialogTitle>
             <DialogContent>
-                <div>Content</div>
-            </DialogContent>2
-            <DialogActions>
-                <div>Actions</div>
-            </DialogActions>
+                <Tabs value={activeTab} onChange={handleTabChange} aria-label='advance-settings-tabs'>
+                    <Tab value='password' label={advanceSettingsDialog.password} />
+                    <Tab value='email' label={advanceSettingsDialog.email} />
+                </Tabs>
+                <TabPanel activeIndex={activeTab} index='password'><PasswordTab /></TabPanel>
+            </DialogContent>
         </Dialog>
     );
 };
