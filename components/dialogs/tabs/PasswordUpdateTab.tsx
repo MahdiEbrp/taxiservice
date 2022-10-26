@@ -11,7 +11,7 @@ import { ToastContext } from '../../context/ToastContext';
 import { postData } from '../../../lib/axiosRequest';
 import { getResponseError } from '../../../lib/language';
 
-const PasswordTab = () => {
+const PasswordUpdateTab = () => {
 
     const currentPasswordRef = useRef<HTMLInputElement>(null);
     const newPasswordRef = useRef<HTMLInputElement>(null);
@@ -79,7 +79,7 @@ const PasswordTab = () => {
         }
         const values = { currentPassword: currentPassword, newPassword: newPassword };
         setLoadingMessage(advanceSettingsDialog.updatingPassword);
-        const response = await postData('/api/settings/updatePassword', values);
+        const response = await postData(process.env.NEXT_PUBLIC_WEB_URL + '/api/settings/updatePassword', values);
         setLoadingMessage('');
 
         if (!response) {
@@ -153,4 +153,4 @@ const PasswordTab = () => {
     );
 };
 
-export default PasswordTab;
+export default PasswordUpdateTab;

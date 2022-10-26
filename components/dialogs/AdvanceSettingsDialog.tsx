@@ -1,8 +1,9 @@
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import PasswordTab from './tabs/PasswordTab';
-import React,{ useContext, useState, useEffect } from 'react';
+import EmailUpdateTab from './tabs/EmailUpdateTab';
+import PasswordUpdateTab from './tabs/PasswordUpdateTab';
+import React, { useContext, useState, useEffect } from 'react';
 import Tab from '@mui/material/Tab';
 import TabPanel from '../controls/TabPanel';
 import Tabs from '@mui/material/Tabs';
@@ -54,7 +55,9 @@ const AdvanceSettingsDialog = (props: advancedSettingsProps) => {
                     <Tab value='password' label={advanceSettingsDialog.password} />
                     <Tab value='email' label={advanceSettingsDialog.email} />
                 </Tabs>
-                <TabPanel activeIndex={activeTab} index='password'><PasswordTab /></TabPanel>
+                <TabPanel activeIndex={activeTab} index='password'><PasswordUpdateTab /></TabPanel>
+                <TabPanel activeIndex={activeTab} index='email'><EmailUpdateTab /></TabPanel>
+
             </DialogContent>
         </Dialog>
     );
