@@ -31,7 +31,9 @@ const english = {
         signOut: 'Sign out',
         emailAddress: 'Email address',
         settingsNotFound: 'Sorry,we were unable to get the information we requested from the server.',
-        loading: 'Loading...',
+        leaving: 'Sadly, I must say goodbye...',
+        accountType: 'Account type',
+        localization: 'Localization',
     },
     notification: {
         addressError: 'A short address is entered or a location on the map has not been selected.',
@@ -255,6 +257,7 @@ const english = {
         },
         userInformation: {
             title: 'User Information',
+            
         }
     },
     submitForm: {

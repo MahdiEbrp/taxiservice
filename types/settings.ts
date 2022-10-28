@@ -2,7 +2,8 @@ export type Settings={
     email: string;
     name: string;
     localization: string;
-    accountType:number;
+    accountType
+    : number;
     profilePicture: string;
     agencyCount: number;
 }

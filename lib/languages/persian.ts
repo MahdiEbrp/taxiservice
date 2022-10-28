@@ -31,7 +31,9 @@ const persian = {
         signOut: 'خروج',
         emailAddress: 'آدرس ایمیل',
         settingsNotFound: 'متأسفیم، نتوانستیم اطلاعاتی را که از سرور درخواست کرده بودیم دریافت کنیم.',
-        loading: 'در حال بارگذاری...',
+        leaving: 'متاسفانه باید خداحافظی کنم...',
+        accountType: 'نوع حساب',
+        localization: 'محلی سازی',
     },
     notification: {
         addressError: 'آدرس کوتاهی وارد شده است یا مکانی روی نقشه انتخاب نشده است.',
