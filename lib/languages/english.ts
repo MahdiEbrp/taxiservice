@@ -85,6 +85,12 @@ const english = {
         currentLocation: 'your current geographic location:',
         requestAgain: 'Request again',
         errorLoading: 'We were unable to get the information you requested. Click on the button below to request again.',
+        dataGrid: {
+            noData: 'No data to display.',
+            rowSelected: 'row selected',
+            rowsSelected: 'rows selected',
+            of: 'of',
+        },
 
     },
     responseError: {
@@ -186,6 +192,14 @@ const english = {
     },
     jobRequestsPage: {
         title: 'Job requests',
+        loading: 'Loading...',
+        receivingJobRequests: 'Receiving job requests...',
+        agencyName: 'Agency name',
+        status: 'Status',
+        sent: 'Sent',
+        accepted: 'Accepted',
+        notSent: 'Not sent',
+        reload:'Reload',
     },
     settingsPage: {
         title: 'Settings',

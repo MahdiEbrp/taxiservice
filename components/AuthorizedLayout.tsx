@@ -35,7 +35,7 @@ const AuthorizedLayout = (props: { children: ReactElement; }) => {
                     </Head>
                     <Card dir={direction}>
                         <CardContent>
-                            {showError && <Alert severity="error">{notification.unauthenticated}</Alert>}
+                            {showError && <Alert severity='error'>{notification.unauthenticated}</Alert>}
                             <Loader usePaper={false} text={session.status === 'loading' ? authorizedLayout.loading : authorizedLayout.redirectingToHomePage} />
                         </CardContent>
                     </Card>

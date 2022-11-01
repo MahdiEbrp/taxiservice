@@ -85,6 +85,12 @@ const persian = {
         currentLocation: 'موقعیت فعلی جغرافیایی شما:',
         requestAgain: 'درخواست مجدد',
         errorLoading: 'ما نتوانستیم اطلاعات درخواستی شما را دریافت کنیم. برای درخواست مجدد روی دکمه زیر کلیک کنید.',
+        dataGrid: {
+            noData: 'اطلاعاتی برای نمایش وجود ندارد.',
+            rowSelected: 'ردیف انتخاب شده',
+            rowsSelected: 'ردیف انتخاب شده',
+            of: 'از',
+        },
 
     },
     responseError: {
@@ -186,6 +192,14 @@ const persian = {
     },
     jobRequestsPage: {
         title: 'درخواست های شغلی',
+        loading: 'در حال بارگذاری...',
+        receivingJobRequests: 'در حال دریافت درخواست های شغلی...',
+        agencyName: 'نام آژانس',
+        status: 'وضعیت',
+        notSent: 'ارسال نشده',
+        sent: 'ارسال شده',
+        accepted: 'پذیرفته شده',
+        reload: 'بارگذاری مجدد',
     },
     settingsPage: {
         title: 'تنظیمات',

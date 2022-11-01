@@ -41,7 +41,7 @@ const SettingFetcher = () => {
                     <Loader text={components.loadingText} />
                     :
                     <>
-                        <Alert severity="error">{components.errorLoading}</Alert>
+                        <Alert severity='error'>{components.errorLoading}</Alert>
                         <Button onClick={() => setRequestId(1 + Math.random())}>
                             {components.requestAgain}
                         </Button>
