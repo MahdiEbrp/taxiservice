@@ -290,7 +290,7 @@ const japanese = {
         newPassword: '新しいパスワード',
         password: 'パスワード',
         passwordHelperText: "パスワードには、少なくとも1つの大文字、1つの数字、および 1 つの記号を含む、8文字以上を含める必要があります。 例: 「Password_1」",
-        update: 'Update',
+        update: '更新',
         confirmEmailHelperText: '電子メールの確認は、入力した電子メールと同じである必要があります。',
         currentEmailHelperText: '現在のメールアドレスを入力してください。',
 
