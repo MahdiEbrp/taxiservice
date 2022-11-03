@@ -1,7 +1,7 @@
 
 const simplifiedchinese = {
     settings: {
-        displayName: '简体中文 (simplified chinese)',
+        displayName: '简体中文 (Simplified Chinese)',
         code: 'zh-CN',
         direction: 'ltr',
         listStyle: 'decimal',
