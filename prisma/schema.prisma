@@ -1,0 +1,178 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model User {
+  id                String     @id @default(cuid()) @map("_id")
+  email             String     @unique
+  password          String
+  createdAt         DateTime   @db.Timestamptz
+  verifiedCodeDate  DateTime   @db.Timestamptz
+  verifiedCode      String
+  verified          Boolean    @default(false)
+  resetCodeDate     DateTime?  @db.Timestamptz
+  settingUpdateDate DateTime?  @db.Timestamptz
+  resetCode         String?
+  profilePicture    String     @default("")
+  name              String     @default("") @db.VarChar(300)
+  localization      String     @default("US")
+  accountType       Int        @default(0)
+  Agency            Agency[]
+  Personel          Personel[]
+  Trips             Trips[]
+  sender            Message[]  @relation("senderID")
+  Message           Message[]
+  Places            Places[]
+  accounts          Account[]
+  sessions          Session[]
+}
+
+model Agency {
+  id                  String        @id @default(cuid()) @map("_id")
+  agencyName          String        @unique @db.VarChar(50)
+  isEnable            Boolean       @default(true)
+  phoneNumber1        String        @db.VarChar(30)
+  phoneNumber2        String        @db.VarChar(30)
+  mobileNumber        String        @db.VarChar(30)
+  address             String        @db.VarChar(300)
+  latitude            Float
+  longitude           Float
+  workingDays         Int
+  startOfWorkingHours DateTime      @db.Timestamptz
+  endOfWorkingHours   DateTime      @db.Timestamptz
+  createdAt           DateTime      @db.Timestamptz
+  commissionRate      Float         @default(15)
+  currencySymbol      String        @db.VarChar(20)
+  user                User          @relation(fields: [userId], references: [id])
+  userId              String
+  Personels           Personel[]
+  Subscribers         Subscribers[]
+  Trips               Trips[]
+  Prices              Prices[]
+}
+
+model Personel {
+  id             String  @id @default(cuid()) @map("_id")
+  User           User    @relation(fields: [userId], references: [id])
+  userId         String
+  position       String  @db.VarChar(50)
+  canDrive       Boolean @default(false)
+  canSeeReports  Boolean @default(false)
+  canSeeRequests Boolean @default(false)
+  isEnable       Boolean @default(true)
+  isManager      Boolean @default(false)
+  Trips          Trips[]
+  Agency         Agency  @relation(fields: [agencyId], references: [id])
+  agencyId       String
+  isRequest      Boolean @default(true)
+}
+
+model Trips {
+  id                   String    @id @default(cuid()) @map("_id")
+  price                Float
+  startDateTime        DateTime  @db.Timestamptz
+  endDateTime          DateTime  @db.Timestamptz
+  destinationAddress   String    @db.VarChar(300)
+  destinationLatitude  Float
+  destinationLongitude Float
+  originAddress        String    @db.VarChar(300)
+  originLatitude       Float
+  originLongitude      Float
+  agency               Agency    @relation(fields: [agencyId], references: [id])
+  agencyId             String
+  User                 User      @relation(fields: [userId], references: [id])
+  userId               String
+  Personel             Personel? @relation(fields: [personelId], references: [id])
+  personelId           String?
+  subscriberID         String?   @db.VarChar(50)
+  description          String?   @db.VarChar(300)
+  status               Int       @default(0)
+  commission           Float     @default(0)
+}
+
+model Prices {
+  id        String @id @default(cuid()) @map("_id")
+  address   String @db.VarChar(800)
+  latitude  Float
+  longitude Float
+  price     Float
+  agency    Agency @relation(fields: [agencyId], references: [id])
+  agencyId  String
+}
+
+model Message {
+  id        String   @id @default(cuid()) @map("_id")
+  title     String   @db.VarChar(50)
+  message   String   @db.VarChar(300)
+  createdAt DateTime @db.Timestamptz
+  isRead    Boolean  @default(false)
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+  sender    User     @relation(name: "senderID", fields: [senderId], references: [id])
+  senderId  String
+}
+
+model Places {
+  id        String @id @default(cuid()) @map("_id")
+  address   String @db.VarChar(800)
+  latitude  Float
+  longitude Float
+  User      User   @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model Subscribers {
+  id           String  @id @default(cuid()) @map("_id")
+  agency       Agency  @relation(fields: [agencyId], references: [id])
+  agencyId     String
+  name         String  @db.VarChar(50)
+  address      String  @db.VarChar(800)
+  latitude     Float
+  longitude    Float
+  subscriberID String  @unique @db.VarChar(50)
+  phoneNumber  String? @db.VarChar(30)
+  description  String? @db.VarChar(300)
+}
