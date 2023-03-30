@@ -1,0 +1,63 @@
+{
+    "extends": [
+        "next/core-web-vitals", "plugin:@typescript-eslint/recommended"
+    ],
+    "ignorePatterns": [
+        "node_modules/",
+        "out/",
+        "next.config.js",
+        "next-env.d.ts",
+        "lib/languages/*"
+    ],
+    "rules": {
+        "no-console": "warn",
+        "no-undef": "warn",
+        "no-unused-expressions": "warn",
+        "no-unused-labels": "warn",
+        "semi": "error",
+        "no-trailing-spaces": "error",
+        "no-duplicate-case": "error",
+        "no-extra-semi": "error",
+        "no-extra-parens": "error",
+        "no-extra-boolean-cast": "error",
+        "no-debugger": "error",
+        "no-empty": "error",
+        "no-duplicate-imports": "error",
+        "no-empty-character-class": "error",
+        "no-empty-pattern": "error",
+        "no-eval": "error",
+        "no-unused-vars": "off",
+        "no-useless-escape": "error",
+        "max-lines": [
+            "error", {
+                "max": 250,
+                "skipBlankLines": true,
+                "skipComments": true
+            }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+            "warn", {
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": false
+            }
+        ],
+        "eqeqeq": [
+            "error", "allow-null"
+        ],
+        "quotes": ["error", "single", "avoid-escape"]
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true,
+        "jest": true
+    },
+    "plugins": ["@typescript-eslint"]
+
+
+}
